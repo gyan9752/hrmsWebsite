@@ -208,3 +208,22 @@
   }
 }
 
+/* ─── Dark Header Mode (For pages with dark top banner like blog detail) ─── */
+.navbar.navbar--dark-header:not(.scrolled) .navbar__logo {
+  color: #FFFFFF !important;
+}
+
+.navbar.navbar--dark-header:not(.scrolled) .navbar__link {
+  color: #FFFFFF !important;
+  opacity: 0.95 !important;
+}
+
+.navbar.navbar--dark-header:not(.scrolled) .navbar__link:hover {
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+}
+
+.navbar.navbar--dark-header:not(.scrolled) .navbar__hamburger span {
+  background: #FFFFFF !important;
+}
+

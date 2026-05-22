@@ -239,26 +239,75 @@ function animateCounter(el) {
    Pricing Toggle
    ═══════════════════════════════════════════ */
 function initPricingToggle() {
-  const toggle = document.querySelector('.pricing__toggle-switch');
+  const switchToggle = document.querySelector('.pricing__toggle-switch');
+  const pillToggleBtns = document.querySelectorAll('.pricing__toggle-btn');
   const monthlyLabel = document.querySelector('.pricing__toggle-label--monthly');
   const annualLabel = document.querySelector('.pricing__toggle-label--annual');
+  const grids = document.querySelectorAll('.pricing__grid, .pricing-page__grid');
 
-  if (!toggle) return;
+  let isAnnual = true; // Default to annual
 
-  let isAnnual = false;
+  if (switchToggle) {
+    isAnnual = switchToggle.classList.contains('annual');
+  } else if (pillToggleBtns.length > 0) {
+    const activeBtn = document.querySelector('.pricing__toggle-btn.active');
+    if (activeBtn) {
+      isAnnual = activeBtn.dataset.type === 'annual';
+    }
+  } else {
+    return;
+  }
 
-  toggle.addEventListener('click', () => {
-    isAnnual = !isAnnual;
-    toggle.classList.toggle('annual', isAnnual);
-
+  const updatePricing = () => {
+    // 1. Update old switch if exists
+    if (switchToggle) {
+      switchToggle.classList.toggle('annual', isAnnual);
+    }
     if (monthlyLabel) monthlyLabel.classList.toggle('active', !isAnnual);
     if (annualLabel) annualLabel.classList.toggle('active', isAnnual);
 
+    // 2. Update new pill buttons if exist
+    pillToggleBtns.forEach(btn => {
+      const type = btn.dataset.type;
+      const isActive = (type === 'annual' && isAnnual) || (type === 'monthly' && !isAnnual);
+      btn.classList.toggle('active', isActive);
+    });
+
+    // 3. Update grids
+    grids.forEach(grid => grid.classList.toggle('annual', isAnnual));
+
+    // 4. Update data-price-monthly elements with micro-animation pop
     document.querySelectorAll('[data-price-monthly]').forEach((el) => {
       el.textContent = isAnnual ? el.dataset.priceAnnual : el.dataset.priceMonthly;
+      el.classList.remove('price-pop');
+      void el.offsetWidth; // Force reflow
+      el.classList.add('price-pop');
+    });
+
+    // 5. Update billed period subtexts if they exist
+    document.querySelectorAll('[data-price-period]').forEach((el) => {
+      el.textContent = isAnnual ? el.dataset.periodAnnual : el.dataset.periodMonthly;
+    });
+  };
+
+  // Initialize
+  updatePricing();
+
+  if (switchToggle) {
+    switchToggle.addEventListener('click', () => {
+      isAnnual = !isAnnual;
+      updatePricing();
+    });
+  }
+
+  pillToggleBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      isAnnual = (btn.dataset.type === 'annual');
+      updatePricing();
     });
   });
 }
+
 
 /* ═══════════════════════════════════════════
    Feature Card Mouse Glow
