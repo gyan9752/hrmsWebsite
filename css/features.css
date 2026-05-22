@@ -1,0 +1,119 @@
+/* ============================================
+   HRVICO — Feature Pillars
+   ============================================ */
+
+.features {
+  position: relative;
+}
+
+.features__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+.feature-card {
+  background: var(--glass-bg);
+  border: var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(108, 63, 197, 0.06) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-base);
+  pointer-events: none;
+}
+
+.feature-card:hover {
+  background: var(--bg-glass-hover);
+  border-color: var(--border-glass-hover);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card);
+}
+
+.feature-card:hover::after {
+  opacity: 1;
+}
+
+.feature-card__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin-bottom: var(--space-lg);
+  position: relative;
+}
+
+/* Icon background variations */
+.feature-card:nth-child(1) .feature-card__icon { background: rgba(108, 63, 197, 0.12); }
+.feature-card:nth-child(2) .feature-card__icon { background: rgba(139, 92, 246, 0.12); }
+.feature-card:nth-child(3) .feature-card__icon { background: rgba(247, 148, 29, 0.12); }
+.feature-card:nth-child(4) .feature-card__icon { background: rgba(236, 72, 153, 0.12); }
+.feature-card:nth-child(5) .feature-card__icon { background: rgba(245, 158, 11, 0.12); }
+.feature-card:nth-child(6) .feature-card__icon { background: rgba(16, 185, 129, 0.12); }
+
+.feature-card__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.feature-card__desc {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  line-height: var(--lh-relaxed);
+  margin-bottom: var(--space-lg);
+}
+
+.feature-card__link {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--accent-purple);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  transition: gap var(--transition-base), color var(--transition-fast);
+}
+
+.feature-card__link:hover {
+  gap: var(--space-sm);
+  color: var(--accent-blue);
+}
+
+.feature-card__link-arrow {
+  transition: transform var(--transition-base);
+}
+
+.feature-card:hover .feature-card__link-arrow {
+  transform: translateX(4px);
+}
+
+@media (max-width: 1024px) {
+  .features__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .features__grid {
+    grid-template-columns: 1fr;
+  }
+}

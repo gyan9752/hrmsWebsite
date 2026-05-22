@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <linearGradient id="redGrad" x1="40" y1="180" x2="170" y2="20" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E53935"/>
+      <stop offset="50%" stop-color="#EF1C1C"/>
+      <stop offset="100%" stop-color="#D32F2F"/>
+    </linearGradient>
+  </defs>
+  <!-- Main arrow body - sharp triangular arrow pointing upper-right -->
+  <path d="
+    M 160 20
+    L 70 95
+    L 95 85
+    L 40 175
+    L 115 100
+    L 92 108
+    Z
+  " fill="url(#redGrad)"/>
+  <!-- Swoosh/speed trail curving from bottom-left under the arrow -->
+  <path d="
+    M 25 170
+    Q 50 150, 55 130
+    Q 60 115, 75 105
+    L 70 95
+    L 40 175
+    Q 30 178, 25 170
+    Z
+  " fill="url(#redGrad)" opacity="0.85"/>
+  <!-- Inner highlight streak for depth -->
+  <path d="
+    M 160 20
+    L 100 78
+    L 108 74
+    L 68 145
+    L 95 90
+    L 88 94
+    Z
+  " fill="#FF3D3D" opacity="0.4"/>
+</svg>

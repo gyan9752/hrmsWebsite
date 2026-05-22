@@ -1,0 +1,98 @@
+/* ============================================
+   HRVICO — Social Proof Bar
+   ============================================ */
+
+.social-proof {
+  padding: var(--space-3xl) 0;
+  border-top: 1px solid rgba(108, 63, 197, 0.04);
+  border-bottom: 1px solid rgba(108, 63, 197, 0.04);
+  background: var(--bg-secondary);
+  overflow: hidden;
+}
+
+.social-proof__label {
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  margin-bottom: var(--space-xl);
+}
+
+.social-proof__marquee {
+  display: flex;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+
+.social-proof__track {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4xl);
+  animation: marqueeScroll 30s linear infinite;
+  flex-shrink: 0;
+  padding-right: var(--space-4xl);
+}
+
+.social-proof__logo {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-bold);
+  color: var(--text-muted);
+  white-space: nowrap;
+  opacity: 0.5;
+  transition: opacity var(--transition-fast), color var(--transition-fast);
+  user-select: none;
+}
+
+.social-proof__logo:hover {
+  opacity: 1;
+  color: var(--text-secondary);
+}
+
+@keyframes marqueeScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Stats */
+.social-proof__stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4xl);
+  margin-top: var(--space-2xl);
+  padding: 0 var(--space-xl);
+}
+
+.social-proof__stat {
+  text-align: center;
+}
+
+.social-proof__stat-value {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.social-proof__stat-label {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  margin-top: var(--space-2xs);
+}
+
+@media (max-width: 768px) {
+  .social-proof__stats {
+    flex-wrap: wrap;
+    gap: var(--space-2xl);
+  }
+
+  .social-proof__stat-value {
+    font-size: var(--fs-xl);
+  }
+}
