@@ -91,18 +91,15 @@
   margin-bottom: var(--space-md);
 }
 
-.demo-modal__logo-img {
-  width: 36px;
-  height: 36px;
-  object-fit: cover;
-  border-radius: var(--radius-md);
+.demo-modal__logo-img,
+.demo-modal__logo img {
+  height: 36px !important;
+  width: auto !important;
+  display: block;
 }
 
 .demo-modal__logo-text {
-  font-family: var(--font-display);
-  font-size: var(--fs-lg);
-  font-weight: var(--fw-bold);
-  color: var(--text-primary);
+  display: none;
 }
 
 .demo-modal__title {

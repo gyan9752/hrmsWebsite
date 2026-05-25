@@ -10,8 +10,8 @@
   <meta name="keywords" content="HRMS, HR software, payroll, attendance, leave management, employee management, SaaS">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/images/Fav_Icon-removebg-preview.png">
-  <link rel="apple-touch-icon" href="assets/images/Fav_Icon-removebg-preview.png">
+  <link rel="icon" type="image/svg+xml" href="assets/images/hrvico-favicon.svg">
+  <link rel="apple-touch-icon" href="assets/images/hrvico-favicon.svg">
 
   <!-- Open Graph -->
   <meta property="og:title" content="HRVICO — One Platform to Manage Your Entire Workforce">
@@ -29,8 +29,8 @@
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/navbar.css?v=1.1">
+  <link rel="stylesheet" href="css/base.css?v=1.5">
+  <link rel="stylesheet" href="css/navbar.css?v=1.5">
   <link rel="stylesheet" href="css/hero.css">
   <link rel="stylesheet" href="css/social-proof.css">
   <link rel="stylesheet" href="css/pain-points.css">
@@ -39,10 +39,10 @@
   <link rel="stylesheet" href="css/dashboard.css">
   <link rel="stylesheet" href="css/how-it-works.css">
   <link rel="stylesheet" href="css/testimonials.css">
-  <link rel="stylesheet" href="css/pricing.css">
+  <link rel="stylesheet" href="css/pricing.css?v=2.5">
   <link rel="stylesheet" href="css/faq.css">
-  <link rel="stylesheet" href="css/footer.css">
-  <link rel="stylesheet" href="css/demo-modal.css">
+  <link rel="stylesheet" href="css/footer.css?v=1.5">
+  <link rel="stylesheet" href="css/demo-modal.css?v=1.5">
 
   <!-- JS -->
   <script defer src="js/main.js"></script>
@@ -57,15 +57,15 @@
     <div class="container">
       <div class="navbar__inner">
         <a href="#" class="navbar__logo">
-          <img src="assets/images/Fav_Icon-removebg-preview.png" alt="HRVICO" class="navbar__logo-icon">
-          HRVICO
+          <img src="assets/images/hrvico-logo.svg?v=1.5" alt="HRvico Logo" class="navbar__logo-img" style="height: 30px; width: auto;">
         </a>
 
         <div class="navbar__links">
           <a href="#features" class="navbar__link">Features</a>
-          <a href="#roles" class="navbar__link">Roles</a>
+          <a href="#roles" class="navbar__link">Role</a>
           <a href="pricing.html" class="navbar__link">Pricing</a>
-          <a href="#faq" class="navbar__link">FAQ</a>
+          <a href="#contact" class="navbar__link">Contact</a>
+          <a href="blogs.html" class="navbar__link">Blog</a>
         </div>
 
         <div class="navbar__cta desktop-only">
@@ -83,9 +83,10 @@
     <!-- Mobile Menu -->
     <div class="navbar__mobile-menu">
       <a href="#features" class="navbar__link">Features</a>
-      <a href="#roles" class="navbar__link">Roles</a>
+      <a href="#roles" class="navbar__link">Role</a>
       <a href="pricing.html" class="navbar__link">Pricing</a>
-      <a href="#faq" class="navbar__link">FAQ</a>
+      <a href="#contact" class="navbar__link">Contact</a>
+      <a href="blogs.html" class="navbar__link">Blog</a>
       <a href="#" class="btn btn--primary" onclick="openDemoModal(); return false;">Book a Demo</a>
     </div>
   </nav>
@@ -788,212 +789,7 @@
   </div>
   </section> -->
 
-  <!-- ═══════════════════════════════════════
-       FAQ
-       ═══════════════════════════════════════ -->
-  <!-- <section class="section section--alt faq" id="faq">
-    <div class="container">
-      <div class="section-header" data-animate="fade-up">
-        <p class="section-eyebrow">FAQ</p>
-        <h2 class="section-title">Got Questions? <span class="gradient-text">We've Got Answers</span></h2>
-        <p class="section-subtitle">Everything you need to know about HRVICO before getting started.</p>
-      </div>
 
-      <div class="faq__list" data-animate="fade-up">
-        <div class="faq-item">
-          <button class="faq-item__question">
-            How does the free trial work?
-            <span class="faq-item__icon">▼</span>
-          </button>
-          <div class="faq-item__answer">
-            <div class="faq-item__answer-inner">
-              Our free trial gives you full access to the Professional plan for 14 days — no credit card required. You
-              can add your team, configure policies, and experience everything HRVICO has to offer. At the end of the
-              trial, you can choose a plan that fits your needs or let it expire without any charges.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-item__question">
-            Can I migrate from another HRMS?
-            <span class="faq-item__icon">▼</span>
-          </button>
-          <div class="faq-item__answer">
-            <div class="faq-item__answer-inner">
-              Absolutely! HRVICO supports bulk CSV import for employee data, and our onboarding specialists can help you
-              migrate from any existing system. We've helped companies transition from BambooHR, Zoho People, greytHR,
-              and custom-built solutions. Most migrations are completed within 24 hours.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-item__question">
-            Is my data secure with HRVICO?
-            <span class="faq-item__icon">▼</span>
-          </button>
-          <div class="faq-item__answer">
-            <div class="faq-item__answer-inner">
-              Security is our top priority. HRVICO uses AES-256 encryption at rest, TLS 1.3 in transit, and is hosted on
-              SOC 2 compliant infrastructure. We perform regular security audits, offer role-based access control, and
-              support two-factor authentication. We are also GDPR-compliant and provide data residency options.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-item__question">
-            What integrations do you support?
-            <span class="faq-item__icon">▼</span>
-          </button>
-          <div class="faq-item__answer">
-            <div class="faq-item__answer-inner">
-              HRVICO integrates with popular accounting tools (QuickBooks, Xero, Tally), communication platforms (Slack,
-              Microsoft Teams), and biometric hardware. Our Enterprise plan includes a REST API for custom integrations.
-              We're constantly adding new integrations based on customer requests.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-item__question">
-            How does face recognition attendance work?
-            <span class="faq-item__icon">▼</span>
-          </button>
-          <div class="faq-item__answer">
-            <div class="faq-item__answer-inner">
-              Employees simply open the HRVICO app and use their phone's camera. Our AI-powered face recognition
-              verifies their identity in under 2 seconds, combined with optional GPS location verification to ensure
-              they're at the right workplace. It works offline and syncs when connectivity is restored. The system is
-              99.7% accurate and prevents buddy punching.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-item__question">
-            Do you offer support for multiple locations and branches?
-            <span class="faq-item__icon">▼</span>
-          </button>
-          <div class="faq-item__answer">
-            <div class="faq-item__answer-inner">
-              Yes! HRVICO is built for multi-location businesses. You can set up separate branches with their own
-              attendance rules, holiday calendars, leave policies, and reporting structures. The Super Admin panel gives
-              platform operators a unified view across all companies and branches.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> -->
-  <section class="section section--alt faq" id="faq">
-    <div class="container">
-      <div class="section-header" data-animate="fade-up">
-        <p class="section-eyebrow">FAQ</p>
-        <h2 class="section-title">Got Questions? <span class="gradient-text">We've Got Answers</span></h2>
-        <p class="section-subtitle">Everything you need to know about our HRMS before getting started.</p>
-      </div>
-
-      <div class="faq__list" data-animate="fade-up">
-
-        <div class="faq-item">
-          <button class="faq-item__question">
-            What makes this HRMS different from others?
-            <span class="faq-item__icon">▼</span>
-          </button>
-          <div class="faq-item__answer">
-            <div class="faq-item__answer-inner">
-              Our HRMS is designed with a powerful multi-role architecture including Super Admin, Admin, and Employee
-              panels. It combines core HR features like payroll, attendance, and leave management with advanced
-              capabilities such as face recognition check-ins, AI-generated calendars, and an in-built chat system — all
-              in one unified platform.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-item__question">
-            How does the face recognition attendance system work?
-            <span class="faq-item__icon">▼</span>
-          </button>
-          <div class="faq-item__answer">
-            <div class="faq-item__answer-inner">
-              Employees can check in and out using their device camera. The system verifies identity using face
-              recognition, helping prevent proxy attendance. It’s fast, easy to use, and eliminates the need for
-              external biometric hardware.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-item__question">
-            Can I manage multiple companies or branches?
-            <span class="faq-item__icon">▼</span>
-          </button>
-          <div class="faq-item__answer">
-            <div class="faq-item__answer-inner">
-              Yes. The Super Admin panel allows you to manage multiple companies, track subscriptions, handle invoices,
-              and monitor overall system activity. Each company can have its own Admin, employees, and HR policies.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-item__question">
-            What features are available for employees?
-            <span class="faq-item__icon">▼</span>
-          </button>
-          <div class="faq-item__answer">
-            <div class="faq-item__answer-inner">
-              Employees can mark attendance, apply for leaves, track holidays, view payslips, submit reimbursements,
-              access documents, and communicate through the built-in chat system — all from a single dashboard.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-item__question">
-            Does the system support payroll and appraisals?
-            <span class="faq-item__icon">▼</span>
-          </button>
-          <div class="faq-item__answer">
-            <div class="faq-item__answer-inner">
-              Yes. The platform includes payroll management along with performance tracking and appraisal features,
-              helping HR teams manage employee growth and compensation efficiently.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-item__question">
-            Is the system suitable for startups as well as enterprises?
-            <span class="faq-item__icon">▼</span>
-          </button>
-          <div class="faq-item__answer">
-            <div class="faq-item__answer-inner">
-              Absolutely. The system is built to scale — whether you're a startup managing a small team or an enterprise
-              handling multiple departments and locations, the platform adapts to your needs.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-item__question">
-            Can I customize policies like leaves, holidays, and attendance?
-            <span class="faq-item__icon">▼</span>
-          </button>
-          <div class="faq-item__answer">
-            <div class="faq-item__answer-inner">
-              Yes. Admins can configure leave policies, holiday calendars, attendance rules, and more based on company
-              requirements. The system is flexible to match different organizational structures.
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
   <!-- ═══════════════════════════════════════
        FINAL CTA
        ═══════════════════════════════════════ -->
@@ -1026,16 +822,20 @@
       <div class="footer__grid">
         <div class="footer__brand">
           <div class="footer__logo">
-            <img src="assets/images/Fav_Icon-removebg-preview.png" alt="HRVICO" class="footer__logo-icon">
-            HRVICO
+            <img src="assets/images/hrvico-logo.svg?v=1.5" alt="HRvico Logo" class="footer__logo-img" style="height: 34px; width: auto;">
           </div>
           <p class="footer__tagline">The all-in-one HRMS platform that transforms how you manage, engage, and grow your
             workforce.</p>
           <div class="footer__socials">
-            <a href="#" class="footer__social" aria-label="Twitter">𝕏</a>
-            <a href="#" class="footer__social" aria-label="LinkedIn">in</a>
-            <!-- <a href="#" class="footer__social" aria-label="GitHub">⌘</a> -->
-            <a href="#" class="footer__social" aria-label="YouTube">▶</a>
+            <a href="https://www.linkedin.com/company/121494424/admin/dashboard/" class="footer__social" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+            <a href="https://www.instagram.com/hrvico_official" class="footer__social" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="https://www.facebook.com/HRvicoOfficial" class="footer__social" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            </a>
           </div>
         </div>
 
@@ -1053,35 +853,33 @@
           <div class="footer__links">
             <a href="about.html" class="footer__link">About Us</a>
             <a href="blogs.html" class="footer__link">Blog</a>
-            <a href="#" class="footer__link">Contact</a>
+            <a href="#contact" class="footer__link">Contact</a>
           </div>
         </div>
 
-        <div class="footer__column">
-          <h4 class="footer__column-title">Resources</h4>
-          <div class="footer__links">
-            <a href="#" class="footer__link">Help Center</a>
-            <a href="#" class="footer__link">API Docs</a>
-            <a href="#" class="footer__link">Community</a>
-          </div>
-        </div>
 
-        <div class="footer__column">
-          <h4 class="footer__column-title">Legal</h4>
+
+        <div class="footer__column" id="contact">
+          <h4 class="footer__column-title">Contact</h4>
           <div class="footer__links">
-            <a href="privacy.html" class="footer__link">Privacy Policy</a>
-            <a href="terms.html" class="footer__link">Terms of Service</a>
-            <a href="#" class="footer__link">Security</a>
+            <div class="footer__contact-item">
+              <strong>Address:</strong>
+              Ground Floor, Logix Park, A-4-5, A Block, Sector 16, Noida, Uttar Pradesh 201301
+            </div>
+            <div class="footer__contact-item">
+              <strong>Phone:</strong>
+              <a href="tel:+9109116011899" class="footer__link">+91-091160 11899</a>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="footer__bottom">
-        <p>© 2026 HRVICO. All rights reserved.</p>
+        <p>© 2026 HRVICO. All rights reserved. ❤️ Crafted by <a href="https://scriza.com" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none; font-weight: 500; transition: color 0.2s;" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color='var(--text-primary)'">Scriza</a></p>
         <div class="footer__bottom-links">
           <a href="privacy.html" class="footer__bottom-link">Privacy</a>
           <a href="terms.html" class="footer__bottom-link">Terms</a>
-          <a href="#" class="footer__bottom-link">Cookies</a>
+          <a href="#" class="footer__bottom-link" onclick="localStorage.removeItem('cookiesAccepted'); initCookiesBanner(); return false;">Cookies</a>
         </div>
       </div>
     </div>
@@ -1100,8 +898,7 @@
       <div class="demo-modal__form-state" id="demoFormState">
         <div class="demo-modal__header">
           <div class="demo-modal__logo">
-            <img src="assets/images/hrvico-logo.png" alt="HRVICO" class="demo-modal__logo-img">
-            <span class="demo-modal__logo-text">HRVICO</span>
+            <img src="assets/images/hrvico-logo.svg?v=1.5" alt="HRvico Logo" class="demo-modal__logo-img" style="height: 36px; width: auto;">
           </div>
           <h3 class="demo-modal__title">Book a Demo</h3>
           <p class="demo-modal__subtitle">Fill in your details and our sales executive will reach out to you shortly.
@@ -1173,6 +970,18 @@
       </div>
     </div>
   </div>
+
+  <!-- Floating Contact Buttons -->
+  <a href="https://wa.me/9109116011899" target="_blank" rel="noopener noreferrer" class="float-contact-icon float-contact-icon--whatsapp" aria-label="Chat on WhatsApp">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.456 5.709 1.458h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  </a>
+  <a href="tel:+9109116011899" class="float-contact-icon float-contact-icon--phone" aria-label="Call Us">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+    </svg>
+  </a>
 
 </body>
 

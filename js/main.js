@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCounters();
   initPricingToggle();
   initFeatureCardGlow();
+  initCookiesBanner();
 
   // Auto-open demo modal if parameter is present in URL
   if (window.location.search.includes('demo=true')) {
@@ -406,3 +407,57 @@ function submitDemoForm(event) {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeDemoModal();
 });
+
+/* ═══════════════════════════════════════════
+   Cookies Notice Banner for EU Users
+   ═══════════════════════════════════════════ */
+function initCookiesBanner() {
+  if (localStorage.getItem('cookiesAccepted') === 'true') {
+    return;
+  }
+
+  let isEU = false;
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (tz && (tz.startsWith('Europe/') || tz.includes('London') || tz.includes('Dublin') || tz.includes('Reykjavik'))) {
+      isEU = true;
+    }
+  } catch (e) {
+    console.error('Timezone check failed', e);
+  }
+
+  // Support testing via ?test_cookies=true
+  if (window.location.search.includes('test_cookies=true')) {
+    isEU = true;
+  }
+
+  if (!isEU) return;
+
+  const banner = document.createElement('div');
+  banner.className = 'cookies-banner';
+  banner.id = 'cookiesBanner';
+  banner.innerHTML = `
+    <div class="cookies-banner__content">
+      <p class="cookies-banner__text">
+        We use cookies to improve your experience on our website. By clicking "Accept", you agree to our use of cookies. 
+        Read our <a href="privacy.html" class="cookies-banner__link">Privacy Policy</a>.
+      </p>
+      <button class="btn btn--primary btn--small cookies-banner__btn" id="acceptCookiesBtn">Accept</button>
+    </div>
+  `;
+  document.body.appendChild(banner);
+
+  // Trigger animation after appending
+  setTimeout(() => {
+    banner.classList.add('show');
+  }, 100);
+
+  document.getElementById('acceptCookiesBtn').addEventListener('click', () => {
+    localStorage.setItem('cookiesAccepted', 'true');
+    banner.classList.remove('show');
+    setTimeout(() => {
+      banner.remove();
+    }, 400);
+  });
+}
+

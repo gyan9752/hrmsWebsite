@@ -62,7 +62,7 @@
 
 .footer__grid {
   display: grid;
-  grid-template-columns: 1.5fr repeat(4, 1fr);
+  grid-template-columns: 1.5fr repeat(3, 1fr);
   gap: var(--space-3xl);
   margin-bottom: var(--space-3xl);
 }
@@ -90,6 +90,14 @@
   object-fit: cover;
   flex-shrink: 0;
   border-radius: var(--radius-sm);
+}
+
+.footer__logo-img,
+.footer__logo img {
+  height: 34px !important;
+  width: auto !important;
+  display: block;
+  flex-shrink: 0;
 }
 
 .footer__tagline {
@@ -203,3 +211,17 @@
     font-size: var(--fs-3xl);
   }
 }
+
+/* ─── Footer Contact Info ─── */
+.footer__contact-item {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  line-height: var(--lh-relaxed);
+}
+
+.footer__contact-item strong {
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 4px;
+}
+

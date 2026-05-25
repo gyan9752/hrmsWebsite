@@ -332,3 +332,126 @@ input, textarea, select {
     font-size: var(--fs-base);
   }
 }
+
+/* ─── Cookies Notice Banner ─── */
+.cookies-banner {
+  position: fixed;
+  bottom: -150px;
+  right: 24px;
+  max-width: 420px;
+  background: rgba(18, 11, 38, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(108, 63, 197, 0.2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(108, 63, 197, 0.15);
+  z-index: 9999;
+  transition: transform 0.4s var(--ease-out-expo), opacity 0.4s ease, bottom 0.4s var(--ease-out-expo);
+  opacity: 0;
+}
+
+.cookies-banner.show {
+  bottom: 24px;
+  opacity: 1;
+}
+
+.cookies-banner__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.cookies-banner__text {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  line-height: var(--lh-relaxed);
+  margin: 0;
+}
+
+.cookies-banner__link {
+  color: var(--text-primary);
+  text-decoration: underline;
+  font-weight: var(--fw-semibold);
+  transition: color var(--transition-fast);
+}
+
+.cookies-banner__link:hover {
+  color: var(--accent-purple);
+}
+
+.cookies-banner__btn {
+  align-self: flex-end;
+  padding: 8px 20px;
+  font-size: var(--fs-xs);
+  min-width: 90px;
+}
+
+@media (max-width: 480px) {
+  .cookies-banner {
+    left: 16px;
+    right: 16px;
+    bottom: -200px;
+    max-width: calc(100% - 32px);
+  }
+  .cookies-banner.show {
+    bottom: 16px;
+  }
+}
+
+/* ─── Floating Contact Action Buttons ─── */
+.float-contact-icon {
+  position: fixed;
+  bottom: 24px;
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  z-index: 10000;
+  transition: all var(--transition-base);
+  text-decoration: none;
+}
+
+.float-contact-icon:hover {
+  transform: scale(1.1) translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+}
+
+.float-contact-icon--whatsapp {
+  left: 24px;
+  background-color: #25D366;
+}
+
+.float-contact-icon--whatsapp:hover {
+  background-color: #20BA5A;
+}
+
+.float-contact-icon--phone {
+  right: 24px;
+  background-color: var(--accent-purple);
+}
+
+.float-contact-icon--phone:hover {
+  background-color: #6127D4;
+}
+
+@media (max-width: 768px) {
+  .float-contact-icon {
+    bottom: 16px;
+    width: 44px;
+    height: 44px;
+  }
+  .float-contact-icon--whatsapp {
+    left: 16px;
+  }
+  .float-contact-icon--phone {
+    right: 16px;
+  }
+}
+
+

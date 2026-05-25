@@ -49,6 +49,14 @@
   border-radius: var(--radius-md);
 }
 
+.navbar__logo-img,
+.navbar__logo img {
+  height: 30px !important;
+  width: auto !important;
+  display: block;
+  flex-shrink: 0;
+}
+
 /* Nav Links */
 .navbar__links {
   display: flex;
@@ -211,6 +219,10 @@
 /* ─── Dark Header Mode (For pages with dark top banner like blog detail) ─── */
 .navbar.navbar--dark-header:not(.scrolled) .navbar__logo {
   color: #FFFFFF !important;
+}
+
+.navbar.navbar--dark-header:not(.scrolled) .navbar__logo img {
+  filter: brightness(0) invert(1);
 }
 
 .navbar.navbar--dark-header:not(.scrolled) .navbar__link {

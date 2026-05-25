@@ -8,7 +8,8 @@
   <meta name="description" content="Read HRVICO's privacy policy to understand how we collect, use, store, and safeguard your personal and employee information.">
   
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/images/Fav_Icon-removebg-preview.png">
+  <link rel="icon" type="image/svg+xml" href="assets/images/hrvico-favicon.svg">
+  <link rel="apple-touch-icon" href="assets/images/hrvico-favicon.svg">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,10 +18,11 @@
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/navbar.css?v=1.1">
-  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/base.css?v=1.5">
+  <link rel="stylesheet" href="css/navbar.css?v=1.5">
+  <link rel="stylesheet" href="css/footer.css?v=1.5">
   <link rel="stylesheet" href="css/subpages.css">
+  <link rel="stylesheet" href="css/demo-modal.css?v=1.5">
 
   <!-- JS -->
   <script defer src="js/main.js"></script>
@@ -40,19 +42,19 @@
     <div class="container">
       <div class="navbar__inner">
         <a href="index.html" class="navbar__logo">
-          <img src="assets/images/Fav_Icon-removebg-preview.png" alt="HRVICO" class="navbar__logo-icon">
-          HRVICO
+          <img src="assets/images/hrvico-logo.svg?v=1.5" alt="HRvico Logo" class="navbar__logo-img" style="height: 30px; width: auto;">
         </a>
 
         <div class="navbar__links">
           <a href="index.html#features" class="navbar__link">Features</a>
-          <a href="index.html#roles" class="navbar__link">Roles</a>
+          <a href="index.html#roles" class="navbar__link">Role</a>
           <a href="pricing.html" class="navbar__link">Pricing</a>
-          <a href="index.html#faq" class="navbar__link">FAQ</a>
+          <a href="#contact" class="navbar__link">Contact</a>
+          <a href="blogs.html" class="navbar__link">Blog</a>
         </div>
 
         <div class="navbar__cta desktop-only">
-          <a href="index.html?demo=true" class="btn btn--primary btn--small">Book a Demo</a>
+          <a href="#" class="btn btn--primary btn--small" onclick="openDemoModal(); return false;">Book a Demo</a>
         </div>
 
         <button class="navbar__hamburger" aria-label="Toggle menu">
@@ -66,10 +68,11 @@
     <!-- Mobile Menu -->
     <div class="navbar__mobile-menu">
       <a href="index.html#features" class="navbar__link">Features</a>
-      <a href="index.html#roles" class="navbar__link">Roles</a>
+      <a href="index.html#roles" class="navbar__link">Role</a>
       <a href="pricing.html" class="navbar__link">Pricing</a>
-      <a href="index.html#faq" class="navbar__link">FAQ</a>
-      <a href="index.html?demo=true" class="btn btn--primary">Book a Demo</a>
+      <a href="#contact" class="navbar__link">Contact</a>
+      <a href="blogs.html" class="navbar__link">Blog</a>
+      <a href="#" class="btn btn--primary" onclick="openDemoModal(); return false;">Book a Demo</a>
     </div>
   </nav>
 
@@ -267,14 +270,19 @@
       <div class="footer__grid">
         <div class="footer__brand">
           <div class="footer__logo">
-            <img src="assets/images/Fav_Icon-removebg-preview.png" alt="HRVICO" class="footer__logo-icon">
-            HRVICO
+            <img src="assets/images/hrvico-logo.svg?v=1.5" alt="HRvico Logo" class="footer__logo-img" style="height: 34px; width: auto;">
           </div>
           <p class="footer__tagline">The all-in-one HRMS platform that transforms how you manage, engage, and grow your workforce.</p>
           <div class="footer__socials">
-            <a href="#" class="footer__social" aria-label="Twitter">𝕏</a>
-            <a href="#" class="footer__social" aria-label="LinkedIn">in</a>
-            <a href="#" class="footer__social" aria-label="YouTube">▶</a>
+            <a href="https://www.linkedin.com/company/121494424/admin/dashboard/" class="footer__social" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+            <a href="https://www.instagram.com/hrvico_official" class="footer__social" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="https://www.facebook.com/HRvicoOfficial" class="footer__social" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            </a>
           </div>
         </div>
 
@@ -292,40 +300,125 @@
           <div class="footer__links">
             <a href="about.html" class="footer__link">About Us</a>
             <a href="blogs.html" class="footer__link">Blog</a>
-            <a href="#" class="footer__link">Contact</a>
+            <a href="#contact" class="footer__link">Contact</a>
           </div>
         </div>
 
-        <div class="footer__column">
-          <h4 class="footer__column-title">Resources</h4>
-          <div class="footer__links">
-            <a href="#" class="footer__link">Help Center</a>
-            <a href="#" class="footer__link">API Docs</a>
-            <a href="#" class="footer__link">Community</a>
-          </div>
-        </div>
 
-        <div class="footer__column">
-          <h4 class="footer__column-title">Legal</h4>
+
+        <div class="footer__column" id="contact">
+          <h4 class="footer__column-title">Contact</h4>
           <div class="footer__links">
-            <a href="privacy.html" class="footer__link">Privacy Policy</a>
-            <a href="terms.html" class="footer__link">Terms of Service</a>
-            <a href="#" class="footer__link">Security</a>
+            <div class="footer__contact-item">
+              <strong>Address:</strong>
+              Ground Floor, Logix Park, A-4-5, A Block, Sector 16, Noida, Uttar Pradesh 201301
+            </div>
+            <div class="footer__contact-item">
+              <strong>Phone:</strong>
+              <a href="tel:+9109116011899" class="footer__link">+91-091160 11899</a>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="footer__bottom">
-        <p>© 2026 HRVICO. All rights reserved.</p>
+        <p>© 2026 HRVICO. All rights reserved. ❤️ Crafted by <a href="https://scriza.com" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none; font-weight: 500; transition: color 0.2s;" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color='var(--text-primary)'">Scriza</a></p>
         <div class="footer__bottom-links">
           <a href="privacy.html" class="footer__bottom-link">Privacy</a>
           <a href="terms.html" class="footer__bottom-link">Terms</a>
-          <a href="#" class="footer__bottom-link">Cookies</a>
+          <a href="#" class="footer__bottom-link" onclick="localStorage.removeItem('cookiesAccepted'); initCookiesBanner(); return false;">Cookies</a>
         </div>
       </div>
     </div>
   </footer>
 
-</body>
+  <!-- ═══════════════════════════════════════
+       DEMO BOOKING MODAL
+       ═══════════════════════════════════════ -->
+  <div class="demo-modal" id="demoModal">
+    <div class="demo-modal__overlay" onclick="closeDemoModal()"></div>
+    <div class="demo-modal__container">
+      <button class="demo-modal__close" onclick="closeDemoModal()" aria-label="Close">&times;</button>
+      <div class="demo-modal__form-state" id="demoFormState">
+        <div class="demo-modal__header">
+          <div class="demo-modal__logo">
+            <img src="assets/images/hrvico-logo.svg?v=1.5" alt="HRvico Logo" class="demo-modal__logo-img" style="height: 36px; width: auto;">
+          </div>
+          <h3 class="demo-modal__title">Book a Demo</h3>
+          <p class="demo-modal__subtitle">Fill in your details and our sales executive will reach out to you shortly.</p>
+        </div>
+        <form class="demo-modal__form" id="demoForm" onsubmit="submitDemoForm(event)">
+          <div class="demo-modal__field">
+            <label for="demoName">Full Name *</label>
+            <input type="text" id="demoName" name="name" placeholder="Enter full name" required>
+          </div>
+          <div class="demo-modal__field">
+            <label for="demoEmail">Work Email *</label>
+            <input type="email" id="demoEmail" name="email" placeholder="Enter work email" required>
+          </div>
+          <div class="demo-modal__field">
+            <label for="demoPhone">Phone Number *</label>
+            <input type="tel" id="demoPhone" name="phone" placeholder="Enter phone number" required>
+          </div>
+          <div class="demo-modal__field">
+            <label for="demoCompany">Company Name *</label>
+            <input type="text" id="demoCompany" name="company" placeholder="Enter Company Name" required>
+          </div>
+          <div class="demo-modal__row">
+            <div class="demo-modal__field">
+              <label for="demoSize">Company Size</label>
+              <select id="demoSize" name="size">
+                <option value="" disabled selected>Select range</option>
+                <option value="1-50">1 – 50 employees</option>
+                <option value="51-200">51 – 200 employees</option>
+                <option value="201-500">201 – 500 employees</option>
+                <option value="501+">501+ employees</option>
+              </select>
+            </div>
+            <div class="demo-modal__field">
+              <label for="demoRole">Your Role</label>
+              <select id="demoRole" name="role">
+                <option value="" disabled selected>Select role</option>
+                <option value="HR Manager">HR Manager</option>
+                <option value="CEO / Founder">CEO / Founder</option>
+                <option value="CTO / IT Head">CTO / IT Head</option>
+                <option value="Operations">Operations</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="demo-modal__field">
+            <label for="demoMessage">Message (optional)</label>
+            <textarea id="demoMessage" name="message" placeholder="Tell us about your HR needs..." rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--large demo-modal__submit">
+            Request Demo
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </form>
+      </div>
+      <div class="demo-modal__success-state" id="demoSuccessState" style="display: none;">
+        <div class="demo-modal__success-icon">✅</div>
+        <h3 class="demo-modal__success-title">Request Sent Successfully!</h3>
+        <p class="demo-modal__success-msg">Thank you for your interest in HRVICO.<br>Our sales executive will reach out to you shortly.</p>
+        <p class="demo-modal__success-note">We typically respond within 2 business hours.</p>
+        <button class="btn btn--secondary btn--large" onclick="closeDemoModal()">Close</button>
+      </div>
+    </div>
+  </div>
+  <!-- Floating Contact Buttons -->
+  <a href="https://wa.me/9109116011899" target="_blank" rel="noopener noreferrer" class="float-contact-icon float-contact-icon--whatsapp" aria-label="Chat on WhatsApp">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.456 5.709 1.458h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  </a>
+  <a href="tel:+9109116011899" class="float-contact-icon float-contact-icon--phone" aria-label="Call Us">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 .7a2 2 0 0 1 22 16.92z" />
+    </svg>
+  </a>
 
+</body>
 </html>
