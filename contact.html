@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | HRVICO — Workforce Management Platform</title>
+  <meta name="description" content="Get in touch with the HRVICO team. Send us your questions, feedback, or custom inquiries and we will get back to you shortly.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/hrvico-favicon.svg">
+  <link rel="apple-touch-icon" href="assets/images/hrvico-favicon.svg">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css?v=1.5">
+  <link rel="stylesheet" href="css/navbar.css?v=1.5">
+  <link rel="stylesheet" href="css/footer.css?v=1.5">
+  <link rel="stylesheet" href="css/subpages.css">
+  <link rel="stylesheet" href="css/contact.css?v=1.5">
+  <link rel="stylesheet" href="css/demo-modal.css?v=1.5">
+
+  <!-- JS -->
+  <script defer src="js/main.js"></script>
+</head>
+
+<body class="subpage contact-page">
+
+  <!-- Background elements -->
+  <div class="subpage__bg-grid"></div>
+  <div class="subpage__orb subpage__orb--1"></div>
+  <div class="subpage__orb subpage__orb--2"></div>
+
+  <!-- ═══════════════════════════════════════
+       NAVBAR
+       ═══════════════════════════════════════ -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="container">
+      <div class="navbar__inner">
+        <a href="index.html" class="navbar__logo">
+          <img src="assets/images/hrvico-logo.svg?v=1.5" alt="HRvico Logo" class="navbar__logo-img" style="height: 30px; width: auto;">
+        </a>
+
+        <div class="navbar__links">
+          <a href="index.html#features" class="navbar__link">Features</a>
+          <a href="index.html#roles" class="navbar__link">Role</a>
+          <a href="pricing.html" class="navbar__link">Pricing</a>
+          <a href="contact.html" class="navbar__link active">Contact</a>
+          <a href="blogs.html" class="navbar__link">Blog</a>
+        </div>
+
+        <div class="navbar__cta desktop-only">
+          <a href="#" class="btn btn--primary btn--small" onclick="openDemoModal(); return false;">Book a Demo</a>
+        </div>
+
+        <button class="navbar__hamburger" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div class="navbar__mobile-menu">
+      <a href="index.html#features" class="navbar__link">Features</a>
+      <a href="index.html#roles" class="navbar__link">Role</a>
+      <a href="pricing.html" class="navbar__link">Pricing</a>
+      <a href="contact.html" class="navbar__link active">Contact</a>
+      <a href="blogs.html" class="navbar__link">Blog</a>
+      <a href="#" class="btn btn--primary" onclick="openDemoModal(); return false;">Book a Demo</a>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════
+       HEADER SECTION
+       ═══════════════════════════════════════ -->
+  <header class="subpage__header">
+    <div class="container">
+      <h1 class="subpage__title" data-animate="fade-up" style="margin-bottom: var(--space-xs);">Contact Us</h1>
+      <p class="subpage__subtitle" data-animate="fade-up">Any question or remarks? Just write us a message!</p>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════
+       CONTENT SECTION
+       ═══════════════════════════════════════ -->
+  <main class="contact-page__container">
+    <div class="contact-card">
+      <!-- Left Panel: Contact Info -->
+      <div class="contact-card__info">
+        <div class="contact-card__info-top">
+          <h2 class="contact-card__info-title">Contact Information</h2>
+          <p class="contact-card__info-subtitle">Say something to start a live chat!</p>
+          
+          <div class="contact-card__info-list">
+            <div class="contact-card__info-item">
+              <span class="contact-card__info-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+              </span>
+              <a href="tel:+9109116011899">+91-091160 11899</a>
+            </div>
+            
+            <div class="contact-card__info-item">
+              <span class="contact-card__info-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+              </span>
+              <a href="mailto:support@hrvico.com">support@hrvico.com</a>
+            </div>
+            
+            <div class="contact-card__info-item">
+              <span class="contact-card__info-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </span>
+              <a href="https://maps.google.com/?q=Office+A-125,+Sector+16A,+Noida,+Uttar+Pradesh,+India" target="_blank" rel="noopener noreferrer"><a href="https://maps.google.com/?q=Office+A-125,+Sector+16A,+Noida,+Uttar+Pradesh,+India" class="footer__link" target="_blank" rel="noopener noreferrer">Office A-125, Sector 16A, Noida, Uttar Pradesh, India</a></a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Social Icons -->
+        <div class="contact-card__info-socials">
+          <a href="https://www.facebook.com/HRvicoOfficial" class="contact-card__info-social" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/hrvico_official" class="contact-card__info-social" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/company/121494424/admin/dashboard/" class="contact-card__info-social" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+        </div>
+        
+        <!-- Background Rings -->
+        <div class="contact-card__info-decor-1"></div>
+        <div class="contact-card__info-decor-2"></div>
+      </div>
+      
+      <!-- Right Panel: Form -->
+      <div class="contact-card__form-wrapper">
+        <form class="contact-card__form" id="contactForm" onsubmit="submitContactForm(event)">
+          <div class="contact-card__form-grid">
+            <div class="contact-card__form-group">
+              <label for="firstName" class="contact-card__label">First Name</label>
+              <input type="text" id="firstName" name="first_name" class="contact-card__input" placeholder="" required>
+            </div>
+            <div class="contact-card__form-group">
+              <label for="lastName" class="contact-card__label">Last Name</label>
+              <input type="text" id="lastName" name="last_name" class="contact-card__input" placeholder="Doe" required>
+            </div>
+            <div class="contact-card__form-group">
+              <label for="email" class="contact-card__label">Email</label>
+              <input type="email" id="email" name="email" class="contact-card__input" placeholder="" required>
+            </div>
+            <div class="contact-card__form-group">
+              <label for="phone" class="contact-card__label">Phone Number</label>
+              <input type="tel" id="phone" name="phone" class="contact-card__input" placeholder="+1 012 3456 789" required>
+            </div>
+            
+            <div class="contact-card__form-group full-width">
+              <label for="message" class="contact-card__label">Message</label>
+              <textarea id="message" name="message" class="contact-card__textarea" placeholder="Write your message..." required></textarea>
+            </div>
+          </div>
+          
+          <div class="contact-card__actions">
+            <!-- Plane SVG -->
+            <svg class="contact-card__plane-svg" width="240" height="90" viewBox="0 0 240 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 70 C 80 70, 110 30, 200 30" stroke="#6C3FC5" stroke-dasharray="4 4" stroke-width="1.5" fill="none" />
+              <path d="M200 30 L212 24 L204 36 L202 42 L200 36 Z" fill="#0A061C" />
+            </svg>
+            
+            <button type="submit" class="contact-card__submit-btn">Send Message</button>
+          </div>
+        </form>
+        
+        <!-- Success State -->
+        <div id="contactSuccessState" style="display: none; text-align: center; margin: auto; padding: var(--space-xl) 0;">
+          <div style="font-size: 3rem; margin-bottom: var(--space-md);">✉️</div>
+          <h3 style="font-size: var(--fs-lg); color: var(--text-primary); margin-bottom: var(--space-sm); font-family: var(--font-display);">Message Sent!</h3>
+          <p style="color: var(--text-secondary); font-size: var(--fs-sm); line-height: 1.6; margin-bottom: var(--space-lg); max-width: 320px; margin-left: auto; margin-right: auto;">Thank you for contacting HRVICO. Our support team will get back to you shortly.</p>
+          <button class="btn btn--secondary" onclick="resetContactForm()" style="padding: 10px 24px; font-size: var(--fs-sm);">Send Another Message</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════ -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="footer__logo">
+            <img src="assets/images/hrvico-logo.svg?v=1.5" alt="HRvico Logo" class="footer__logo-img" style="height: 34px; width: auto;">
+          </div>
+          <p class="footer__tagline">The all-in-one HRMS platform that transforms how you manage, engage, and grow your workforce.</p>
+          <div class="footer__socials">
+            <a href="https://www.linkedin.com/company/121494424/admin/dashboard/" class="footer__social" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </a>
+            <a href="https://www.instagram.com/hrvico_official" class="footer__social" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+            <a href="https://www.facebook.com/HRvicoOfficial" class="footer__social" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer__column">
+          <h4 class="footer__column-title">Product</h4>
+          <div class="footer__links">
+            <a href="index.html#features" class="footer__link">Features</a>
+            <a href="pricing.html" class="footer__link">Pricing</a>
+            <a href="index.html#roles" class="footer__link">Roles</a>
+          </div>
+        </div>
+
+        <div class="footer__column">
+          <h4 class="footer__column-title">Company</h4>
+          <div class="footer__links">
+            <a href="about.html" class="footer__link">About Us</a>
+            <a href="blogs.html" class="footer__link">Blog</a>
+            <a href="contact.html" class="footer__link">Contact</a>
+          </div>
+        </div>
+
+        <div class="footer__column">
+          <h4 class="footer__column-title">Contact</h4>
+          <div class="footer__links">
+            <div class="footer__contact-item">
+              <strong>Address:</strong>
+              <a href="https://maps.google.com/?q=Office+A-125,+Sector+16A,+Noida,+Uttar+Pradesh,+India" class="footer__link" target="_blank" rel="noopener noreferrer">Office A-125, Sector 16A, Noida, Uttar Pradesh, India</a>
+            </div>
+            <div class="footer__contact-item">
+              <strong>Phone:</strong>
+              <a href="tel:+9109116011899" class="footer__link">+91-091160 11899</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p>© 2026 HRVICO. All rights reserved. ❤️ Crafted by <a href="https://scriza.com" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: none; font-weight: 500; transition: color 0.2s;" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color='var(--text-primary)'">Scriza</a></p>
+        <div class="footer__bottom-links">
+          <a href="privacy.html" class="footer__bottom-link">Privacy</a>
+          <a href="terms.html" class="footer__bottom-link">Terms</a>
+          <a href="refund.html" class="footer__bottom-link">Refund Policy</a>
+          <a href="#" class="footer__bottom-link" onclick="window.CookieConsent.showSettings(); return false;">Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════
+       DEMO BOOKING MODAL
+       ═══════════════════════════════════════ -->
+  <div class="demo-modal" id="demoModal">
+    <div class="demo-modal__overlay" onclick="closeDemoModal()"></div>
+    <div class="demo-modal__container">
+      <button class="demo-modal__close" onclick="closeDemoModal()" aria-label="Close">&times;</button>
+      <div class="demo-modal__form-state" id="demoFormState">
+        <div class="demo-modal__header">
+          <div class="demo-modal__logo">
+            <img src="assets/images/hrvico-logo.svg?v=1.5" alt="HRvico Logo" class="demo-modal__logo-img" style="height: 36px; width: auto;">
+          </div>
+          <h3 class="demo-modal__title">Book a Demo</h3>
+          <p class="demo-modal__subtitle">Fill in your details and our sales executive will reach out to you shortly.</p>
+        </div>
+        <form class="demo-modal__form" id="demoForm" onsubmit="submitDemoForm(event)">
+          <div class="demo-modal__field">
+            <label for="demoName">Full Name *</label>
+            <input type="text" id="demoName" name="name" placeholder="Enter full name" required>
+          </div>
+          <div class="demo-modal__field">
+            <label for="demoEmail">Work Email *</label>
+            <input type="email" id="demoEmail" name="email" placeholder="Enter work email" required>
+          </div>
+          <div class="demo-modal__field">
+            <label for="demoPhone">Phone Number *</label>
+            <input type="tel" id="demoPhone" name="phone" placeholder="Enter phone number" required>
+          </div>
+          <div class="demo-modal__field">
+            <label for="demoCompany">Company Name *</label>
+            <input type="text" id="demoCompany" name="company" placeholder="Enter Company Name" required>
+          </div>
+          <div class="demo-modal__row">
+            <div class="demo-modal__field">
+              <label for="demoSize">Company Size</label>
+              <select id="demoSize" name="size">
+                <option value="" disabled selected>Select range</option>
+                <option value="1-50">1 – 50 employees</option>
+                <option value="51-200">51 – 200 employees</option>
+                <option value="201-500">201 – 500 employees</option>
+                <option value="501+">501+ employees</option>
+              </select>
+            </div>
+            <div class="demo-modal__field">
+              <label for="demoRole">Your Role</label>
+              <select id="demoRole" name="role">
+                <option value="" disabled selected>Select role</option>
+                <option value="HR Manager">HR Manager</option>
+                <option value="CEO / Founder">CEO / Founder</option>
+                <option value="CTO / IT Head">CTO / IT Head</option>
+                <option value="Operations">Operations</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="demo-modal__field">
+            <label for="demoMessage">Message (optional)</label>
+            <textarea id="demoMessage" name="message" placeholder="Tell us about your HR needs..." rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--large demo-modal__submit">
+            Request Demo
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </form>
+      </div>
+      <div class="demo-modal__success-state" id="demoSuccessState" style="display: none;">
+        <div class="demo-modal__success-icon">✅</div>
+        <h3 class="demo-modal__success-title">Request Sent Successfully!</h3>
+        <p class="demo-modal__success-msg">Thank you for your interest in HRVICO.<br>Our sales executive will reach out to you shortly.</p>
+        <p class="demo-modal__success-note">We typically respond within 2 business hours.</p>
+        <button class="btn btn--secondary btn--large" onclick="closeDemoModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Contact Buttons -->
+  <a href="https://wa.me/9109116011899" target="_blank" rel="noopener noreferrer" class="float-contact-icon float-contact-icon--whatsapp" aria-label="Chat on WhatsApp">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.456 5.709 1.458h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  </a>
+  <a href="tel:+9109116011899" class="float-contact-icon float-contact-icon--phone" aria-label="Call Us">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+    </svg>
+  </a>
+
+  <!-- Inline Contact Form Script -->
+  <script>
+    function submitContactForm(event) {
+      event.preventDefault();
+      const form = document.getElementById('contactForm');
+      const successState = document.getElementById('contactSuccessState');
+      const submitBtn = form.querySelector('.contact-card__submit-btn');
+      const formData = new FormData(form);
+      
+      // Show sending loading state
+      const originalText = submitBtn.innerText;
+      submitBtn.innerText = 'Sending...';
+      submitBtn.disabled = true;
+      submitBtn.style.opacity = '0.7';
+      
+      // Build payload for FormSubmit.co
+      const data = {
+        name: formData.get('first_name') + ' ' + formData.get('last_name'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        message: formData.get('message'),
+        _subject: 'HRVICO Contact Form Submission',
+        _replyto: formData.get('email'),
+        _template: 'table',
+        _captcha: 'false',
+      };
+      
+      fetch('https://formsubmit.co/ajax/satyam@scriza.in', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(result => {
+        if (result.success) {
+          form.style.display = 'none';
+          successState.style.display = 'block';
+          form.reset();
+        } else {
+          throw new Error(result.message || 'Submission failed');
+        }
+      })
+      .catch(error => {
+        console.error('Contact form error:', error);
+        alert('Something went wrong. Please try again or email us directly at support@hrvico.com');
+      })
+      .finally(() => {
+        submitBtn.innerText = originalText;
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+      });
+    }
+    
+    function resetContactForm() {
+      document.getElementById('contactForm').style.display = 'block';
+      document.getElementById('contactSuccessState').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
