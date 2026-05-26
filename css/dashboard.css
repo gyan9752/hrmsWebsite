@@ -13,14 +13,14 @@
   margin: 0 auto;
 }
 
-.dashboard-preview__image {
+/* .dashboard-preview__image {
   width: 100%;
   border-radius: var(--radius-xl);
   border: 1px solid rgba(108, 63, 197, 0.1);
   box-shadow:
     0 24px 64px rgba(108, 63, 197, 0.1),
     0 4px 12px rgba(0, 0, 0, 0.06);
-}
+} */
 
 .dashboard-preview__glow {
   position: absolute;
