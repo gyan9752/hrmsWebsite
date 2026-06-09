@@ -2,6 +2,10 @@
    HRVICO — All JavaScript (Non-Module)
    ============================================ */
 
+/* ─── API Configuration ─── */
+var HRVICO_API_BASE = 'https://app.hrvico.com/back/api';
+var HRVICO_APP_URL = 'https://app.hrvico.com';
+
 document.addEventListener('DOMContentLoaded', () => {
   initAnimations();
   initNavbar();
@@ -12,6 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initPricingToggle();
   initFeatureCardGlow();
   initCookiesBanner();
+  initDynamicPricing();
+  initStartFreeButton();
 
   // Auto-open demo modal if parameter is present in URL
   if (window.location.search.includes('demo=true')) {
@@ -324,16 +330,173 @@ function initFeatureCardGlow() {
 }
 
 /* ═══════════════════════════════════════════
+   Start Free Button — inject into navbar + demo modal
+   ═══════════════════════════════════════════ */
+function initStartFreeButton() {
+  var onboardUrl = HRVICO_APP_URL + '/onboard-company';
+
+  // 1. Desktop navbar — add "Start Free" before "Book a Demo"
+  var desktopCta = document.querySelector('.navbar__cta.desktop-only');
+  if (desktopCta) {
+    var existingBtn = desktopCta.querySelector('.btn');
+    if (existingBtn && !desktopCta.querySelector('.btn--start-free')) {
+      var startFreeBtn = document.createElement('a');
+      startFreeBtn.href = onboardUrl;
+      startFreeBtn.className = 'btn btn--outline btn--small btn--start-free';
+      startFreeBtn.textContent = 'Start Free';
+      startFreeBtn.style.cssText = 'border: 1.5px solid var(--color-primary, #6c5ce7); color: var(--color-primary, #6c5ce7); background: transparent; margin-right: 8px; border-radius: 8px; padding: 8px 18px; font-weight: 600; font-size: 0.88rem; text-decoration: none; transition: all 0.2s;';
+      startFreeBtn.onmouseover = function() { this.style.background = 'var(--color-primary, #6c5ce7)'; this.style.color = '#fff'; };
+      startFreeBtn.onmouseout = function() { this.style.background = 'transparent'; this.style.color = 'var(--color-primary, #6c5ce7)'; };
+      desktopCta.insertBefore(startFreeBtn, existingBtn);
+    }
+  }
+
+  // 2. Mobile menu — add "Start Free" before "Book a Demo"
+  var mobileMenu = document.querySelector('.navbar__mobile-menu');
+  if (mobileMenu) {
+    var mobileDemo = mobileMenu.querySelector('.btn--primary');
+    if (mobileDemo && !mobileMenu.querySelector('.btn--start-free')) {
+      var mobileStartFree = document.createElement('a');
+      mobileStartFree.href = onboardUrl;
+      mobileStartFree.className = 'btn btn--outline btn--start-free';
+      mobileStartFree.textContent = 'Start Free';
+      mobileStartFree.style.cssText = 'border: 1.5px solid var(--color-primary, #6c5ce7); color: var(--color-primary, #6c5ce7); background: transparent; border-radius: 8px; padding: 10px 20px; font-weight: 600; text-decoration: none; text-align: center;';
+      mobileMenu.insertBefore(mobileStartFree, mobileDemo);
+    }
+  }
+
+  // 3. Demo modal — add "Start Free" link below the form submit button
+  var demoForm = document.getElementById('demoForm');
+  if (demoForm && !demoForm.querySelector('.demo-start-free')) {
+    var submitBtn = demoForm.querySelector('.demo-modal__submit');
+    if (submitBtn) {
+      var freeLink = document.createElement('p');
+      freeLink.className = 'demo-start-free';
+      freeLink.style.cssText = 'text-align: center; margin-top: 16px; font-size: 0.85rem; color: #666;';
+      freeLink.innerHTML = 'Want to get started right away? <a href="' + onboardUrl + '" style="color: var(--color-primary, #6c5ce7); font-weight: 700; text-decoration: none;">Start Free →</a>';
+      submitBtn.parentNode.insertBefore(freeLink, submitBtn.nextSibling);
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════
+   Dynamic Pricing — Fetch from Backend
+   ═══════════════════════════════════════════ */
+function initDynamicPricing() {
+  var grid = document.getElementById('pricingGrid');
+  if (!grid) return;
+
+  fetch(HRVICO_API_BASE + '/superadmin/subscriptionPlan/getAllPlans?limit=50')
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+      if (!data.success || !data.plans || data.plans.length === 0) return;
+
+      var plans = data.plans
+        .filter(function (p) { return p.status === 'Active'; })
+        .sort(function (a, b) { return (a.pricePerMonth || 0) - (b.pricePerMonth || 0); });
+
+      if (plans.length === 0) return;
+
+      // Find the most popular plan (middle-ish or the one with most features)
+      var popularIndex = Math.min(2, plans.length - 1);
+
+      var cardsHTML = '';
+      plans.forEach(function (plan, index) {
+        var isPopular = index === popularIndex;
+        var price = plan.pricePerMonth;
+        var priceDisplay = price === 0 || price === null ? '₹0' : '₹' + Number(price).toLocaleString('en-IN');
+        var period = price === 0 || price === null ? '/ 6 mo' : '/mo';
+        var subtext = price === 0 || price === null ? 'free setup' : 'billed monthly';
+
+        var featuresHTML = '';
+        if (plan.features && plan.features.length > 0) {
+          plan.features.forEach(function (f) {
+            featuresHTML += '<div class="pricing-feature"><span class="pricing-feature__check">✔</span> ' + f.featuresName + '</div>';
+          });
+        }
+
+        var highlightText = plan.userLimit
+          ? 'Up to ' + plan.userLimit + ' Employees Included'
+          : 'Unlimited Employees Included';
+
+        var ctaText = price === 0 || price === null ? 'Start Free' : 'Get Started';
+        var ctaClass = isPopular ? 'btn btn--primary pricing-card__cta' : 'btn btn--light-grey pricing-card__cta';
+        var cardClass = isPopular ? 'pricing-card pricing-card--popular' : 'pricing-card';
+
+        if (isPopular) {
+          cardsHTML += '<div class="' + cardClass + '">';
+          cardsHTML += '<div class="pricing-card__popular-header"><span class="popular-header__icon">🔥</span> Popular Choice</div>';
+          cardsHTML += '<div class="pricing-card__body">';
+        } else {
+          cardsHTML += '<div class="' + cardClass + '">';
+          cardsHTML += '<div class="pricing-card__inner">';
+        }
+
+        cardsHTML += '<h3 class="pricing-card__name">' + plan.plan + '</h3>';
+        cardsHTML += '<p class="pricing-card__desc">Up to ' + (plan.userLimit || '∞') + ' employees</p>';
+        cardsHTML += '<div class="pricing-card__price">';
+        cardsHTML += '<span class="pricing-card__amount">' + priceDisplay + '</span>';
+        cardsHTML += '<span class="pricing-card__period">' + period + '</span>';
+        cardsHTML += '</div>';
+        cardsHTML += '<div class="pricing-card__price-subtext">' + subtext + '</div>';
+        cardsHTML += '<div class="pricing-card__features">' + featuresHTML + '</div>';
+        cardsHTML += '<div class="pricing-card__feature-highlight">' + highlightText + '</div>';
+
+        if (price === 0 || price === null) {
+          cardsHTML += '<a href="' + HRVICO_APP_URL + '/onboard-company" class="' + ctaClass + '">' + ctaText + '</a>';
+          cardsHTML += '<span class="pricing-card__highlight-small">No Credit Card Required</span>';
+        } else {
+          cardsHTML += '<a href="' + HRVICO_APP_URL + '/onboard-company" class="' + ctaClass + '">' + ctaText + '</a>';
+        }
+
+        cardsHTML += '</div></div>';
+      });
+
+      grid.innerHTML = cardsHTML;
+    })
+    .catch(function (err) {
+      console.error('Failed to fetch pricing plans:', err);
+      // Keep the static fallback cards if API fails
+    });
+}
+
+/* ═══════════════════════════════════════════
    Demo Booking Modal
    ═══════════════════════════════════════════ */
+var _demoOtpVerified = false;
+var _demoVerifiedEmail = '';
+
 function openDemoModal() {
   const modal = document.getElementById('demoModal');
   if (!modal) return;
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
   // Reset to form state
+  _demoOtpVerified = false;
+  _demoVerifiedEmail = '';
   document.getElementById('demoFormState').style.display = 'block';
   document.getElementById('demoSuccessState').style.display = 'none';
+
+  // Inject OTP state if not already present
+  if (!document.getElementById('demoOtpState')) {
+    var otpHTML = '<div class="demo-modal__form-state" id="demoOtpState" style="display: none;">'
+      + '<div class="demo-modal__header">'
+      + '<div class="demo-modal__logo"><img src="assets/images/hrvico-logo.svg?v=1.5" alt="HRvico Logo" class="demo-modal__logo-img" style="height: 36px; width: auto;"></div>'
+      + '<h3 class="demo-modal__title">Verify Your Email</h3>'
+      + '<p class="demo-modal__subtitle">We\'ve sent an OTP to <strong id="demoOtpEmail"></strong></p>'
+      + '</div>'
+      + '<div style="padding: 0 1.5rem 1.5rem;">'
+      + '<div class="demo-modal__field"><label for="demoOtpInput">Enter OTP *</label>'
+      + '<input type="text" id="demoOtpInput" placeholder="Enter 6-digit OTP" maxlength="6" style="text-align: center; font-size: 1.2rem; letter-spacing: 0.3em;" required></div>'
+      + '<button type="button" class="btn btn--primary btn--large demo-modal__submit" id="demoOtpVerifyBtn" onclick="verifyDemoOtp()" style="width: 100%; margin-top: 1rem;">Verify & Submit</button>'
+      + '<p style="text-align: center; margin-top: 1rem; font-size: 0.85rem; color: #888;">Didn\'t receive it? '
+      + '<button type="button" id="demoOtpResendBtn" onclick="resendDemoOtp()" style="background: none; border: none; color: #6c5ce7; cursor: pointer; font-weight: 600; font-size: 0.85rem;">Resend OTP</button></p>'
+      + '</div></div>';
+    var container = modal.querySelector('.demo-modal__container');
+    var successState = document.getElementById('demoSuccessState');
+    successState.insertAdjacentHTML('beforebegin', otpHTML);
+  }
+  document.getElementById('demoOtpState').style.display = 'none';
 }
 
 function closeDemoModal() {
@@ -343,64 +506,158 @@ function closeDemoModal() {
   document.body.style.overflow = '';
 }
 
+/* Step 1: Submit form → send OTP to email */
 function submitDemoForm(event) {
   event.preventDefault();
 
   var form = document.getElementById('demoForm');
   var submitBtn = form.querySelector('.demo-modal__submit');
-  var formData = new FormData(form);
+  var email = form.querySelector('[name="email"]').value.trim();
 
-  // Build payload for FormSubmit.co
-  var data = {
-    name: formData.get('name'),
-    email: formData.get('email'),
-    phone: formData.get('phone'),
-    company: formData.get('company'),
-    'Company Size': formData.get('size') || 'Not specified',
-    'Role': formData.get('role') || 'Not specified',
-    message: formData.get('message') || 'No message',
-    _subject: 'HRVICO Demo Request from ' + formData.get('company'),
-    _replyto: formData.get('email'),
-    _template: 'table',
-    _captcha: 'false',
-    _autoresponse: 'Thank you for your interest in HRVICO! Our sales executive will reach out to you within 2 business hours.'
-  };
+  if (!email) {
+    alert('Please enter your email address.');
+    return;
+  }
 
-  // Show loading state
   var originalHTML = submitBtn.innerHTML;
-  submitBtn.innerHTML = 'Sending...';
+  submitBtn.innerHTML = 'Sending OTP...';
   submitBtn.disabled = true;
   submitBtn.style.opacity = '0.7';
 
-  // Send via FormSubmit.co (free email delivery for static sites)
-  fetch('https://formsubmit.co/ajax/satyam@scriza.in', {
+  fetch(HRVICO_API_BASE + '/Demo/send-demo-otp', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    },
-    body: JSON.stringify(data)
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: email })
   })
-  .then(function(response) { return response.json(); })
-  .then(function(result) {
-    console.log('FormSubmit response:', result);
-    if (result.success) {
-      document.getElementById('demoFormState').style.display = 'none';
-      document.getElementById('demoSuccessState').style.display = 'block';
-      form.reset();
-    } else {
-      throw new Error(result.message || 'Submission failed');
-    }
+    .then(function (res) { return res.json(); })
+    .then(function (result) {
+      if (result.success) {
+        _demoVerifiedEmail = email;
+        document.getElementById('demoFormState').style.display = 'none';
+        document.getElementById('demoOtpState').style.display = 'block';
+        document.getElementById('demoOtpEmail').textContent = email;
+      } else {
+        alert(result.message || 'Failed to send OTP. Please try again.');
+      }
+    })
+    .catch(function (err) {
+      console.error('Send OTP error:', err);
+      alert('Something went wrong. Please try again.');
+    })
+    .finally(function () {
+      submitBtn.innerHTML = originalHTML;
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '1';
+    });
+}
+
+/* Step 2: Verify OTP */
+function verifyDemoOtp() {
+  var otpInput = document.getElementById('demoOtpInput');
+  var verifyBtn = document.getElementById('demoOtpVerifyBtn');
+  var otp = otpInput.value.trim();
+
+  if (!otp || otp.length < 4) {
+    alert('Please enter a valid OTP.');
+    return;
+  }
+
+  verifyBtn.textContent = 'Verifying...';
+  verifyBtn.disabled = true;
+
+  fetch(HRVICO_API_BASE + '/Demo/verify-demo-otp', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: _demoVerifiedEmail, otp: otp })
   })
-  .catch(function(error) {
-    console.error('Form submission error:', error);
-    alert('Something went wrong. Please try again or email us directly at satyam@scriza.in');
+    .then(function (res) { return res.json(); })
+    .then(function (result) {
+      if (result.success) {
+        _demoOtpVerified = true;
+        submitDemoRequest();
+      } else {
+        alert(result.message || 'Invalid or expired OTP.');
+      }
+    })
+    .catch(function (err) {
+      console.error('Verify OTP error:', err);
+      alert('Something went wrong. Please try again.');
+    })
+    .finally(function () {
+      verifyBtn.textContent = 'Verify & Submit';
+      verifyBtn.disabled = false;
+    });
+}
+
+/* Step 3: Submit demo request to backend */
+function submitDemoRequest() {
+  var form = document.getElementById('demoForm');
+  var formData = new FormData(form);
+
+  var payload = {
+    fullName: formData.get('name'),
+    email: _demoVerifiedEmail,
+    phone: formData.get('phone'),
+    companyName: formData.get('company'),
+    companySize: formData.get('size') || '1-50',
+    role: formData.get('role') || 'Other',
+    message: formData.get('message') || '',
+  };
+
+  fetch(HRVICO_API_BASE + '/Demo/create-demo-request', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
   })
-  .finally(function() {
-    submitBtn.innerHTML = originalHTML;
-    submitBtn.disabled = false;
-    submitBtn.style.opacity = '1';
-  });
+    .then(function (res) { return res.json(); })
+    .then(function (result) {
+      if (result.success) {
+        document.getElementById('demoOtpState').style.display = 'none';
+        document.getElementById('demoSuccessState').style.display = 'block';
+        form.reset();
+      } else {
+        alert(result.message || 'Submission failed. Please try again.');
+        // Go back to form if duplicate or error
+        document.getElementById('demoOtpState').style.display = 'none';
+        document.getElementById('demoFormState').style.display = 'block';
+      }
+    })
+    .catch(function (err) {
+      console.error('Demo request error:', err);
+      alert('Something went wrong. Please try again.');
+      document.getElementById('demoOtpState').style.display = 'none';
+      document.getElementById('demoFormState').style.display = 'block';
+    });
+}
+
+/* Resend OTP */
+function resendDemoOtp() {
+  if (!_demoVerifiedEmail) return;
+
+  var resendBtn = document.getElementById('demoOtpResendBtn');
+  resendBtn.textContent = 'Sending...';
+  resendBtn.disabled = true;
+
+  fetch(HRVICO_API_BASE + '/Demo/send-demo-otp', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: _demoVerifiedEmail })
+  })
+    .then(function (res) { return res.json(); })
+    .then(function (result) {
+      if (result.success) {
+        alert('OTP resent to ' + _demoVerifiedEmail);
+      } else {
+        alert(result.message || 'Could not resend OTP. Please wait and try again.');
+      }
+    })
+    .catch(function () {
+      alert('Failed to resend OTP.');
+    })
+    .finally(function () {
+      resendBtn.textContent = 'Resend OTP';
+      resendBtn.disabled = false;
+    });
 }
 
 // Close modal on Escape key
@@ -414,7 +671,7 @@ document.addEventListener('keydown', (e) => {
 function initCookiesBanner() {
   // Define Global CookieConsent API
   window.CookieConsent = {
-    getPreferences: function() {
+    getPreferences: function () {
       const saved = localStorage.getItem('cookiePreferences');
       if (saved) {
         try {
@@ -429,13 +686,13 @@ function initCookiesBanner() {
       }
       return null;
     },
-    hasConsented: function(category) {
+    hasConsented: function (category) {
       const prefs = this.getPreferences();
       if (!prefs) return false;
       if (category === 'necessary') return true;
       return !!prefs[category];
     },
-    showSettings: function() {
+    showSettings: function () {
       const banner = document.getElementById('cookiesBanner');
       const trigger = document.getElementById('cookiesSettingsTrigger');
       if (banner) {
@@ -460,7 +717,7 @@ function initCookiesBanner() {
         trigger.classList.remove('show');
       }
     },
-    hideSettings: function() {
+    hideSettings: function () {
       const banner = document.getElementById('cookiesBanner');
       const trigger = document.getElementById('cookiesSettingsTrigger');
       if (banner) {
@@ -584,7 +841,7 @@ function initCookiesBanner() {
     preferencesDiv.style.display = 'flex';
     mainActions.style.display = 'none';
     saveActions.style.display = 'flex';
-    
+
     // Fill switches with active consent states
     const currentPrefs = window.CookieConsent.getPreferences() || { necessary: true, analytics: false, marketing: false };
     document.getElementById('cookiesOptAnalytics').checked = !!currentPrefs.analytics;
