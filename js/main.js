@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCookiesBanner();
   initDynamicPricing();
   initStartFreeButton();
+  cleanHtmlExtensions();
 
   // Auto-open demo modal if parameter is present in URL
   if (window.location.search.includes('demo=true')) {
@@ -330,6 +331,19 @@ function initFeatureCardGlow() {
 }
 
 /* ═══════════════════════════════════════════
+   Clean .html extension from URL bar (cosmetic only)
+   ═══════════════════════════════════════════ */
+function cleanHtmlExtensions() {
+  // Hide .html from the browser URL bar without breaking navigation
+  // Links still point to .html files — works on any server, local, nginx, etc.
+  if (location.pathname.endsWith('.html')) {
+    var clean = location.pathname.replace(/\.html$/, '');
+    if (clean === '/index') clean = '/';
+    history.replaceState(null, '', clean + location.search + location.hash);
+  }
+}
+
+/* ═══════════════════════════════════════════
    Start Free Button — inject into navbar + demo modal
    ═══════════════════════════════════════════ */
 function initStartFreeButton() {
@@ -389,7 +403,10 @@ function initDynamicPricing() {
   fetch(HRVICO_API_BASE + '/superadmin/subscriptionPlan/getAllPlans?limit=50')
     .then(function (res) { return res.json(); })
     .then(function (data) {
-      if (!data.success || !data.plans || data.plans.length === 0) return;
+      if (!data.success || !data.plans || data.plans.length === 0) {
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px 20px;"><p style="color:#64748b;font-size:0.95rem;">Plans are being updated. Please check back shortly.</p></div>';
+        return;
+      }
 
       var plans = data.plans
         .filter(function (p) { return p.status === 'Active'; })
@@ -456,7 +473,7 @@ function initDynamicPricing() {
     })
     .catch(function (err) {
       console.error('Failed to fetch pricing plans:', err);
-      // Keep the static fallback cards if API fails
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px 20px;"><p style="color:#64748b;font-size:0.95rem;">Unable to load plans. Please refresh the page.</p><button onclick="location.reload()" style="margin-top:12px;padding:8px 24px;border-radius:8px;border:none;background:#6366f1;color:#fff;font-weight:600;cursor:pointer;">Refresh</button></div>';
     });
 }
 
@@ -672,208 +689,102 @@ function initCookiesBanner() {
   // Define Global CookieConsent API
   window.CookieConsent = {
     getPreferences: function () {
-      const saved = localStorage.getItem('cookiePreferences');
+      var saved = localStorage.getItem('cookiePreferences');
       if (saved) {
-        try {
-          return JSON.parse(saved);
-        } catch (e) {
-          console.error('Error parsing cookie preferences', e);
-        }
+        try { return JSON.parse(saved); } catch (e) { /* */ }
       }
-      // Check legacy accept key (assume full acceptance if they previously accepted)
       if (localStorage.getItem('cookiesAccepted') === 'true') {
         return { necessary: true, analytics: true, marketing: true };
       }
       return null;
     },
     hasConsented: function (category) {
-      const prefs = this.getPreferences();
+      var prefs = this.getPreferences();
       if (!prefs) return false;
       if (category === 'necessary') return true;
       return !!prefs[category];
     },
-    showSettings: function () {
-      const banner = document.getElementById('cookiesBanner');
-      const trigger = document.getElementById('cookiesSettingsTrigger');
-      if (banner) {
-        // Pre-fill toggles with current settings
-        const prefs = this.getPreferences() || { necessary: true, analytics: false, marketing: false };
-        const analyticsInput = document.getElementById('cookiesOptAnalytics');
-        const marketingInput = document.getElementById('cookiesOptMarketing');
-        if (analyticsInput) analyticsInput.checked = !!prefs.analytics;
-        if (marketingInput) marketingInput.checked = !!prefs.marketing;
-
-        // Display preferences panel and save buttons
-        const preferencesDiv = document.getElementById('cookiesPreferences');
-        const mainActions = document.getElementById('cookiesActionsMain');
-        const saveActions = document.getElementById('cookiesActionsSave');
-        if (preferencesDiv) preferencesDiv.style.display = 'flex';
-        if (mainActions) mainActions.style.display = 'none';
-        if (saveActions) saveActions.style.display = 'flex';
-
-        banner.classList.add('show');
-      }
-      if (trigger) {
-        trigger.classList.remove('show');
-      }
-    },
-    hideSettings: function () {
-      const banner = document.getElementById('cookiesBanner');
-      const trigger = document.getElementById('cookiesSettingsTrigger');
-      if (banner) {
-        banner.classList.remove('show');
-      }
-      // Show floating trigger button once user has chosen consent preferences
-      if (trigger && this.getPreferences() !== null) {
-        setTimeout(() => {
-          trigger.classList.add('show');
-        }, 400);
-      }
-    }
+    showSettings: function () { /* no-op — cookie icon removed */ }
   };
 
-  // Create & Append Floating Cookie Settings trigger button
-  const trigger = document.createElement('button');
-  trigger.className = 'cookies-settings-trigger';
-  trigger.id = 'cookiesSettingsTrigger';
-  trigger.setAttribute('aria-label', 'Cookie Settings');
-  trigger.innerHTML = `
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10c.877 0 1.73-.113 2.545-.328a1.002 1.002 0 00.707-.723 1 1 0 00-.312-1.013 3.518 3.518 0 01-1.123-2.909c.148-1.579 1.4-2.884 2.977-3.085A3.498 3.498 0 0121 17.41a1.002 1.002 0 001.077-.293 1 1 0 00.171-1.082C21.431 14.28 21.05 12.185 21 12c0-5.523-4.477-10-10-10zm-3 5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm6 1a1 1 0 110 2 1 1 0 010-2zm-8 5a1 1 0 110 2 1 1 0 010-2zm7 4a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/>
-    </svg>
-  `;
-  document.body.appendChild(trigger);
+  // Already consented — don't show anything
+  if (window.CookieConsent.getPreferences() !== null) return;
 
-  trigger.addEventListener('click', () => {
-    window.CookieConsent.showSettings();
-  });
-
-  // Create & Append Banner Element
-  const banner = document.createElement('div');
+  // Create banner (first visit only, no floating icon)
+  var banner = document.createElement('div');
   banner.className = 'cookies-banner';
   banner.id = 'cookiesBanner';
-  banner.innerHTML = `
-    <div class="cookies-banner__body">
-      <div class="cookies-banner__header">
-        <h4 class="cookies-banner__title">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display: inline-block; vertical-align: middle;">
-            <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10c.877 0 1.73-.113 2.545-.328a1.002 1.002 0 00.707-.723 1 1 0 00-.312-1.013 3.518 3.518 0 01-1.123-2.909c.148-1.579 1.4-2.884 2.977-3.085A3.498 3.498 0 0121 17.41a1.002 1.002 0 001.077-.293 1 1 0 00.171-1.082C21.431 14.28 21.05 12.185 21 12c0-5.523-4.477-10-10-10zm-3 5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm6 1a1 1 0 110 2 1 1 0 010-2zm-8 5a1 1 0 110 2 1 1 0 010-2zm7 4a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/>
-          </svg>
-          Cookie Consent
-        </h4>
-      </div>
-      <p class="cookies-banner__text">
-        We use cookies to improve your experience on our website. By clicking "Accept All", you agree to our use of all cookies. You can customize your settings or read our <a href="privacy.html" class="cookies-banner__link">Privacy Policy</a>.
-      </p>
-      
-      <div class="cookies-banner__preferences" id="cookiesPreferences" style="display: none;">
-        <div class="cookies-preference-item">
-          <div class="cookies-preference-item__info">
-            <span class="cookies-preference-item__title">Necessary Cookies</span>
-            <p class="cookies-preference-item__desc">Required for basic website functions, security, and preferences. Cannot be disabled.</p>
-          </div>
-          <label class="cookies-switch">
-            <input type="checkbox" checked disabled>
-            <span class="cookies-slider round"></span>
-          </label>
-        </div>
-        <div class="cookies-preference-item">
-          <div class="cookies-preference-item__info">
-            <span class="cookies-preference-item__title">Analytics Cookies</span>
-            <p class="cookies-preference-item__desc">Enable us to monitor traffic patterns, analyze behaviors, and optimize page performance.</p>
-          </div>
-          <label class="cookies-switch">
-            <input type="checkbox" id="cookiesOptAnalytics">
-            <span class="cookies-slider round"></span>
-          </label>
-        </div>
-        <div class="cookies-preference-item">
-          <div class="cookies-preference-item__info">
-            <span class="cookies-preference-item__title">Marketing Cookies</span>
-            <p class="cookies-preference-item__desc">Allow personalized advertising and campaign efficiency tracking.</p>
-          </div>
-          <label class="cookies-switch">
-            <input type="checkbox" id="cookiesOptMarketing">
-            <span class="cookies-slider round"></span>
-          </label>
-        </div>
-      </div>
-      
-      <div class="cookies-banner__actions">
-        <div class="cookies-banner__actions-row" id="cookiesActionsMain">
-          <button class="btn btn--secondary btn--small cookies-banner__btn" id="rejectCookiesBtn">Reject All</button>
-          <button class="cookies-banner__btn-link" id="customizeCookiesBtn">Customize</button>
-          <button class="btn btn--primary btn--small cookies-banner__btn" id="acceptAllCookiesBtn">Accept All</button>
-        </div>
-        <div class="cookies-banner__actions-row" id="cookiesActionsSave" style="display: none;">
-          <button class="btn btn--secondary btn--small cookies-banner__btn" id="savePrefsCancelBtn">Back</button>
-          <button class="btn btn--primary btn--small cookies-banner__btn" id="savePrefsConfirmBtn">Save Settings</button>
-        </div>
-      </div>
-    </div>
-  `;
+  banner.innerHTML = ''
+    + '<div class="cookies-banner__body">'
+    + '  <div class="cookies-banner__header">'
+    + '    <h4 class="cookies-banner__title">'
+    + '      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;vertical-align:middle;">'
+    + '        <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10c.877 0 1.73-.113 2.545-.328a1.002 1.002 0 00.707-.723 1 1 0 00-.312-1.013 3.518 3.518 0 01-1.123-2.909c.148-1.579 1.4-2.884 2.977-3.085A3.498 3.498 0 0121 17.41a1.002 1.002 0 001.077-.293 1 1 0 00.171-1.082C21.431 14.28 21.05 12.185 21 12c0-5.523-4.477-10-10-10zm-3 5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm6 1a1 1 0 110 2 1 1 0 010-2zm-8 5a1 1 0 110 2 1 1 0 010-2zm7 4a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/>'
+    + '      </svg>'
+    + '      Cookie Consent'
+    + '    </h4>'
+    + '  </div>'
+    + '  <p class="cookies-banner__text">'
+    + '    We use cookies to improve your experience on our website. By clicking "Accept All", you agree to our use of all cookies. You can customize your settings or read our <a href="/privacy" class="cookies-banner__link">Privacy Policy</a>.'
+    + '  </p>'
+    + '  <div class="cookies-banner__preferences" id="cookiesPreferences" style="display:none;">'
+    + '    <div class="cookies-preference-item"><div class="cookies-preference-item__info"><span class="cookies-preference-item__title">Necessary Cookies</span><p class="cookies-preference-item__desc">Required for basic website functions. Cannot be disabled.</p></div><label class="cookies-switch"><input type="checkbox" checked disabled><span class="cookies-slider round"></span></label></div>'
+    + '    <div class="cookies-preference-item"><div class="cookies-preference-item__info"><span class="cookies-preference-item__title">Analytics Cookies</span><p class="cookies-preference-item__desc">Help us understand how visitors interact with our website.</p></div><label class="cookies-switch"><input type="checkbox" id="cookiesOptAnalytics"><span class="cookies-slider round"></span></label></div>'
+    + '    <div class="cookies-preference-item"><div class="cookies-preference-item__info"><span class="cookies-preference-item__title">Marketing Cookies</span><p class="cookies-preference-item__desc">Allow personalized advertising and campaign tracking.</p></div><label class="cookies-switch"><input type="checkbox" id="cookiesOptMarketing"><span class="cookies-slider round"></span></label></div>'
+    + '  </div>'
+    + '  <div class="cookies-banner__actions">'
+    + '    <div class="cookies-banner__actions-row" id="cookiesActionsMain">'
+    + '      <button class="btn btn--secondary btn--small cookies-banner__btn" id="rejectCookiesBtn">Reject All</button>'
+    + '      <button class="cookies-banner__btn-link" id="customizeCookiesBtn">Customize</button>'
+    + '      <button class="btn btn--primary btn--small cookies-banner__btn" id="acceptAllCookiesBtn">Accept All</button>'
+    + '    </div>'
+    + '    <div class="cookies-banner__actions-row" id="cookiesActionsSave" style="display:none;">'
+    + '      <button class="btn btn--secondary btn--small cookies-banner__btn" id="savePrefsCancelBtn">Back</button>'
+    + '      <button class="btn btn--primary btn--small cookies-banner__btn" id="savePrefsConfirmBtn">Save Settings</button>'
+    + '    </div>'
+    + '  </div>'
+    + '</div>';
   document.body.appendChild(banner);
 
-  // Helper function to save choice
-  const saveConsent = (prefs) => {
+  var saveConsent = function (prefs) {
     localStorage.setItem('cookiePreferences', JSON.stringify(prefs));
-    localStorage.setItem('cookiesAccepted', 'true'); // Legacy key compatibility
-    window.dispatchEvent(new CustomEvent('cookieConsentChanged', { detail: prefs }));
-    window.CookieConsent.hideSettings();
+    localStorage.setItem('cookiesAccepted', 'true');
+    banner.classList.remove('show');
   };
 
-  // Button Action Listeners
-  document.getElementById('acceptAllCookiesBtn').addEventListener('click', () => {
+  document.getElementById('acceptAllCookiesBtn').addEventListener('click', function () {
     saveConsent({ necessary: true, analytics: true, marketing: true });
   });
 
-  document.getElementById('rejectCookiesBtn').addEventListener('click', () => {
+  document.getElementById('rejectCookiesBtn').addEventListener('click', function () {
     saveConsent({ necessary: true, analytics: false, marketing: false });
   });
 
-  const customizeBtn = document.getElementById('customizeCookiesBtn');
-  const preferencesDiv = document.getElementById('cookiesPreferences');
-  const mainActions = document.getElementById('cookiesActionsMain');
-  const saveActions = document.getElementById('cookiesActionsSave');
+  var preferencesDiv = document.getElementById('cookiesPreferences');
+  var mainActions = document.getElementById('cookiesActionsMain');
+  var saveActions = document.getElementById('cookiesActionsSave');
 
-  customizeBtn.addEventListener('click', () => {
-    // Show preference panels
+  document.getElementById('customizeCookiesBtn').addEventListener('click', function () {
     preferencesDiv.style.display = 'flex';
     mainActions.style.display = 'none';
     saveActions.style.display = 'flex';
-
-    // Fill switches with active consent states
-    const currentPrefs = window.CookieConsent.getPreferences() || { necessary: true, analytics: false, marketing: false };
-    document.getElementById('cookiesOptAnalytics').checked = !!currentPrefs.analytics;
-    document.getElementById('cookiesOptMarketing').checked = !!currentPrefs.marketing;
   });
 
-  document.getElementById('savePrefsCancelBtn').addEventListener('click', () => {
-    // Go back to main options
+  document.getElementById('savePrefsCancelBtn').addEventListener('click', function () {
     preferencesDiv.style.display = 'none';
     mainActions.style.display = 'flex';
     saveActions.style.display = 'none';
   });
 
-  document.getElementById('savePrefsConfirmBtn').addEventListener('click', () => {
-    const prefs = {
+  document.getElementById('savePrefsConfirmBtn').addEventListener('click', function () {
+    saveConsent({
       necessary: true,
       analytics: document.getElementById('cookiesOptAnalytics').checked,
       marketing: document.getElementById('cookiesOptMarketing').checked
-    };
-    saveConsent(prefs);
+    });
   });
 
-  // Check state on load
-  const savedPreferences = window.CookieConsent.getPreferences();
-  if (savedPreferences === null) {
-    // Show banner with delay for entry transition
-    setTimeout(() => {
-      banner.classList.add('show');
-    }, 400);
-  } else {
-    // Already accepted/selected preferences, show the widget button
-    trigger.classList.add('show');
-  }
+  // Show banner after short delay
+  setTimeout(function () { banner.classList.add('show'); }, 400);
 }
 
