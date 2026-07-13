@@ -44,11 +44,11 @@ gtag('config', 'G-TVS20GZXDB');
   <link rel="stylesheet" href="css/navbar.css?v=1.5">
   <link rel="stylesheet" href="css/footer.css?v=1.5">
   <link rel="stylesheet" href="css/subpages.css">
-  <link rel="stylesheet" href="css/blog-listing.css">
+  <link rel="stylesheet" href="css/blog-listing.css?v=5">
   <link rel="stylesheet" href="css/demo-modal.css?v=1.5">
 
   <!-- JS -->
-  <script defer src="js/main.js"></script>
+  <script defer src="js/main.js?v=10"></script>
 </head>
 
 <body class="subpage blog-listing-page">
@@ -61,7 +61,7 @@ gtag('config', 'G-TVS20GZXDB');
   <!-- ═══════════════════════════════════════
        NAVBAR
        ═══════════════════════════════════════ -->
-  <nav class="navbar scrolled" id="navbar" style="background: white">
+  <nav class="navbar scrolled" id="navbar">
     <div class="container">
       <div class="navbar__inner">
         <a href="index.html" class="navbar__logo">
@@ -115,7 +115,10 @@ gtag('config', 'G-TVS20GZXDB');
         work.
       </p>
 
-
+      <!-- Category Filter Tabs -->
+      <div class="blog-listing__filters" data-animate="fade-up" id="category-filters-container">
+        <button class="blog-filter-btn active" data-category="all">All</button>
+      </div>
     </div>
   </header>
 
@@ -124,270 +127,25 @@ gtag('config', 'G-TVS20GZXDB');
        ═══════════════════════════════════════ -->
   <main class="blog-listing__main">
 
+    <!-- ── FEATURED BLOG GRID (1 Left + 3 Right) ── -->
+    <section class="blog-listing__featured" data-animate="fade-up">
+
+      <!-- LEFT: Large Featured Blog Card -->
+      <div id="featured-blog-container" style="width: 100%;">
+        <p style="padding: 20px;">Loading featured blog...</p>
+      </div>
+
+      <!-- RIGHT: Stack of 3 Smaller Overlay Cards -->
+      <div class="blog-listing__side-stack" id="trending-blogs-container">
+        <p style="padding: 20px;">Loading trending blogs...</p>
+      </div>
+    </section>
 
     <!-- ── THREE COLUMN STORIES GRID ── -->
     <section class="blog-listing__grid" data-animate="fade-up">
-
-      <!-- Card 1: Best HRMS Software for SMEs in 2026 -->
-      <a href="hrms-software-2026.html" class="blog-card--horizontal" data-blog-category="hrms-guides">
-        <div class="blog-card__img-wrap">
-          <img src="assets/images/blog_transforming_business.png" alt="Best HRMS Software for SMEs in 2026" loading="lazy">
-          <div class="blog-card__img-overlay"></div>
-        </div>
-        <div class="blog-card__body">
-          <span class="blog-tag blog-tag--purple">HRMS Guides</span>
-          <h3 class="blog-card__title">Best HRMS Software for Small and Medium Businesses in 2026</h3>
-          <p class="blog-card__excerpt">Discover the best HRMS software for small and medium businesses in 2026. Learn how HRVico HRMS automates payroll, attendance, leave & HR operations easily.</p>
-          <div class="blog-card__footer">
-            <div class="blog-card__meta">
-              <span>May 26, 2026</span>
-              <span class="blog-card__meta-dot"></span>
-              <span>5 Min</span>
-            </div>
-            <span class="blog-card__read-link">
-              Read
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Card 2: EPF & ESIC Compliance Guide -->
-      <a href="streamlining-epf-esic-compliance.html" class="blog-card--horizontal" data-blog-category="payroll-compliance">
-        <div class="blog-card__img-wrap">
-          <img src="assets/images/blog_epf_esic_compliance.png" alt="EPF & ESIC Compliance Guide for Indian Startups" loading="lazy">
-          <div class="blog-card__img-overlay"></div>
-        </div>
-        <div class="blog-card__body">
-          <span class="blog-tag blog-tag--teal">Payroll & Compliance</span>
-          <h3 class="blog-card__title">Streamlining EPF & ESIC Compliance: A Guide for Indian Startups</h3>
-          <p class="blog-card__excerpt">Learn how Indian startups can streamline EPF and ESIC registration, contribution calculations, and monthly filing compliance using automation.</p>
-          <div class="blog-card__footer">
-            <div class="blog-card__meta">
-              <span>May 25, 2026</span>
-              <span class="blog-card__meta-dot"></span>
-              <span>6 Min</span>
-            </div>
-            <span class="blog-card__read-link">
-              Read
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Card 3: Simplifying Payroll Processing in India -->
-      <a href="payroll-processing-india.html" class="blog-card--horizontal" data-blog-category="payroll-compliance">
-        <div class="blog-card__img-wrap">
-          <img src="assets/images/blog_payroll_processing.png" alt="Simplifying Payroll Processing in India" loading="lazy">
-          <div class="blog-card__img-overlay"></div>
-        </div>
-        <div class="blog-card__body">
-          <span class="blog-tag blog-tag--teal">Payroll & Compliance</span>
-          <h3 class="blog-card__title">Simplifying Payroll Processing in India: Form 16, TDS, and Gratuity</h3>
-          <p class="blog-card__excerpt">A comprehensive guide on simplifying complex Indian payroll tasks, including tax deduction at source (TDS), quarterly returns, Form 16, and gratuity calculations.</p>
-          <div class="blog-card__footer">
-            <div class="blog-card__meta">
-              <span>May 24, 2026</span>
-              <span class="blog-card__meta-dot"></span>
-              <span>5 Min</span>
-            </div>
-            <span class="blog-card__read-link">
-              Read
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Card 4: Future of HR Automation in India -->
-      <a href="future-of-hr-in-india-2026.html" class="blog-card--horizontal" data-blog-category="hr-automation">
-        <div class="blog-card__img-wrap">
-          <img src="assets/images/blog_future_hr_india.png" alt="Future of HR Automation in India" loading="lazy">
-          <div class="blog-card__img-overlay"></div>
-        </div>
-        <div class="blog-card__body">
-          <span class="blog-tag blog-tag--blue">HR Automation</span>
-          <h3 class="blog-card__title">The Future of HR Automation in India: Key Trends for SMEs in 2026</h3>
-          <p class="blog-card__excerpt">Explore the major shifts and technologies driving HR automation, AI recruiting, cloud systems, and payroll integrations for Indian SMEs in 2026.</p>
-          <div class="blog-card__footer">
-            <div class="blog-card__meta">
-              <span>May 23, 2026</span>
-              <span class="blog-card__meta-dot"></span>
-              <span>5 Min</span>
-            </div>
-            <span class="blog-card__read-link">
-              Read
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Card 5: Employee Retention in Indian IT -->
-      <a href="employee-retention-indian-it.html" class="blog-card--horizontal" data-blog-category="hrms-guides">
-        <div class="blog-card__img-wrap">
-          <img src="assets/images/blog_employee_retention.png" alt="Employee Retention in Indian IT Sector" loading="lazy">
-          <div class="blog-card__img-overlay"></div>
-        </div>
-        <div class="blog-card__body">
-          <span class="blog-tag blog-tag--purple">HRMS Guides</span>
-          <h3 class="blog-card__title">Employee Retention Strategies in the Indian IT Sector</h3>
-          <p class="blog-card__excerpt">Understand the challenges behind IT attrition in India and learn actionable HR strategies to improve retention, upskill talent, and boost satisfaction.</p>
-          <div class="blog-card__footer">
-            <div class="blog-card__meta">
-              <span>May 22, 2026</span>
-              <span class="blog-card__meta-dot"></span>
-              <span>6 Min</span>
-            </div>
-            <span class="blog-card__read-link">
-              Read
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Card 6: Hybrid Work Culture in India -->
-      <a href="hybrid-work-culture-india.html" class="blog-card--horizontal" data-blog-category="attendance-leave">
-        <div class="blog-card__img-wrap">
-          <img src="assets/images/blog_hybrid_work_india.png" alt="Hybrid Work Culture in India" loading="lazy">
-          <div class="blog-card__img-overlay"></div>
-        </div>
-        <div class="blog-card__body">
-          <span class="blog-tag blog-tag--orange">Attendance & Leave</span>
-          <h3 class="blog-card__title">Managing Hybrid Work Culture in India: Policy and Practice</h3>
-          <p class="blog-card__excerpt">Discover how Indian companies are successfully managing hybrid work cultures, balancing employee flexibility with productivity and collaboration.</p>
-          <div class="blog-card__footer">
-            <div class="blog-card__meta">
-              <span>May 21, 2026</span>
-              <span class="blog-card__meta-dot"></span>
-              <span>5 Min</span>
-            </div>
-            <span class="blog-card__read-link">
-              Read
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Card 7: Performance Management in Indian SMEs -->
-      <a href="performance-management-indian-smes.html" class="blog-card--horizontal" data-blog-category="hrms-guides">
-        <div class="blog-card__img-wrap">
-          <img src="assets/images/blog_performance_appraisals.png" alt="Performance Management in Indian SMEs" loading="lazy">
-          <div class="blog-card__img-overlay"></div>
-        </div>
-        <div class="blog-card__body">
-          <span class="blog-tag blog-tag--purple">HRMS Guides</span>
-          <h3 class="blog-card__title">Modern Performance Management in Indian SMEs</h3>
-          <p class="blog-card__excerpt">Learn how to design objective, continuous appraisal systems and KPIs to drive performance and align teams in growing Indian small & medium enterprises.</p>
-          <div class="blog-card__footer">
-            <div class="blog-card__meta">
-              <span>May 20, 2026</span>
-              <span class="blog-card__meta-dot"></span>
-              <span>5 Min</span>
-            </div>
-            <span class="blog-card__read-link">
-              Read
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Card 8: Maternity Leave Act in India Guide -->
-      <a href="maternity-leave-act-india-guide.html" class="blog-card--horizontal" data-blog-category="payroll-compliance">
-        <div class="blog-card__img-wrap">
-          <img src="assets/images/blog_maternity_benefit_act.png" alt="Maternity Leave Act in India Guide" loading="lazy">
-          <div class="blog-card__img-overlay"></div>
-        </div>
-        <div class="blog-card__body">
-          <span class="blog-tag blog-tag--teal">Payroll & Compliance</span>
-          <h3 class="blog-card__title">Understanding the Maternity Benefit Act in India: An HR Guide</h3>
-          <p class="blog-card__excerpt">Get a clear guide on the rules, duration, salary calculations, and compliance requirements under the Maternity Benefit Amendment Act for Indian employers.</p>
-          <div class="blog-card__footer">
-            <div class="blog-card__meta">
-              <span>May 19, 2026</span>
-              <span class="blog-card__meta-dot"></span>
-              <span>5 Min</span>
-            </div>
-            <span class="blog-card__read-link">
-              Read
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Card 9: Employee Wellness Festive Season -->
-      <a href="employee-wellness-festive-season.html" class="blog-card--horizontal" data-blog-category="hrms-guides">
-        <div class="blog-card__img-wrap">
-          <img src="assets/images/blog_festive_employee_wellness.png" alt="Employee Wellness Festive Season in India" loading="lazy">
-          <div class="blog-card__img-overlay"></div>
-        </div>
-        <div class="blog-card__body">
-          <span class="blog-tag blog-tag--purple">HRMS Guides</span>
-          <h3 class="blog-card__title">Employee Wellness During the Indian Festive Season</h3>
-          <p class="blog-card__excerpt">Explore how HR managers can balance high holiday productivity demands with empathetic wellness initiatives, group celebrations, and leave management.</p>
-          <div class="blog-card__footer">
-            <div class="blog-card__meta">
-              <span>May 18, 2026</span>
-              <span class="blog-card__meta-dot"></span>
-              <span>5 Min</span>
-            </div>
-            <span class="blog-card__read-link">
-              Read
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Card 10: Gig Economy in India -->
-      <a href="gig-economy-india-hr-impact.html" class="blog-card--horizontal" data-blog-category="hr-automation">
-        <div class="blog-card__img-wrap">
-          <img src="assets/images/blog_gig_economy_india.png" alt="Gig Economy in India" loading="lazy">
-          <div class="blog-card__img-overlay"></div>
-        </div>
-        <div class="blog-card__body">
-          <span class="blog-tag blog-tag--blue">HR Automation</span>
-          <h3 class="blog-card__title">The Rise of the Gig Economy in India: Compliance and HR Management</h3>
-          <p class="blog-card__excerpt">Understand the compliance requirements, contractor classification, tax deductions, and payment automation setups for managing gig workers and freelancers in India.</p>
-          <div class="blog-card__footer">
-            <div class="blog-card__meta">
-              <span>May 17, 2026</span>
-              <span class="blog-card__meta-dot"></span>
-              <span>6 Min</span>
-            </div>
-            <span class="blog-card__read-link">
-              Read
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </span>
-          </div>
-        </div>
-      </a>
-
+      <div id="blog-listing-container">
+        <p style="text-align: center; width: 100%; padding: 40px 0;">Loading more blogs...</p>
+      </div>
     </section>
 
   </main>
@@ -479,7 +237,7 @@ gtag('config', 'G-TVS20GZXDB');
           <div class="footer__links">
             <div class="footer__contact-item">
               <strong>Address:</strong>
-              <a href="https://maps.google.com/?q=Office+A-125,+Sector+16A,+Noida,+Uttar+Pradesh,+India" class="footer__link" target="_blank" rel="noopener noreferrer">Office A-125, Sector 16A, Noida, Uttar Pradesh, India</a>
+              <a href="https://maps.google.com/?q=NX-ONE,+Tech+Zone+IV,+Plot+No+17,+Tech+Zone+IV,+Amrapali+Dream+Valley,+Greater+Noida,+Uttar+Pradesh+201318" class="footer__link" target="_blank" rel="noopener noreferrer">NX-ONE, Tech Zone IV, Plot No 17, Tech Zone IV, Amrapali Dream Valley, Greater Noida, Uttar Pradesh 201318</a>
             </div>
             <div class="footer__contact-item">
               <strong>Phone:</strong>
@@ -499,8 +257,7 @@ gtag('config', 'G-TVS20GZXDB');
           <a href="privacy.html" class="footer__bottom-link">Privacy</a>
           <a href="terms.html" class="footer__bottom-link">Terms</a>
           <a href="refund.html" class="footer__bottom-link">Refund Policy</a>
-          <a href="#" class="footer__bottom-link"
-            onclick="window.CookieConsent.showSettings(); return false;">Cookies</a>
+          <a href="#" class="footer__bottom-link" onclick="window.CookieConsent.showSettings(); return false;">Cookies</a>
         </div>
       </div>
     </div>

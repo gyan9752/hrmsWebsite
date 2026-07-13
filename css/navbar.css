@@ -8,7 +8,9 @@
   left: 0;
   right: 0;
   z-index: var(--z-sticky);
-  padding: var(--space-md) 0;
+  padding: var(--space-sm) 0;
+  background: var(--bg-secondary);
+  border-bottom: none;
   transition: all var(--transition-base);
 }
 
@@ -95,6 +97,13 @@
 /* CTA */
 .navbar__cta {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navbar__cta .btn {
+  border-radius: var(--radius-sm);
 }
 
 /* Hamburger */
@@ -216,26 +225,5 @@
   }
 }
 
-/* ─── Dark Header Mode (For pages with dark top banner like blog detail) ─── */
-.navbar.navbar--dark-header:not(.scrolled) .navbar__logo {
-  color: #FFFFFF !important;
-}
-
-.navbar.navbar--dark-header:not(.scrolled) .navbar__logo img {
-  filter: brightness(0) invert(1);
-}
-
-.navbar.navbar--dark-header:not(.scrolled) .navbar__link {
-  color: #FFFFFF !important;
-  opacity: 0.95 !important;
-}
-
-.navbar.navbar--dark-header:not(.scrolled) .navbar__link:hover {
-  color: #FFFFFF !important;
-  opacity: 1 !important;
-}
-
-.navbar.navbar--dark-header:not(.scrolled) .navbar__hamburger span {
-  background: #FFFFFF !important;
-}
+/* Removed Dark Header Mode overrides to keep navbar white everywhere */
 
