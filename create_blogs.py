@@ -54,7 +54,7 @@ TEMPLATE = """<!DOCTYPE html>
           <a href="index.html#roles" class="navbar__link">Role</a>
           <a href="pricing.html" class="navbar__link">Pricing</a>
           <a href="#contact" class="navbar__link">Contact</a>
-          <a href="blogs.html" class="navbar__link">Blog</a>
+
         </div>
 
         <div class="navbar__cta desktop-only">
@@ -75,7 +75,7 @@ TEMPLATE = """<!DOCTYPE html>
       <a href="index.html#roles" class="navbar__link">Role</a>
       <a href="pricing.html" class="navbar__link">Pricing</a>
       <a href="#contact" class="navbar__link">Contact</a>
-      <a href="blogs.html" class="navbar__link">Blog</a>
+
       <a href="#" class="btn btn--primary" onclick="openDemoModal(); return false;">Book a Demo</a>
     </div>
   </nav>
