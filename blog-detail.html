@@ -51,7 +51,7 @@ gtag('config', 'G-TVS20GZXDB');
   <link rel="stylesheet" href="css/demo-modal.css?v=1.5">
 
   <!-- JS -->
-  <script defer src="js/main.js?v=10"></script>
+  <script defer src="js/main.js?v=18"></script>
 </head>
 
 <body class="subpage">
@@ -176,19 +176,22 @@ gtag('config', 'G-TVS20GZXDB');
           </div>
         </div>
 
-        <!-- Widget 2: Related Articles -->
-        <div class="blog-sidebar__widget">
-          <h3 class="blog-sidebar__widget-title">Related Articles</h3>
-          <div class="blog-sidebar__list" id="sidebar-related-blogs">
-            <p style="padding: 10px;">Loading related articles...</p>
-          </div>
-        </div>
 
         <!-- Widget 3: Categories -->
         <div class="blog-sidebar__widget">
           <h3 class="blog-sidebar__widget-title">Categories</h3>
           <div class="blog-sidebar__list" id="sidebar-categories">
             <p style="padding: 10px;">Loading categories...</p>
+          </div>
+        </div>
+
+        <!-- Widget 4: Promotion -->
+        <div class="blog-sidebar__widget" id="sidebar-promotion-widget" style="display: none;">
+          <h3 class="blog-sidebar__widget-title" id="promotion-title"></h3>
+          <div class="blog-sidebar__promotion" style="margin-top: 10px;">
+             <a id="promotion-link" href="#" target="_blank">
+               <img id="promotion-image" src="" alt="Promotion" style="width: 100%; border-radius: 8px;">
+             </a>
           </div>
         </div>
       </aside>

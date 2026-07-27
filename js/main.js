@@ -3,14 +3,19 @@
    ============================================ */
 
 /* ─── API Configuration ─── */
-var HRVICO_API_BASE = "https://app.hrvico.com/back/api";
-var HRVICO_APP_URL = "https://app.hrvico.com";
+var HRVICO_API_BASE = "https://test.hrvico.com/back/api";
+var HRVICO_APP_URL = "https://test.hrvico.com/back";
 
-if (
-  window.location.hostname === "localhost" ||
-  window.location.hostname === "127.0.0.1"
-) {
+if (window.location.hostname !== "test.hrvico.com" && window.location.hostname !== "app.hrvico.com") {
   HRVICO_API_BASE = "/back/api";
+}
+
+function getBlogImg(img) {
+  if (!img) return "";
+  if (img.startsWith('http')) return img;
+  if (img.startsWith('/')) return HRVICO_APP_URL + img;
+  if (img.startsWith('uploads/')) return HRVICO_APP_URL + '/' + img;
+  return HRVICO_APP_URL + "/uploads/" + img;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -448,7 +453,7 @@ function initDynamicPricing() {
       return res.json();
     })
     .then(function (data) {
-      if (!data.success || !data.plans || data.plans.length === 0) {
+      if (!(data.success || data.status) || !data.plans || data.plans.length === 0) {
         grid.innerHTML =
           '<div style="grid-column:1/-1;text-align:center;padding:40px 20px;"><p style="color:#64748b;font-size:0.95rem;">Plans are being updated. Please check back shortly.</p></div>';
         return;
@@ -930,7 +935,7 @@ function initBlogListing() {
     fetch(HRVICO_API_BASE + "/superadmin/blogCategory/blog-categories")
       .then((res) => res.json())
       .then((data) => {
-        if (data.success && data.data) {
+        if ((data.success || data.status) && data.data) {
           filterContainer.innerHTML =
             '<button class="blog-filter-btn active" data-category="all">All</button>';
           data.data.forEach((cat) => {
@@ -948,11 +953,11 @@ function initBlogListing() {
 
   // 2. Fetch Blogs
   let allBlogs = [];
-  fetch(HRVICO_API_BASE + "/superadmin/blog")
+  fetch(HRVICO_API_BASE + "/superadmin/blog?limit=100")
     .then((res) => res.json())
     .then((data) => {
-      if (data.success && data.data && data.data.length > 0) {
-        allBlogs = data.data.filter((b) => b.status === "published");
+      if ((data.success || data.status) && data.data && data.data.length > 0) {
+        allBlogs = data.data.filter((b) => b.status === "published" || b.status === "show");
         // Sort by date descending
         allBlogs.sort(
           (a, b) =>
@@ -960,7 +965,7 @@ function initBlogListing() {
             new Date(a.publishDate || a.createdAt),
         );
 
-        renderBlogs(allBlogs);
+        currentPage = 1; renderBlogs(allBlogs);
       } else {
         gridContainer.innerHTML =
           '<p style="text-align: center; width: 100%; padding: 40px 0;">No blogs found.</p>';
@@ -982,38 +987,77 @@ function initBlogListing() {
         btn.classList.add("active");
         const catId = btn.getAttribute("data-category");
         if (catId === "all") {
-          renderBlogs(allBlogs);
+          currentPage = 1; renderBlogs(allBlogs);
         } else {
           const filtered = allBlogs.filter(
-            (b) => b.category && b.category._id === catId,
+            (b) => b.category && (b.category === catId || b.category._id === catId),
           );
-          renderBlogs(filtered);
+          currentPage = 1; renderBlogs(filtered);
         }
       });
     });
   }
 
+  let currentPage = 1;
+  const blogsPerPage = 10;
+
+  window.goToBlogPage = function(page) {
+    currentPage = page;
+    renderBlogs(window.currentBlogsToRender);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  function renderPagination(totalItems) {
+    const paginationContainer = document.getElementById('blog-pagination');
+    if (!paginationContainer) return;
+    paginationContainer.innerHTML = '';
+    
+    const totalPages = Math.ceil(totalItems / blogsPerPage);
+    if (totalPages <= 1) return;
+
+    let html = '';
+    
+    // Prev
+    html += `<button class="blog-pagination-btn" ${currentPage === 1 ? 'disabled' : ''} onclick="goToBlogPage(${currentPage - 1})">&laquo;</button>`;
+    
+    for (let i = 1; i <= totalPages; i++) {
+        html += `<button class="blog-pagination-btn ${currentPage === i ? 'active' : ''}" onclick="goToBlogPage(${i})">${i}</button>`;
+    }
+
+    // Next
+    html += `<button class="blog-pagination-btn" ${currentPage === totalPages ? 'disabled' : ''} onclick="goToBlogPage(${currentPage + 1})">&raquo;</button>`;
+    
+    paginationContainer.innerHTML = html;
+  }
+
   function renderBlogs(blogsToRender) {
+    window.currentBlogsToRender = blogsToRender;
     if (featuredContainer) featuredContainer.innerHTML = "";
     if (trendingContainer) trendingContainer.innerHTML = "";
     gridContainer.innerHTML = "";
 
     if (blogsToRender.length === 0) {
       gridContainer.innerHTML =
-        '<p style="text-align: center; width: 100%; padding: 40px 0;">No blogs found for this category.</p>';
+        '<p style="text-align: center; width: 100%; padding: 40px 0;">No blogs found.</p>';
+      renderPagination(0);
       return;
     }
 
+    const startIndex = (currentPage - 1) * blogsPerPage;
+    const paginatedBlogs = blogsToRender.slice(startIndex, startIndex + blogsPerPage);
+
+    if (paginatedBlogs.length === 0) return;
+
     // Featured (1st)
-    const featured = blogsToRender[0];
+    const featured = paginatedBlogs[0];
     if (featuredContainer && featured) {
-      const catName = featured.category
-        ? featured.category.name
-        : featured.categoryName || "Blog";
+      const catName = featured.categoryId
+        ? featured.categoryId.name
+        : (featured.category && featured.category.name) || featured.categoryName || "Blog";
       featuredContainer.innerHTML = `
-        <a href="blog-detail.html?id=${featured._id}" class="blog-card--featured">
+        <a href="blog-detail.html?slug=${featured.slug}" class="blog-card--featured">
           <div class="blog-card__img-wrap">
-            <img src="${featured.featuredImage || ""}" alt="${featured.altTag || featured.title}" loading="eager">
+            <img src="${getBlogImg(featured.featureImage || featured.featuredImage)}" alt="${featured.altTag || featured.title}" loading="eager">
           </div>
           <div class="blog-card__overlay"></div>
           <div class="blog-card__content">
@@ -1038,21 +1082,21 @@ function initBlogListing() {
     }
 
     // Trending (2nd to 4th)
-    const trendings = blogsToRender.slice(1, 4);
+    const trendings = paginatedBlogs.slice(1, 4);
     if (trendingContainer && trendings.length > 0) {
       trendings.forEach((blog, i) => {
         const colors = ["orange", "blue", "teal"];
         const color = colors[i % colors.length];
-        const catName = blog.category
-          ? blog.category.name
-          : blog.categoryName || "Blog";
+        const catName = blog.categoryId
+          ? blog.categoryId.name
+          : (blog.category && blog.category.name) || blog.categoryName || (typeof blog.category === "string" ? blog.category : "Blog");
 
         const card = document.createElement("a");
-        card.href = `blog-detail.html?id=${blog._id}`;
+        card.href = `blog-detail.html?slug=${blog.slug}`;
         card.className = "blog-card--small";
         card.innerHTML = `
           <div class="blog-card__img-wrap">
-            <img src="${blog.featuredImage || ""}" alt="${blog.altTag || blog.title}" loading="lazy">
+            <img src="${getBlogImg(blog.featureImage || (blog.featureImage || blog.featuredImage))}" alt="${blog.altTag || blog.title}" loading="lazy">
           </div>
           <div class="blog-card__overlay"></div>
           <div class="blog-card__content">
@@ -1070,19 +1114,19 @@ function initBlogListing() {
     }
 
     // Grid (5th onwards)
-    const gridBlogs = blogsToRender.slice(4);
+    const gridBlogs = paginatedBlogs.slice(4);
     if (gridBlogs.length > 0) {
       gridBlogs.forEach((blog) => {
-        const catName = blog.category
-          ? blog.category.name
-          : blog.categoryName || "Blog";
+        const catName = blog.categoryId
+          ? blog.categoryId.name
+          : (blog.category && blog.category.name) || blog.categoryName || (typeof blog.category === "string" ? blog.category : "Blog");
         const card = document.createElement("a");
-        card.href = `blog-detail.html?id=${blog._id}`;
+        card.href = `blog-detail.html?slug=${blog.slug}`;
         card.className = "blog-card--horizontal";
 
         card.innerHTML = `
           <div class="blog-card__img-wrap">
-            <img src="${blog.featuredImage || ""}" alt="${blog.altTag || blog.title}" loading="lazy">
+            <img src="${getBlogImg(blog.featureImage || (blog.featureImage || blog.featuredImage))}" alt="${blog.altTag || blog.title}" loading="lazy">
             <div class="blog-card__img-overlay"></div>
           </div>
           <div class="blog-card__body">
@@ -1106,6 +1150,7 @@ function initBlogListing() {
         gridContainer.appendChild(card);
       });
     }
+    renderPagination(blogsToRender.length);
   }
 }
 
@@ -1124,15 +1169,15 @@ function initBlogDetail() {
   if (!titleEl && !sidebarLatestEl) return;
 
   const urlParams = new URLSearchParams(window.location.search);
-  const blogId = urlParams.get("id");
+  const blogId = urlParams.get("slug") || urlParams.get("id");
 
   // Load Main Content
   if (blogId && titleEl) {
     fetch(HRVICO_API_BASE + "/superadmin/blog/" + blogId)
       .then((res) => res.json())
       .then((data) => {
-        if (data.success && data.data) {
-          const blog = data.data;
+        if (data && (data._id || data.id)) {
+          const blog = data;
 
           document.title = (blog.metaTitle || blog.title) + " | HRVico";
 
@@ -1187,8 +1232,8 @@ function initBlogDetail() {
 
           if (imageEl) {
             const fallbackSrc = "assets/images/blogs_image_prev.webp";
-            if (blog.featuredImage) {
-              imageEl.src = blog.featuredImage;
+            if ((blog.featureImage || blog.featuredImage)) {
+              imageEl.src = getBlogImg((blog.featureImage || blog.featuredImage));
               imageEl.alt = blog.altTag || blog.title;
               imageEl.style.display = "block";
               imageEl.onerror = function () {
@@ -1202,8 +1247,8 @@ function initBlogDetail() {
             }
           }
 
-          if (heroImageEl && blog.featuredImage) {
-            heroImageEl.src = blog.featuredImage;
+          if (heroImageEl && (blog.featureImage || blog.featuredImage)) {
+            heroImageEl.src = getBlogImg((blog.featureImage || blog.featuredImage));
             heroImageEl.alt = blog.altTag || blog.title;
           }
 
@@ -1231,10 +1276,10 @@ function initBlogDetail() {
 
   function fetchSidebarBlogs(currentBlog) {
     if (sidebarLatestEl || sidebarRelatedEl) {
-      fetch(HRVICO_API_BASE + "/superadmin/blog")
+      fetch(HRVICO_API_BASE + "/superadmin/blog?limit=100")
         .then((res) => res.json())
         .then((data) => {
-          if (data.success && data.data) {
+          if ((data.success || data.status) && data.data) {
             // Remove the strict exclusion of the current blog so that sections populate even with 1 blog
             const published = data.data.filter((b) => b.status === "published");
             published.sort(
@@ -1246,13 +1291,13 @@ function initBlogDetail() {
             // Latest Articles
             if (sidebarLatestEl) {
               sidebarLatestEl.innerHTML = "";
-              const latest = published.slice(0, 5); // Show up to 5 latest
+              const latest = published.slice(0, 4); // Show up to 4 latest
               if (latest.length > 0) {
                 latest.forEach((blog) => {
                   sidebarLatestEl.innerHTML += `
-                    <a href="blog-detail.html?id=${blog._id}" class="blog-sidebar__list-item">
+                    <a href="blog-detail.html?slug=${blog.slug}" class="blog-sidebar__list-item">
                       <div class="blog-sidebar__list-thumb">
-                        <img src="${blog.featuredImage || "assets/images/blogs_image_prev.webp"}" alt="${blog.altTag || blog.title}" onerror="this.onerror=null; this.src='assets/images/blogs_image_prev.webp';">
+                        <img src="${getBlogImg((blog.featureImage || blog.featuredImage)) || "assets/images/blogs_image_prev.webp"}" alt="${blog.altTag || blog.title}" onerror="this.onerror=null; this.src='assets/images/blogs_image_prev.webp';">
                       </div>
                       <div class="blog-sidebar__list-content">
                         <h4 class="blog-sidebar__list-title">${blog.title}</h4>
@@ -1267,49 +1312,7 @@ function initBlogDetail() {
               }
             }
 
-            // Related Articles (Top 4 related by category)
-            if (sidebarRelatedEl) {
-              sidebarRelatedEl.innerHTML = "";
 
-              // Filter related blogs by matching categoryId (excluding the current one if possible, but keeping it if it's the only one)
-              let related = published.filter(
-                (b) =>
-                  b.categoryId &&
-                  currentBlog.categoryId &&
-                  b.categoryId === currentBlog.categoryId &&
-                  b._id !== blogId,
-              );
-
-              if (related.length === 0) {
-                // If no exact category match (other than current), fallback to other recent blogs
-                related = published.filter((b) => b._id !== blogId);
-              }
-
-              if (related.length === 0) {
-                // If STILL empty, just show the current blog so it's not totally empty (as per user request "fix this")
-                related = published;
-              }
-
-              const top4Related = related.slice(0, 4);
-              if (top4Related.length > 0) {
-                top4Related.forEach((blog) => {
-                  sidebarRelatedEl.innerHTML += `
-                    <a href="blog-detail.html?id=${blog._id}" class="blog-sidebar__list-item">
-                      <div class="blog-sidebar__list-thumb">
-                        <img src="${blog.featuredImage || "assets/images/blogs_image_prev.webp"}" alt="${blog.altTag || blog.title}" onerror="this.onerror=null; this.src='assets/images/blogs_image_prev.webp';">
-                      </div>
-                      <div class="blog-sidebar__list-content">
-                        <h4 class="blog-sidebar__list-title">${blog.title}</h4>
-                        <span class="blog-sidebar__list-meta">${formatDate(blog.publishDate || blog.createdAt)}</span>
-                      </div>
-                    </a>
-                  `;
-                });
-              } else {
-                sidebarRelatedEl.innerHTML =
-                  '<p style="padding:10px;">No related articles found.</p>';
-              }
-            }
           }
         })
         .catch(console.error);
@@ -1321,12 +1324,12 @@ function initBlogDetail() {
     fetch(HRVICO_API_BASE + "/superadmin/blogCategory/blog-categories")
       .then((res) => res.json())
       .then((data) => {
-        if (data.success && data.data) {
+        if ((data.success || data.status) && data.data) {
           sidebarCategoriesEl.innerHTML = "";
           data.data.forEach((cat) => {
             const count = cat.posts || 0;
             const imgHtml = cat.image
-              ? `<img src="${cat.image}" alt="${cat.altTag || cat.name}">`
+              ? `<img src="${getBlogImg(cat.image)}" alt="${cat.altTag || cat.name}">`
               : "";
             sidebarCategoriesEl.innerHTML += `
               <a href="blogs.html?category=${cat._id}" class="blog-sidebar__list-item">
@@ -1351,6 +1354,34 @@ function initBlogDetail() {
         sidebarCategoriesEl.innerHTML =
           '<p style="padding:10px; color: red;">Failed to load categories.</p>';
       });
+  }
+
+  // Load Promotion Widget
+  const promotionWidget = document.getElementById("sidebar-promotion-widget");
+  if (promotionWidget) {
+    fetch(HRVICO_API_BASE + "/superadmin/promotion/slug/independence-day-offer")
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.data) {
+          const promo = data.data;
+          const titleEl = document.getElementById("promotion-title");
+          if (titleEl) titleEl.textContent = promo.title;
+          
+          const imgEl = document.getElementById("promotion-image");
+          if (imgEl) {
+            imgEl.src = getBlogImg(promo.featureImage);
+            imgEl.alt = promo.featureAlt || promo.title;
+          }
+          
+          const linkEl = document.getElementById("promotion-link");
+          if (linkEl) {
+            linkEl.href = promo.relatedLink || "#";
+          }
+          
+          promotionWidget.style.display = "block";
+        }
+      })
+      .catch(console.error);
   }
 }
 

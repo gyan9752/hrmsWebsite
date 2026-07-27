@@ -5,7 +5,7 @@ import urllib.error
 import os
 
 PORT = 8000
-API_TARGET = "https://app.hrvico.com"
+API_TARGET = "https://test.hrvico.com"
 
 class ProxyHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
