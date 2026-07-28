@@ -1,0 +1,238 @@
+/* ============================================
+   Scriza Latest News Override Stylesheet
+   ============================================ */
+
+/* ─── Global Reset for this Page ─── */
+.scriza-news-page {
+  background-color: #f8fafc; /* light gray/blue background */
+  font-family: 'Inter', sans-serif;
+}
+
+/* Hide original background elements from hrms */
+.scriza-news-page .subpage__bg-grid,
+.scriza-news-page .subpage__orb {
+  display: none !important;
+}
+
+/* ─── Scriza Navbar ─── */
+.scriza-navbar {
+  background-color: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.scriza-navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.scriza-navbar__logo-img {
+  height: 40px;
+}
+
+.scriza-navbar__links {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.scriza-navbar__link {
+  color: #334155;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.scriza-navbar__link:hover {
+  color: #0f172a;
+}
+
+.scriza-navbar__cta {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-scriza-primary {
+  background-color: #0f172a;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-scriza-secondary {
+  background-color: #ef4444; /* red */
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ─── Hero Section ─── */
+.scriza-hero {
+  background-color: #0f172a; /* dark navy */
+  color: #fff;
+  padding: 80px 20px 100px;
+  text-align: center;
+}
+
+.scriza-hero__inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.scriza-hero__title {
+  font-size: 42px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.scriza-hero__subtitle {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #cbd5e1;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ─── Blog Grid Section ─── */
+.scriza-grid-section {
+  max-width: 1300px;
+  margin: 40px auto 60px;
+  padding: 0 20px;
+  position: relative;
+  z-index: 10;
+}
+
+.scriza-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+/* ─── Scriza Card ─── */
+.scriza-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid #f1f5f9;
+}
+
+.scriza-card:hover {
+  transform: translateY(-5px);
+}
+
+.scriza-card__img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.scriza-card__body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.scriza-card__title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 10px;
+  flex-grow: 0;
+  line-height: 1.4;
+}
+
+.scriza-card__tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: #6366f1;
+  background: rgba(99, 102, 241, 0.1);
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 15px;
+  align-self: flex-start;
+}
+
+.scriza-card__excerpt {
+  font-size: 14px;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.scriza-card__read-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+  color: #0f172a;
+  font-size: 13px;
+}
+
+.scriza-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 15px;
+  margin-top: auto;
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* ─── Floating Buttons ─── */
+.scriza-float-left,
+.scriza-float-right {
+  position: fixed;
+  bottom: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  z-index: 100;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  text-decoration: none;
+}
+
+.scriza-float-left {
+  left: 30px;
+  background-color: #0f172a; /* Navy Phone */
+}
+
+.scriza-float-right {
+  right: 30px;
+  background-color: #25d366; /* WhatsApp Green */
+}

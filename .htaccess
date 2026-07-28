@@ -1,0 +1,9 @@
+RewriteEngine On
+
+# Route /blog-details/slug to blog-detail.html
+RewriteRule ^blog-details/(.*)$ blog-detail.html [L,QSA]
+
+# Remove .html extension for other pages
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^\.]+)$ $1.html [NC,L]

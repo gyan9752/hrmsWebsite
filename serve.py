@@ -36,7 +36,9 @@ class ProxyHandler(http.server.SimpleHTTPRequestHandler):
         base_path = path_parts[0]
         query_string = '?' + path_parts[1] if len(path_parts) > 1 else ''
         
-        if base_path != '/' and '.' not in base_path:
+        if base_path.startswith('/blog-details/'):
+            self.path = '/blog-detail.html' + query_string
+        elif base_path != '/' and '.' not in base_path:
             potential_file = base_path.lstrip('/') + '.html'
             if os.path.exists(potential_file):
                 self.path = base_path + '.html' + query_string

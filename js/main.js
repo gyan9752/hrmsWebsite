@@ -2,12 +2,11 @@
    HRVICO — All JavaScript (Non-Module)
    ============================================ */
 
-/* ─── API Configuration ─── */
 var HRVICO_API_BASE = "https://test.hrvico.com/back/api";
 var HRVICO_APP_URL = "https://test.hrvico.com/back";
 
 if (window.location.hostname !== "test.hrvico.com" && window.location.hostname !== "app.hrvico.com") {
-  HRVICO_API_BASE = "/back/api";
+  HRVICO_API_BASE = "/back/api"; // Local proxy to bypass CORS during development
 }
 
 function getBlogImg(img) {
@@ -1032,12 +1031,16 @@ function initBlogListing() {
 
   function renderBlogs(blogsToRender) {
     window.currentBlogsToRender = blogsToRender;
+    const featuredContainer = document.getElementById("featured-blog-container");
+    const trendingContainer = document.getElementById("trending-blogs-container");
+    const gridContainer = document.getElementById("blog-listing-container");
+    
     if (featuredContainer) featuredContainer.innerHTML = "";
     if (trendingContainer) trendingContainer.innerHTML = "";
-    gridContainer.innerHTML = "";
+    if (gridContainer) gridContainer.innerHTML = "";
 
     if (blogsToRender.length === 0) {
-      gridContainer.innerHTML =
+      if (gridContainer) gridContainer.innerHTML =
         '<p style="text-align: center; width: 100%; padding: 40px 0;">No blogs found.</p>';
       renderPagination(0);
       return;
@@ -1048,96 +1051,27 @@ function initBlogListing() {
 
     if (paginatedBlogs.length === 0) return;
 
-    // Featured (1st)
-    const featured = paginatedBlogs[0];
-    if (featuredContainer && featured) {
-      const catName = featured.categoryId
-        ? featured.categoryId.name
-        : (featured.category && featured.category.name) || featured.categoryName || "Blog";
-      featuredContainer.innerHTML = `
-        <a href="blog-detail.html?slug=${featured.slug}" class="blog-card--featured">
-          <div class="blog-card__img-wrap">
-            <img src="${getBlogImg(featured.featureImage || featured.featuredImage)}" alt="${featured.altTag || featured.title}" loading="eager">
-          </div>
-          <div class="blog-card__overlay"></div>
-          <div class="blog-card__content">
-            <span class="blog-tag blog-tag--purple">${catName}</span>
-            <h2 class="blog-card__title">${featured.title}</h2>
-            <p class="blog-card__excerpt">${featured.shortDescription || ""}</p>
-            <div class="blog-card__meta">
-              <span>${formatDate(featured.publishDate || featured.createdAt)}</span>
-              <span class="blog-card__meta-dot"></span>
-              <span>4 Min Read</span>
-            </div>
-            <span class="blog-card__cta">
-              Read Article
-              <svg class="blog-card__cta-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </span>
-          </div>
-        </a>
-      `;
-    }
-
-    // Trending (2nd to 4th)
-    const trendings = paginatedBlogs.slice(1, 4);
-    if (trendingContainer && trendings.length > 0) {
-      trendings.forEach((blog, i) => {
-        const colors = ["orange", "blue", "teal"];
-        const color = colors[i % colors.length];
+    if (gridContainer) {
+      paginatedBlogs.forEach((blog) => {
         const catName = blog.categoryId
           ? blog.categoryId.name
           : (blog.category && blog.category.name) || blog.categoryName || (typeof blog.category === "string" ? blog.category : "Blog");
-
+        
         const card = document.createElement("a");
-        card.href = `blog-detail.html?slug=${blog.slug}`;
-        card.className = "blog-card--small";
-        card.innerHTML = `
-          <div class="blog-card__img-wrap">
-            <img src="${getBlogImg(blog.featureImage || (blog.featureImage || blog.featuredImage))}" alt="${blog.altTag || blog.title}" loading="lazy">
-          </div>
-          <div class="blog-card__overlay"></div>
-          <div class="blog-card__content">
-            <span class="blog-tag blog-tag--${color}">${catName}</span>
-            <h3 class="blog-card__title">${blog.title}</h3>
-            <div class="blog-card__meta">
-              <span>${formatDate(blog.publishDate || blog.createdAt)}</span>
-              <span class="blog-card__meta-dot"></span>
-              <span>5 Min Read</span>
-            </div>
-          </div>
-        `;
-        trendingContainer.appendChild(card);
-      });
-    }
-
-    // Grid (5th onwards)
-    const gridBlogs = paginatedBlogs.slice(4);
-    if (gridBlogs.length > 0) {
-      gridBlogs.forEach((blog) => {
-        const catName = blog.categoryId
-          ? blog.categoryId.name
-          : (blog.category && blog.category.name) || blog.categoryName || (typeof blog.category === "string" ? blog.category : "Blog");
-        const card = document.createElement("a");
-        card.href = `blog-detail.html?slug=${blog.slug}`;
-        card.className = "blog-card--horizontal";
+        card.href = `/blog-details/${blog.slug}`;
+        card.className = "scriza-card";
 
         card.innerHTML = `
-          <div class="blog-card__img-wrap">
-            <img src="${getBlogImg(blog.featureImage || (blog.featureImage || blog.featuredImage))}" alt="${blog.altTag || blog.title}" loading="lazy">
-            <div class="blog-card__img-overlay"></div>
-          </div>
-          <div class="blog-card__body">
-            <span class="blog-tag blog-tag--purple">${catName}</span>
-            <h3 class="blog-card__title">${blog.title}</h3>
-            <p class="blog-card__excerpt">${blog.shortDescription || ""}</p>
-            <div class="blog-card__footer">
-              <div class="blog-card__meta">
+          <img class="scriza-card__img" src="${getBlogImg(blog.featureImage || (blog.featureImage || blog.featuredImage))}" alt="${blog.altTag || blog.title}" loading="lazy">
+          <div class="scriza-card__body">
+            <span class="scriza-card__tag">${catName}</span>
+            <div class="scriza-card__title">${blog.title}</div>
+            <p class="scriza-card__excerpt">${blog.shortDescription || ""}</p>
+            <div class="scriza-card__footer">
+              <div class="scriza-card__meta">
                 <span>${formatDate(blog.publishDate || blog.createdAt)}</span>
               </div>
-              <span class="blog-card__read-link">
+              <span class="scriza-card__read-link">
                 Read
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -1150,6 +1084,7 @@ function initBlogListing() {
         gridContainer.appendChild(card);
       });
     }
+
     renderPagination(blogsToRender.length);
   }
 }
@@ -1169,7 +1104,11 @@ function initBlogDetail() {
   if (!titleEl && !sidebarLatestEl) return;
 
   const urlParams = new URLSearchParams(window.location.search);
-  const blogId = urlParams.get("slug") || urlParams.get("id");
+  let blogId = urlParams.get("slug") || urlParams.get("id");
+  if (!blogId && window.location.pathname.includes("/blog-details/")) {
+    const parts = window.location.pathname.split("/").filter(p => p);
+    blogId = parts[parts.length - 1];
+  }
 
   // Load Main Content
   if (blogId && titleEl) {
@@ -1256,6 +1195,32 @@ function initBlogDetail() {
             contentEl.innerHTML =
               blog.content || "<p>No content available.</p>";
 
+          // Populate Tag Pill
+          const tagPill = document.getElementById("blog-tag-pill");
+          if (tagPill && blog.category && blog.category.name) {
+            tagPill.textContent = blog.category.name;
+            tagPill.style.display = "inline-block";
+          } else if (tagPill) {
+            tagPill.textContent = "General";
+            tagPill.style.display = "inline-block";
+          }
+
+          // Populate Author
+          const authorItem = document.getElementById("blog-author-item");
+          const authorEl = document.getElementById("blog-author");
+          if (authorItem && authorEl) {
+            let authorText = "Admin";
+            if (typeof blog.author === 'string') {
+              authorText = blog.author;
+            } else if (blog.author && blog.author.name) {
+              authorText = blog.author.name;
+            } else if (blog.author && blog.author.email) {
+              authorText = blog.author.email;
+            }
+            authorEl.textContent = authorText;
+            authorItem.style.display = "flex";
+          }
+
           // Now fetch sidebar blogs using the current blog's category
           fetchSidebarBlogs(blog);
         } else {
@@ -1272,6 +1237,8 @@ function initBlogDetail() {
           contentEl.innerHTML =
             '<p style="color: red;">Failed to load blog content. Please try again later.</p>';
       });
+  } else if (sidebarLatestEl || sidebarRelatedEl || sidebarCategoriesEl) {
+    fetchSidebarBlogs(null);
   }
 
   function fetchSidebarBlogs(currentBlog) {
@@ -1295,7 +1262,7 @@ function initBlogDetail() {
               if (latest.length > 0) {
                 latest.forEach((blog) => {
                   sidebarLatestEl.innerHTML += `
-                    <a href="blog-detail.html?slug=${blog.slug}" class="blog-sidebar__list-item">
+                    <a href="/blog-details/${blog.slug}" class="blog-sidebar__list-item">
                       <div class="blog-sidebar__list-thumb">
                         <img src="${getBlogImg((blog.featureImage || blog.featuredImage)) || "assets/images/blogs_image_prev.webp"}" alt="${blog.altTag || blog.title}" onerror="this.onerror=null; this.src='assets/images/blogs_image_prev.webp';">
                       </div>
@@ -1332,13 +1299,16 @@ function initBlogDetail() {
               ? `<img src="${getBlogImg(cat.image)}" alt="${cat.altTag || cat.name}">`
               : "";
             sidebarCategoriesEl.innerHTML += `
-              <a href="blogs.html?category=${cat._id}" class="blog-sidebar__list-item">
-                <div class="blog-sidebar__list-thumb">
-                  ${imgHtml}
+              <a href="blogs.html?category=${cat._id}" class="blog-sidebar__category-item">
+                <div class="blog-sidebar__category-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
                 </div>
-                <div class="blog-sidebar__list-content">
-                  <h4 class="blog-sidebar__list-title">${cat.name}</h4>
-                  <span class="blog-sidebar__list-meta">${count} Article${count !== 1 ? "s" : ""}</span>
+                <div class="blog-sidebar__category-text">
+                  <h4 class="blog-sidebar__category-title">${cat.name}</h4>
+                  <p class="blog-sidebar__category-subtitle">Articles in ${cat.name}</p>
+                </div>
+                <div class="blog-sidebar__category-count">
+                  ${count} Post${count !== 1 ? 's' : ''}
                 </div>
               </a>
             `;
