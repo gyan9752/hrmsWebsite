@@ -5,7 +5,7 @@ import urllib.error
 import os
 
 PORT = 8000
-API_TARGET = "https://test.hrvico.com"
+API_TARGET = "https://app.hrvico.com"
 
 class ProxyHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
@@ -43,7 +43,14 @@ class ProxyHandler(http.server.SimpleHTTPRequestHandler):
             if os.path.exists(potential_file):
                 self.path = base_path + '.html' + query_string
                 
-        return super().do_GET()
+        # Send cache control headers to force browser to load fresh files
+        super().do_GET()
+
+    def end_headers(self):
+        self.send_header('Cache-Control', 'no-cache, no-store, must-revalidate')
+        self.send_header('Pragma', 'no-cache')
+        self.send_header('Expires', '0')
+        super().end_headers()
 
 with socketserver.TCPServer(("", PORT), ProxyHandler) as httpd:
     print(f"Serving at port {PORT} with API proxy")

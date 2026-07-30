@@ -54,7 +54,7 @@ gtag('config', 'G-TVS20GZXDB');
     <link rel="stylesheet" href="css/demo-modal.css?v=1.5" />
 
     <!-- JS -->
-    <script defer src="js/main.js?v=25"></script>
+    <script defer src="js/main_v2.js"></script>
   </head>
 
   <body class="subpage pricing-page">
@@ -155,6 +155,16 @@ gtag('config', 'G-TVS20GZXDB');
         </div>
       </div>
 
+      <!-- Monthly / Yearly Billing Toggle -->
+      <div class="pricing__toggle-container" data-animate="fade-up">
+        <div class="pricing__toggle-pill">
+          <div class="pricing__toggle-slider"></div>
+          <button type="button" class="pricing__toggle-btn active" data-type="monthly">Monthly</button>
+          <button type="button" class="pricing__toggle-btn" data-type="annual">Yearly</button>
+        </div>
+        <div class="pricing__toggle-subtext">Save on Annual Plans</div>
+      </div>
+
       <!-- Pricing Grid Wrapper (Mockup Glassmorphism Background) -->
       <div class="pricing-grid-wrapper" data-animate="fade-up">
         <!-- Pricing Cards Grid (dynamically populated from API) -->
@@ -167,84 +177,7 @@ gtag('config', 'G-TVS20GZXDB');
           </div>
         </div>
 
-        <!-- Plan 5: Enterprise Plan (Horizontal Redesign) -->
-        <div class="pricing-card-horizontal" data-animate="fade-up">
-          <!-- Left: Plan Name & Price -->
-          <div class="pricing-card-horizontal__left">
-            <div>
-              <h3 class="pricing-card-horizontal__name">Enterprise Plan 💎</h3>
-              <p class="pricing-card-horizontal__desc">
-                Best For: 100+ Employees &amp; Enterprises
-              </p>
-            </div>
-            <div class="pricing-card-horizontal__price">
-              <span class="pricing-card-horizontal__amount">Custom</span>
-              <span class="pricing-card-horizontal__period"
-                >tailored pricing</span
-              >
-            </div>
-          </div>
 
-          <!-- Middle: Feature Grid -->
-          <div class="pricing-card-horizontal__middle">
-            <h4 class="pricing-card-horizontal__title">
-              TAILORED HRMS SOLUTIONS
-            </h4>
-            <div class="pricing-card-horizontal__features">
-              <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Unlimited
-                Employees
-              </div>
-              <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Custom
-                Modules
-              </div>
-              <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Custom
-                Integrations
-              </div>
-              <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Enterprise
-                Level Automation
-              </div>
-              <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> API Access
-              </div>
-              <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Premium
-                Support
-              </div>
-              <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Dedicated
-                Account Manager
-              </div>
-              <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Custom
-                Support SLA
-              </div>
-              <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Advanced
-                Security
-              </div>
-            </div>
-          </div>
-
-          <!-- Right: Badge + CTA -->
-          <div class="pricing-card-horizontal__right">
-            <div class="pricing-card-horizontal__badge">
-              Unlimited Employees Included
-            </div>
-            <a
-              href="#"
-              class="pricing-card-horizontal__btn"
-              onclick="
-                openDemoModal();
-                return false;
-              "
-              >Contact Sales</a
-            >
-          </div>
-        </div>
       </div>
     </main>
 
@@ -374,8 +307,8 @@ gtag('config', 'G-TVS20GZXDB');
               </div>
               <div class="footer__contact-item">
                 <strong>Phone:</strong>
-                <a href="tel:+919599287096" class="footer__link"
-                  >+91 9599287096</a
+                <a href="tel:+919116011899" class="footer__link"
+                  >+91 9116011899</a
                 >
               </div>
             </div>
@@ -639,7 +572,7 @@ gtag('config', 'G-TVS20GZXDB');
     </div>
     <!-- Floating Contact Buttons -->
     <a
-      href="https://wa.me/919599287096"
+      href="https://wa.me/919116011899"
       target="_blank"
       rel="noopener noreferrer"
       class="float-contact-icon float-contact-icon--whatsapp"
@@ -652,7 +585,7 @@ gtag('config', 'G-TVS20GZXDB');
       </svg>
     </a>
     <a
-      href="tel:+919599287096"
+      href="tel:+919116011899"
       class="float-contact-icon float-contact-icon--phone"
       aria-label="Call Us"
     >

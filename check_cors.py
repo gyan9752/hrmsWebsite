@@ -1,7 +1,7 @@
 import urllib.request
 
-req = urllib.request.Request('https://test.hrvico.com/back/api/superadmin/blog', method='OPTIONS')
-req.add_header('Origin', 'http://localhost:8000')
+req = urllib.request.Request('https://app.hrvico.com/back/api/superadmin/blog', method='OPTIONS')
+req.add_header('Origin', 'https://app.hrvico.com')
 req.add_header('Access-Control-Request-Method', 'GET')
 
 try:

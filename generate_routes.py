@@ -3,7 +3,7 @@ import urllib.request
 import json
 import shutil
 
-API_URL = "https://test.hrvico.com/back/api/superadmin/blog?limit=100"
+API_URL = "https://app.hrvico.com/back/api/superadmin/blog?limit=100"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 BLOG_DETAILS_DIR = os.path.join(BASE_DIR, 'blog-details')
 TEMPLATE_PATH = os.path.join(BASE_DIR, 'blog-detail.html')

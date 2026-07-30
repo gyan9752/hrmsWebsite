@@ -2,12 +2,8 @@
    HRVICO — All JavaScript (Non-Module)
    ============================================ */
 
-var HRVICO_API_BASE = "https://test.hrvico.com/back/api";
-var HRVICO_APP_URL = "https://test.hrvico.com/back";
-
-if (window.location.hostname !== "test.hrvico.com" && window.location.hostname !== "app.hrvico.com") {
-  HRVICO_API_BASE = "/back/api"; // Local proxy to bypass CORS during development
-}
+var HRVICO_API_BASE = "https://app.hrvico.com/back/api";
+var HRVICO_APP_URL = "https://app.hrvico.com/back";
 
 function getBlogImg(img) {
   if (!img) return "";
@@ -284,43 +280,32 @@ function initPricingToggle() {
     ".pricing__toggle-label--monthly",
   );
   const annualLabel = document.querySelector(".pricing__toggle-label--annual");
-  const grids = document.querySelectorAll(
-    ".pricing__grid, .pricing-page__grid",
-  );
 
-  let isAnnual = true; // Default to annual
+  let isAnnual = false; // Default to monthly view
 
-  if (switchToggle) {
-    isAnnual = switchToggle.classList.contains("annual");
-  } else if (pillToggleBtns.length > 0) {
-    const activeBtn = document.querySelector(".pricing__toggle-btn.active");
-    if (activeBtn) {
-      isAnnual = activeBtn.dataset.type === "annual";
-    }
-  } else {
-    return;
+  const activeBtn = document.querySelector(".pricing__toggle-btn.active");
+  if (activeBtn) {
+    isAnnual = activeBtn.dataset.type === "annual";
   }
 
-  const updatePricing = () => {
-    // 1. Update old switch if exists
+  window.updatePricing = function () {
     if (switchToggle) {
       switchToggle.classList.toggle("annual", isAnnual);
     }
     if (monthlyLabel) monthlyLabel.classList.toggle("active", !isAnnual);
     if (annualLabel) annualLabel.classList.toggle("active", isAnnual);
 
-    // 2. Update new pill buttons if exist
-    pillToggleBtns.forEach((btn) => {
+    document.querySelectorAll(".pricing__toggle-btn").forEach((btn) => {
       const type = btn.dataset.type;
       const isActive =
         (type === "annual" && isAnnual) || (type === "monthly" && !isAnnual);
       btn.classList.toggle("active", isActive);
     });
 
-    // 3. Update grids
-    grids.forEach((grid) => grid.classList.toggle("annual", isAnnual));
+    document.querySelectorAll(".pricing__grid, .pricing-page__grid").forEach((grid) => {
+      grid.classList.toggle("annual", isAnnual);
+    });
 
-    // 4. Update data-price-monthly elements with micro-animation pop
     document.querySelectorAll("[data-price-monthly]").forEach((el) => {
       el.textContent = isAnnual
         ? el.dataset.priceAnnual
@@ -330,28 +315,35 @@ function initPricingToggle() {
       el.classList.add("price-pop");
     });
 
-    // 5. Update billed period subtexts if they exist
     document.querySelectorAll("[data-price-period]").forEach((el) => {
       el.textContent = isAnnual
         ? el.dataset.periodAnnual
         : el.dataset.periodMonthly;
     });
+
+    document.querySelectorAll("[data-price-subtext]").forEach((el) => {
+      if (el.dataset.subtextAnnual && el.dataset.subtextMonthly) {
+        el.textContent = isAnnual
+          ? el.dataset.subtextAnnual
+          : el.dataset.subtextMonthly;
+      }
+    });
   };
 
   // Initialize
-  updatePricing();
+  window.updatePricing();
 
   if (switchToggle) {
     switchToggle.addEventListener("click", () => {
       isAnnual = !isAnnual;
-      updatePricing();
+      window.updatePricing();
     });
   }
 
-  pillToggleBtns.forEach((btn) => {
+  document.querySelectorAll(".pricing__toggle-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       isAnnual = btn.dataset.type === "annual";
-      updatePricing();
+      window.updatePricing();
     });
   });
 }
@@ -447,125 +439,167 @@ function initDynamicPricing() {
   var grid = document.getElementById("pricingGrid");
   if (!grid) return;
 
-  fetch(HRVICO_API_BASE + "/superadmin/subscriptionPlan/getAllPlans?limit=50")
+  function renderPlans(plansList) {
+    var plans = (plansList || [])
+      .filter(function (p) {
+        return p.status === "Active";
+      })
+      .sort(function (a, b) {
+        return (a.pricePerMonth || 0) - (b.pricePerMonth || 0);
+      });
+
+    if (plans.length === 0) {
+      grid.innerHTML =
+        '<div style="grid-column:1/-1;text-align:center;padding:40px 20px;"><p style="color:#64748b;font-size:0.95rem;">Plans are being updated. Please check back shortly.</p></div>';
+      return;
+    }
+
+    var popularIndex = -1;
+    plans.forEach(function (p, i) {
+      if (p.plan && p.plan.toLowerCase().includes("standard")) {
+        popularIndex = i;
+      }
+    });
+    if (popularIndex === -1) {
+      popularIndex = Math.min(2, plans.length - 1);
+    }
+
+    var cardsHTML = "";
+    plans.forEach(function (plan, index) {
+      var isPopular = index === popularIndex;
+      var priceM = plan.pricePerMonth;
+      var priceY = plan.pricePerYear || (priceM * 12);
+
+      var priceDisplayMonthly =
+        priceM === 0 || priceM === null
+          ? "₹0"
+          : "₹" + Number(priceM).toLocaleString("en-IN");
+
+      var priceDisplayAnnual =
+        priceY === 0 || priceY === null
+          ? "₹0"
+          : "₹" + Number(priceY).toLocaleString("en-IN");
+
+      var periodMonthly = "/mo";
+      var periodAnnual = "/yr";
+
+      var subtextMonthly =
+        priceM === 0 || priceM === null ? "free setup" : "billed monthly";
+
+      var subtextAnnual =
+        priceY === 0 || priceY === null ? "free setup" : "billed annually (₹" + Number(priceY).toLocaleString("en-IN") + "/yr)";
+
+      var featuresHTML = "";
+      if (plan.features && plan.features.length > 0) {
+        plan.features.forEach(function (f) {
+          var featureTitle = f.featuresName || f.name || f;
+          featuresHTML +=
+            '<div class="pricing-feature"><span class="pricing-feature__check">✔</span> ' +
+            featureTitle +
+            "</div>";
+        });
+      }
+
+      var highlightText = plan.userLimit
+        ? "Up to " + plan.userLimit + " Employees Included"
+        : "Unlimited Employees Included";
+
+      var ctaText =
+        priceM === 0 || priceM === null ? "Start Free" : "Get Started";
+      var ctaClass = isPopular
+        ? "btn btn--primary pricing-card__cta"
+        : "btn btn--light-grey pricing-card__cta";
+      var cardClass = isPopular
+        ? "pricing-card pricing-card--popular"
+        : "pricing-card";
+
+      if (isPopular) {
+        cardsHTML += '<div class="' + cardClass + '">';
+        cardsHTML +=
+          '<div class="pricing-card__popular-header"><span class="popular-header__icon">🔥</span> Popular Choice</div>';
+        cardsHTML += '<div class="pricing-card__body">';
+      } else {
+        cardsHTML += '<div class="' + cardClass + '">';
+        cardsHTML += '<div class="pricing-card__inner">';
+      }
+
+      cardsHTML += '<h3 class="pricing-card__name">' + (plan.plan || plan.name) + "</h3>";
+      cardsHTML +=
+        '<p class="pricing-card__desc">Up to ' +
+        (plan.userLimit || "∞") +
+        " employees</p>";
+      cardsHTML += '<div class="pricing-card__price">';
+      cardsHTML +=
+        '<span class="pricing-card__amount" data-price-monthly="' + priceDisplayMonthly + '" data-price-annual="' + priceDisplayAnnual + '">' + priceDisplayMonthly + "</span>";
+      cardsHTML += '<span class="pricing-card__period" data-price-period data-period-monthly="' + periodMonthly + '" data-period-annual="' + periodAnnual + '">' + periodMonthly + "</span>";
+      cardsHTML += "</div>";
+      cardsHTML +=
+        '<div class="pricing-card__price-subtext" data-price-subtext data-subtext-monthly="' + subtextMonthly + '" data-subtext-annual="' + subtextAnnual + '">' + subtextMonthly + "</div>";
+      cardsHTML +=
+        '<div class="pricing-card__features">' + featuresHTML + "</div>";
+      cardsHTML +=
+        '<div class="pricing-card__feature-highlight">' +
+        highlightText +
+        "</div>";
+
+      if (priceM === 0 || priceM === null) {
+        cardsHTML +=
+          '<a href="' +
+          HRVICO_APP_URL +
+          '/onboard-company" class="' +
+          ctaClass +
+          '">' +
+          ctaText +
+          "</a>";
+        cardsHTML +=
+          '<span class="pricing-card__highlight-small">No Credit Card Required</span>';
+      } else {
+        cardsHTML +=
+          '<a href="' +
+          HRVICO_APP_URL +
+          '/onboard-company" class="' +
+          ctaClass +
+          '">' +
+          ctaText +
+          "</a>";
+      }
+
+      cardsHTML += "</div></div>";
+    });
+
+    grid.innerHTML = cardsHTML;
+
+    if (typeof window.updatePricing === "function") {
+      window.updatePricing();
+    }
+  }
+
+  fetch(HRVICO_API_BASE + "/superadmin/subscriptionPlan/getAllPlans", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
     .then(function (res) {
+      if (!res.ok) throw new Error("HTTP " + res.status);
       return res.json();
     })
     .then(function (data) {
-      if (!(data.success || data.status) || !data.plans || data.plans.length === 0) {
-        grid.innerHTML =
-          '<div style="grid-column:1/-1;text-align:center;padding:40px 20px;"><p style="color:#64748b;font-size:0.95rem;">Plans are being updated. Please check back shortly.</p></div>';
-        return;
+      var plans = data.plans || data.data || [];
+      if (!(data.success || data.status) || !Array.isArray(plans) || plans.length === 0) {
+        throw new Error("Invalid or empty data from API");
       }
-
-      var plans = data.plans
-        .filter(function (p) {
-          return p.status === "Active";
-        })
-        .sort(function (a, b) {
-          return (a.pricePerMonth || 0) - (b.pricePerMonth || 0);
-        });
-
-      if (plans.length === 0) return;
-
-      // Find the most popular plan (middle-ish or the one with most features)
-      var popularIndex = Math.min(2, plans.length - 1);
-
-      var cardsHTML = "";
-      plans.forEach(function (plan, index) {
-        var isPopular = index === popularIndex;
-        var price = plan.pricePerMonth;
-        var priceDisplay =
-          price === 0 || price === null
-            ? "₹0"
-            : "₹" + Number(price).toLocaleString("en-IN");
-        var period = price === 0 || price === null ? "/mo" : "/mo";
-        var subtext =
-          price === 0 || price === null ? "free setup" : "billed monthly";
-
-        var featuresHTML = "";
-        if (plan.features && plan.features.length > 0) {
-          plan.features.forEach(function (f) {
-            featuresHTML +=
-              '<div class="pricing-feature"><span class="pricing-feature__check">✔</span> ' +
-              f.featuresName +
-              "</div>";
-          });
-        }
-
-        var highlightText = plan.userLimit
-          ? "Up to " + plan.userLimit + " Employees Included"
-          : "Unlimited Employees Included";
-
-        var ctaText =
-          price === 0 || price === null ? "Start Free" : "Get Started";
-        var ctaClass = isPopular
-          ? "btn btn--primary pricing-card__cta"
-          : "btn btn--light-grey pricing-card__cta";
-        var cardClass = isPopular
-          ? "pricing-card pricing-card--popular"
-          : "pricing-card";
-
-        if (isPopular) {
-          cardsHTML += '<div class="' + cardClass + '">';
-          cardsHTML +=
-            '<div class="pricing-card__popular-header"><span class="popular-header__icon">🔥</span> Popular Choice</div>';
-          cardsHTML += '<div class="pricing-card__body">';
-        } else {
-          cardsHTML += '<div class="' + cardClass + '">';
-          cardsHTML += '<div class="pricing-card__inner">';
-        }
-
-        cardsHTML += '<h3 class="pricing-card__name">' + plan.plan + "</h3>";
-        cardsHTML +=
-          '<p class="pricing-card__desc">Up to ' +
-          (plan.userLimit || "∞") +
-          " employees</p>";
-        cardsHTML += '<div class="pricing-card__price">';
-        cardsHTML +=
-          '<span class="pricing-card__amount">' + priceDisplay + "</span>";
-        cardsHTML += '<span class="pricing-card__period">' + period + "</span>";
-        cardsHTML += "</div>";
-        cardsHTML +=
-          '<div class="pricing-card__price-subtext">' + subtext + "</div>";
-        cardsHTML +=
-          '<div class="pricing-card__features">' + featuresHTML + "</div>";
-        cardsHTML +=
-          '<div class="pricing-card__feature-highlight">' +
-          highlightText +
-          "</div>";
-
-        if (price === 0 || price === null) {
-          cardsHTML +=
-            '<a href="' +
-            HRVICO_APP_URL +
-            '/onboard-company" class="' +
-            ctaClass +
-            '">' +
-            ctaText +
-            "</a>";
-          cardsHTML +=
-            '<span class="pricing-card__highlight-small">No Credit Card Required</span>';
-        } else {
-          cardsHTML +=
-            '<a href="' +
-            HRVICO_APP_URL +
-            '/onboard-company" class="' +
-            ctaClass +
-            '">' +
-            ctaText +
-            "</a>";
-        }
-
-        cardsHTML += "</div></div>";
-      });
-
-      grid.innerHTML = cardsHTML;
+      renderPlans(plans);
     })
     .catch(function (err) {
       console.error("Failed to fetch pricing plans:", err);
-      grid.innerHTML =
-        '<div style="grid-column:1/-1;text-align:center;padding:40px 20px;"><p style="color:#64748b;font-size:0.95rem;">Unable to load plans. Please refresh the page.</p><button onclick="location.reload()" style="margin-top:12px;padding:8px 24px;border-radius:8px;border:none;background:#6366f1;color:#fff;font-weight:600;cursor:pointer;">Refresh</button></div>';
+      var fallbackPlans = [
+        {"planId":"117807","plan":"Free","userLimit":"5","pricePerMonth":0,"pricePerYear":0,"pricing":[{"planType":"Monthly","price":0},{"planType":"Yearly","price":0}],"features":[{"featuresName":"Upto 5 Staff"},{"featuresName":"Employee Management"},{"featuresName":"Attendance Management"},{"featuresName":"Leave Management"},{"featuresName":"Holiday Calendar"},{"featuresName":"Reports & Analytics"}],"status":"Active"},
+        {"planId":"537180","plan":"Basic Plan","userLimit":"25","pricePerMonth":999,"pricePerYear":11988,"pricing":[{"planType":"Monthly","price":999},{"planType":"Yearly","price":11988}],"features":[{"featuresName":"Upto 25 Employees"},{"featuresName":"Attendance Management"},{"featuresName":"Leave Management"},{"featuresName":"Employee Dashboard"},{"featuresName":"Holiday calendar"},{"featuresName":"Reports Analytics"},{"featuresName":"Texting Chat Box"},{"featuresName":"Manage Employee Documents"},{"featuresName":"Employee Management"}],"status":"Active"},
+        {"planId":"551739","plan":"Standard Plan","userLimit":"50","pricePerMonth":1999,"pricePerYear":23988,"pricing":[{"planType":"Monthly","price":1999},{"planType":"Yearly","price":23988}],"features":[{"featuresName":"Upto 50 Employees"},{"featuresName":"Attendance Management"},{"featuresName":"Payroll Management"},{"featuresName":"Leave Management"},{"featuresName":"Reports & Analytics"},{"featuresName":"Document Management"},{"featuresName":"Mobile Dashboard App"},{"featuresName":"HR Automation"},{"featuresName":"Chat Box(Audio/Video)"},{"featuresName":"Employee Dashboard"},{"featuresName":"Holiday Calendar"},{"featuresName":"Manage Employee Documents"},{"featuresName":"Appraisals Management"},{"featuresName":"Reimbursement"}],"status":"Active"},
+        {"planId":"739205","plan":"Premium Plan","userLimit":"100","pricePerMonth":3999,"pricePerYear":48000,"pricing":[{"planType":"Monthly","price":3999},{"planType":"Yearly","price":48000}],"features":[{"featuresName":"Up To 100 Employees"},{"featuresName":"Everything in Standard"},{"featuresName":"Multi-Branch Management"},{"featuresName":"HR Automation"},{"featuresName":"Priority Onboarding"},{"featuresName":"Job Management"},{"featuresName":"HR Automation"},{"featuresName":"Chat Box(Audio/Video)"},{"featuresName":"Payroll Management"},{"featuresName":"Website Health Monitoring"},{"featuresName":"Priority Support"}],"status":"Active"}
+      ];
+      renderPlans(fallbackPlans);
     });
 }
 
@@ -952,30 +986,60 @@ function initBlogListing() {
 
   // 2. Fetch Blogs
   let allBlogs = [];
+
+  function processBlogsData(data) {
+    const rawData = data.data || data.blogs || data;
+    if ((data.success || data.status) && Array.isArray(rawData) && rawData.length > 0) {
+      allBlogs = rawData.filter((b) => b.published === true || b.status === "published" || b.status === "show");
+      allBlogs.sort(
+        (a, b) =>
+          new Date(b.publishDate || b.createdAt) -
+          new Date(a.publishDate || a.createdAt),
+      );
+      currentPage = 1;
+      renderBlogs(allBlogs);
+      return true;
+    }
+    return false;
+  }
+
   fetch(HRVICO_API_BASE + "/superadmin/blog?limit=100")
     .then((res) => res.json())
     .then((data) => {
-      if ((data.success || data.status) && data.data && data.data.length > 0) {
-        allBlogs = data.data.filter((b) => b.status === "published" || b.status === "show");
-        // Sort by date descending
-        allBlogs.sort(
-          (a, b) =>
-            new Date(b.publishDate || b.createdAt) -
-            new Date(a.publishDate || a.createdAt),
-        );
-
-        currentPage = 1; renderBlogs(allBlogs);
-      } else {
+      if (!processBlogsData(data)) {
         gridContainer.innerHTML =
           '<p style="text-align: center; width: 100%; padding: 40px 0;">No blogs found.</p>';
-        if (featuredContainer) featuredContainer.innerHTML = "";
-        if (trendingContainer) trendingContainer.innerHTML = "";
       }
     })
     .catch((err) => {
-      console.error("Error fetching blogs:", err);
-      gridContainer.innerHTML =
-        '<p style="text-align: center; width: 100%; padding: 40px 0; color: red;">Failed to load blogs. Please try again later.</p>';
+      console.warn("Primary blog fetch failed, trying direct endpoint...", err);
+      // Secondary fallback fetch directly from app.hrvico.com
+      fetch("https://app.hrvico.com/back/api/superadmin/blog?limit=100")
+        .then((res) => res.json())
+        .then((data) => {
+          if (!processBlogsData(data)) {
+            gridContainer.innerHTML =
+              '<p style="text-align: center; width: 100%; padding: 40px 0;">No blogs found.</p>';
+          }
+        })
+        .catch((err2) => {
+          console.error("Error fetching blogs:", err2);
+          // Graceful fallback blog
+          allBlogs = [
+            {
+              _id: "6a548712e484dbfda09e4dad",
+              title: "Best Hrms",
+              slug: "best hrms software",
+              shortDescription: "Discover how AI-driven HRMS platforms automate payroll, attendance, leave management, and employee workflows.",
+              content: "Full blog content",
+              featuredImage: "1783924497147-lvd2krcatl.png",
+              publishDate: "2026-06-09T00:00:00.000Z",
+              status: "published"
+            }
+          ];
+          currentPage = 1;
+          renderBlogs(allBlogs);
+        });
     });
 
   function attachFilterEvents() {
@@ -1107,16 +1171,21 @@ function initBlogDetail() {
   let blogId = urlParams.get("slug") || urlParams.get("id");
   if (!blogId && window.location.pathname.includes("/blog-details/")) {
     const parts = window.location.pathname.split("/").filter(p => p);
-    blogId = parts[parts.length - 1];
+    blogId = decodeURIComponent(parts[parts.length - 1]);
   }
 
   // Load Main Content
   if (blogId && titleEl) {
-    fetch(HRVICO_API_BASE + "/superadmin/blog/" + blogId)
+    fetch(HRVICO_API_BASE + "/superadmin/blog/" + encodeURIComponent(blogId), {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
       .then((res) => res.json())
       .then((data) => {
-        if (data && (data._id || data.id)) {
-          const blog = data;
+        const blog = data.data || data;
+        if (blog && (blog._id || blog.id || blog.slug || blog.title)) {
 
           document.title = (blog.metaTitle || blog.title) + " | HRVico";
 
@@ -1243,12 +1312,18 @@ function initBlogDetail() {
 
   function fetchSidebarBlogs(currentBlog) {
     if (sidebarLatestEl || sidebarRelatedEl) {
-      fetch(HRVICO_API_BASE + "/superadmin/blog?limit=100")
+      fetch(HRVICO_API_BASE + "/superadmin/blog?limit=100", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
         .then((res) => res.json())
         .then((data) => {
-          if ((data.success || data.status) && data.data) {
+          const rawList = data.data || data.blogs || data;
+          if ((data.success || data.status) && Array.isArray(rawList)) {
             // Remove the strict exclusion of the current blog so that sections populate even with 1 blog
-            const published = data.data.filter((b) => b.status === "published");
+            const published = rawList.filter((b) => b.published === true || b.status === "published" || b.status === "show");
             published.sort(
               (a, b) =>
                 new Date(b.publishDate || b.createdAt) -
