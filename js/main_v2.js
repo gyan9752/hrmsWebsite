@@ -530,11 +530,11 @@ function initDynamicPricing() {
         " employees</p>";
       cardsHTML += '<div class="pricing-card__price">';
       cardsHTML +=
-        '<span class="pricing-card__amount" data-price-monthly="' + priceDisplayMonthly + '" data-price-annual="' + priceDisplayAnnual + '">' + priceDisplayMonthly + "</span>";
-      cardsHTML += '<span class="pricing-card__period" data-price-period data-period-monthly="' + periodMonthly + '" data-period-annual="' + periodAnnual + '">' + periodMonthly + "</span>";
+        '<span class="pricing-card__amount">' + priceDisplayMonthly + "</span>";
+      cardsHTML += '<span class="pricing-card__period">/mo</span>';
       cardsHTML += "</div>";
       cardsHTML +=
-        '<div class="pricing-card__price-subtext" data-price-subtext data-subtext-monthly="' + subtextMonthly + '" data-subtext-annual="' + subtextAnnual + '">' + subtextMonthly + "</div>";
+        '<div class="pricing-card__price-subtext">' + subtextMonthly + "</div>";
       cardsHTML +=
         '<div class="pricing-card__features">' + featuresHTML + "</div>";
       cardsHTML +=
@@ -574,12 +574,7 @@ function initDynamicPricing() {
     }
   }
 
-  fetch(HRVICO_API_BASE + "/superadmin/subscriptionPlan/getAllPlans", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
+  fetch(HRVICO_API_BASE + "/superadmin/subscriptionPlan/getAllPlans")
     .then(function (res) {
       if (!res.ok) throw new Error("HTTP " + res.status);
       return res.json();
@@ -1176,12 +1171,7 @@ function initBlogDetail() {
 
   // Load Main Content
   if (blogId && titleEl) {
-    fetch(HRVICO_API_BASE + "/superadmin/blog/" + encodeURIComponent(blogId), {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
+    fetch(HRVICO_API_BASE + "/superadmin/blog/" + encodeURIComponent(blogId))
       .then((res) => res.json())
       .then((data) => {
         const blog = data.data || data;
@@ -1312,12 +1302,7 @@ function initBlogDetail() {
 
   function fetchSidebarBlogs(currentBlog) {
     if (sidebarLatestEl || sidebarRelatedEl) {
-      fetch(HRVICO_API_BASE + "/superadmin/blog?limit=100", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
+      fetch(HRVICO_API_BASE + "/superadmin/blog?limit=100")
         .then((res) => res.json())
         .then((data) => {
           const rawList = data.data || data.blogs || data;
