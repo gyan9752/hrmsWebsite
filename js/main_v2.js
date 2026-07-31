@@ -384,7 +384,7 @@ function cleanHtmlExtensions() {
    Start Free Button — inject into navbar + demo modal
    ═══════════════════════════════════════════ */
 function initStartFreeButton() {
-  var onboardUrl = HRVICO_APP_URL + "/onboard-company";
+  var onboardUrl = "https://app.hrvico.com/onboard-company";
 
   // 1. Desktop navbar — add "Start Free" before "Book a Demo"
   var desktopCta = document.querySelector(".navbar__cta.desktop-only");
@@ -544,9 +544,7 @@ function initDynamicPricing() {
 
       if (priceM === 0 || priceM === null) {
         cardsHTML +=
-          '<a href="' +
-          HRVICO_APP_URL +
-          '/onboard-company" class="' +
+          '<a href="https://app.hrvico.com/onboard-company" class="' +
           ctaClass +
           '">' +
           ctaText +
@@ -555,9 +553,7 @@ function initDynamicPricing() {
           '<span class="pricing-card__highlight-small">No Credit Card Required</span>';
       } else {
         cardsHTML +=
-          '<a href="' +
-          HRVICO_APP_URL +
-          '/onboard-company" class="' +
+          '<a href="https://app.hrvico.com/onboard-company" class="' +
           ctaClass +
           '">' +
           ctaText +
