@@ -8,25 +8,40 @@
       name="description"
       content="Flexible pricing plans built for startups, SMEs & growing companies. Simple, transparent pricing with no hidden charges."
     />
-<meta name="google-site-verification" content="75TcVrkXvzr8OeGQGFGbqzZrnDQwCY6igYneiVkIUjg" />
+    <meta
+      name="google-site-verification"
+      content="75TcVrkXvzr8OeGQGFGbqzZrnDQwCY6igYneiVkIUjg"
+    />
 
-  <script type="text/javascript">
-(function(c,l,a,r,i,t,y){
-c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-})(window, document, "clarity", "script", "xkp73lbkvb");
-</script>
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "xkp73lbkvb");
+    </script>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TVS20GZXDB"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-TVS20GZXDB"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-gtag('config', 'G-TVS20GZXDB');
-</script>
+      gtag("config", "G-TVS20GZXDB");
+    </script>
 
     <!-- Favicon -->
     <link
@@ -79,16 +94,15 @@ gtag('config', 'G-TVS20GZXDB');
           </a>
 
           <div class="navbar__links">
-                      <a href="index.html" class="navbar__link">Home</a>
-          <a href="features.html" class="navbar__link">Features</a>
-          <a href="roles.html" class="navbar__link">Roles</a>
-          <a href="pricing.html" class="navbar__link active">Pricing</a>
-          <a href="contact.html" class="navbar__link">Contact</a>
-
-        </div>
+            <a href="index.html" class="navbar__link">Home</a>
+            <a href="features.html" class="navbar__link">Features</a>
+            <a href="roles.html" class="navbar__link">Roles</a>
+            <a href="pricing.html" class="navbar__link active">Pricing</a>
+            <a href="contact.html" class="navbar__link">Contact</a>
+          </div>
 
           <div class="navbar__cta desktop-only">
-              <a
+            <a
               href="#"
               class="btn btn--primary btn--small"
               onclick="
@@ -109,14 +123,22 @@ gtag('config', 'G-TVS20GZXDB');
 
       <!-- Mobile Menu -->
       <div class="navbar__mobile-menu">
-              <a href="index.html" class="navbar__link">Home</a>
-      <a href="features.html" class="navbar__link">Features</a>
-      <a href="roles.html" class="navbar__link">Roles</a>
-      <a href="pricing.html" class="navbar__link active">Pricing</a>
-      <a href="contact.html" class="navbar__link">Contact</a>
+        <a href="index.html" class="navbar__link">Home</a>
+        <a href="features.html" class="navbar__link">Features</a>
+        <a href="roles.html" class="navbar__link">Roles</a>
+        <a href="pricing.html" class="navbar__link active">Pricing</a>
+        <a href="contact.html" class="navbar__link">Contact</a>
 
-      <a href="#" class="btn btn--primary" onclick="openDemoModal(); return false;">Book a Demo</a>
-    </div>
+        <a
+          href="#"
+          class="btn btn--primary"
+          onclick="
+            openDemoModal();
+            return false;
+          "
+          >Book a Demo</a
+        >
+      </div>
     </nav>
 
     <!-- ═══════════════════════════════════════
@@ -160,10 +182,31 @@ gtag('config', 'G-TVS20GZXDB');
         <!-- Pricing Cards Grid (dynamically populated from API) -->
         <div class="pricing-page__grid" id="pricingGrid">
           <!-- Loading state — replaced dynamically by JS -->
-          <div id="pricingLoading" style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
-            <div style="display: inline-block; width: 40px; height: 40px; border: 3px solid rgba(99,102,241,0.2); border-top-color: #6366f1; border-radius: 50%; animation: spin 0.8s linear infinite;"></div>
-            <p style="margin-top: 16px; color: #64748b; font-size: 0.95rem;">Loading plans...</p>
-            <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
+          <div
+            id="pricingLoading"
+            style="grid-column: 1 / -1; text-align: center; padding: 60px 20px"
+          >
+            <div
+              style="
+                display: inline-block;
+                width: 40px;
+                height: 40px;
+                border: 3px solid rgba(99, 102, 241, 0.2);
+                border-top-color: #6366f1;
+                border-radius: 50%;
+                animation: spin 0.8s linear infinite;
+              "
+            ></div>
+            <p style="margin-top: 16px; color: #64748b; font-size: 0.95rem">
+              Loading plans...
+            </p>
+            <style>
+              @keyframes spin {
+                to {
+                  transform: rotate(360deg);
+                }
+              }
+            </style>
           </div>
         </div>
 
@@ -172,50 +215,79 @@ gtag('config', 'G-TVS20GZXDB');
           <div class="pricing-card-horizontal__left">
             <div>
               <h3 class="pricing-card-horizontal__name">Enterprise Plan 💎</h3>
-              <p class="pricing-card-horizontal__desc">Best For: 100+ Employees &amp; Enterprises</p>
+              <p class="pricing-card-horizontal__desc">
+                Best For: 100+ Employees &amp; Enterprises
+              </p>
             </div>
             <div class="pricing-card-horizontal__price">
               <span class="pricing-card-horizontal__amount">Custom</span>
-              <span class="pricing-card-horizontal__period" style="font-size: 0.75rem; color: #888; max-width: 70px; line-height: 1.2;">tailored pricing</span>
+              <span
+                class="pricing-card-horizontal__period"
+                style="
+                  font-size: 0.75rem;
+                  color: #888;
+                  max-width: 70px;
+                  line-height: 1.2;
+                "
+                >tailored pricing</span
+              >
             </div>
           </div>
           <div class="pricing-card-horizontal__middle">
-            <h4 class="pricing-card-horizontal__title">TAILORED HRMS SOLUTIONS</h4>
+            <h4 class="pricing-card-horizontal__title">
+              TAILORED HRMS SOLUTIONS
+            </h4>
             <div class="pricing-card-horizontal__features">
               <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Unlimited Employees
+                <span class="pricing-card-horizontal__check">✔</span> Unlimited
+                Employees
               </div>
               <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Custom Modules
+                <span class="pricing-card-horizontal__check">✔</span> Custom
+                Modules
               </div>
               <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Custom Integrations
+                <span class="pricing-card-horizontal__check">✔</span> Custom
+                Integrations
               </div>
               <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Enterprise Level Automation
+                <span class="pricing-card-horizontal__check">✔</span> Enterprise
+                Level Automation
               </div>
               <div class="pricing-card-horizontal__feature">
                 <span class="pricing-card-horizontal__check">✔</span> API Access
               </div>
               <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Premium Support
+                <span class="pricing-card-horizontal__check">✔</span> Premium
+                Support
               </div>
               <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Dedicated Account Manager
+                <span class="pricing-card-horizontal__check">✔</span> Dedicated
+                Account Manager
               </div>
               <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Custom Support SLA
+                <span class="pricing-card-horizontal__check">✔</span> Custom
+                Support SLA
               </div>
               <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Advanced Security
+                <span class="pricing-card-horizontal__check">✔</span> Advanced
+                Security
               </div>
             </div>
           </div>
           <div class="pricing-card-horizontal__right">
             <div class="pricing-card-horizontal__badge">
-              Unlimited<br>Employees Included
+              Unlimited<br />Employees Included
             </div>
-            <a href="#" class="btn btn--primary pricing-card-horizontal__btn" onclick="openDemoModal(); return false;">Contact Sales</a>
+            <a
+              href="#"
+              class="btn btn--primary pricing-card-horizontal__btn"
+              onclick="
+                openDemoModal();
+                return false;
+              "
+              >Contact Sales</a
+            >
           </div>
         </div>
       </div>
@@ -342,13 +414,20 @@ gtag('config', 'G-TVS20GZXDB');
                   class="footer__link"
                   target="_blank"
                   rel="noopener noreferrer"
-                  >NX-ONE, Tech Zone IV, Plot No 17, Tech Zone IV, Amrapali Dream Valley, Greater Noida, Uttar Pradesh 201318</a
+                  >NX-ONE, Tech Zone IV, Plot No 17, Tech Zone IV, Amrapali
+                  Dream Valley, Greater Noida, Uttar Pradesh 201318</a
                 >
               </div>
               <div class="footer__contact-item">
                 <strong>Phone:</strong>
                 <a href="tel:+919116011899" class="footer__link"
                   >+91 9116011899</a
+                >
+              </div>
+              <div class="footer__contact-item">
+                <strong>Email:</strong>
+                <a href="mailto:info@scriza.in" class="footer__link"
+                  >info@scriza.in</a
                 >
               </div>
             </div>
