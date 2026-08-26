@@ -4,13 +4,15 @@
 
 var HRVICO_API_BASE = "https://app.hrvico.com/back/api";
 var HRVICO_APP_URL = "https://app.hrvico.com/back";
+var BLOG_API_BASE = "https://blogb.hrvico.com/hrms-blogs/api";
+var BLOG_IMAGE_BASE = "https://blogb.hrvico.com";
 
 function getBlogImg(img) {
   if (!img) return "";
   if (img.startsWith('http')) return img;
-  if (img.startsWith('/')) return HRVICO_APP_URL + img;
-  if (img.startsWith('uploads/')) return HRVICO_APP_URL + '/' + img;
-  return HRVICO_APP_URL + "/uploads/" + img;
+  if (img.startsWith('/')) return BLOG_IMAGE_BASE + img;
+  if (img.startsWith('uploads/')) return BLOG_IMAGE_BASE + '/' + img;
+  return BLOG_IMAGE_BASE + "/uploads/" + img;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -956,13 +958,14 @@ function initBlogListing() {
 
   // 1. Fetch Categories
   if (filterContainer) {
-    fetch(HRVICO_API_BASE + "/superadmin/blogCategory/blog-categories")
+    fetch(BLOG_API_BASE + "/admin/categories/visible")
       .then((res) => res.json())
       .then((data) => {
-        if ((data.success || data.status) && data.data) {
+        const categories = data.data || data.categories || data;
+        if (Array.isArray(categories) && categories.length > 0) {
           filterContainer.innerHTML =
             '<button class="blog-filter-btn active" data-category="all">All</button>';
-          data.data.forEach((cat) => {
+          categories.forEach((cat) => {
             const btn = document.createElement("button");
             btn.className = "blog-filter-btn";
             btn.setAttribute("data-category", cat._id); // use ID for filtering
@@ -980,7 +983,7 @@ function initBlogListing() {
 
   function processBlogsData(data) {
     const rawData = data.data || data.blogs || data;
-    if ((data.success || data.status) && Array.isArray(rawData) && rawData.length > 0) {
+    if (Array.isArray(rawData) && rawData.length > 0) {
       allBlogs = rawData.filter((b) => b.published === true || b.status === "published" || b.status === "show");
       allBlogs.sort(
         (a, b) =>
@@ -994,7 +997,7 @@ function initBlogListing() {
     return false;
   }
 
-  fetch(HRVICO_API_BASE + "/superadmin/blog?limit=100")
+  fetch(BLOG_API_BASE + "/blogs")
     .then((res) => res.json())
     .then((data) => {
       if (!processBlogsData(data)) {
@@ -1003,34 +1006,9 @@ function initBlogListing() {
       }
     })
     .catch((err) => {
-      console.warn("Primary blog fetch failed, trying direct endpoint...", err);
-      // Secondary fallback fetch directly from app.hrvico.com
-      fetch("https://app.hrvico.com/back/api/superadmin/blog?limit=100")
-        .then((res) => res.json())
-        .then((data) => {
-          if (!processBlogsData(data)) {
-            gridContainer.innerHTML =
-              '<p style="text-align: center; width: 100%; padding: 40px 0;">No blogs found.</p>';
-          }
-        })
-        .catch((err2) => {
-          console.error("Error fetching blogs:", err2);
-          // Graceful fallback blog
-          allBlogs = [
-            {
-              _id: "6a548712e484dbfda09e4dad",
-              title: "Best Hrms",
-              slug: "best hrms software",
-              shortDescription: "Discover how AI-driven HRMS platforms automate payroll, attendance, leave management, and employee workflows.",
-              content: "Full blog content",
-              featuredImage: "1783924497147-lvd2krcatl.png",
-              publishDate: "2026-06-09T00:00:00.000Z",
-              status: "published"
-            }
-          ];
-          currentPage = 1;
-          renderBlogs(allBlogs);
-        });
+      console.error("Error fetching blogs:", err);
+      gridContainer.innerHTML =
+        '<p style="text-align: center; width: 100%; padding: 40px 0;">Failed to load blogs. Please try again later.</p>';
     });
 
   function attachFilterEvents() {
@@ -1113,7 +1091,7 @@ function initBlogListing() {
           : (blog.category && blog.category.name) || blog.categoryName || (typeof blog.category === "string" ? blog.category : "Blog");
         
         const card = document.createElement("a");
-        card.href = `/blog-details/${blog.slug}`;
+        card.href = `blog-detail.html?slug=${encodeURIComponent(blog.slug)}`;
         card.className = "scriza-card";
 
         card.innerHTML = `
@@ -1167,7 +1145,7 @@ function initBlogDetail() {
 
   // Load Main Content
   if (blogId && titleEl) {
-    fetch(HRVICO_API_BASE + "/superadmin/blog/" + encodeURIComponent(blogId))
+    fetch(BLOG_API_BASE + "/blogs/" + encodeURIComponent(blogId))
       .then((res) => res.json())
       .then((data) => {
         const blog = data.data || data;
@@ -1298,11 +1276,11 @@ function initBlogDetail() {
 
   function fetchSidebarBlogs(currentBlog) {
     if (sidebarLatestEl || sidebarRelatedEl) {
-      fetch(HRVICO_API_BASE + "/superadmin/blog?limit=100")
+      fetch(BLOG_API_BASE + "/blogs")
         .then((res) => res.json())
         .then((data) => {
           const rawList = data.data || data.blogs || data;
-          if ((data.success || data.status) && Array.isArray(rawList)) {
+          if (Array.isArray(rawList)) {
             // Remove the strict exclusion of the current blog so that sections populate even with 1 blog
             const published = rawList.filter((b) => b.published === true || b.status === "published" || b.status === "show");
             published.sort(
@@ -1318,7 +1296,7 @@ function initBlogDetail() {
               if (latest.length > 0) {
                 latest.forEach((blog) => {
                   sidebarLatestEl.innerHTML += `
-                    <a href="/blog-details/${blog.slug}" class="blog-sidebar__list-item">
+                    <a href="blog-detail.html?slug=${encodeURIComponent(blog.slug)}" class="blog-sidebar__list-item">
                       <div class="blog-sidebar__list-thumb">
                         <img src="${getBlogImg((blog.featureImage || blog.featuredImage)) || "assets/images/blogs_image_prev.webp"}" alt="${blog.altTag || blog.title}" onerror="this.onerror=null; this.src='assets/images/blogs_image_prev.webp';">
                       </div>
@@ -1344,12 +1322,13 @@ function initBlogDetail() {
 
   // Load Sidebar Categories
   if (sidebarCategoriesEl) {
-    fetch(HRVICO_API_BASE + "/superadmin/blogCategory/blog-categories")
+    fetch(BLOG_API_BASE + "/admin/categories/visible")
       .then((res) => res.json())
       .then((data) => {
-        if ((data.success || data.status) && data.data) {
+        const categories = data.data || data.categories || data;
+        if (Array.isArray(categories) && categories.length > 0) {
           sidebarCategoriesEl.innerHTML = "";
-          data.data.forEach((cat) => {
+          categories.forEach((cat) => {
             const count = cat.posts || 0;
             const imgHtml = cat.image
               ? `<img src="${getBlogImg(cat.image)}" alt="${cat.altTag || cat.name}">`
@@ -1369,10 +1348,9 @@ function initBlogDetail() {
               </a>
             `;
           });
-          if (data.data.length === 0) {
-            sidebarCategoriesEl.innerHTML =
-              '<p style="padding:10px;">No categories found.</p>';
-          }
+        } else {
+          sidebarCategoriesEl.innerHTML =
+            '<p style="padding:10px;">No categories found.</p>';
         }
       })
       .catch((err) => {
