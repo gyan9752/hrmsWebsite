@@ -924,7 +924,7 @@ function initCookiesBanner() {
     '        <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10c.877 0 1.73-.113 2.545-.328a1.002 1.002 0 00.707-.723 1 1 0 00-.312-1.013 3.518 3.518 0 01-1.123-2.909c.148-1.579 1.4-2.884 2.977-3.085A3.498 3.498 0 0121 17.41a1.002 1.002 0 001.077-.293 1 1 0 00.171-1.082C21.431 14.28 21.05 12.185 21 12c0-5.523-4.477-10-10-10zm-3 5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm6 1a1 1 0 110 2 1 1 0 010-2zm-8 5a1 1 0 110 2 1 1 0 010-2zm7 4a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/>' +
     "      </svg>" +
     "      Cookie Consent" +
-    "    </h4>" +
+    "    ####" +
     "  </div>" +
     '  <p class="cookies-banner__text">' +
     '    We use cookies to improve your experience on our website. By clicking "Accept All", you agree to our use of all cookies. You can customize your settings or read our <a href="/privacy" class="cookies-banner__link">Privacy Policy</a>.' +
@@ -1002,7 +1002,7 @@ function initCookiesBanner() {
 }
 
 /* ═══════════════════════════════════════════
-   BLOG API INTEGRATION & SCRIZA CARD LAYOUT
+   INSTANT PARALLEL FETCHING & FAST SESSION CACHE
    ═══════════════════════════════════════════ */
 
 function formatDate(dateString) {
@@ -1013,15 +1013,64 @@ function formatDate(dateString) {
   return date.toLocaleDateString("en-US", options);
 }
 
-function initBlogListing() {
-  const filterContainer = document.getElementById("category-filters-container");
-  const gridContainer = document.getElementById("blog-listing-container");
+// ⚡ GLOBAL FAST API CACHE (INSTANT PAGE RENDERING)
+var _cachedBlogs = null;
+var _cachedCategories = null;
 
-  if (!gridContainer) return;
-
-  if (filterContainer) {
-    filterContainer.style.display = "none";
+function fetchAllBlogsFast() {
+  if (_cachedBlogs && Array.isArray(_cachedBlogs)) {
+    return Promise.resolve(_cachedBlogs);
   }
+  const sessionData = sessionStorage.getItem("hrvico_blogs_cache");
+  if (sessionData) {
+    try {
+      _cachedBlogs = JSON.parse(sessionData);
+      return Promise.resolve(_cachedBlogs);
+    } catch (e) {}
+  }
+
+  return fetch(BLOG_API_BASE + "/blogs?limit=100")
+    .then((res) => res.json())
+    .then((data) => {
+      const list = data.data || data.blogs || data || [];
+      if (Array.isArray(list)) {
+        _cachedBlogs = list.filter((b) => b && String(b.status || "").toLowerCase() !== "deleted");
+        _cachedBlogs.sort((a, b) => new Date(b.publishDate || b.createdAt || 0) - new Date(a.publishDate || a.createdAt || 0));
+        sessionStorage.setItem("hrvico_blogs_cache", JSON.stringify(_cachedBlogs));
+        return _cachedBlogs;
+      }
+      return [];
+    });
+}
+
+function fetchAllCategoriesFast() {
+  if (_cachedCategories && Array.isArray(_cachedCategories)) {
+    return Promise.resolve(_cachedCategories);
+  }
+  const sessionData = sessionStorage.getItem("hrvico_categories_cache");
+  if (sessionData) {
+    try {
+      _cachedCategories = JSON.parse(sessionData);
+      return Promise.resolve(_cachedCategories);
+    } catch (e) {}
+  }
+
+  return fetch(BLOG_API_BASE + "/admin/categories/visible")
+    .then((res) => res.json())
+    .then((data) => {
+      const list = data.data || data.categories || data || [];
+      if (Array.isArray(list)) {
+        _cachedCategories = list;
+        sessionStorage.setItem("hrvico_categories_cache", JSON.stringify(_cachedCategories));
+        return _cachedCategories;
+      }
+      return [];
+    });
+}
+
+function initBlogListing() {
+  const gridContainer = document.getElementById("blog-listing-container");
+  if (!gridContainer) return;
 
   const urlParams = new URLSearchParams(window.location.search);
   const selectedCatFromUrl = urlParams.get("category");
@@ -1049,143 +1098,49 @@ function initBlogListing() {
     }
   }
 
-  function fetchAndApplyCategoryDetails(catTarget) {
-    if (!catTarget || catTarget === "all") {
-      updateCategoryBanner(null);
-      return;
-    }
+  // ⚡ PARALLEL FETCH BLOGS & CATEGORIES FOR HERO BANNER
+  Promise.all([fetchAllBlogsFast(), fetchAllCategoriesFast()])
+    .then(([allBlogs, categories]) => {
+      if (selectedCatFromUrl && selectedCatFromUrl !== "all") {
+        const targetStr = String(selectedCatFromUrl).toLowerCase().trim();
+        const targetSlug = slugify(selectedCatFromUrl);
+        const match = categories.find((c) => {
+          const id = String(c._id || c.id || "").toLowerCase().trim();
+          const name = String(c.name || "").toLowerCase().trim();
+          const slug = String(c.slug || slugify(c.name) || "").toLowerCase().trim();
+          return id === targetStr || id === targetSlug || name === targetStr || slug === targetSlug || slugify(name) === targetSlug;
+        });
+        updateCategoryBanner(match, selectedCatFromUrl);
 
-    const targetStr = String(catTarget).toLowerCase().trim();
-    const targetSlug = slugify(catTarget);
-
-    fetch(BLOG_API_BASE + "/admin/categories/visible")
-      .then((res) => res.json())
-      .then((data) => {
-        const list = data.data || data.categories || data || [];
-        if (Array.isArray(list)) {
-          const match = list.find((c) => {
-            const id = String(c._id || c.id || "").toLowerCase().trim();
-            const name = String(c.name || "").toLowerCase().trim();
-            const slug = String(c.slug || slugify(c.name) || "").toLowerCase().trim();
-            return id === targetStr || id === targetSlug || name === targetStr || slug === targetSlug || slugify(name) === targetSlug;
+        const filtered = allBlogs.filter((blog) => {
+          if (!blog) return false;
+          const candidates = [blog.categoryId, blog.category, blog.categoryName, blog.categorySlug];
+          return candidates.some((item) => {
+            if (!item) return false;
+            if (typeof item === "string" || typeof item === "number") {
+              const s = String(item).toLowerCase().trim();
+              const sl = slugify(item);
+              return s === targetStr || sl === targetSlug || s === targetSlug || sl === targetStr;
+            }
+            if (typeof item === "object") {
+              const id = String(item._id || item.id || "").toLowerCase().trim();
+              const name = String(item.name || "").toLowerCase().trim();
+              const slug = String(item.slug || "").toLowerCase().trim();
+              return id === targetStr || id === targetSlug || name === targetStr || slugify(name) === targetSlug || slug === targetSlug;
+            }
+            return false;
           });
-          if (match) {
-            updateCategoryBanner(match);
-            return;
-          }
-        }
-        updateCategoryBanner(null, catTarget);
-      })
-      .catch(() => {
-        updateCategoryBanner(null, catTarget);
-      });
-  }
-
-  let allBlogs = [];
-
-  function processBlogsData(data) {
-    const rawData = data.data || data.blogs || data;
-    if (Array.isArray(rawData) && rawData.length > 0) {
-      allBlogs = rawData.filter((b) => {
-        if (!b) return false;
-        const stat = String(b.status || "").toLowerCase().trim();
-        if (stat === "deleted") return false;
-        return true;
-      });
-
-      allBlogs.sort(
-        (a, b) =>
-          new Date(b.publishDate || b.createdAt || 0) -
-          new Date(a.publishDate || a.createdAt || 0),
-      );
-
-      if (selectedCatFromUrl) {
-        filterBlogsByCategory(selectedCatFromUrl);
+        });
+        renderBlogs(filtered);
       } else {
         updateCategoryBanner(null);
-        currentPage = 1;
         renderBlogs(allBlogs);
-      }
-      return true;
-    }
-    return false;
-  }
-
-  fetch(BLOG_API_BASE + "/blogs?limit=100")
-    .then((res) => res.json())
-    .then((data) => {
-      if (!processBlogsData(data)) {
-        gridContainer.innerHTML =
-          '<p style="text-align: center; width: 100%; padding: 40px 0;">No blogs found.</p>';
       }
     })
     .catch((err) => {
-      console.error("Error fetching blogs:", err);
-      gridContainer.innerHTML =
-        '<p style="text-align: center; width: 100%; padding: 40px 0;">Failed to load blogs. Please try again later.</p>';
+      console.error("Error loading blog listing:", err);
+      gridContainer.innerHTML = '<p style="text-align: center; width: 100%; padding: 40px 0;">Failed to load blogs.</p>';
     });
-
-  // DYNAMIC CATEGORY MATCHING + BANNER UPDATE
-  function filterBlogsByCategory(catTarget) {
-    fetchAndApplyCategoryDetails(catTarget);
-
-    if (!catTarget || catTarget === "all") {
-      currentPage = 1;
-      renderBlogs(allBlogs);
-      return;
-    }
-
-    const targetStr = String(catTarget).toLowerCase().trim();
-    const targetSlug = slugify(catTarget);
-
-    const filtered = allBlogs.filter((blog) => {
-      if (!blog) return false;
-
-      const candidates = [];
-
-      if (blog.categoryId) candidates.push(blog.categoryId);
-      if (blog.category) candidates.push(blog.category);
-      if (blog.categoryName) candidates.push(blog.categoryName);
-      if (blog.categorySlug) candidates.push(blog.categorySlug);
-
-      return candidates.some((item) => {
-        if (!item) return false;
-
-        if (typeof item === "string" || typeof item === "number") {
-          const s = String(item).toLowerCase().trim();
-          const sl = slugify(item);
-          return (
-            s === targetStr ||
-            sl === targetSlug ||
-            s === targetSlug ||
-            sl === targetStr
-          );
-        }
-
-        if (typeof item === "object") {
-          const id = String(item._id || item.id || "").toLowerCase().trim();
-          const name = String(item.name || "").toLowerCase().trim();
-          const nameSl = slugify(item.name || "");
-          const slug = String(item.slug || "").toLowerCase().trim();
-          const slugSl = slugify(item.slug || "");
-
-          return (
-            id === targetStr ||
-            id === targetSlug ||
-            name === targetStr ||
-            nameSl === targetSlug ||
-            slug === targetStr ||
-            slugSl === targetSlug
-          );
-        }
-
-        return false;
-      });
-    });
-
-    currentPage = 1;
-    renderBlogs(filtered);
-  }
 
   let currentPage = 1;
   const blogsPerPage = 9;
@@ -1220,19 +1175,14 @@ function initBlogListing() {
     paginationContainer.innerHTML = html;
   }
 
-  // ✅ RENDER BLOG CARDS (NO CARD HOVER, IMAGE HOVER ONLY, CLICKABLE IMAGE & HEADING)
   function renderBlogs(blogsToRender) {
     window.currentBlogsToRender = blogsToRender;
-    const featuredContainer = document.getElementById("featured-blog-container");
-    const trendingContainer = document.getElementById("trending-blogs-container");
     const gridContainer = document.getElementById("blog-listing-container");
-    
-    if (featuredContainer) featuredContainer.innerHTML = "";
-    if (trendingContainer) trendingContainer.innerHTML = "";
-    if (gridContainer) gridContainer.innerHTML = "";
+    if (!gridContainer) return;
+    gridContainer.innerHTML = "";
 
     if (!blogsToRender || blogsToRender.length === 0) {
-      if (gridContainer) gridContainer.innerHTML =
+      gridContainer.innerHTML =
         '<p style="text-align: center; width: 100%; padding: 40px 0; font-size: 16px; color: #64748b; font-weight: 500;">No blogs found in this category.</p>';
       renderPagination(0);
       return;
@@ -1241,94 +1191,74 @@ function initBlogListing() {
     const startIndex = (currentPage - 1) * blogsPerPage;
     const paginatedBlogs = blogsToRender.slice(startIndex, startIndex + blogsPerPage);
 
-    if (paginatedBlogs.length === 0) return;
+    paginatedBlogs.forEach((blog) => {
+      const catName = blog.categoryId
+        ? (blog.categoryId.name || blog.categoryId)
+        : (blog.category && blog.category.name) || blog.categoryName || (typeof blog.category === "string" ? blog.category : "Delhi NCR Business & HR");
+      
+      let rawAuthor = blog.authorName || blog.author || blog.addedBy || blog.addedByName;
+      if (typeof rawAuthor === "object" && rawAuthor !== null) {
+        rawAuthor = rawAuthor.name || rawAuthor.fullName || rawAuthor.username || rawAuthor.email;
+      }
+      const authorDisplay = cleanAuthorString(String(rawAuthor || "Garima Bansal"));
 
-    if (gridContainer) {
-      paginatedBlogs.forEach((blog) => {
-        const catName = blog.categoryId
-          ? (blog.categoryId.name || blog.categoryId)
-          : (blog.category && blog.category.name) || blog.categoryName || (typeof blog.category === "string" ? blog.category : "Delhi NCR Business & HR");
-        
-        let rawAuthor = blog.authorName || blog.author || blog.addedBy || blog.addedByName;
-        if (typeof rawAuthor === "object" && rawAuthor !== null) {
-          rawAuthor = rawAuthor.name || rawAuthor.fullName || rawAuthor.username || rawAuthor.email;
-        }
-        const authorDisplay = cleanAuthorString(String(rawAuthor || "Garima Bansal"));
+      let shortDesc = blog.shortDescription || stripHtml(blog.content || "").slice(0, 110) + "...";
+      const blogDetailUrl = `blog-detail.html?slug=${encodeURIComponent(blog.slug || slugify(blog.title) || blog._id)}`;
 
-        let shortDesc = blog.shortDescription || stripHtml(blog.content || "").slice(0, 110) + "...";
-        const blogDetailUrl = `blog-detail.html?slug=${encodeURIComponent(blog.slug || slugify(blog.title) || blog._id)}`;
+      const card = document.createElement("div");
+      card.className = "scriza-card";
+      card.style.cssText = "display: flex; flex-direction: column; background: #ffffff; border: 1px solid #eaeaea; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.03);";
 
-        const card = document.createElement("div");
-        card.className = "scriza-card";
-        card.style.cssText = "display: flex; flex-direction: column; background: #ffffff; border: 1px solid #eaeaea; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.03);";
+      card.innerHTML = `
+        <a href="${blogDetailUrl}" style="position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: #f1f5f9; display: block; text-decoration: none;">
+          <img src="${getBlogImg(blog.featureImage || blog.featuredImage)}" alt="${blog.altTag || blog.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'" loading="lazy" onerror="this.onerror=null; this.src='assets/images/blogs_image_prev.webp';">
+          <div style="position: absolute; bottom: 12px; left: 12px; background: rgba(0, 0, 0, 0.75); color: #ffffff; font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 8px; backdrop-filter: blur(4px);">
+            ${catName}
+          </div>
+        </a>
 
-        card.innerHTML = `
-          <!-- CLICKABLE IMAGE WRAPPER WITH HOVER ZOOM ONLY ON IMAGE -->
-          <a href="${blogDetailUrl}" style="position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: #f1f5f9; display: block; text-decoration: none;">
-            <img src="${getBlogImg(blog.featureImage || blog.featuredImage)}" alt="${blog.altTag || blog.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'" loading="lazy" onerror="this.onerror=null; this.src='assets/images/blogs_image_prev.webp';">
-            
-            <div style="position: absolute; bottom: 12px; left: 12px; background: rgba(0, 0, 0, 0.75); color: #ffffff; font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 8px; backdrop-filter: blur(4px); letter-spacing: 0.3px;">
-              ${catName}
-            </div>
+        <div style="padding: 20px; display: flex; flex-direction: column; flex: 1;">
+          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #64748b; margin-bottom: 12px; font-weight: 600;">
+            <span>${formatDate(blog.publishDate || blog.createdAt)}</span>
+            <span style="color: #475569; font-weight: 700;">By ${authorDisplay}</span>
+          </div>
+
+          <a href="${blogDetailUrl}" style="text-decoration: none; display: block; margin-bottom: 10px;">
+            <h3 style="font-size: 17px; font-weight: 800; color: #0e2a46; margin: 0; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; transition: color 0.2s;" onmouseover="this.style.color='#6366f1'" onmouseout="this.style.color='#0e2a46'">
+              ${blog.title}
+            </h3>
           </a>
 
-          <!-- CARD BODY -->
-          <div style="padding: 20px; display: flex; flex-direction: column; flex: 1;">
-            <!-- DATE & AUTHOR ROW ABOVE TITLE -->
-            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #64748b; margin-bottom: 12px; font-weight: 600;">
-              <span>${formatDate(blog.publishDate || blog.createdAt)}</span>
-              <span style="color: #475569; font-weight: 700;">By ${authorDisplay}</span>
-            </div>
+          <p style="font-size: 13px; color: #64748b; margin: 0 0 20px; line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; flex: 1;">
+            ${shortDesc}
+          </p>
 
-            <!-- CLICKABLE HEADING TITLE -->
-            <a href="${blogDetailUrl}" style="text-decoration: none; display: block; margin-bottom: 10px;">
-              <h3 style="font-size: 17px; font-weight: 800; color: #0e2a46; margin: 0; line-height: 1.35; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; transition: color 0.2s;" onmouseover="this.style.color='#6366f1'" onmouseout="this.style.color='#0e2a46'">
-                ${blog.title}
-              </h3>
+          <div>
+            <a href="${blogDetailUrl}" style="text-decoration: none; display: inline-block;">
+              <span style="display: inline-flex; align-items: center; gap: 6px; background: #6366f1; color: #ffffff; font-size: 13px; font-weight: 700; padding: 9px 20px; border-radius: 24px; box-shadow: 0 4px 12px rgba(99,102,241,0.3); transition: all 0.2s;">
+                Read More →
+              </span>
             </a>
-
-            <!-- DESCRIPTION EXCERPT -->
-            <p style="font-size: 13px; color: #64748b; margin: 0 0 20px; line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; flex: 1;">
-              ${shortDesc}
-            </p>
-
-            <!-- CLICKABLE PURPLE READ MORE BUTTON -->
-            <div>
-              <a href="${blogDetailUrl}" style="text-decoration: none; display: inline-block;">
-                <span style="display: inline-flex; align-items: center; gap: 6px; background: #6366f1; color: #ffffff; font-size: 13px; font-weight: 700; padding: 9px 20px; border-radius: 24px; box-shadow: 0 4px 12px rgba(99,102,241,0.3); transition: all 0.2s;">
-                  Read More →
-                </span>
-              </a>
-            </div>
           </div>
-        `;
-        gridContainer.appendChild(card);
-      });
-    }
+        </div>
+      `;
+      gridContainer.appendChild(card);
+    });
 
     renderPagination(blogsToRender.length);
   }
 }
 
+// ⚡ INSTANT PARALLEL FETCHING FOR BLOG DETAIL & SIDEBAR
 function initBlogDetail() {
   const titleEl = document.getElementById("blog-title");
   const breadcrumbEl = document.getElementById("breadcrumb-title");
   const imageEl = document.getElementById("blog-image");
-  const heroImageEl = document.getElementById("blog-hero-image");
   const dateEl = document.getElementById("blog-date");
   const contentEl = document.getElementById("blog-content");
 
   const sidebarLatestEl = document.getElementById("sidebar-latest-blogs");
-  const sidebarRelatedEl = document.getElementById("sidebar-related-blogs");
   const sidebarCategoriesEl = document.getElementById("sidebar-categories");
-
-  // HIDE TOP BREADCRUMB
-  const breadcrumbContainer = document.querySelector(".blog-detail-hero__breadcrumb, .blog-detail__breadcrumb, .blog-detail__breadcrumbs");
-  if (breadcrumbContainer) {
-    breadcrumbContainer.style.display = "none";
-  }
-
-  if (!titleEl && !sidebarLatestEl) return;
 
   const urlParams = new URLSearchParams(window.location.search);
   let blogId = urlParams.get("slug") || urlParams.get("id");
@@ -1337,109 +1267,86 @@ function initBlogDetail() {
     blogId = decodeURIComponent(parts[parts.length - 1]);
   }
 
-  let allBlogsCache = [];
+  // 1. INSTANT PARALLEL LATEST BLOGS & CATEGORIES RENDER (ZERO DELAY)
+  fetchAllBlogsFast().then((allBlogs) => {
+    if (sidebarLatestEl) {
+      sidebarLatestEl.innerHTML = "";
+      const latest = allBlogs.slice(0, 4);
+      latest.forEach((blog) => {
+        sidebarLatestEl.innerHTML += `
+          <a href="blog-detail.html?slug=${encodeURIComponent(blog.slug || slugify(blog.title) || blog._id)}" class="blog-sidebar__list-item" style="display:flex; align-items:center; gap:12px; text-decoration:none; margin-bottom:12px;">
+            <div class="blog-sidebar__list-thumb" style="width:60px; height:60px; border-radius:10px; overflow:hidden; shrink:0; background:#f5f5f5;">
+              <img src="${getBlogImg(blog.featureImage || blog.featuredImage) || "assets/images/blogs_image_prev.webp"}" alt="${blog.title}" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='assets/images/blogs_image_prev.webp';">
+            </div>
+            <div class="blog-sidebar__list-content">
+              <h4 class="blog-sidebar__list-title" style="font-size:14px; font-weight:700; color:#0e2a46; margin:0 0 4px; line-height:1.3; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${blog.title}</h4>
+              <span class="blog-sidebar__list-meta" style="font-size:12px; color:#64748b; font-weight:500;">${formatDate(blog.publishDate || blog.createdAt)}</span>
+            </div>
+          </a>
+        `;
+      });
+    }
+  });
 
+  fetchAllCategoriesFast().then((categories) => {
+    if (sidebarCategoriesEl) {
+      sidebarCategoriesEl.innerHTML = "";
+      sidebarCategoriesEl.style.maxHeight = "400px";
+      sidebarCategoriesEl.style.overflowY = "auto";
+      sidebarCategoriesEl.style.display = "flex";
+      sidebarCategoriesEl.style.flexDirection = "column";
+      sidebarCategoriesEl.style.gap = "10px";
+      sidebarCategoriesEl.style.width = "100%";
+
+      categories.forEach((cat) => {
+        const catSlugParam = cat.slug || slugify(cat.name);
+        sidebarCategoriesEl.innerHTML += `
+          <a href="blogs.html?category=${encodeURIComponent(catSlugParam)}" class="blog-sidebar__category-item" style="display:flex; align-items:center; gap:14px; padding:12px 16px; border:1px solid #eaeaea; border-radius:14px; text-decoration:none; background:#ffffff; width:100%; transition:all 0.2s;">
+            <div class="blog-sidebar__category-icon" style="width:36px; height:36px; border-radius:10px; background:rgba(99, 102, 241, 0.1); color:#6366f1; display:flex; align-items:center; justify-content:center; shrink:0;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
+            </div>
+            <div class="blog-sidebar__category-text" style="flex:1; width:100%;">
+              <h4 class="blog-sidebar__category-title" style="font-size:14px; font-weight:700; color:#0e2a46; margin:0 0 2px; line-height:1.3;">${cat.name}</h4>
+              <p class="blog-sidebar__category-subtitle" style="font-size:11px; color:#64748b; margin:0;">Articles in ${cat.name}</p>
+            </div>
+          </a>
+        `;
+      });
+    }
+  });
+
+  // 2. SINGLE BLOG DETAIL FETCH
   if (blogId && titleEl) {
     fetch(BLOG_API_BASE + "/blogs/" + encodeURIComponent(blogId))
       .then((res) => res.json())
       .then((data) => {
         const blog = data.data || data;
         if (blog && (blog._id || blog.id || blog.slug || blog.title)) {
-
           document.title = (blog.metaTitle || blog.title) + " | HRVico";
 
-          let metaDesc = document.querySelector('meta[name="description"]');
-          if (metaDesc) {
-            metaDesc.setAttribute(
-              "content",
-              blog.metaDescription || blog.shortDescription || "",
-            );
-          }
-
           titleEl.textContent = blog.title;
-
-          const shareX = document.getElementById("share-x");
-          const shareLinkedin = document.getElementById("share-linkedin");
-          const shareFacebook = document.getElementById("share-facebook");
-          const shareWhatsapp = document.getElementById("share-whatsapp");
-
-          function updateSocialLinks(blogTitle) {
-            const currentUrl = encodeURIComponent(window.location.href);
-            const encodedTitle = encodeURIComponent(blogTitle);
-
-            if (shareX) shareX.href = `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${currentUrl}`;
-            if (shareLinkedin) shareLinkedin.href = `https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}&title=${encodedTitle}`;
-            if (shareFacebook) shareFacebook.href = `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
-            if (shareWhatsapp) shareWhatsapp.href = `https://api.whatsapp.com/send?text=${encodedTitle}%20${currentUrl}`;
-          }
-
-          updateSocialLinks(blog.title);
-
           if (breadcrumbEl) breadcrumbEl.textContent = blog.title;
           if (dateEl) dateEl.textContent = formatDate(blog.publishDate || blog.createdAt);
 
           if (imageEl) {
-            const fallbackSrc = "assets/images/blogs_image_prev.webp";
-            if ((blog.featureImage || blog.featuredImage)) {
-              imageEl.src = getBlogImg((blog.featureImage || blog.featuredImage));
-              imageEl.alt = blog.altTag || blog.title;
-              imageEl.style.display = "block";
-              imageEl.onerror = function () {
-                this.onerror = null;
-                this.src = fallbackSrc;
-              };
-            } else {
-              imageEl.src = fallbackSrc;
-              imageEl.alt = blog.title;
-              imageEl.style.display = "block";
-            }
-          }
-
-          if (heroImageEl && (blog.featureImage || blog.featuredImage)) {
-            heroImageEl.src = getBlogImg((blog.featureImage || blog.featuredImage));
-            heroImageEl.alt = blog.altTag || blog.title;
+            imageEl.src = getBlogImg((blog.featureImage || blog.featuredImage));
+            imageEl.alt = blog.altTag || blog.title;
+            imageEl.style.display = "block";
           }
 
           if (contentEl) contentEl.innerHTML = blog.content || "<p>No content available.</p>";
 
-          // ✅ SMART CATEGORY RESOLVER: Converts Hex IDs to Human Category Names
           const tagPill = document.getElementById("blog-tag-pill");
           if (tagPill) {
-            let catName = "";
-
-            if (blog.categoryId && typeof blog.categoryId === "object") {
-              catName = blog.categoryId.name || "";
-            } else if (blog.category && typeof blog.category === "object") {
-              catName = blog.category.name || "";
+            let catName = blog.categoryId?.name || blog.category?.name || blog.categoryName || blog.category || "Delhi NCR Business & HR";
+            if (/^[0-9a-fA-F]{24}$/.test(String(catName).trim())) {
+              fetchAllCategoriesFast().then((cats) => {
+                const match = cats.find((c) => String(c._id || c.id) === String(catName).trim());
+                tagPill.textContent = match ? match.name : "Delhi NCR Business & HR";
+              });
             } else {
-              catName = blog.categoryName || blog.category || blog.categoryId || "";
+              tagPill.textContent = catName;
             }
-
-            catName = String(catName).trim();
-
-            const isHexId = /^[0-9a-fA-F]{24}$/.test(catName);
-
-            if (isHexId) {
-              fetch(BLOG_API_BASE + "/admin/categories/visible")
-                .then((res) => res.json())
-                .then((data) => {
-                  const list = data.data || data.categories || data || [];
-                  if (Array.isArray(list)) {
-                    const match = list.find((c) => String(c._id || c.id) === catName);
-                    if (match && match.name) {
-                      tagPill.textContent = match.name;
-                      return;
-                    }
-                  }
-                  tagPill.textContent = "Delhi NCR Business & HR";
-                })
-                .catch(() => {
-                  tagPill.textContent = "Delhi NCR Business & HR";
-                });
-            } else {
-              tagPill.textContent = catName || "Delhi NCR Business & HR";
-            }
-
             tagPill.style.display = "inline-block";
           }
 
@@ -1453,105 +1360,10 @@ function initBlogDetail() {
             authorEl.textContent = cleanAuthorString(String(rawAuthor || "Garima Bansal"));
             authorItem.style.display = "flex";
           }
-
-          fetchSidebarBlogs(blog);
-        } else {
-          titleEl.textContent = "Blog Not Found";
-          if (contentEl) contentEl.innerHTML = "<p>The requested blog post could not be found.</p>";
         }
       })
       .catch((err) => {
-        console.error("Error fetching blog details:", err);
-        titleEl.textContent = "Error Loading Blog";
-        if (contentEl)
-          contentEl.innerHTML = '<p style="color: red;">Failed to load blog content. Please try again later.</p>';
-      });
-  } else if (sidebarLatestEl || sidebarRelatedEl || sidebarCategoriesEl) {
-    fetchSidebarBlogs(null);
-  }
-
-  function fetchSidebarBlogs(currentBlog) {
-    fetch(BLOG_API_BASE + "/blogs?limit=100")
-      .then((res) => res.json())
-      .then((data) => {
-        const rawList = data.data || data.blogs || data;
-        if (Array.isArray(rawList)) {
-          allBlogsCache = rawList.filter((b) => {
-            if (!b) return false;
-            const stat = String(b.status || "").toLowerCase().trim();
-            if (stat === "deleted") return false;
-            return true;
-          });
-          allBlogsCache.sort(
-            (a, b) => new Date(b.publishDate || b.createdAt || 0) - new Date(a.publishDate || a.createdAt || 0)
-          );
-
-          if (sidebarLatestEl) {
-            sidebarLatestEl.innerHTML = "";
-            const latest = allBlogsCache.slice(0, 4);
-            if (latest.length > 0) {
-              latest.forEach((blog) => {
-                sidebarLatestEl.innerHTML += `
-                  <a href="blog-detail.html?slug=${encodeURIComponent(blog.slug || slugify(blog.title) || blog._id)}" class="blog-sidebar__list-item" style="display:flex; align-items:center; gap:12px; text-decoration:none; margin-bottom:12px;">
-                    <div class="blog-sidebar__list-thumb" style="width:60px; height:60px; border-radius:10px; overflow:hidden; shrink:0; background:#f5f5f5;">
-                      <img src="${getBlogImg(blog.featureImage || blog.featuredImage) || "assets/images/blogs_image_prev.webp"}" alt="${blog.title}" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='assets/images/blogs_image_prev.webp';">
-                    </div>
-                    <div class="blog-sidebar__list-content">
-                      <h4 class="blog-sidebar__list-title" style="font-size:14px; font-weight:700; color:#0e2a46; margin:0 0 4px; line-height:1.3; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${blog.title}</h4>
-                      <span class="blog-sidebar__list-meta" style="font-size:12px; color:#64748b; font-weight:500;">${formatDate(blog.publishDate || blog.createdAt)}</span>
-                    </div>
-                  </a>
-                `;
-              });
-            } else {
-              sidebarLatestEl.innerHTML = '<p style="padding:10px;">No recent articles found.</p>';
-            }
-          }
-
-          loadSidebarCategories();
-        }
-      })
-      .catch(console.error);
-  }
-
-  function loadSidebarCategories() {
-    if (!sidebarCategoriesEl) return;
-
-    sidebarCategoriesEl.style.maxHeight = "400px";
-    sidebarCategoriesEl.style.overflowY = "auto";
-    sidebarCategoriesEl.style.display = "flex";
-    sidebarCategoriesEl.style.flexDirection = "column";
-    sidebarCategoriesEl.style.gap = "10px";
-    sidebarCategoriesEl.style.paddingRight = "6px";
-    sidebarCategoriesEl.style.width = "100%";
-
-    fetch(BLOG_API_BASE + "/admin/categories/visible")
-      .then((res) => res.json())
-      .then((data) => {
-        const categories = data.data || data.categories || data;
-        if (Array.isArray(categories) && categories.length > 0) {
-          sidebarCategoriesEl.innerHTML = "";
-          categories.forEach((cat) => {
-            const catSlugParam = cat.slug || slugify(cat.name);
-            sidebarCategoriesEl.innerHTML += `
-              <a href="blogs.html?category=${encodeURIComponent(catSlugParam)}" class="blog-sidebar__category-item" style="display:flex; align-items:center; gap:14px; padding:12px 16px; border:1px solid #eaeaea; border-radius:14px; text-decoration:none; background:#ffffff; width:100%; transition:all 0.2s;">
-                <div class="blog-sidebar__category-icon" style="width:36px; height:36px; border-radius:10px; background:rgba(99, 102, 241, 0.1); color:#6366f1; display:flex; align-items:center; justify-content:center; shrink:0;">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M3 9h18"></path><path d="M9 21V9"></path></svg>
-                </div>
-                <div class="blog-sidebar__category-text" style="flex:1; width:100%;">
-                  <h4 class="blog-sidebar__category-title" style="font-size:14px; font-weight:700; color:#0e2a46; margin:0 0 2px; line-height:1.3;">${cat.name}</h4>
-                  <p class="blog-sidebar__category-subtitle" style="font-size:11px; color:#64748b; margin:0;">Articles in ${cat.name}</p>
-                </div>
-              </a>
-            `;
-          });
-        } else {
-          sidebarCategoriesEl.innerHTML = '<p style="padding:10px;">No categories found.</p>';
-        }
-      })
-      .catch((err) => {
-        console.error("Error fetching categories:", err);
-        sidebarCategoriesEl.innerHTML = '<p style="padding:10px; color: red;">Failed to load categories.</p>';
+        console.error("Error fetching single blog:", err);
       });
   }
 }
@@ -1589,47 +1401,4 @@ function initActiveMenu() {
       link.style.fontWeight = "bold";
     }
   });
-
-  const sections = [];
-  navLinks.forEach((link) => {
-    const href = link.getAttribute("href");
-    if (href && href.includes("#")) {
-      let hrefClean = href
-        .split("#")[0]
-        .replace(".html", "")
-        .replace(/^\.\//, "");
-      if (hrefClean === "") hrefClean = "index";
-
-      if (hrefClean === currentPath) {
-        const id = href.split("#")[1];
-        if (id) {
-          const section = document.getElementById(id);
-          if (section) {
-            sections.push({ link, section });
-          }
-        }
-      }
-    }
-  });
-
-  if (sections.length > 0) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            sections.forEach((s) => (s.link.style.fontWeight = "normal"));
-            const activeSection = sections.find(
-              (s) => s.section.id === entry.target.id,
-            );
-            if (activeSection) {
-              activeSection.link.style.fontWeight = "bold";
-            }
-          }
-        });
-      },
-      { threshold: 0.3 },
-    );
-
-    sections.forEach((s) => observer.observe(s.section));
-  }
 }
