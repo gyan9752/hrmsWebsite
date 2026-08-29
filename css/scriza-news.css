@@ -142,9 +142,9 @@
   border: 1px solid #f1f5f9;
 }
 
-.scriza-card:hover {
+/* .scriza-card:hover {
   transform: translateY(-5px);
-}
+} */
 
 .scriza-card__img {
   width: 100%;
