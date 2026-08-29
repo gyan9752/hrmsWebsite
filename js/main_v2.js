@@ -1235,7 +1235,7 @@ function initBlogListing() {
 
           <div>
             <a href="${blogDetailUrl}" style="text-decoration: none; display: inline-block;">
-              <span style="display: inline-flex; align-items: center; gap: 6px; background: #6366f1; color: #ffffff; font-size: 13px; font-weight: 700; padding: 9px 20px; border-radius: 24px; box-shadow: 0 4px 12px rgba(99,102,241,0.3); transition: all 0.2s;">
+              <span style="display: inline-flex; align-items: center; gap: 6px; background: #6366f1; color: #ffffff; font-size: 13px; font-weight: 700; padding: 9px 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(99,102,241,0.3); transition: all 0.2s;">
                 Read More →
               </span>
             </a>
