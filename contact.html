@@ -6,42 +6,13 @@
     <title>Contact Us | HRVICO — Workforce Management Platform</title>
     <meta
       name="description"
-      content="Get in touch with the HRVICO team. Send us your questions, feedback, or custom inquiries and we will get back to you shortly."
+      content="Get in touch with the HRVICO team. Contact HRVICO by phone, email, or the message form."
     />
     <meta
       name="google-site-verification"
       content="75TcVrkXvzr8OeGQGFGbqzZrnDQwCY6igYneiVkIUjg"
     />
 
-    <script type="text/javascript">
-      (function (c, l, a, r, i, t, y) {
-        c[a] =
-          c[a] ||
-          function () {
-            (c[a].q = c[a].q || []).push(arguments);
-          };
-        t = l.createElement(r);
-        t.async = 1;
-        t.src = "https://www.clarity.ms/tag/" + i;
-        y = l.getElementsByTagName(r)[0];
-        y.parentNode.insertBefore(t, y);
-      })(window, document, "clarity", "script", "xkp73lbkvb");
-    </script>
-
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-TVS20GZXDB"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-TVS20GZXDB");
-    </script>
 
     <!-- Favicon -->
     <link
@@ -117,15 +88,15 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/variables.css" />
-    <link rel="stylesheet" href="css/base.css?v=1.5" />
+    <link rel="stylesheet" href="css/base.css?v=2.0" />
     <link rel="stylesheet" href="css/navbar.css?v=1.5" />
     <link rel="stylesheet" href="css/footer.css?v=1.5" />
     <link rel="stylesheet" href="css/subpages.css" />
-    <link rel="stylesheet" href="css/contact.css?v=1.5" />
-    <link rel="stylesheet" href="css/demo-modal.css?v=1.5" />
+    <link rel="stylesheet" href="css/contact.css?v=1.9" />
+    <link rel="stylesheet" href="css/demo-modal.css?v=1.6" />
 
     <!-- JS -->
-    <script defer src="js/main_v2.js?v=2.1"></script>
+    <script defer src="js/main_v2.js?v=2.6"></script>
   </head>
 
   <body class="subpage contact-page">
@@ -169,7 +140,7 @@
             >
           </div>
 
-          <button class="navbar__hamburger" aria-label="Toggle menu">
+          <button class="navbar__hamburger" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
             <span></span>
             <span></span>
             <span></span>
@@ -178,7 +149,7 @@
       </div>
 
       <!-- Mobile Menu -->
-      <div class="navbar__mobile-menu">
+      <div class="navbar__mobile-menu" id="mobileMenu" role="group" aria-label="Mobile navigation" aria-hidden="true">
         <a href="index.html" class="navbar__link">Home</a>
         <a href="features.html" class="navbar__link">Features</a>
         <a href="roles.html" class="navbar__link">Roles</a>
@@ -225,7 +196,7 @@
           <div class="contact-card__info-top">
             <h2 class="contact-card__info-title">Contact Information</h2>
             <p class="contact-card__info-subtitle">
-              Say something to start a live chat!
+              Call or email us, or send a message using the form.
             </p>
 
             <div class="contact-card__info-list">
@@ -247,6 +218,11 @@
                   </svg>
                 </span>
                 <a href="tel:+919116011899">+91 9116011899</a>
+              </div>
+
+              <div class="contact-card__info-item">
+                <span class="contact-card__info-icon" aria-hidden="true"><svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z"/></svg></span>
+                <a href="https://wa.me/919116011899" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
               </div>
 
               <div class="contact-card__info-item">
@@ -347,7 +323,7 @@
               </svg>
             </a>
             <a
-              href="https://www.linkedin.com/company/121494424/admin/dashboard/"
+              href="https://www.linkedin.com/company/121494424/"
               class="contact-card__info-social"
               aria-label="LinkedIn"
               target="_blank"
@@ -387,12 +363,13 @@
             <div class="contact-card__form-grid">
               <div class="contact-card__form-group">
                 <label for="firstName" class="contact-card__label"
-                  >First Name</label
+                  >First Name *</label
                 >
                 <input
                   type="text"
                   id="firstName"
                   name="first_name"
+                  autocomplete="given-name"
                   class="contact-card__input"
                   placeholder=""
                   required
@@ -400,23 +377,25 @@
               </div>
               <div class="contact-card__form-group">
                 <label for="lastName" class="contact-card__label"
-                  >Last Name</label
+                  >Last Name *</label
                 >
                 <input
                   type="text"
                   id="lastName"
                   name="last_name"
+                  autocomplete="family-name"
                   class="contact-card__input"
                   placeholder="Doe"
                   required
                 />
               </div>
               <div class="contact-card__form-group">
-                <label for="email" class="contact-card__label">Email</label>
+                <label for="email" class="contact-card__label">Email *</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
+                  autocomplete="email"
                   class="contact-card__input"
                   placeholder=""
                   required
@@ -424,12 +403,13 @@
               </div>
               <div class="contact-card__form-group">
                 <label for="phone" class="contact-card__label"
-                  >Phone Number</label
+                  >Phone Number *</label
                 >
                 <input
                   type="tel"
                   id="phone"
                   name="phone"
+                  autocomplete="tel"
                   class="contact-card__input"
                   placeholder="+1 012 3456 789"
                   required
@@ -437,7 +417,7 @@
               </div>
 
               <div class="contact-card__form-group full-width">
-                <label for="message" class="contact-card__label">Message</label>
+                <label for="message" class="contact-card__label">Message *</label>
                 <textarea
                   id="message"
                   name="message"
@@ -448,6 +428,7 @@
               </div>
             </div>
 
+            <p id="contactFormStatus" class="contact-form-status" role="alert" aria-live="assertive" tabindex="-1" hidden></p>
             <div class="contact-card__actions">
               <button type="submit" class="contact-card__submit-btn">
                 Send Message
@@ -458,6 +439,8 @@
           <!-- Success State -->
           <div
             id="contactSuccessState"
+            role="status"
+            aria-live="polite"
             style="
               display: none;
               text-align: center;
@@ -465,10 +448,8 @@
               padding: var(--space-xl) 0;
             "
           >
-            <div style="font-size: 3rem; margin-bottom: var(--space-md)">
-              ✉️
-            </div>
-            <h3
+            <div class="contact-success-icon" aria-hidden="true"><svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></div>
+            <h3 tabindex="-1"
               style="
                 font-size: var(--fs-lg);
                 color: var(--text-primary);
@@ -489,8 +470,7 @@
                 margin-right: auto;
               "
             >
-              Thank you for contacting HRVICO. Our support team will get back to
-              you shortly.
+              Your message was sent through the contact form. You can also reach us at info@scriza.in.
             </p>
             <button
               class="btn btn--secondary"
@@ -520,12 +500,11 @@
               />
             </div>
             <p class="footer__tagline">
-              The all-in-one HRMS platform that transforms how you manage,
-              engage, and grow your workforce.
+              HR tools for employee records, attendance, leave, payroll in selected plans, and employee self-service.
             </p>
             <div class="footer__socials">
               <a
-                href="https://www.linkedin.com/company/121494424/admin/dashboard/"
+                href="https://www.linkedin.com/company/121494424/"
                 class="footer__social"
                 aria-label="LinkedIn"
                 target="_blank"
@@ -647,7 +626,7 @@
 
         <div class="footer__bottom">
           <p>
-            © 2026 HRVICO. All rights reserved. ❤️ Crafted by
+            © 2026 HRVICO. All rights reserved. Crafted by
             <a
               href="https://scriza.in/"
               target="_blank"
@@ -684,9 +663,10 @@
     <!-- ═══════════════════════════════════════
        DEMO BOOKING MODAL
        ═══════════════════════════════════════ -->
-    <div class="demo-modal" id="demoModal">
+    <div class="demo-modal" id="demoModal" role="dialog" aria-modal="true" aria-labelledby="demoModalTitle" aria-hidden="true">
       <div class="demo-modal__overlay" onclick="closeDemoModal()"></div>
       <div class="demo-modal__container">
+        <p class="demo-modal__status" id="demoFormStatus" role="alert" aria-live="assertive" hidden></p>
         <button
           class="demo-modal__close"
           onclick="closeDemoModal()"
@@ -704,10 +684,9 @@
                 style="height: 36px; width: auto"
               />
             </div>
-            <h3 class="demo-modal__title">Book a Demo</h3>
+            <h3 class="demo-modal__title" id="demoModalTitle">Book a Demo</h3>
             <p class="demo-modal__subtitle">
-              Fill in your details and our sales executive will reach out to you
-              shortly.
+              Share a few details so HRVICO can review your demo request. Email verification is required before it is submitted.
             </p>
           </div>
           <form
@@ -809,15 +788,10 @@
           id="demoSuccessState"
           style="display: none"
         >
-          <div class="demo-modal__success-icon">✅</div>
-          <h3 class="demo-modal__success-title">Request Sent Successfully!</h3>
-          <p class="demo-modal__success-msg">
-            Thank you for your interest in HRVICO.<br />Our sales executive will
-            reach out to you shortly.
-          </p>
-          <p class="demo-modal__success-note">
-            We typically respond within 2 business hours.
-          </p>
+          <div class="demo-modal__success-icon"><svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg></div>
+          <h3 class="demo-modal__success-title" id="demoSuccessTitle" tabindex="-1">Request Sent Successfully!</h3>
+          <p class="demo-modal__success-msg">Your demo request has been submitted. HRVICO can use the details you provided to follow up; this form does not confirm a demo time.</p>
+
           <button
             class="btn btn--secondary btn--large"
             onclick="closeDemoModal()"
@@ -829,7 +803,8 @@
     </div>
 
     <!-- Floating Contact Buttons -->
-    <a
+    <nav class="mobile-contact-actions" aria-label="Quick contact">
+<a
       href="https://wa.me/919116011899"
       target="_blank"
       rel="noopener noreferrer"
@@ -862,6 +837,7 @@
         />
       </svg>
     </a>
+  </nav>
 
     <!-- Inline Contact Form Script -->
     <script>
@@ -871,6 +847,9 @@
         const successState = document.getElementById("contactSuccessState");
         const submitBtn = form.querySelector(".contact-card__submit-btn");
         const formData = new FormData(form);
+        const formStatus = document.getElementById("contactFormStatus");
+        formStatus.hidden = true;
+        formStatus.textContent = "";
 
         // Show sending loading state
         const originalText = submitBtn.innerText;
@@ -904,15 +883,16 @@
               form.style.display = "none";
               successState.style.display = "block";
               form.reset();
+              successState.querySelector("h3")?.focus();
             } else {
               throw new Error(result.message || "Submission failed");
             }
           })
           .catch((error) => {
             console.error("Contact form error:", error);
-            alert(
-              "Something went wrong. Please try again or email us directly at support@hrvico.com",
-            );
+            formStatus.textContent = "We could not send your message. Please try again or email info@scriza.in.";
+            formStatus.hidden = false;
+            formStatus.focus?.();
           })
           .finally(() => {
             submitBtn.innerText = originalText;

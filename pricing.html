@@ -6,42 +6,13 @@
     <title>Pricing Plans | HRVICO — Workforce Management Platform</title>
     <meta
       name="description"
-      content="Flexible pricing plans built for startups, SMEs & growing companies. Simple, transparent pricing with no hidden charges."
+      content="Current INR plans, employee limits, and listed modules for growing businesses."
     />
     <meta
       name="google-site-verification"
       content="75TcVrkXvzr8OeGQGFGbqzZrnDQwCY6igYneiVkIUjg"
     />
 
-    <script type="text/javascript">
-      (function (c, l, a, r, i, t, y) {
-        c[a] =
-          c[a] ||
-          function () {
-            (c[a].q = c[a].q || []).push(arguments);
-          };
-        t = l.createElement(r);
-        t.async = 1;
-        t.src = "https://www.clarity.ms/tag/" + i;
-        y = l.getElementsByTagName(r)[0];
-        y.parentNode.insertBefore(t, y);
-      })(window, document, "clarity", "script", "xkp73lbkvb");
-    </script>
-
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-TVS20GZXDB"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-TVS20GZXDB");
-    </script>
 
     <!-- Favicon -->
     <link
@@ -57,7 +28,7 @@
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Pricing Plans | HRVICO — Workforce Management Platform" />
-    <meta property="og:description" content="Flexible pricing plans built for startups, SMEs & growing companies. Simple, transparent pricing with no hidden charges." />
+    <meta property="og:description" content="Current INR plans, employee limits, and listed modules for growing businesses." />
     <meta property="og:url" content="https://www.hrvico.com/pricing.html" />
     <meta property="og:site_name" content="HRVICO" />
     <meta property="og:image" content="assets/images/hero-dashboard.png" />
@@ -65,7 +36,7 @@
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Pricing Plans | HRVICO — Workforce Management Platform" />
-    <meta name="twitter:description" content="Flexible pricing plans built for startups, SMEs & growing companies. Simple, transparent pricing with no hidden charges." />
+    <meta name="twitter:description" content="Current INR plans, employee limits, and listed modules for growing businesses." />
     <meta name="twitter:image" content="assets/images/hero-dashboard.png" />
 
     <!-- Schema.org JSON-LD (BreadcrumbList) -->
@@ -105,15 +76,15 @@
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/variables.css" />
-    <link rel="stylesheet" href="css/base.css?v=1.5" />
+    <link rel="stylesheet" href="css/base.css?v=2.0" />
     <link rel="stylesheet" href="css/navbar.css?v=1.5" />
     <link rel="stylesheet" href="css/footer.css?v=1.5" />
     <link rel="stylesheet" href="css/subpages.css" />
-    <link rel="stylesheet" href="css/pricing.css?v=2.5" />
-    <link rel="stylesheet" href="css/demo-modal.css?v=1.5" />
+    <link rel="stylesheet" href="css/pricing.css?v=2.7" />
+    <link rel="stylesheet" href="css/demo-modal.css?v=1.6" />
 
     <!-- JS -->
-    <script defer src="js/main_v2.js?v=2.1"></script>
+    <script defer src="js/main_v2.js?v=2.6"></script>
   </head>
 
   <body class="subpage pricing-page">
@@ -157,7 +128,7 @@
             >
           </div>
 
-          <button class="navbar__hamburger" aria-label="Toggle menu">
+          <button class="navbar__hamburger" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobileMenu">
             <span></span>
             <span></span>
             <span></span>
@@ -166,7 +137,7 @@
       </div>
 
       <!-- Mobile Menu -->
-      <div class="navbar__mobile-menu">
+      <div class="navbar__mobile-menu" id="mobileMenu" role="group" aria-label="Mobile navigation" aria-hidden="true">
         <a href="index.html" class="navbar__link">Home</a>
         <a href="features.html" class="navbar__link">Features</a>
         <a href="roles.html" class="navbar__link">Roles</a>
@@ -192,11 +163,10 @@
       <div class="container">
         <p class="subpage__eyebrow" data-animate="fade-up">PRICING PLANS</p>
         <h1 class="subpage__title" data-animate="fade-up">
-          Workforce Management without hassle,<br />Leave admin to
-          <span class="gradient-text">HRVICO</span>.
+          HRVICO plan <span class="gradient-text">prices and limits</span>
         </h1>
         <p class="subpage__subtitle" data-animate="fade-up">
-          Plans for every kind of business
+          Compare monthly prices, employee limits, and listed modules
         </p>
       </div>
     </header>
@@ -206,20 +176,11 @@
        ═══════════════════════════════════════ -->
     <main class="pricing-page__container">
       <!-- Highlight Badges -->
-      <div class="pricing-page-bullets" data-animate="fade-up">
-        <div class="pricing-page-bullet">
-          <span class="pricing-page-bullet-icon">✅</span> No Hidden Charges
-        </div>
-        <div class="pricing-page-bullet">
-          <span class="pricing-page-bullet-icon">✅</span> Free Setup Support
-        </div>
-        <div class="pricing-page-bullet">
-          <span class="pricing-page-bullet-icon">✅</span> Secure Cloud HRMS
-        </div>
-        <div class="pricing-page-bullet">
-          <span class="pricing-page-bullet-icon">✅</span> GST Billing Available
-        </div>
+      <p class="pricing-intro">Compare the current published prices, employee limits, and modules below. Payroll is listed in the Standard and Premium plan details.</p>
+      <div class="pricing-comparison" id="pricingComparison" tabindex="0" aria-label="Plan comparison table" aria-live="polite">
+        <p class="pricing-comparison__loading">Loading plan comparison…</p>
       </div>
+      <p class="pricing-owner-note">The public materials reviewed do not specify whether taxes or GST are included, what setup includes, or what happens when a team exceeds a capped plan’s employee limit. The Enterprise page lists unlimited employees and custom terms; confirm what is included with HRVICO before choosing.</p>
 
       <!-- Pricing Grid Wrapper (Mockup Glassmorphism Background) -->
       <div class="pricing-grid-wrapper" data-animate="fade-up">
@@ -258,9 +219,9 @@
         <div class="pricing-card-horizontal" data-animate="fade-up">
           <div class="pricing-card-horizontal__left">
             <div>
-              <h3 class="pricing-card-horizontal__name">Enterprise Plan 💎</h3>
+              <h3 class="pricing-card-horizontal__name">Enterprise Plan</h3>
               <p class="pricing-card-horizontal__desc">
-                Best For: 100+ Employees &amp; Enterprises
+                Published plan for teams requiring more than the capped plans
               </p>
             </div>
             <div class="pricing-card-horizontal__price">
@@ -278,51 +239,11 @@
             </div>
           </div>
           <div class="pricing-card-horizontal__middle">
-            <h4 class="pricing-card-horizontal__title">
-              TAILORED HRMS SOLUTIONS
-            </h4>
-            <div class="pricing-card-horizontal__features">
-              <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Unlimited
-                Employees
-              </div>
-              <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Custom
-                Modules
-              </div>
-              <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Custom
-                Integrations
-              </div>
-              <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Enterprise
-                Level Automation
-              </div>
-              <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> API Access
-              </div>
-              <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Premium
-                Support
-              </div>
-              <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Dedicated
-                Account Manager
-              </div>
-              <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Custom
-                Support SLA
-              </div>
-              <div class="pricing-card-horizontal__feature">
-                <span class="pricing-card-horizontal__check">✔</span> Advanced
-                Security
-              </div>
-            </div>
+            <h4 class="pricing-card-horizontal__title">PLAN DETAILS TO CONFIRM</h4>
+            <p class="pricing-enterprise-note">The public listing shows unlimited employees, custom modules and integrations, automation, API access, premium support, a dedicated account manager, and a custom support SLA. Confirm what is included and the service terms with HRVICO.</p>
           </div>
           <div class="pricing-card-horizontal__right">
-            <div class="pricing-card-horizontal__badge">
-              Unlimited<br />Employees Included
-            </div>
+            <div class="pricing-card-horizontal__badge">Unlimited employees<br>(published listing)</div>
             <a
               href="#"
               class="btn btn--primary pricing-card-horizontal__btn"
@@ -353,12 +274,11 @@
               />
             </div>
             <p class="footer__tagline">
-              The all-in-one HRMS platform that transforms how you manage,
-              engage, and grow your workforce.
+              HR tools for employee records, attendance, leave, payroll in selected plans, and employee self-service.
             </p>
             <div class="footer__socials">
               <a
-                href="https://www.linkedin.com/company/121494424/admin/dashboard/"
+                href="https://www.linkedin.com/company/121494424/"
                 class="footer__social"
                 aria-label="LinkedIn"
                 target="_blank"
@@ -480,7 +400,7 @@
 
         <div class="footer__bottom">
           <p>
-            © 2026 HRVICO. All rights reserved. ❤️ Crafted by
+            © 2026 HRVICO. All rights reserved. Crafted by
             <a
               href="https://scriza.in/"
               target="_blank"
@@ -517,9 +437,10 @@
     <!-- ═══════════════════════════════════════
        DEMO BOOKING MODAL
        ═══════════════════════════════════════ -->
-    <div class="demo-modal" id="demoModal">
+    <div class="demo-modal" id="demoModal" role="dialog" aria-modal="true" aria-labelledby="demoModalTitle" aria-hidden="true">
       <div class="demo-modal__overlay" onclick="closeDemoModal()"></div>
       <div class="demo-modal__container">
+        <p class="demo-modal__status" id="demoFormStatus" role="alert" aria-live="assertive" hidden></p>
         <button
           class="demo-modal__close"
           onclick="closeDemoModal()"
@@ -537,10 +458,9 @@
                 style="height: 36px; width: auto"
               />
             </div>
-            <h3 class="demo-modal__title">Book a Demo</h3>
+            <h3 class="demo-modal__title" id="demoModalTitle">Book a Demo</h3>
             <p class="demo-modal__subtitle">
-              Fill in your details and our sales executive will reach out to you
-              shortly.
+              Share a few details so HRVICO can review your demo request. Email verification is required before it is submitted.
             </p>
           </div>
           <form
@@ -652,7 +572,7 @@
                 style="height: 36px; width: auto"
               />
             </div>
-            <h3 class="demo-modal__title">Verify Your Email</h3>
+            <h3 class="demo-modal__title" id="demoOtpTitle">Verify Your Email</h3>
             <p class="demo-modal__subtitle">
               We've sent an OTP to <strong id="demoOtpEmail"></strong>
             </p>
@@ -715,15 +635,10 @@
           id="demoSuccessState"
           style="display: none"
         >
-          <div class="demo-modal__success-icon">✅</div>
-          <h3 class="demo-modal__success-title">Request Sent Successfully!</h3>
-          <p class="demo-modal__success-msg">
-            Thank you for your interest in HRVICO.<br />Our sales executive will
-            reach out to you shortly.
-          </p>
-          <p class="demo-modal__success-note">
-            We typically respond within 2 business hours.
-          </p>
+          <div class="demo-modal__success-icon"><svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></svg></div>
+          <h3 class="demo-modal__success-title" id="demoSuccessTitle" tabindex="-1">Request Sent Successfully!</h3>
+          <p class="demo-modal__success-msg">Your demo request has been submitted. HRVICO can use the details you provided to follow up; this form does not confirm a demo time.</p>
+
           <button
             class="btn btn--secondary btn--large"
             onclick="closeDemoModal()"
@@ -734,7 +649,8 @@
       </div>
     </div>
     <!-- Floating Contact Buttons -->
-    <a
+    <nav class="mobile-contact-actions" aria-label="Quick contact">
+<a
       href="https://wa.me/919116011899"
       target="_blank"
       rel="noopener noreferrer"
@@ -767,5 +683,6 @@
         />
       </svg>
     </a>
+  </nav>
   </body>
 </html>

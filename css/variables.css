@@ -124,3 +124,6 @@
   --z-modal: 400;
   --z-toast: 500;
 }
+
+/* Darker muted text preserves the existing palette with stronger small-text contrast. */
+:root { --text-muted: #64748b; }

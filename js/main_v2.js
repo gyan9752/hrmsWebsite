@@ -64,7 +64,7 @@
 //     .then((res) => res.json())
 //     .then((data) => {
 //       const items = Array.isArray(data) ? data : (data.data || data.images || []);
-      
+
 //       let imgUrl = "assets/images/blogs_image_prev.webp";
 //       let link = "#";
 //       let title = "Grow Faster With HRVICO HRMS";
@@ -88,10 +88,10 @@
 //           <a href="${link}" target="_blank" style="display: block; width: 100%; border-radius: 14px; overflow: hidden; margin-bottom: 16px;">
 //             <img src="${imgUrl}" alt="${title}" style="width: 100%; height: auto; display: block; object-fit: cover; border-radius: 14px; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
 //           </a>
-          
+
 //           <h4 style="font-size: 17px; font-weight: 800; color: #0e2a46; margin-bottom: 8px; line-height: 1.3;">${title}</h4>
 //           <p style="font-size: 13px; color: #64748b; margin-bottom: 18px; line-height: 1.5; font-weight: 500;">${desc}</p>
-          
+
 //           <button onclick="openDemoModal(); return false;" style="width: 100%; background: #6366f1; color: #ffffff; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 15px rgba(99,102,241,0.3);">
 //             ${ctaText}
 //           </button>
@@ -576,7 +576,7 @@
 //         plan.features.forEach(function (f) {
 //           var featureTitle = f.featuresName || f.name || f;
 //           featuresHTML +=
-//             '<div class="pricing-feature"><span class="pricing-feature__check">✔</span> ' +
+//             '<div class="pricing-feature"><span class="pricing-feature__check"></span> ' +
 //             featureTitle +
 //             "</div>";
 //         });
@@ -598,14 +598,14 @@
 //       if (isPopular) {
 //         cardsHTML += '<div class="' + cardClass + '">';
 //         cardsHTML +=
-//           '<div class="pricing-card__popular-header"><span class="popular-header__icon">🔥</span> Popular Choice</div>';
+//           '<div class="pricing-card__popular-header"><span class="popular-header__icon"><svg class="icon-svg" viewBox="0 0 24 24"><path d="m12 3 2.1 2.1 3-.2.8 2.9 2.6 1.5-1 2.8 1 2.8-2.6 1.5-.8 2.9-3-.2L12 21l-2.1-2.1-3 .2-.8-2.9-2.6-1.5 1-2.8-1-2.8 2.6-1.5.8-2.9 3 .2L12 3Z"/><path d="m9 12 2 2 4-4"/></svg></span> Popular Choice</div>';
 //         cardsHTML += '<div class="pricing-card__body">';
 //       } else {
 //         cardsHTML += '<div class="' + cardClass + '">';
 //         cardsHTML += '<div class="pricing-card__inner">';
 //       }
 
-//       cardsHTML += '<h3 class="pricing-card__name">' + (plan.plan || plan.name) + "</h3>";
+//       cardsHTML += '<h3 class="pricing-card__name">' + escapePricingText(plan.plan || plan.name || "Plan") + "</h3>";
 //       cardsHTML +=
 //         '<p class="pricing-card__desc">Up to ' +
 //         (plan.userLimit || "∞") +
@@ -697,7 +697,7 @@
 //       '<div class="demo-modal__form-state" id="demoOtpState" style="display: none;">' +
 //       '<div class="demo-modal__header">' +
 //       '<div class="demo-modal__logo"><img src="assets/images/hrvico-logo.svg?v=1.5" alt="HRvico Logo" class="demo-modal__logo-img" style="height: 36px; width: auto;"></div>' +
-//       '<h3 class="demo-modal__title">Verify Your Email</h3>' +
+//       '<h3 class="demo-modal__title" id="demoOtpTitle">Verify Your Email</h3>' +
 //       '<p class="demo-modal__subtitle">We\'ve sent an OTP to <strong id="demoOtpEmail"></strong></p>' +
 //       "</div>" +
 //       '<div style="padding: 0 1.5rem 1.5rem;">' +
@@ -834,7 +834,7 @@
 //         document.getElementById("demoSuccessState").style.display = "block";
 //         form.reset();
 //       } else {
-//         alert(result.message || "Submission failed. Please try again.");
+//         showDemoStatus(result.message || "The demo request could not be submitted. Please try again.");
 //         document.getElementById("demoOtpState").style.display = "none";
 //         document.getElementById("demoFormState").style.display = "block";
 //       }
@@ -1013,7 +1013,7 @@
 //   return date.toLocaleDateString("en-US", options);
 // }
 
-// // ⚡ GLOBAL FAST API CACHE (INSTANT PAGE RENDERING)
+// //  GLOBAL FAST API CACHE (INSTANT PAGE RENDERING)
 // var _cachedBlogs = null;
 // var _cachedCategories = null;
 
@@ -1098,7 +1098,7 @@
 //     }
 //   }
 
-//   // ⚡ PARALLEL FETCH BLOGS & CATEGORIES FOR HERO BANNER
+//   //  PARALLEL FETCH BLOGS & CATEGORIES FOR HERO BANNER
 //   Promise.all([fetchAllBlogsFast(), fetchAllCategoriesFast()])
 //     .then(([allBlogs, categories]) => {
 //       if (selectedCatFromUrl && selectedCatFromUrl !== "all") {
@@ -1155,7 +1155,7 @@
 //     const paginationContainer = document.getElementById('blog-pagination');
 //     if (!paginationContainer) return;
 //     paginationContainer.innerHTML = '';
-    
+
 //     const totalPages = Math.ceil(totalItems / blogsPerPage);
 //     if (totalPages <= 1) {
 //       paginationContainer.style.display = 'none';
@@ -1165,13 +1165,13 @@
 //     paginationContainer.style.display = 'flex';
 //     let html = '';
 //     html += `<button class="blog-pagination-btn" ${currentPage === 1 ? 'disabled' : ''} onclick="goToBlogPage(${currentPage - 1})">&laquo;</button>`;
-    
+
 //     for (let i = 1; i <= totalPages; i++) {
 //         html += `<button class="blog-pagination-btn ${currentPage === i ? 'active' : ''}" onclick="goToBlogPage(${i})">${i}</button>`;
 //     }
 
 //     html += `<button class="blog-pagination-btn" ${currentPage === totalPages ? 'disabled' : ''} onclick="goToBlogPage(${currentPage + 1})">&raquo;</button>`;
-    
+
 //     paginationContainer.innerHTML = html;
 //   }
 
@@ -1195,7 +1195,7 @@
 //       const catName = blog.categoryId
 //         ? (blog.categoryId.name || blog.categoryId)
 //         : (blog.category && blog.category.name) || blog.categoryName || (typeof blog.category === "string" ? blog.category : "Delhi NCR Business & HR");
-      
+
 //       let rawAuthor = blog.authorName || blog.author || blog.addedBy || blog.addedByName;
 //       if (typeof rawAuthor === "object" && rawAuthor !== null) {
 //         rawAuthor = rawAuthor.name || rawAuthor.fullName || rawAuthor.username || rawAuthor.email;
@@ -1249,7 +1249,7 @@
 //   }
 // }
 
-// // ⚡ INSTANT PARALLEL FETCHING FOR BLOG DETAIL & SIDEBAR
+// //  INSTANT PARALLEL FETCHING FOR BLOG DETAIL & SIDEBAR
 // function initBlogDetail() {
 //   const titleEl = document.getElementById("blog-title");
 //   const breadcrumbEl = document.getElementById("breadcrumb-title");
@@ -1473,7 +1473,7 @@ function getCleanBlogSlug(blog) {
   return String(raw).trim().replace(/^\/+|\/+$/g, "");
 }
 
-// 🌐 ROOT-RELATIVE LINK GENERATORS (PREVENTS 404 ERRORS ON NESTED URLS)
+//  ROOT-RELATIVE LINK GENERATORS (PREVENTS 404 ERRORS ON NESTED URLS)
 function getBlogDetailUrl(blog) {
   const cleanSlug = getCleanBlogSlug(blog);
   return `/blog-detail.html?slug=${encodeURIComponent(cleanSlug)}`;
@@ -1483,7 +1483,7 @@ function getCategoryUrl(catSlug) {
   return `/blogs.html?category=${encodeURIComponent(catSlug)}`;
 }
 
-// ⚡ FAIL-SAFE BREADCRUMB ENGINE
+//  FAIL-SAFE BREADCRUMB ENGINE
 function updateBreadcrumbs(type, catName, blogTitle) {
   let container = document.getElementById("breadcrumb-container");
   if (!container) {
@@ -1492,7 +1492,7 @@ function updateBreadcrumbs(type, catName, blogTitle) {
 
   if (container) {
     if (type === "category") {
-      // 🏷️ Category Filter: Home > Blog Categories > Category Name
+      //  Category Filter: Home > Blog Categories > Category Name
       container.innerHTML = `
         <a href="/index.html" style="color: #6366f1; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; font-weight: 600;">
           <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg>
@@ -1504,7 +1504,7 @@ function updateBreadcrumbs(type, catName, blogTitle) {
         <span style="color: #0f172a; font-weight: 700;">${catName || "Category"}</span>
       `;
     } else if (type === "detail") {
-      // 📖 Blog Detail: Home > Latest Blog > Blog Title
+      //  Blog Detail: Home > Latest Blog > Blog Title
       container.innerHTML = `
         <a href="/index.html" style="color: #6366f1; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; font-weight: 600;">
           <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg>
@@ -1516,7 +1516,7 @@ function updateBreadcrumbs(type, catName, blogTitle) {
         <span id="breadcrumb-title" style="color: #0f172a; font-weight: 700; max-width: 450px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${blogTitle || "Blog Detail"}</span>
       `;
     } else {
-      // 📄 Blog Listing: Home > Latest Blog
+      //  Blog Listing: Home > Latest Blog
       container.innerHTML = `
         <a href="/index.html" style="color: #6366f1; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; font-weight: 600;">
           <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg>
@@ -1538,7 +1538,7 @@ function renderPromotionWidget() {
     .then((res) => res.json())
     .then((data) => {
       const items = Array.isArray(data) ? data : (data.data || data.images || []);
-      
+
       let imgUrl = "assets/images/blogs_image_prev.webp";
       let link = "#";
       let title = "Grow Faster With HRVICO HRMS";
@@ -1562,10 +1562,10 @@ function renderPromotionWidget() {
           <a href="${link}" target="_blank" style="display: block; width: 100%; border-radius: 14px; overflow: hidden; margin-bottom: 16px;">
             <img src="${imgUrl}" alt="${title}" style="width: 100%; height: auto; display: block; object-fit: cover; border-radius: 14px; transition: transform 0.4s ease;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
           </a>
-          
+
           <h4 style="font-size: 17px; font-weight: 800; color: #0e2a46; margin-bottom: 8px; line-height: 1.3;">${title}</h4>
           <p style="font-size: 13px; color: #64748b; margin-bottom: 18px; line-height: 1.5; font-weight: 500;">${desc}</p>
-          
+
           <button onclick="openDemoModal(); return false;" style="width: 100%; background: #6366f1; color: #ffffff; border: none; padding: 12px 20px; border-radius: 12px; font-weight: 700; font-size: 14px; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 15px rgba(99,102,241,0.3);">
             ${ctaText}
           </button>
@@ -1665,20 +1665,48 @@ function initNavbar() {
   onScroll();
 
   if (hamburger && mobileMenu) {
+    const setMenuOpen = (isOpen) => {
+      hamburger.classList.toggle("active", isOpen);
+      hamburger.setAttribute("aria-expanded", String(isOpen));
+      hamburger.setAttribute("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+      mobileMenu.classList.toggle("open", isOpen);
+      mobileMenu.setAttribute("aria-hidden", String(!isOpen));
+      document.body.style.overflow = isOpen ? "hidden" : "";
+      if (isOpen) {
+        window.requestAnimationFrame(() => mobileMenu.querySelector(".navbar__link")?.focus());
+      }
+    };
+
     hamburger.addEventListener("click", () => {
-      hamburger.classList.toggle("active");
-      mobileMenu.classList.toggle("open");
-      document.body.style.overflow = mobileMenu.classList.contains("open")
-        ? "hidden"
-        : "";
+      setMenuOpen(!mobileMenu.classList.contains("open"));
     });
 
     mobileMenu.querySelectorAll(".navbar__link").forEach((link) => {
-      link.addEventListener("click", () => {
-        hamburger.classList.remove("active");
-        mobileMenu.classList.remove("open");
-        document.body.style.overflow = "";
-      });
+      link.addEventListener("click", () => setMenuOpen(false));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (!mobileMenu.classList.contains("open")) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setMenuOpen(false);
+        hamburger.focus();
+        return;
+      }
+      if (event.key === "Tab") {
+        const focusable = Array.from(mobileMenu.querySelectorAll('a[href], button:not([disabled])'))
+          .filter((element) => element.getClientRects().length > 0);
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && (!mobileMenu.contains(document.activeElement) || document.activeElement === first)) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && (!mobileMenu.contains(document.activeElement) || document.activeElement === last)) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
     });
   }
 
@@ -1778,16 +1806,26 @@ function initTestimonials() {
 function initFAQ() {
   const items = document.querySelectorAll(".faq-item");
 
-  items.forEach((item) => {
+  items.forEach((item, index) => {
     const question = item.querySelector(".faq-item__question");
-    if (!question) return;
+    const answer = item.querySelector(".faq-item__answer");
+    if (!question || !answer) return;
+
+    if (!answer.id) answer.id = "faq-answer-" + (index + 1);
+    question.setAttribute("aria-controls", answer.id);
+    question.setAttribute("aria-expanded", String(item.classList.contains("open")));
+    answer.setAttribute("aria-hidden", String(!item.classList.contains("open")));
 
     question.addEventListener("click", () => {
       const isOpen = item.classList.contains("open");
-      items.forEach((o) => {
-        if (o !== item) o.classList.remove("open");
+      items.forEach((other) => {
+        const otherQuestion = other.querySelector(".faq-item__question");
+        const otherAnswer = other.querySelector(".faq-item__answer");
+        const shouldOpen = other === item && !isOpen;
+        other.classList.toggle("open", shouldOpen);
+        if (otherQuestion) otherQuestion.setAttribute("aria-expanded", String(shouldOpen));
+        if (otherAnswer) otherAnswer.setAttribute("aria-hidden", String(!shouldOpen));
       });
-      item.classList.toggle("open", !isOpen);
     });
   });
 }
@@ -1993,6 +2031,12 @@ function initStartFreeButton() {
 /* ═══════════════════════════════════════
    Dynamic Pricing
    ═══════════════════════════════════════ */
+function escapePricingText(value) {
+  return String(value).replace(/[&<>"']/g, function (character) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[character];
+  });
+}
+
 function initDynamicPricing() {
   var grid = document.getElementById("pricingGrid");
   if (!grid) return;
@@ -2023,6 +2067,54 @@ function initDynamicPricing() {
     }
 
     var cardsHTML = "";
+    var comparisonRows = plans.map(function (plan) {
+      var featureNames = (plan.features || []).map(function (feature) {
+        return String(feature.featuresName || feature.name || feature).trim();
+      });
+      var hasPayroll = featureNames.some(function (feature) { return /payroll/i.test(feature); });
+      var limit = plan.userLimit ? "Up to " + plan.userLimit + " employees" : "Not listed";
+      var price = Number(plan.pricePerMonth || 0) === 0 ? "₹0 / month" : "₹" + Number(plan.pricePerMonth).toLocaleString("en-IN") + " / month";
+      var readable = {
+        "Employee Management": "Employee records",
+        "Attendance Management": "Attendance",
+        "Leave Management": "Leave",
+        "Holiday Calendar": "Holiday calendar",
+        "Holiday calendar": "Holiday calendar",
+        "Reports & Analytics": "Reports",
+        "Reports Analytics": "Reports",
+        "Employee Dashboard": "Employee dashboard",
+        "Manage Employee Documents": "Employee documents",
+        "Document Management": "Documents",
+        "Texting Chat Box": "Team chat",
+        "Chat Box(Audio/Video)": "Chat and calls",
+        "Mobile Dashboard App": "Mobile app",
+        "Appraisals Management": "Appraisals",
+        "Reimbursement": "Reimbursements",
+        "HR Automation": "Automation (steps not specified)",
+        "Multi-Branch Management": "Multiple branches",
+        "Job Management": "Job management",
+        "Priority Onboarding": "Priority onboarding",
+        "Priority Support": "Priority support",
+        "Website Health Monitoring": "Website health monitoring"
+      };
+      var highlights = featureNames.map(function (name) {
+        return readable[name] || name;
+      }).filter(function (name) {
+        return !/payroll|^upto |^up to /i.test(name);
+      }).filter(function (name, index, all) {
+        return all.indexOf(name) === index;
+      }).slice(0, 5).map(escapePricingText).join(", ");
+      return '<tr><th scope="row">' + escapePricingText(plan.plan || plan.name || "Plan") +
+        '</th><td data-label="Monthly price">' + price + '</td><td data-label="Employee limit">' + escapePricingText(limit) +
+        '</td><td data-label="Payroll">' + (hasPayroll ? "Listed" : "Not listed") +
+        '</td><td data-label="Other listed modules">' + (highlights || "See plan details") + '</td></tr>';
+    }).join("");
+    var enterpriseRow = '<tr><th scope="row">Enterprise</th><td data-label="Monthly price">Custom</td><td data-label="Employee limit">Unlimited (published listing)</td><td data-label="Payroll">Not listed</td><td data-label="Other listed modules">Custom modules, integrations, automation, API access, premium support, account management, and support SLA (published listing)</td></tr>';
+    var comparison = document.getElementById("pricingComparison");
+    if (comparison) {
+      comparison.innerHTML = '<table class="pricing-comparison__table"><caption>Current published plans compared</caption><thead><tr><th scope="col">Plan</th><th scope="col">Monthly price</th><th scope="col">Employee limit</th><th scope="col">Payroll</th><th scope="col">Other listed modules</th></tr></thead><tbody>' + comparisonRows + enterpriseRow + '</tbody></table>';
+    }
+
     plans.forEach(function (plan, index) {
       var isPopular = index === popularIndex;
       var priceM = plan.pricePerMonth;
@@ -2034,22 +2126,28 @@ function initDynamicPricing() {
           : "₹" + Number(priceM).toLocaleString("en-IN");
 
       var subtextMonthly =
-        priceM === 0 || priceM === null ? "free setup" : "billed monthly";
+        priceM === 0 || priceM === null ? "free plan" : "per month";
 
       var featuresHTML = "";
+      var hasPayroll = (plan.features || []).some(function (feature) {
+        return /payroll/i.test(feature.featuresName || feature.name || feature);
+      });
+      featuresHTML += '<div class="pricing-feature pricing-feature--payroll"><strong>Payroll:</strong> ' +
+        (hasPayroll ? "listed in this plan" : "not listed in plan details") + "</div>";
       if (plan.features && plan.features.length > 0) {
         plan.features.forEach(function (f) {
           var featureTitle = f.featuresName || f.name || f;
+          if (/payroll/i.test(String(featureTitle))) return;
           featuresHTML +=
-            '<div class="pricing-feature"><span class="pricing-feature__check">✔</span> ' +
-            featureTitle +
+            '<div class="pricing-feature"><span aria-hidden="true" class="pricing-feature__check"><svg class="icon-svg" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span> ' +
+            escapePricingText(featureTitle) +
             "</div>";
         });
       }
 
       var highlightText = plan.userLimit
-        ? "Up to " + plan.userLimit + " Employees Included"
-        : "Unlimited Employees Included";
+        ? "Up to " + plan.userLimit + " employees"
+        : "Employee limit not listed";
 
       var ctaText =
         priceM === 0 || priceM === null ? "Start Free" : "Get Started";
@@ -2063,17 +2161,17 @@ function initDynamicPricing() {
       if (isPopular) {
         cardsHTML += '<div class="' + cardClass + '">';
         cardsHTML +=
-          '<div class="pricing-card__popular-header"><span class="popular-header__icon">🔥</span> Popular Choice</div>';
+          '<div class="pricing-card__popular-header"><span class="popular-header__icon"><svg class="icon-svg" viewBox="0 0 24 24"><path d="m12 3 2.1 2.1 3-.2.8 2.9 2.6 1.5-1 2.8 1 2.8-2.6 1.5-.8 2.9-3-.2L12 21l-2.1-2.1-3 .2-.8-2.9-2.6-1.5 1-2.8-1-2.8 2.6-1.5.8-2.9 3 .2L12 3Z"/><path d="m9 12 2 2 4-4"/></svg></span> Popular Choice</div>';
         cardsHTML += '<div class="pricing-card__body">';
       } else {
         cardsHTML += '<div class="' + cardClass + '">';
         cardsHTML += '<div class="pricing-card__inner">';
       }
 
-      cardsHTML += '<h3 class="pricing-card__name">' + (plan.plan || plan.name) + "</h3>";
+      cardsHTML += '<h3 class="pricing-card__name">' + escapePricingText(plan.plan || plan.name || "Plan") + "</h3>";
       cardsHTML +=
         '<p class="pricing-card__desc">Up to ' +
-        (plan.userLimit || "∞") +
+        escapePricingText(plan.userLimit || "employee limit not listed") +
         " employees</p>";
       cardsHTML += '<div class="pricing-card__price">';
       cardsHTML +=
@@ -2097,7 +2195,7 @@ function initDynamicPricing() {
           ctaText +
           "</a>";
         cardsHTML +=
-          '<span class="pricing-card__highlight-small">No Credit Card Required</span>';
+          '<span class="pricing-card__highlight-small">Free plan for up to ' + escapePricingText(plan.userLimit || "") + ' employees</span>';
       } else {
         cardsHTML +=
           '<a href="https://app.hrvico.com/onboard-company" class="' +
@@ -2146,11 +2244,32 @@ function initDynamicPricing() {
    ═══════════════════════════════════════ */
 var _demoOtpVerified = false;
 var _demoVerifiedEmail = "";
+var _demoModalOpener = null;
+var _demoPreviousOverflow = "";
+
+function showDemoStatus(message) {
+  var status = document.getElementById("demoFormStatus");
+  if (!status) return;
+  status.textContent = message || "";
+  status.hidden = !message;
+}
+
+function getModalFocusableElements(modal) {
+  return Array.from(modal.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'))
+    .filter(function (element) {
+      return !element.hidden && element.getAttribute("aria-hidden") !== "true" && element.getClientRects().length > 0;
+    });
+}
 
 function openDemoModal() {
   const modal = document.getElementById("demoModal");
   if (!modal) return;
+  _demoModalOpener = document.activeElement;
+  _demoPreviousOverflow = document.body.style.overflow;
+  showDemoStatus("");
   modal.classList.add("active");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.classList.add("demo-modal-open");
   document.body.style.overflow = "hidden";
   _demoOtpVerified = false;
   _demoVerifiedEmail = "";
@@ -2162,7 +2281,7 @@ function openDemoModal() {
       '<div class="demo-modal__form-state" id="demoOtpState" style="display: none;">' +
       '<div class="demo-modal__header">' +
       '<div class="demo-modal__logo"><img src="assets/images/hrvico-logo.svg?v=1.5" alt="HRvico Logo" class="demo-modal__logo-img" style="height: 36px; width: auto;"></div>' +
-      '<h3 class="demo-modal__title">Verify Your Email</h3>' +
+      '<h3 class="demo-modal__title" id="demoOtpTitle">Verify Your Email</h3>' +
       '<p class="demo-modal__subtitle">We\'ve sent an OTP to <strong id="demoOtpEmail"></strong></p>' +
       "</div>" +
       '<div style="padding: 0 1.5rem 1.5rem;">' +
@@ -2177,13 +2296,21 @@ function openDemoModal() {
     successState.insertAdjacentHTML("beforebegin", otpHTML);
   }
   document.getElementById("demoOtpState").style.display = "none";
+  modal.setAttribute("aria-labelledby", "demoModalTitle");
+  modal.querySelector(".demo-modal__container").scrollTop = 0;
+  window.requestAnimationFrame(function () {
+    modal.querySelector("#demoName")?.focus();
+  });
 }
 
 function closeDemoModal() {
   const modal = document.getElementById("demoModal");
   if (!modal) return;
   modal.classList.remove("active");
-  document.body.style.overflow = "";
+  modal.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("demo-modal-open");
+  document.body.style.overflow = _demoPreviousOverflow;
+  if (_demoModalOpener && typeof _demoModalOpener.focus === "function") _demoModalOpener.focus();
 }
 
 function submitDemoForm(event) {
@@ -2194,9 +2321,11 @@ function submitDemoForm(event) {
   var email = form.querySelector('[name="email"]').value.trim();
 
   if (!email) {
-    alert("Please enter your email address.");
+    showDemoStatus("Enter your email address to continue.");
+    form.querySelector('[name="email"]').focus();
     return;
   }
+  showDemoStatus("");
 
   var originalHTML = submitBtn.innerHTML;
   submitBtn.innerHTML = "Sending OTP...";
@@ -2217,13 +2346,16 @@ function submitDemoForm(event) {
         document.getElementById("demoFormState").style.display = "none";
         document.getElementById("demoOtpState").style.display = "block";
         document.getElementById("demoOtpEmail").textContent = email;
+        document.getElementById("demoModal").setAttribute("aria-labelledby", "demoOtpTitle");
+        showDemoStatus("");
+        window.requestAnimationFrame(function () { document.getElementById("demoOtpInput")?.focus(); });
       } else {
-        alert(result.message || "Failed to send OTP. Please try again.");
+        showDemoStatus(result.message || "We could not send the verification code. Check the email address and try again.");
       }
     })
     .catch(function (err) {
       console.error("Send OTP error:", err);
-      alert("Something went wrong. Please try again.");
+      showDemoStatus("We could not send the verification code. Please try again.");
     })
     .finally(function () {
       submitBtn.innerHTML = originalHTML;
@@ -2238,9 +2370,11 @@ function verifyDemoOtp() {
   var otp = otpInput.value.trim();
 
   if (!otp || otp.length < 4) {
-    alert("Please enter a valid OTP.");
+    showDemoStatus("Enter the verification code sent to your email.");
+    otpInput.focus();
     return;
   }
+  showDemoStatus("");
 
   verifyBtn.textContent = "Verifying...";
   verifyBtn.disabled = true;
@@ -2258,12 +2392,12 @@ function verifyDemoOtp() {
         _demoOtpVerified = true;
         submitDemoRequest();
       } else {
-        alert(result.message || "Invalid or expired OTP.");
+        showDemoStatus(result.message || "That verification code could not be confirmed. Check it and try again.");
       }
     })
     .catch(function (err) {
       console.error("Verify OTP error:", err);
-      alert("Something went wrong. Please try again.");
+      showDemoStatus("We could not verify that code. Please try again.");
     })
     .finally(function () {
       verifyBtn.textContent = "Verify & Submit";
@@ -2297,16 +2431,20 @@ function submitDemoRequest() {
       if (result.success) {
         document.getElementById("demoOtpState").style.display = "none";
         document.getElementById("demoSuccessState").style.display = "block";
+        document.getElementById("demoModal").setAttribute("aria-labelledby", "demoSuccessTitle");
+        showDemoStatus("");
         form.reset();
+        window.requestAnimationFrame(function () { document.getElementById("demoSuccessTitle")?.focus(); });
       } else {
-        alert(result.message || "Submission failed. Please try again.");
+        showDemoStatus(result.message || "The demo request could not be submitted. Please try again.");
         document.getElementById("demoOtpState").style.display = "none";
         document.getElementById("demoFormState").style.display = "block";
+        document.getElementById("demoModal").setAttribute("aria-labelledby", "demoModalTitle");
       }
     })
     .catch(function (err) {
       console.error("Demo request error:", err);
-      alert("Something went wrong. Please try again.");
+      showDemoStatus("The demo request could not be submitted. Please try again.");
       document.getElementById("demoOtpState").style.display = "none";
       document.getElementById("demoFormState").style.display = "block";
     });
@@ -2329,15 +2467,13 @@ function resendDemoOtp() {
     })
     .then(function (result) {
       if (result.success) {
-        alert("OTP resent to " + _demoVerifiedEmail);
+        showDemoStatus("A new verification code was sent to " + _demoVerifiedEmail + ".");
       } else {
-        alert(
-          result.message || "Could not resend OTP. Please wait and try again.",
-        );
+        showDemoStatus(result.message || "We could not resend the code. Please try again.");
       }
     })
     .catch(function () {
-      alert("Failed to resend OTP.");
+      showDemoStatus("We could not resend the code. Please try again.");
     })
     .finally(function () {
       resendBtn.textContent = "Resend OTP";
@@ -2345,125 +2481,207 @@ function resendDemoOtp() {
     });
 }
 
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") closeDemoModal();
+document.addEventListener("keydown", function (event) {
+  var modal = document.getElementById("demoModal");
+  if (!modal || !modal.classList.contains("active")) return;
+  if (event.key === "Escape") {
+    event.preventDefault();
+    closeDemoModal();
+    return;
+  }
+  if (event.key === "Tab") {
+    var focusable = getModalFocusableElements(modal);
+    if (!focusable.length) return;
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  }
 });
 
 /* ═══════════════════════════════════════
-   Cookies Consent Manager (EU GDPR Standard)
+   Cookie choices and optional analytics
    ═══════════════════════════════════════ */
+function updateAnalyticsConsent(isAllowed) {
+  if (!isAllowed) {
+    if (window.gtag) {
+      window.gtag("consent", "update", {
+        analytics_storage: "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied"
+      });
+    }
+    if (window.clarity) {
+      window.clarity("consentv2", { ad_Storage: "denied", analytics_Storage: "denied" });
+    }
+    return;
+  }
+
+  if (window.__hrvicoAnalyticsLoaded) return;
+  window.__hrvicoAnalyticsLoaded = true;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+  window.gtag("consent", "default", {
+    analytics_storage: "denied",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied"
+  });
+  window.gtag("consent", "update", {
+    analytics_storage: "granted",
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied"
+  });
+  window.gtag("js", new Date());
+  window.gtag("config", "G-TVS20GZXDB");
+  var googleTag = document.createElement("script");
+  googleTag.async = true;
+  googleTag.src = "https://www.googletagmanager.com/gtag/js?id=G-TVS20GZXDB";
+  document.head.appendChild(googleTag);
+
+  (function (c, l, a, r, i, t, y) {
+    c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments); };
+    t = l.createElement(r);
+    t.async = 1;
+    t.src = "https://www.clarity.ms/tag/" + i;
+    y = l.getElementsByTagName(r)[0];
+    y.parentNode.insertBefore(t, y);
+  })(window, document, "clarity", "script", "xkp73lbkvb");
+  window.clarity("consentv2", { ad_Storage: "denied", analytics_Storage: "granted" });
+}
+
 function initCookiesBanner() {
-  window.CookieConsent = {
-    getPreferences: function () {
-      var saved = localStorage.getItem("cookiePreferences");
-      if (saved) {
-        try {
-          return JSON.parse(saved);
-        } catch (e) {}
-      }
-      if (localStorage.getItem("cookiesAccepted") === "true") {
-        return { necessary: true, analytics: true, marketing: true };
-      }
-      return null;
-    },
-    hasConsented: function (category) {
-      var prefs = this.getPreferences();
-      if (!prefs) return false;
-      if (category === "necessary") return true;
-      return !!prefs[category];
-    },
-    showSettings: function () {},
+  var savedPreferences = function () {
+    var saved = localStorage.getItem("cookiePreferences");
+    if (saved) {
+      try {
+        var parsed = JSON.parse(saved);
+        return { necessary: true, analytics: !!parsed.analytics, marketing: false };
+      } catch (e) {}
+    }
+    if (localStorage.getItem("cookiesAccepted") === "true") {
+      return { necessary: true, analytics: true, marketing: false };
+    }
+    return null;
   };
 
-  if (window.CookieConsent.getPreferences() !== null) return;
+  window.CookieConsent = {
+    getPreferences: savedPreferences,
+    hasConsented: function (category) {
+      var preferences = savedPreferences();
+      if (category === "necessary") return true;
+      return !!(preferences && preferences[category]);
+    },
+    showSettings: function () {
+      if (!banner) return;
+      banner.hidden = false;
+      preferencesDiv.hidden = false;
+      mainActions.hidden = true;
+      saveActions.hidden = false;
+      analyticsToggle.checked = !!(savedPreferences() && savedPreferences().analytics);
+      customizeButton.setAttribute("aria-expanded", "true");
+      window.requestAnimationFrame(function () {
+        banner.scrollIntoView({ behavior: "smooth", block: "center" });
+        analyticsToggle.focus();
+      });
+    }
+  };
 
-  var banner = document.createElement("div");
+  var banner = document.createElement("section");
   banner.className = "cookies-banner";
   banner.id = "cookiesBanner";
-  banner.innerHTML =
-    "" +
-    '<div class="cookies-banner__body">' +
-    '  <div class="cookies-banner__header">' +
-    '    <h4 class="cookies-banner__title">' +
-    '      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;vertical-align:middle;">' +
-    '        <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10c.877 0 1.73-.113 2.545-.328a1.002 1.002 0 00.707-.723 1 1 0 00-.312-1.013 3.518 3.518 0 01-1.123-2.909c.148-1.579 1.4-2.884 2.977-3.085A3.498 3.498 0 0121 17.41a1.002 1.002 0 001.077-.293 1 1 0 00.171-1.082C21.431 14.28 21.05 12.185 21 12c0-5.523-4.477-10-10-10zm-3 5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm6 1a1 1 0 110 2 1 1 0 010-2zm-8 5a1 1 0 110 2 1 1 0 010-2zm7 4a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/>' +
-    "      </svg>" +
-    "      Cookie Consent" +
-    "    </h4>" +
-    "  </div>" +
-    '  <p class="cookies-banner__text">' +
-    '    We use cookies to improve your experience on our website. By clicking "Accept All", you agree to our use of all cookies. You can customize your settings or read our <a href="/privacy" class="cookies-banner__link">Privacy Policy</a>.' +
-    "  </p>" +
-    '  <div class="cookies-banner__preferences" id="cookiesPreferences" style="display:none;">' +
-    '    <div class="cookies-preference-item"><div class="cookies-preference-item__info"><span class="cookies-preference-item__title">Necessary Cookies</span><p class="cookies-preference-item__desc">Required for basic website functions. Cannot be disabled.</p></div><label class="cookies-switch"><input type="checkbox" checked disabled><span class="cookies-slider round"></span></label></div>' +
-    '    <div class="cookies-preference-item"><div class="cookies-preference-item__info"><span class="cookies-preference-item__title">Analytics Cookies</span><p class="cookies-preference-item__desc">Help us understand how visitors interact with our website.</p></div><label class="cookies-switch"><input type="checkbox" id="cookiesOptAnalytics"><span class="cookies-slider round"></span></label></div>' +
-    '    <div class="cookies-preference-item"><div class="cookies-preference-item__info"><span class="cookies-preference-item__title">Marketing Cookies</span><p class="cookies-preference-item__desc">Allow personalized advertising and campaign tracking.</p></div><label class="cookies-switch"><input type="checkbox" id="cookiesOptMarketing"><span class="cookies-slider round"></span></label></div>' +
-    "  </div>" +
-    '  <div class="cookies-banner__actions">' +
-    '    <div class="cookies-banner__actions-row" id="cookiesActionsMain">' +
-    '      <button class="btn btn--secondary btn--small cookies-banner__btn" id="rejectCookiesBtn">Reject All</button>' +
-    '      <button class="cookies-banner__btn-link" id="customizeCookiesBtn">Customize</button>' +
-    '      <button class="btn btn--primary btn--small cookies-banner__btn" id="acceptAllCookiesBtn">Accept All</button>' +
-    "    </div>" +
-    '    <div class="cookies-banner__actions-row" id="cookiesActionsSave" style="display:none;">' +
-    '      <button class="btn btn--secondary btn--small cookies-banner__btn" id="savePrefsCancelBtn">Back</button>' +
-    '      <button class="btn btn--primary btn--small cookies-banner__btn" id="savePrefsConfirmBtn">Save Settings</button>' +
-    "    </div>" +
-    "  </div>" +
-    "</div>";
-  document.body.appendChild(banner);
+  banner.setAttribute("role", "region");
+  banner.setAttribute("aria-labelledby", "cookiesTitle");
+  banner.innerHTML = '<div class="cookies-banner__body">' +
+    '<div class="cookies-banner__header"><h2 class="cookies-banner__title" id="cookiesTitle">Cookie choices</h2></div>' +
+    '<p class="cookies-banner__text">Optional analytics run only if you allow them. Change this choice in Cookie settings.</p>' +
+    '<div class="cookies-banner__preferences" id="cookiesPreferences" hidden>' +
+      '<div class="cookies-preference-item"><div class="cookies-preference-item__info"><span class="cookies-preference-item__title">Necessary storage</span><p class="cookies-preference-item__desc">Used to save this choice. Always on.</p></div><span class="cookies-required">Always on</span></div>' +
+      '<div class="cookies-preference-item"><div class="cookies-preference-item__info"><label class="cookies-preference-item__title" for="cookiesOptAnalytics">Analytics</label><p class="cookies-preference-item__desc">Google Analytics and Microsoft Clarity. Optional.</p></div><label class="cookies-switch"><input type="checkbox" id="cookiesOptAnalytics" role="switch" aria-label="Allow analytics"><span class="cookies-slider round" aria-hidden="true"></span></label></div>' +
+    '</div>' +
+    '<div class="cookies-banner__actions">' +
+      '<div class="cookies-banner__actions-row" id="cookiesActionsMain">' +
+        '<button type="button" class="btn btn--secondary btn--small cookies-banner__btn" id="rejectCookiesBtn">Reject optional</button>' +
+        '<button type="button" class="cookies-banner__btn-link" id="customizeCookiesBtn" aria-expanded="false" aria-controls="cookiesPreferences">Customize</button>' +
+        '<button type="button" class="btn btn--primary btn--small cookies-banner__btn" id="acceptAllCookiesBtn">Accept analytics</button>' +
+      '</div>' +
+      '<div class="cookies-banner__actions-row" id="cookiesActionsSave" hidden>' +
+        '<button type="button" class="btn btn--secondary btn--small cookies-banner__btn" id="savePrefsCancelBtn">Back</button>' +
+        '<button type="button" class="btn btn--primary btn--small cookies-banner__btn" id="savePrefsConfirmBtn">Save choice</button>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
 
-  var saveConsent = function (prefs) {
-    localStorage.setItem("cookiePreferences", JSON.stringify(prefs));
-    localStorage.setItem("cookiesAccepted", "true");
-    banner.classList.remove("show");
-  };
-
-  document
-    .getElementById("acceptAllCookiesBtn")
-    .addEventListener("click", function () {
-      saveConsent({ necessary: true, analytics: true, marketing: true });
-    });
-
-  document
-    .getElementById("rejectCookiesBtn")
-    .addEventListener("click", function () {
-      saveConsent({ necessary: true, analytics: false, marketing: false });
-    });
+  var heroActions = document.querySelector(".hero__ctas");
+  var pageHeader = document.querySelector(".subpage__header");
+  var featureHeading = document.querySelector(".features .section-header");
+  var mainContent = document.querySelector("main");
+  var navbar = document.querySelector(".navbar");
+  var insertAfter = heroActions || pageHeader || featureHeading || mainContent;
+  if (insertAfter && insertAfter.parentNode) {
+    insertAfter.insertAdjacentElement("afterend", banner);
+  } else if (navbar && navbar.parentNode) {
+    banner.classList.add("cookies-banner--after-nav");
+    navbar.insertAdjacentElement("afterend", banner);
+  } else {
+    banner.classList.add("cookies-banner--after-nav");
+    document.body.insertBefore(banner, document.body.firstChild);
+  }
 
   var preferencesDiv = document.getElementById("cookiesPreferences");
   var mainActions = document.getElementById("cookiesActionsMain");
   var saveActions = document.getElementById("cookiesActionsSave");
+  var analyticsToggle = document.getElementById("cookiesOptAnalytics");
+  var customizeButton = document.getElementById("customizeCookiesBtn");
+  var currentPreferences = savedPreferences();
+  banner.hidden = currentPreferences !== null;
+  if (currentPreferences && currentPreferences.analytics) updateAnalyticsConsent(true);
 
-  document
-    .getElementById("customizeCookiesBtn")
-    .addEventListener("click", function () {
-      preferencesDiv.style.display = "flex";
-      mainActions.style.display = "none";
-      saveActions.style.display = "flex";
-    });
+  var setCustomizeView = function (isOpen) {
+    preferencesDiv.hidden = !isOpen;
+    mainActions.hidden = isOpen;
+    saveActions.hidden = !isOpen;
+    customizeButton.setAttribute("aria-expanded", String(isOpen));
+    analyticsToggle.checked = !!(savedPreferences() && savedPreferences().analytics);
+  };
 
-  document
-    .getElementById("savePrefsCancelBtn")
-    .addEventListener("click", function () {
-      preferencesDiv.style.display = "none";
-      mainActions.style.display = "flex";
-      saveActions.style.display = "none";
-    });
+  var saveConsent = function (preferences) {
+    var previous = savedPreferences();
+    preferences = { necessary: true, analytics: !!preferences.analytics, marketing: false };
+    localStorage.setItem("cookiePreferences", JSON.stringify(preferences));
+    localStorage.setItem("cookiesAccepted", "true");
+    banner.hidden = true;
+    if (previous && previous.analytics && !preferences.analytics) {
+      updateAnalyticsConsent(false);
+      window.location.reload();
+    } else if (preferences.analytics) {
+      updateAnalyticsConsent(true);
+    }
+  };
 
-  document
-    .getElementById("savePrefsConfirmBtn")
-    .addEventListener("click", function () {
-      saveConsent({
-        necessary: true,
-        analytics: document.getElementById("cookiesOptAnalytics").checked,
-        marketing: document.getElementById("cookiesOptMarketing").checked,
-      });
-    });
-
-  setTimeout(function () {
-    banner.classList.add("show");
-  }, 400);
+  document.getElementById("acceptAllCookiesBtn").addEventListener("click", function () {
+    saveConsent({ analytics: true });
+  });
+  document.getElementById("rejectCookiesBtn").addEventListener("click", function () {
+    saveConsent({ analytics: false });
+  });
+  customizeButton.addEventListener("click", function () {
+    setCustomizeView(true);
+  });
+  document.getElementById("savePrefsCancelBtn").addEventListener("click", function () {
+    setCustomizeView(false);
+    if (savedPreferences()) banner.hidden = true;
+  });
+  document.getElementById("savePrefsConfirmBtn").addEventListener("click", function () {
+    saveConsent({ analytics: analyticsToggle.checked });
+  });
 }
 
 /* ═══════════════════════════════════════════
@@ -2478,7 +2696,7 @@ function formatDate(dateString) {
   return date.toLocaleDateString("en-US", options);
 }
 
-// ⚡ GLOBAL FAST API CACHE
+//  GLOBAL FAST API CACHE
 var _cachedBlogs = null;
 var _cachedCategories = null;
 
@@ -2561,7 +2779,7 @@ function initBlogListing() {
       heroTitleEl.innerHTML = name;
       heroSubtitleEl.textContent = desc;
 
-      // 🏷️ Category Filter Breadcrumb: Home > Blog Categories > Category Name
+      //  Category Filter Breadcrumb: Home > Blog Categories > Category Name
       updateBreadcrumbs("category", name);
       try {
         window.history.replaceState(null, "", "/latest-blog/category/" + encodeURIComponent(catObj.slug || slugify(name)));
@@ -2571,7 +2789,7 @@ function initBlogListing() {
       heroTitleEl.innerHTML = cleanTitle;
       heroSubtitleEl.textContent = `Explore expert guides, industry trends, and insights on ${cleanTitle}.`;
 
-      // 🏷️ Category Filter Breadcrumb: Home > Blog Categories > Category Name
+      //  Category Filter Breadcrumb: Home > Blog Categories > Category Name
       updateBreadcrumbs("category", cleanTitle);
       try {
         window.history.replaceState(null, "", "/latest-blog/category/" + encodeURIComponent(fallbackName));
@@ -2580,7 +2798,7 @@ function initBlogListing() {
       heroTitleEl.innerHTML = defaultTitleHTML;
       heroSubtitleEl.textContent = defaultSubtitleText;
 
-      // 📄 Blog Listing Breadcrumb: Home > Latest Blog
+      //  Blog Listing Breadcrumb: Home > Latest Blog
       updateBreadcrumbs("listing");
       try {
         window.history.replaceState(null, "", "/latest-blog");
@@ -2588,7 +2806,7 @@ function initBlogListing() {
     }
   }
 
-  // ⚡ PARALLEL FETCH BLOGS & CATEGORIES
+  //  PARALLEL FETCH BLOGS & CATEGORIES
   Promise.all([fetchAllBlogsFast(), fetchAllCategoriesFast()])
     .then(([allBlogs, categories]) => {
       if (selectedCatFromUrl && selectedCatFromUrl !== "all") {
@@ -2645,7 +2863,7 @@ function initBlogListing() {
     const paginationContainer = document.getElementById('blog-pagination');
     if (!paginationContainer) return;
     paginationContainer.innerHTML = '';
-    
+
     const totalPages = Math.ceil(totalItems / blogsPerPage);
     if (totalPages <= 1) {
       paginationContainer.style.display = 'none';
@@ -2655,13 +2873,13 @@ function initBlogListing() {
     paginationContainer.style.display = 'flex';
     let html = '';
     html += `<button class="blog-pagination-btn" ${currentPage === 1 ? 'disabled' : ''} onclick="goToBlogPage(${currentPage - 1})">&laquo;</button>`;
-    
+
     for (let i = 1; i <= totalPages; i++) {
         html += `<button class="blog-pagination-btn ${currentPage === i ? 'active' : ''}" onclick="goToBlogPage(${i})">${i}</button>`;
     }
 
     html += `<button class="blog-pagination-btn" ${currentPage === totalPages ? 'disabled' : ''} onclick="goToBlogPage(${currentPage + 1})">&raquo;</button>`;
-    
+
     paginationContainer.innerHTML = html;
   }
 
@@ -2685,7 +2903,7 @@ function initBlogListing() {
       const catName = blog.categoryId
         ? (blog.categoryId.name || blog.categoryId)
         : (blog.category && blog.category.name) || blog.categoryName || (typeof blog.category === "string" ? blog.category : "Delhi NCR Business & HR");
-      
+
       let rawAuthor = blog.authorName || blog.author || blog.addedBy || blog.addedByName;
       if (typeof rawAuthor === "object" && rawAuthor !== null) {
         rawAuthor = rawAuthor.name || rawAuthor.fullName || rawAuthor.username || rawAuthor.email;
@@ -2739,7 +2957,7 @@ function initBlogListing() {
   }
 }
 
-// ⚡ INSTANT FETCH FOR BLOG DETAIL WITH DYNAMIC SEO & CLEAN URL REWRITER
+//  INSTANT FETCH FOR BLOG DETAIL WITH DYNAMIC SEO & CLEAN URL REWRITER
 function initBlogDetail() {
   const titleEl = document.getElementById("blog-title");
   const imageEl = document.getElementById("blog-image");
@@ -2832,7 +3050,7 @@ function initBlogDetail() {
           titleEl.textContent = blog.title;
           updateBreadcrumbs("detail", null, blog.title);
 
-          // 🌐 REWRITE URL BAR CLEANLY WITHOUT 404 ERROR (latest-blog/slug-name)
+          //  REWRITE URL BAR CLEANLY WITHOUT 404 ERROR (latest-blog/slug-name)
           try {
             window.history.replaceState(null, "", "/latest-blog/" + encodeURIComponent(cleanSlug));
           } catch (e) {}
