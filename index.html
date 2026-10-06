@@ -55,19 +55,145 @@
     />
     <link rel="apple-touch-icon" href="assets/images/hrvico-favicon.svg" />
 
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.hrvico.com/" />
+
     <!-- Open Graph -->
     <meta
       property="og:title"
-      content="HRVICO — One Platform to Manage Your Entire Workforce"
+      content="HRVICO — All-in-One HRMS Software & Automated Payroll Platform 2026"
     />
     <meta
       property="og:description"
-      content="From attendance to appraisals, payroll to performance HRVICO unifies every HR workflow in one intelligent platform."
+      content="From attendance to appraisals, payroll to statutory compliance (EPF, ESIC, TDS), HRVICO unifies every HR workflow in one intelligent platform."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="assets/images/hero-dashboard.png" />
+    <meta property="og:url" content="https://www.hrvico.com/" />
+    <meta property="og:site_name" content="HRVICO" />
+    <meta property="og:image" content="https://www.hrvico.com/assets/images/hero-dashboard.png" />
 
-    <!-- Google Fonts -->
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="HRVICO — All-in-One HRMS Software & Automated Payroll Platform 2026"
+    />
+    <meta
+      name="twitter:description"
+      content="From attendance to appraisals, payroll to statutory compliance (EPF, ESIC, TDS), HRVICO unifies every HR workflow in one intelligent platform."
+    />
+    <meta name="twitter:image" content="https://www.hrvico.com/assets/images/hero-dashboard.png" />
+
+    <!-- Structured Data JSON-LD (Organization, SoftwareApplication, WebSite, FAQPage) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://www.hrvico.com/#organization",
+          "name": "HRVICO",
+          "legalName": "Scriza Information Technology Private Limited",
+          "url": "https://www.hrvico.com/",
+          "logo": "https://www.hrvico.com/assets/images/hrvico-logo.svg",
+          "description": "All-in-one HRMS, payroll automation, biometric and geo-fenced attendance tracking, and employee management platform.",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "NX-ONE, Tech Zone IV, Plot No 17, Amrapali Dream Valley",
+            "addressLocality": "Greater Noida",
+            "addressRegion": "Uttar Pradesh",
+            "postalCode": "201318",
+            "addressCountry": "IN"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+91-9116011899",
+            "contactType": "customer service",
+            "email": "info@scriza.in",
+            "areaServed": ["IN", "Global"],
+            "availableLanguage": ["English", "Hindi"]
+          },
+          "sameAs": [
+            "https://www.linkedin.com/company/121494424/",
+            "https://www.instagram.com/hrvico_official",
+            "https://www.facebook.com/HRvicoOfficial"
+          ]
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://www.hrvico.com/#software",
+          "name": "HRVICO HRMS & Payroll System",
+          "operatingSystem": "Cloud, Web, Mobile-Responsive (iOS, Android)",
+          "applicationCategory": "BusinessApplication",
+          "description": "Cloud-based HRMS software for biometric attendance, statutory payroll calculation (EPF, ESIC, TDS), leave approvals, and employee self-service.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR",
+            "availability": "https://schema.org/InStock",
+            "description": "Free product demonstration and flexible monthly per-employee pricing."
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://www.hrvico.com/#website",
+          "url": "https://www.hrvico.com/",
+          "name": "HRVICO",
+          "publisher": {
+            "@id": "https://www.hrvico.com/#organization"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://www.hrvico.com/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is HRVICO HRMS?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "HRVICO is a cloud-based Human Resource Management System (HRMS) designed to automate payroll calculations, attendance tracking, leave requests, employee appraisals, and statutory compliance (EPF, ESIC, PT, TDS) for businesses of all sizes."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does HRVICO automate EPF, ESIC, and TDS payroll deductions?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. HRVICO automatically computes monthly EPF, ESIC, Professional Tax, and Income Tax (TDS) according to current Indian statutory slabs, and generates ECR files and Form 16 ready for compliance submission."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can employees clock attendance using mobile GPS and biometrics?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. HRVICO supports mobile clock-in with GPS geo-fencing and facial recognition, alongside real-time API synchronization with standard office biometric hardware (eSSL, ZKTeco)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How does HRVICO support multi-branch organizations?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "HRVICO features multi-company and multi-branch architecture, enabling Super Admins to oversee multiple business entities, branch-specific shift rosters, and centralized payroll from a single master dashboard."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How can I book a free demo of HRVICO?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You can schedule a personalized walkthrough anytime by clicking 'Book a Demo' on our website or calling our product advisory team at +91 9116011899."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Fonts (Optimized Non-Blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -417,6 +543,71 @@
           <a href="roles.html" class="btn btn--primary btn--large">
             View Role Capabilities
           </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+       FREQUENTLY ASKED QUESTIONS (FAQ)
+       ═══════════════════════════════════════ -->
+    <section class="section faq" id="faq">
+      <div class="container">
+        <div class="section-header" data-animate="fade-up" style="text-align: center; margin-bottom: 3rem;">
+          <p class="section-eyebrow">Got Questions?</p>
+          <h2 class="section-title">Frequently Asked <span class="gradient-text">Questions</span></h2>
+          <p class="section-subtitle">Everything you need to know about HRVICO features, statutory compliance, and implementation.</p>
+        </div>
+
+        <div class="faq__list" data-animate="fade-up">
+          <div class="faq-item open">
+            <button class="faq-item__question" type="button">
+              <span>What is HRVICO HRMS and how does it help businesses?</span>
+              <svg class="faq-item__chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-item__answer">
+              <p>HRVICO is a cloud-based Human Resource Management System (HRMS) that consolidates payroll processing, attendance tracking, leave workflows, and compliance into a unified interface. It reduces manual administrative work by up to 80% while preventing costly payroll errors.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-item__question" type="button">
+              <span>Does HRVICO automate EPF, ESIC, Professional Tax, and TDS?</span>
+              <svg class="faq-item__chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-item__answer">
+              <p>Yes. HRVICO is specifically engineered for Indian labor statutory requirements. It automatically computes EPF, ESIC, state-specific Professional Tax (PT), and Income Tax TDS under both Old and New regimes, producing EPFO-ready ECR challans and Form 16 reports.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-item__question" type="button">
+              <span>How does mobile GPS and biometric attendance tracking work?</span>
+              <svg class="faq-item__chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-item__answer">
+              <p>Employees can mark attendance using the mobile self-service portal within GPS geo-fenced perimeters or office Wi-Fi zones with optional selfie verification. For on-site offices, HRVICO syncs directly with physical biometric fingerprint and facial scanner hardware via API.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-item__question" type="button">
+              <span>How long does onboarding and data migration take?</span>
+              <svg class="faq-item__chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-item__answer">
+              <p>Most organizations go live within 24 to 48 hours. Our team provides pre-formatted Excel bulk import templates to upload employee master data, historical leave balances, and salary components in minutes without complex IT setup.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-item__question" type="button">
+              <span>How is our company data secured?</span>
+              <svg class="faq-item__chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-item__answer">
+              <p>We implement bank-grade security including SSL/TLS 1.3 encryption in transit, AES-256 encryption at rest, granular Role-Based Access Control (RBAC), and automated daily cloud backups to guarantee strict data privacy and continuity.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

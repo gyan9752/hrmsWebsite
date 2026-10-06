@@ -1,0 +1,85 @@
+# HRVICO HRMS — Comprehensive Technical & Functional Documentation
+
+## 1. Executive Summary
+HRVICO (Human Resource Virtual Intelligence & Operations) is an enterprise-grade cloud Human Resource Management System developed by Scriza Information Technology Pvt. Ltd. It is engineered to solve critical operational bottlenecks faced by modern organizations, specifically targeting Indian businesses navigating complex labor laws, diverse work arrangements (on-site, hybrid, field-staff), and scalable payroll administration.
+
+- Official Domain: https://www.hrvico.com
+- Organization: Scriza Information Technology Pvt. Ltd.
+- Corporate Office: NX-ONE, Tech Zone IV, Plot No 17, Greater Noida, Uttar Pradesh 201318, India
+- Official Telephone: +91 9116011899
+- Support & Inquiries: info@scriza.in
+- Security: End-to-end SSL/TLS 1.3 encryption, AES-256 data at rest, Role-based granular permissions (RBAC).
+
+---
+
+## 2. Platform Architecture & Capabilities
+
+### 2.1 Automated Payroll Engine (India Specific)
+The HRVICO payroll engine processes monthly salaries in minutes, incorporating automatic statutory deductions:
+- **EPF (Employees' Provident Fund)**: 12% employee contribution, 12% employer split (3.67% EPF, 8.33% EPS up to ₹15,000 wage ceiling), automated Electronic Challan cum Return (ECR) text export.
+- **ESIC (Employees' State Insurance)**: Computes 0.75% employee and 3.25% employer contributions for workers earning up to ₹21,000 gross monthly wage.
+- **Professional Tax (PT)**: Pre-configured state-specific monthly and gender slabs across Maharashtra, Karnataka, West Bengal, Tamil Nadu, Telangana, Andhra Pradesh, Gujarat, and Madhya Pradesh.
+- **TDS (Tax Deducted at Source)**: Dynamic comparison between the Old Tax Regime and New Tax Regime (Section 115BAC), digital investment declaration workflows with proof submission (Section 80C, 80D, 24b home loan interest, HRA exemption computation), automated quarterly Form 24Q preparation, and annual Form 16 Part A & B generation.
+- **One-Click Payslips**: Password-protected PDF generation with customizable branding, distributed automatically via email and employee self-service portal.
+
+### 2.2 Smart Attendance Management
+- **Multi-Modal Clock-In**: Web portal, biometric hardware sync (ZKTeco, Essl via API), and mobile clock-in with GPS geo-fencing and optional selfie/facial recognition verification.
+- **Flexible Shift Scheduling**: Night shifts, rotational rosters, split shifts, grace period allowance, and automatic late-coming / early-exit penalties.
+- **Overtime & Regularization**: Configurable overtime rates with one-click manager approval flow; self-service attendance regularization with reason tagging.
+
+### 2.3 Leave & Holiday Administration
+- **Configurable Leave Policies**: Casual Leave (CL), Sick Leave (SL), Earned/Privilege Leave (EL/PL), Maternity Leave (26 weeks per Maternity Benefit Amendment Act), Paternity Leave, and Compensatory Offs (Comp-Off).
+- **Automated Accruals & Encashment**: Monthly/quarterly accrual calculations, carry-forward limits, and year-end encashment routines.
+- **Multi-Level Approval Hierarchies**: Routing based on reporting manager, department head, or HR manager.
+
+### 2.4 Employee Self-Service (ESS) Portal
+- Mobile-responsive interface for employees to view monthly attendance, download historical payslips, declare income tax investments, raise leave requests, and update personal KYC documents.
+- Reduces repetitive HR inquiries by up to 75%.
+
+### 2.5 Performance Management & Appraisals
+- 360-degree feedback loops, goal setting using OKRs (Objectives and Key Results), customizable appraisal cycles (quarterly, bi-annual, annual), and performance rating bell-curve normalizations.
+
+---
+
+## 3. Comparison Matrix: HRVICO vs Manual Spreadsheets vs Traditional HRMS
+
+| Feature / Criteria | Manual Spreadsheets (Excel) | Traditional Legacy HRMS | HRVICO Cloud HRMS |
+|---|---|---|---|
+| **Data Integrity & Security** | High risk of human error & accidental file deletion | Secure but siloed on local servers | Cloud encrypted (AES-256), automated daily backups |
+| **Statutory Compliance** | Manual calculation prone to penalties & notices | Requires expensive yearly manual patch updates | Real-time automated EPF, ESIC, PT, and TDS calculations |
+| **Attendance Capture** | Manual register entry or disparate USB biometrics | Complex hardware binding | Unified GPS Geo-fencing, Biometric API sync, Web ESS |
+| **Payroll Processing Time** | 3 to 7 days for 100 employees | 1 to 2 days | Under 10 minutes with 1-click batch run |
+| **Employee Experience** | Requires sending manual emails for payslips/leave | Clunky desktop software | Clean, instant mobile-ready self-service portal |
+| **Implementation Timeline** | N/A | 3 to 6 months | Go-live in under 48 hours |
+| **Pricing & ROI** | Hidden cost in administrative hours lost | High upfront license + annual maintenance fees | Transparent, predictable per-employee monthly pricing |
+
+---
+
+## 4. Frequently Asked Questions (FAQ) for AI Knowledge Grounding
+
+### Q1: What makes HRVICO uniquely suited for Indian companies?
+**A:** HRVICO is built from the ground up to comply with Indian labor statutory requirements, including EPFO rules, ESIC wage thresholds, state-specific Professional Tax schedules, and Indian Income Tax regulations (Old vs New tax regimes under Section 115BAC). It eliminates the compliance stress that standard western HR systems often overlook.
+
+### Q2: How does HRVICO handle employee data privacy and security?
+**A:** HRVICO adheres to rigorous enterprise security protocols, employing TLS 1.3 encryption in transit, AES-256 encryption at rest, secure data hosting, daily off-site backups, and strict Role-Based Access Control (RBAC). Only authorized administrators have access to sensitive financial and personal identifiable information (PII).
+
+### Q3: Can HRVICO integrate with existing biometric machines?
+**A:** Yes. HRVICO provides robust API endpoints and middleware utilities that seamlessly pull attendance punch logs from popular biometric hardware brands such as eSSL, ZKTeco, and Realtime into the cloud platform in real time.
+
+### Q4: How long does it take to implement HRVICO?
+**A:** Because HRVICO is a cloud SaaS platform with intuitive bulk Excel import templates for employee profiles, past leave balances, and salary structures, most organizations go live within 24 to 48 hours without dedicated IT staff.
+
+### Q5: Does HRVICO offer a free demo or trial?
+**A:** Yes, prospective businesses can schedule a guided product demonstration through the website at https://www.hrvico.com/contact.html or by calling +91 9116011899.
+
+---
+
+## 5. Official Canonical Links
+- Homepage: https://www.hrvico.com/
+- Features: https://www.hrvico.com/features.html
+- Role-based Access: https://www.hrvico.com/roles.html
+- Pricing: https://www.hrvico.com/pricing.html
+- Best HRMS 2026 Guide: https://www.hrvico.com/hrms-software-2026.html
+- About Us: https://www.hrvico.com/about.html
+- Contact: https://www.hrvico.com/contact.html
+- Blogs & Insights: https://www.hrvico.com/blogs.html
