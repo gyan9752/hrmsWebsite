@@ -2031,12 +2031,6 @@ function initStartFreeButton() {
 /* ═══════════════════════════════════════
    Dynamic Pricing
    ═══════════════════════════════════════ */
-function escapePricingText(value) {
-  return String(value).replace(/[&<>"']/g, function (character) {
-    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;" }[character];
-  });
-}
-
 function initDynamicPricing() {
   var grid = document.getElementById("pricingGrid");
   if (!grid) return;
@@ -2067,54 +2061,6 @@ function initDynamicPricing() {
     }
 
     var cardsHTML = "";
-    var comparisonRows = plans.map(function (plan) {
-      var featureNames = (plan.features || []).map(function (feature) {
-        return String(feature.featuresName || feature.name || feature).trim();
-      });
-      var hasPayroll = featureNames.some(function (feature) { return /payroll/i.test(feature); });
-      var limit = plan.userLimit ? "Up to " + plan.userLimit + " employees" : "Not listed";
-      var price = Number(plan.pricePerMonth || 0) === 0 ? "₹0 / month" : "₹" + Number(plan.pricePerMonth).toLocaleString("en-IN") + " / month";
-      var readable = {
-        "Employee Management": "Employee records",
-        "Attendance Management": "Attendance",
-        "Leave Management": "Leave",
-        "Holiday Calendar": "Holiday calendar",
-        "Holiday calendar": "Holiday calendar",
-        "Reports & Analytics": "Reports",
-        "Reports Analytics": "Reports",
-        "Employee Dashboard": "Employee dashboard",
-        "Manage Employee Documents": "Employee documents",
-        "Document Management": "Documents",
-        "Texting Chat Box": "Team chat",
-        "Chat Box(Audio/Video)": "Chat and calls",
-        "Mobile Dashboard App": "Mobile app",
-        "Appraisals Management": "Appraisals",
-        "Reimbursement": "Reimbursements",
-        "HR Automation": "Automation (steps not specified)",
-        "Multi-Branch Management": "Multiple branches",
-        "Job Management": "Job management",
-        "Priority Onboarding": "Priority onboarding",
-        "Priority Support": "Priority support",
-        "Website Health Monitoring": "Website health monitoring"
-      };
-      var highlights = featureNames.map(function (name) {
-        return readable[name] || name;
-      }).filter(function (name) {
-        return !/payroll|^upto |^up to /i.test(name);
-      }).filter(function (name, index, all) {
-        return all.indexOf(name) === index;
-      }).slice(0, 5).map(escapePricingText).join(", ");
-      return '<tr><th scope="row">' + escapePricingText(plan.plan || plan.name || "Plan") +
-        '</th><td data-label="Monthly price">' + price + '</td><td data-label="Employee limit">' + escapePricingText(limit) +
-        '</td><td data-label="Payroll">' + (hasPayroll ? "Listed" : "Not listed") +
-        '</td><td data-label="Other listed modules">' + (highlights || "See plan details") + '</td></tr>';
-    }).join("");
-    var enterpriseRow = '<tr><th scope="row">Enterprise</th><td data-label="Monthly price">Custom</td><td data-label="Employee limit">Unlimited (published listing)</td><td data-label="Payroll">Not listed</td><td data-label="Other listed modules">Custom modules, integrations, automation, API access, premium support, account management, and support SLA (published listing)</td></tr>';
-    var comparison = document.getElementById("pricingComparison");
-    if (comparison) {
-      comparison.innerHTML = '<table class="pricing-comparison__table"><caption>Current published plans compared</caption><thead><tr><th scope="col">Plan</th><th scope="col">Monthly price</th><th scope="col">Employee limit</th><th scope="col">Payroll</th><th scope="col">Other listed modules</th></tr></thead><tbody>' + comparisonRows + enterpriseRow + '</tbody></table>';
-    }
-
     plans.forEach(function (plan, index) {
       var isPopular = index === popularIndex;
       var priceM = plan.pricePerMonth;
@@ -2126,28 +2072,22 @@ function initDynamicPricing() {
           : "₹" + Number(priceM).toLocaleString("en-IN");
 
       var subtextMonthly =
-        priceM === 0 || priceM === null ? "free plan" : "per month";
+        priceM === 0 || priceM === null ? "free setup" : "billed monthly";
 
       var featuresHTML = "";
-      var hasPayroll = (plan.features || []).some(function (feature) {
-        return /payroll/i.test(feature.featuresName || feature.name || feature);
-      });
-      featuresHTML += '<div class="pricing-feature pricing-feature--payroll"><strong>Payroll:</strong> ' +
-        (hasPayroll ? "listed in this plan" : "not listed in plan details") + "</div>";
       if (plan.features && plan.features.length > 0) {
         plan.features.forEach(function (f) {
           var featureTitle = f.featuresName || f.name || f;
-          if (/payroll/i.test(String(featureTitle))) return;
           featuresHTML +=
-            '<div class="pricing-feature"><span aria-hidden="true" class="pricing-feature__check"><svg class="icon-svg" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></span> ' +
-            escapePricingText(featureTitle) +
+            '<div class="pricing-feature"><span class="pricing-feature__check">✔</span> ' +
+            featureTitle +
             "</div>";
         });
       }
 
       var highlightText = plan.userLimit
-        ? "Up to " + plan.userLimit + " employees"
-        : "Employee limit not listed";
+        ? "Up to " + plan.userLimit + " Employees Included"
+        : "Unlimited Employees Included";
 
       var ctaText =
         priceM === 0 || priceM === null ? "Start Free" : "Get Started";
@@ -2161,17 +2101,17 @@ function initDynamicPricing() {
       if (isPopular) {
         cardsHTML += '<div class="' + cardClass + '">';
         cardsHTML +=
-          '<div class="pricing-card__popular-header"><span class="popular-header__icon"><svg class="icon-svg" viewBox="0 0 24 24"><path d="m12 3 2.1 2.1 3-.2.8 2.9 2.6 1.5-1 2.8 1 2.8-2.6 1.5-.8 2.9-3-.2L12 21l-2.1-2.1-3 .2-.8-2.9-2.6-1.5 1-2.8-1-2.8 2.6-1.5.8-2.9 3 .2L12 3Z"/><path d="m9 12 2 2 4-4"/></svg></span> Popular Choice</div>';
+          '<div class="pricing-card__popular-header"><span class="popular-header__icon">🔥</span> Popular Choice</div>';
         cardsHTML += '<div class="pricing-card__body">';
       } else {
         cardsHTML += '<div class="' + cardClass + '">';
         cardsHTML += '<div class="pricing-card__inner">';
       }
 
-      cardsHTML += '<h3 class="pricing-card__name">' + escapePricingText(plan.plan || plan.name || "Plan") + "</h3>";
+      cardsHTML += '<h3 class="pricing-card__name">' + (plan.plan || plan.name) + "</h3>";
       cardsHTML +=
         '<p class="pricing-card__desc">Up to ' +
-        escapePricingText(plan.userLimit || "employee limit not listed") +
+        (plan.userLimit || "∞") +
         " employees</p>";
       cardsHTML += '<div class="pricing-card__price">';
       cardsHTML +=
@@ -2195,7 +2135,7 @@ function initDynamicPricing() {
           ctaText +
           "</a>";
         cardsHTML +=
-          '<span class="pricing-card__highlight-small">Free plan for up to ' + escapePricingText(plan.userLimit || "") + ' employees</span>';
+          '<span class="pricing-card__highlight-small">No Credit Card Required</span>';
       } else {
         cardsHTML +=
           '<a href="https://app.hrvico.com/onboard-company" class="' +
