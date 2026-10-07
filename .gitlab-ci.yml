@@ -21,12 +21,9 @@ deploy:
   script:
     - |
       ssh $SSH_USER@$SERVER_IP "
-        echo '=== SUDO PERMISSIONS ==='
-        sudo -n -l 2>/dev/null || echo 'No passwordless sudo'
-        echo '=== LISTENING PORTS ==='
-        ss -tlpn 2>/dev/null || netstat -tlpn 2>/dev/null || lsof -i -P -n | grep LISTEN || true
-        echo '=== NGINX CONF FILENAMES ==='
-        grep -rn 'hrvico.com' /etc/nginx/ 2>/dev/null || true
+        ls -la /etc/nginx/sites-enabled/hrvico.com
+        ls -ld /etc/nginx/sites-available /etc/nginx/sites-enabled /etc/nginx
+        test -w /etc/nginx/sites-enabled/hrvico.com && echo 'WRITABLE' || echo 'NOT WRITABLE'
       "
 
   rules:
