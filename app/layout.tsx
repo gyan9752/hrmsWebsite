@@ -29,6 +29,7 @@ import '@/css/contact.css';
 import '@/css/subpages.css';
 import '@/css/scriza-news.css';
 import '@/css/blog-hero-enhanced.css';
+import '@/css/homepage-seo.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://hrvico.com'),
