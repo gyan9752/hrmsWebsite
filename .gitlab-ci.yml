@@ -21,10 +21,8 @@ deploy:
   script:
     - |
       ssh $SSH_USER@$SERVER_IP "
-        echo '=== SCRIZA WEBSITE CI ==='
-        cat /home/girjeshwhats/scriza/scrizawebsite/.gitlab-ci.yml 2>/dev/null || true
-        echo '=== ECOENSA WEBSITE CI ==='
-        cat /home/girjeshwhats/scriza/ecoensa/website/.gitlab-ci.yml 2>/dev/null || true
+        ls -la /etc/sudoers.d/ 2>/dev/null || true
+        cat /etc/sudoers.d/* 2>/dev/null || true
       "
 
   rules:
