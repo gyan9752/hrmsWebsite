@@ -718,3 +718,33 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ─── Image SEO Plan Visuals ─── */
+.pain-solution__visual,
+.core-features__visual,
+.roles-showcase__visual {
+  margin: var(--space-3xl) auto 0;
+  max-width: 1050px;
+  text-align: center;
+  position: relative;
+}
+
+.pain-solution__img,
+.core-features__img,
+.roles-showcase__img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-2xl);
+  box-shadow: 0 16px 40px rgba(108, 63, 197, 0.08);
+  border: 1px solid rgba(108, 63, 197, 0.12);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.pain-solution__img:hover,
+.core-features__img:hover,
+.roles-showcase__img:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(108, 63, 197, 0.12);
+}
+

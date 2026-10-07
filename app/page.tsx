@@ -319,6 +319,18 @@ export default function HomePage() {
             </div>
           </div>
 
+          {/* Pain / Solution Visual Showcase */}
+          <div className="pain-solution__visual" data-animate="scale-in">
+            <Image
+              src="/assets/images/hrvico-employee-management-software.webp"
+              alt="HRVico employee management software for businesses"
+              loading="lazy"
+              width={1100}
+              height={620}
+              className="pain-solution__img"
+            />
+          </div>
+
           <div className="pain-solution__action" data-animate="fade-up">
             <Link href="/features" className="btn btn--secondary btn--large">
               <span>See How HRVico Works</span>
@@ -458,6 +470,18 @@ export default function HomePage() {
             </div>
           </div>
 
+          {/* Product HRMS Dashboard Visual Showcase */}
+          <div className="core-features__visual" data-animate="scale-in">
+            <Image
+              src="/assets/images/hrvico-employee-management-hrms-dashboard.webp"
+              alt="HRVico employee management and HRMS dashboard"
+              loading="lazy"
+              width={1100}
+              height={620}
+              className="core-features__img"
+            />
+          </div>
+
           <div style={{ textAlign: 'center' }} data-animate="fade-up">
             <Link href="/features" className="btn btn--secondary btn--large">
               <span>Explore All Features</span>
@@ -520,6 +544,18 @@ export default function HomePage() {
                 Access relevant employee information and complete everyday HR activities.
               </p>
             </div>
+          </div>
+
+          {/* Roles Dashboard Showcase */}
+          <div className="roles-showcase__visual" data-animate="scale-in">
+            <Image
+              src="/assets/images/hrvico-role-based-hrms-super-admin-hr-employees.webp"
+              alt="HRVico role based HRMS for Super Admin HR and employees"
+              loading="lazy"
+              width={1100}
+              height={620}
+              className="roles-showcase__img"
+            />
           </div>
 
           {/* Business Size Section */}
