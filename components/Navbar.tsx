@@ -81,12 +81,12 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
             >
               Pricing
             </Link>
-            {/* <Link
+            <Link
               href="/latest-news"
-              className={`navbar__link ${isActive('/latest-news') || isActive('/blogs') || isActive('/blog-details') ? 'active' : ''}`}
+              className={`navbar__link ${isActive('/latest-news') || isActive('/blogs') || isActive('/blog') || isActive('/blog-details') ? 'active' : ''}`}
             >
-              Latest News
-            </Link> */}
+              Blog
+            </Link>
             <Link
               href="/about"
               className={`navbar__link ${isActive('/about') ? 'active' : ''}`}
@@ -169,8 +169,8 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
         <Link href="/pricing" className={`navbar__link ${isActive('/pricing') ? 'active' : ''}`} onClick={() => setMobileOpen(false)}>
           Pricing
         </Link>
-        <Link href="/latest-news" className={`navbar__link ${isActive('/latest-news') || isActive('/blogs') || isActive('/blog-details') ? 'active' : ''}`} onClick={() => setMobileOpen(false)}>
-          Latest News
+        <Link href="/latest-news" className={`navbar__link ${isActive('/latest-news') || isActive('/blogs') || isActive('/blog') || isActive('/blog-details') ? 'active' : ''}`} onClick={() => setMobileOpen(false)}>
+          Blog
         </Link>
         <Link href="/about" className={`navbar__link ${isActive('/about') ? 'active' : ''}`} onClick={() => setMobileOpen(false)}>
           About Us

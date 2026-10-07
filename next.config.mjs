@@ -20,6 +20,22 @@ const nextConfig = {
         source: '/blog-details/:slug',
         destination: '/blog-details/:slug',
       },
+      {
+        source: '/blogs',
+        destination: '/latest-news',
+      },
+      {
+        source: '/blog',
+        destination: '/latest-news',
+      },
+      {
+        source: '/blogs/:path*',
+        destination: '/latest-news/:path*',
+      },
+      {
+        source: '/blog/:path*',
+        destination: '/latest-news/:path*',
+      },
     ];
   },
 };

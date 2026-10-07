@@ -182,7 +182,7 @@ export default function Footer() {
               <h4 className="footer__column-title">Company</h4>
               <nav className="footer__links" aria-label="Company Links">
                 <Link href="/about" className="footer__link" title="About HRVICO & Scriza">About Us</Link>
-                <Link href="/latest-news" className="footer__link" title="Read HRVICO Latest News & Updates">Latest News</Link>
+                <Link href="/latest-news" className="footer__link" title="Read HRVICO Blog & Insights">Blog</Link>
                 <Link href="/contact" className="footer__link" title="Contact Sales & Technical Support">Contact</Link>
               </nav>
             </div>
