@@ -91,21 +91,40 @@ export default function HRMSSoftware2026Page() {
 
             {/* KEY HIGHLIGHTS BOX */}
             <div style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '24px', marginBottom: '36px' }}>
-              <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a', marginBottom: '14px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                📌 Key Takeaways for 2026 HR Leaders:
+              <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a', marginBottom: '14px', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6C3FC5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4a2 2 0 0 0-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42z"/>
+                  <circle cx="7" cy="7" r="1.5"/>
+                </svg>
+                Key Takeaways for 2026 HR Leaders:
               </h3>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '14px' }}>
-                <div style={{ background: '#ffffff', padding: '12px 16px', borderRadius: '10px', border: '1px solid #f1f5f9', fontSize: '13px', color: '#334155', fontWeight: 600 }}>
-                  ⚡ <strong>Save 25+ Hours Weekly:</strong> Eliminate manual spreadsheets.
+                <div style={{ background: '#ffffff', padding: '12px 16px', borderRadius: '10px', border: '1px solid #f1f5f9', fontSize: '13px', color: '#334155', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flexShrink: 0 }}>
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                  </svg>
+                  <span><strong>Save 25+ Hours Weekly:</strong> Eliminate manual spreadsheets.</span>
                 </div>
-                <div style={{ background: '#ffffff', padding: '12px 16px', borderRadius: '10px', border: '1px solid #f1f5f9', fontSize: '13px', color: '#334155', fontWeight: 600 }}>
-                  💸 <strong>100% Statutory Compliance:</strong> Auto-compute PF, ESI, TDS & Payslips.
+                <div style={{ background: '#ffffff', padding: '12px 16px', borderRadius: '10px', border: '1px solid #f1f5f9', fontSize: '13px', color: '#334155', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flexShrink: 0 }}>
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="m9 12 2 2 4-4"/>
+                  </svg>
+                  <span><strong>100% Statutory Compliance:</strong> Auto-compute PF, ESI, TDS & Payslips.</span>
                 </div>
-                <div style={{ background: '#ffffff', padding: '12px 16px', borderRadius: '10px', border: '1px solid #f1f5f9', fontSize: '13px', color: '#334155', fontWeight: 600 }}>
-                  📍 <strong>GPS &amp; Biometric Tracking:</strong> Attendance for remote & office staff.
+                <div style={{ background: '#ffffff', padding: '12px 16px', borderRadius: '10px', border: '1px solid #f1f5f9', fontSize: '13px', color: '#334155', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6C3FC5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flexShrink: 0 }}>
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                  <span><strong>GPS &amp; Biometric Tracking:</strong> Attendance for remote & office staff.</span>
                 </div>
-                <div style={{ background: '#ffffff', padding: '12px 16px', borderRadius: '10px', border: '1px solid #f1f5f9', fontSize: '13px', color: '#334155', fontWeight: 600 }}>
-                  📱 <strong>Employee Self-Service:</strong> 1-click payslip downloads & leave requests.
+                <div style={{ background: '#ffffff', padding: '12px 16px', borderRadius: '10px', border: '1px solid #f1f5f9', fontSize: '13px', color: '#334155', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flexShrink: 0 }}>
+                    <rect width="14" height="20" x="5" y="2" rx="2" ry="2"/>
+                    <path d="M12 18h.01"/>
+                  </svg>
+                  <span><strong>Employee Self-Service:</strong> 1-click payslip downloads & leave requests.</span>
                 </div>
               </div>
             </div>
@@ -165,8 +184,12 @@ export default function HRMSSoftware2026Page() {
                 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', margin: '20px 0' }}>
                   <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '14px', padding: '20px', boxShadow: '0 2px 10px rgba(0,0,0,0.02)' }}>
-                    <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#6C3FC5', marginBottom: '8px' }}>
-                      🕒 Attendance Tracking
+                    <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#6C3FC5', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6C3FC5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                      </svg>
+                      Attendance Tracking
                     </h3>
                     <p style={{ fontSize: '14px', color: '#64748b', margin: 0, lineHeight: 1.6 }}>
                       Biometric integration, mobile GPS geofencing, shift scheduling, late-coming penalties, and real-time attendance logs.
@@ -174,8 +197,12 @@ export default function HRMSSoftware2026Page() {
                   </div>
                   
                   <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '14px', padding: '20px', boxShadow: '0 2px 10px rgba(0,0,0,0.02)' }}>
-                    <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#6C3FC5', marginBottom: '8px' }}>
-                      💰 Payroll &amp; Compliance
+                    <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#6C3FC5', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6C3FC5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <rect width="20" height="14" x="2" y="5" rx="2"/>
+                        <line x1="2" x2="22" y1="10" y2="10"/>
+                      </svg>
+                      Payroll &amp; Compliance
                     </h3>
                     <p style={{ fontSize: '14px', color: '#64748b', margin: 0, lineHeight: 1.6 }}>
                       Auto-calculate net pay, deductions, PF/ESI challan reports, and 1-click encrypted PDF payslip generation.
@@ -183,8 +210,14 @@ export default function HRMSSoftware2026Page() {
                   </div>
 
                   <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '14px', padding: '20px', boxShadow: '0 2px 10px rgba(0,0,0,0.02)' }}>
-                    <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#6C3FC5', marginBottom: '8px' }}>
-                      🌴 Leave Management
+                    <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#6C3FC5', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6C3FC5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                        <line x1="16" x2="16" y1="2" y2="6"/>
+                        <line x1="8" x2="8" y1="2" y2="6"/>
+                        <line x1="3" x2="21" y1="10" y2="10"/>
+                      </svg>
+                      Leave Management
                     </h3>
                     <p style={{ fontSize: '14px', color: '#64748b', margin: 0, lineHeight: 1.6 }}>
                       Custom leave policies (Casual, Sick, Paid, Earned), automated leave accruals, and instant manager approvals.
@@ -192,8 +225,14 @@ export default function HRMSSoftware2026Page() {
                   </div>
 
                   <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '14px', padding: '20px', boxShadow: '0 2px 10px rgba(0,0,0,0.02)' }}>
-                    <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#6C3FC5', marginBottom: '8px' }}>
-                      📱 Employee Portal (ESS)
+                    <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#6C3FC5', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6C3FC5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                      </svg>
+                      Employee Portal (ESS)
                     </h3>
                     <p style={{ fontSize: '14px', color: '#64748b', margin: 0, lineHeight: 1.6 }}>
                       Self-service web and mobile portal for downloading payslips, marking attendance, and viewing company announcements.
@@ -311,14 +350,19 @@ export default function HRMSSoftware2026Page() {
               <a
                 href="tel:+919116011899"
                 style={{
-                  display: 'inline-block',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
                   color: '#6C3FC5',
                   fontWeight: 700,
                   fontSize: '14px',
                   textDecoration: 'none',
                 }}
               >
-                📞 +91 9116011899
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+                +91 9116011899
               </a>
             </div>
 

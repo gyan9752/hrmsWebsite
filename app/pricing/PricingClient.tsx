@@ -43,16 +43,32 @@ export default function PricingClient() {
         {/* Highlight Badges */}
         <div className="pricing-page-bullets">
           <div className="pricing-page-bullet">
-            <span className="pricing-page-bullet-icon">✅</span> No Hidden Charges
+            <span className="pricing-page-bullet-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </span> No Hidden Charges
           </div>
           <div className="pricing-page-bullet">
-            <span className="pricing-page-bullet-icon">✅</span> Free Setup Support
+            <span className="pricing-page-bullet-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </span> Free Setup Support
           </div>
           <div className="pricing-page-bullet">
-            <span className="pricing-page-bullet-icon">✅</span> Secure Cloud HRMS
+            <span className="pricing-page-bullet-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </span> Secure Cloud HRMS
           </div>
           <div className="pricing-page-bullet">
-            <span className="pricing-page-bullet-icon">✅</span> GST Billing Available
+            <span className="pricing-page-bullet-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </span> GST Billing Available
           </div>
         </div>
 
@@ -64,7 +80,7 @@ export default function PricingClient() {
           <div className="pricing-card-horizontal">
             <div className="pricing-card-horizontal__left">
               <div>
-                <h3 className="pricing-card-horizontal__name">Enterprise Plan 💎</h3>
+                <h3 className="pricing-card-horizontal__name">Enterprise Plan</h3>
                 <p className="pricing-card-horizontal__desc">
                   Best For: 100+ Employees &amp; Enterprises
                 </p>
@@ -90,31 +106,67 @@ export default function PricingClient() {
               </h4>
               <div className="pricing-card-horizontal__features">
                 <div className="pricing-card-horizontal__feature">
-                  <span className="pricing-card-horizontal__check">✔</span> Unlimited Employees
+                  <span className="pricing-card-horizontal__check" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span> Unlimited Employees
                 </div>
                 <div className="pricing-card-horizontal__feature">
-                  <span className="pricing-card-horizontal__check">✔</span> Custom Modules
+                  <span className="pricing-card-horizontal__check" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span> Custom Modules
                 </div>
                 <div className="pricing-card-horizontal__feature">
-                  <span className="pricing-card-horizontal__check">✔</span> Custom Integrations
+                  <span className="pricing-card-horizontal__check" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span> Custom Integrations
                 </div>
                 <div className="pricing-card-horizontal__feature">
-                  <span className="pricing-card-horizontal__check">✔</span> Enterprise Level Automation
+                  <span className="pricing-card-horizontal__check" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span> Enterprise Level Automation
                 </div>
                 <div className="pricing-card-horizontal__feature">
-                  <span className="pricing-card-horizontal__check">✔</span> API Access
+                  <span className="pricing-card-horizontal__check" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span> API Access
                 </div>
                 <div className="pricing-card-horizontal__feature">
-                  <span className="pricing-card-horizontal__check">✔</span> Premium Support
+                  <span className="pricing-card-horizontal__check" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span> Premium Support
                 </div>
                 <div className="pricing-card-horizontal__feature">
-                  <span className="pricing-card-horizontal__check">✔</span> Dedicated Account Manager
+                  <span className="pricing-card-horizontal__check" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span> Dedicated Account Manager
                 </div>
                 <div className="pricing-card-horizontal__feature">
-                  <span className="pricing-card-horizontal__check">✔</span> Custom Support SLA
+                  <span className="pricing-card-horizontal__check" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span> Custom Support SLA
                 </div>
                 <div className="pricing-card-horizontal__feature">
-                  <span className="pricing-card-horizontal__check">✔</span> Advanced Security
+                  <span className="pricing-card-horizontal__check" aria-hidden="true">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  </span> Advanced Security
                 </div>
               </div>
             </div>

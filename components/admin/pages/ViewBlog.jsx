@@ -32,7 +32,7 @@ const ViewBlog = () => {
     );
   }
 
-  // ✅ CLEAN CONTENT (REMOVES EXTRA GAPS)
+  // Clean content (removes extra gaps)
   const cleanContent = DOMPurify.sanitize(data?.content || "")
     .replace(/<p><br><\/p>/g, "")
     .replace(/<p>\s*<\/p>/g, "")

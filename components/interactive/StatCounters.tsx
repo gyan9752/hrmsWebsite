@@ -13,7 +13,7 @@ const statsData: Stat[] = [
   { target: 500, suffix: '+', label: 'Companies' },
   { target: 50000, suffix: '+', label: 'Employees Managed' },
   { target: 99.9, suffix: '%', decimals: 1, label: 'Uptime' },
-  { target: 4.9, suffix: '★', decimals: 1, label: 'User Rating' },
+  { target: 4.9, suffix: '/5', decimals: 1, label: 'User Rating' },
 ];
 
 export default function StatCounters() {
@@ -74,9 +74,13 @@ export default function StatCounters() {
 
             return (
               <div className="social-proof__stat" key={idx}>
-                <div className="social-proof__stat-value">
-                  {formatted}
-                  {stat.suffix}
+                <div className="social-proof__stat-value" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
+                  <span>{formatted}{stat.suffix}</span>
+                  {idx === 3 && (
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" strokeWidth="1" aria-hidden="true" style={{ verticalAlign: 'middle' }}>
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    </svg>
+                  )}
                 </div>
                 <div className="social-proof__stat-label">{stat.label}</div>
               </div>

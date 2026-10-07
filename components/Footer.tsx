@@ -220,7 +220,7 @@ export default function Footer() {
 
           <div className="footer__bottom">
             <p>
-              © 2026 HRVICO. All rights reserved. ❤️ Crafted by{' '}
+              © 2026 HRVICO. All rights reserved. Crafted by{' '}
               <a
                 href="https://scriza.in/"
                 target="_blank"

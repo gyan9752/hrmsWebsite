@@ -119,7 +119,11 @@ export default function PricingGrid() {
           >
             {isPopular && (
               <div className="pricing-card__popular-header">
-                <span className="popular-header__icon">🔥</span> Popular Choice
+                <span className="popular-header__icon" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: 'middle', marginRight: '4px' }}>
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                </span> Popular Choice
               </div>
             )}
 
@@ -141,7 +145,11 @@ export default function PricingGrid() {
               <div className="pricing-card__features">
                 {plan.features?.map((f: any, fIdx: number) => (
                   <div key={fIdx} className="pricing-feature">
-                    <span className="pricing-feature__check">✔</span>{' '}
+                    <span className="pricing-feature__check" aria-hidden="true">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    </span>{' '}
                     {f.featuresName || f.name}
                   </div>
                 ))}

@@ -200,7 +200,14 @@ export default function ContactClient() {
               </form>
             ) : (
               <div style={{ textAlign: 'center', margin: 'auto', padding: '40px 0' }}>
-                <div style={{ fontSize: '3rem', marginBottom: '16px' }}>✉️</div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
+                  <div style={{ width: '64px', height: '64px', borderRadius: '50%', background: 'rgba(108, 63, 197, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6C3FC5' }}>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                      <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                  </div>
+                </div>
                 <h3 style={{ fontSize: '20px', color: 'var(--text-primary)', marginBottom: '8px' }}>
                   Message Sent!
                 </h3>

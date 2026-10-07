@@ -207,7 +207,9 @@ export default function HomePage() {
               {/* Floating micro-stat card 1: Payroll */}
               <div className="hero__floating-badge hero__floating-badge--left" aria-hidden="true">
                 <div className="hero__floating-badge-icon hero__floating-badge-icon--purple">
-                  ⚡
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                  </svg>
                 </div>
                 <div>
                   <div className="hero__floating-badge-title">1-Click Payroll Automation</div>
@@ -218,7 +220,9 @@ export default function HomePage() {
               {/* Floating micro-stat card 2: Attendance */}
               <div className="hero__floating-badge hero__floating-badge--right" aria-hidden="true">
                 <div className="hero__floating-badge-icon hero__floating-badge-icon--green">
-                  ✓
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
                 </div>
                 <div>
                   <div className="hero__floating-badge-title">Real-Time Attendance Sync</div>
@@ -270,12 +274,16 @@ export default function HomePage() {
               <div
                 className="social-proof__stat-value"
                 data-counter="4.9"
-                data-counter-suffix="★"
                 data-counter-decimals="1"
               >
                 0
               </div>
-              <div className="social-proof__stat-label">User Rating</div>
+              <div className="social-proof__stat-label" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="#F7941D" stroke="#F7941D" strokeWidth="1" aria-hidden="true">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                </svg>
+                User Rating (4.9 / 5)
+              </div>
             </div>
           </div>
         </div>
@@ -296,7 +304,11 @@ export default function HomePage() {
 
           <div className="pain-points__grid" data-stagger>
             <div className="pain-card">
-              <div className="pain-card__icon">⚡</div>
+              <div className="pain-card__icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                </svg>
+              </div>
               <h3 className="pain-card__title">Automated Workflows</h3>
               <p className="pain-card__desc">
                 Free your HR team from repetitive tasks. Automate attendance tracking, payroll calculations, and leave approvals seamlessly.
@@ -304,7 +316,11 @@ export default function HomePage() {
             </div>
 
             <div className="pain-card">
-              <div className="pain-card__icon">🛡️</div>
+              <div className="pain-card__icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              </div>
               <h3 className="pain-card__title">Unmatched Security</h3>
               <p className="pain-card__desc">
                 Your data is secured with enterprise-grade encryption. Ensure compliance and protect sensitive employee information at all times.
@@ -312,7 +328,12 @@ export default function HomePage() {
             </div>
 
             <div className="pain-card">
-              <div className="pain-card__icon">📈</div>
+              <div className="pain-card__icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                  <polyline points="17 6 23 6 23 12" />
+                </svg>
+              </div>
               <h3 className="pain-card__title">Actionable Analytics</h3>
               <p className="pain-card__desc">
                 Leverage real-time dashboards to gain insights into attendance trends, performance metrics, and workforce distribution.
@@ -368,7 +389,18 @@ export default function HomePage() {
 
           <div className="how-it-works__steps" data-stagger>
             <div className="step-card" style={{ textAlign: 'center' }}>
-              <div className="step-card__icon" style={{ margin: '0 auto 1.5rem' }}>🏢</div>
+              <div className="step-card__icon" style={{ margin: '0 auto 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="4" y="2" width="16" height="20" rx="2" ry="2" />
+                  <path d="M9 22v-4h6v4" />
+                  <path d="M8 6h.01" />
+                  <path d="M16 6h.01" />
+                  <path d="M8 10h.01" />
+                  <path d="M16 10h.01" />
+                  <path d="M8 14h.01" />
+                  <path d="M16 14h.01" />
+                </svg>
+              </div>
               <h3 className="step-card__title">Super Admin</h3>
               <p className="step-card__desc">
                 Complete command center for multi-company management and platform oversight.
@@ -376,7 +408,12 @@ export default function HomePage() {
             </div>
 
             <div className="step-card" style={{ textAlign: 'center' }}>
-              <div className="step-card__icon" style={{ margin: '0 auto 1.5rem' }}>👔</div>
+              <div className="step-card__icon" style={{ margin: '0 auto 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                </svg>
+              </div>
               <h3 className="step-card__title">Admin</h3>
               <p className="step-card__desc">
                 Powerful automation for payroll, attendance, and complete employee lifecycle management.
@@ -384,7 +421,12 @@ export default function HomePage() {
             </div>
 
             <div className="step-card" style={{ textAlign: 'center' }}>
-              <div className="step-card__icon" style={{ margin: '0 auto 1.5rem' }}>👤</div>
+              <div className="step-card__icon" style={{ margin: '0 auto 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </div>
               <h3 className="step-card__title">Employee</h3>
               <p className="step-card__desc">
                 Intuitive self-service portal for one-tap attendance, leave requests, and payslips.

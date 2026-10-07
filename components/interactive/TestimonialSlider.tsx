@@ -9,7 +9,8 @@ const testimonials = [
     role: "Head of People & Culture",
     company: "TechNova Solutions",
     rating: 5,
-    avatar: "👨‍💼",
+    initials: "RS",
+    color: "linear-gradient(135deg, #6C3FC5 0%, #8B5CF6 100%)",
   },
   {
     quote: "The multi-role architecture is brilliant. As a Super Admin managing 4 entities, having unified oversight and automated leave approval workflows saved us hundreds of manual hours.",
@@ -17,7 +18,8 @@ const testimonials = [
     role: "VP Operations",
     company: "Apex Global Group",
     rating: 5,
-    avatar: "👩‍💼",
+    initials: "PM",
+    color: "linear-gradient(135deg, #0EA5E9 0%, #2563EB 100%)",
   },
   {
     quote: "Our employees love the self-service portal! Clocking attendance, applying for leaves, and downloading payslips on mobile takes seconds without contacting HR.",
@@ -25,7 +27,8 @@ const testimonials = [
     role: "HR Director",
     company: "InnoWave Digital",
     rating: 5,
-    avatar: "👨‍💻",
+    initials: "AV",
+    color: "linear-gradient(135deg, #10B981 0%, #059669 100%)",
   },
 ];
 
@@ -74,12 +77,35 @@ export default function TestimonialSlider() {
                 key={index}
                 style={{ minWidth: '100%', boxSizing: 'border-box', padding: '1rem' }}
               >
-                <div className="testimonial-card__stars">
-                  {'★'.repeat(t.rating)}
+                <div className="testimonial-card__stars" style={{ display: 'flex', gap: '4px', marginBottom: '12px' }} aria-label={`${t.rating} out of 5 stars`}>
+                  {[...Array(t.rating)].map((_, i) => (
+                    <svg key={i} width="18" height="18" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" strokeWidth="1" aria-hidden="true">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                    </svg>
+                  ))}
                 </div>
                 <p className="testimonial-card__quote">"{t.quote}"</p>
-                <div className="testimonial-card__author" style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '20px' }}>
-                  <div style={{ fontSize: '2rem' }}>{t.avatar}</div>
+                <div className="testimonial-card__author" style={{ display: 'flex', alignItems: 'center', gap: '14px', marginTop: '20px' }}>
+                  <div
+                    style={{
+                      width: '46px',
+                      height: '46px',
+                      borderRadius: '50%',
+                      background: t.color,
+                      color: '#ffffff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontWeight: 700,
+                      fontSize: '15px',
+                      letterSpacing: '0.5px',
+                      boxShadow: '0 4px 12px rgba(0,0,0,0.12)',
+                      flexShrink: 0,
+                    }}
+                    aria-hidden="true"
+                  >
+                    {t.initials}
+                  </div>
                   <div>
                     <h4 className="testimonial-card__name" style={{ margin: 0 }}>{t.name}</h4>
                     <p className="testimonial-card__role" style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.875rem' }}>

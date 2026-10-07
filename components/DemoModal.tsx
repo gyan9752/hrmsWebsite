@@ -358,7 +358,12 @@ export default function DemoModal({ isOpen: propsIsOpen, onClose: propsOnClose }
 
         {step === 'success' && (
           <div className="demo-modal__success-state" id="demoSuccessState">
-            <div className="demo-modal__success-icon">✅</div>
+            <div className="demo-modal__success-icon" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px' }}>
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
+            </div>
             <h3 className="demo-modal__success-title">Request Sent Successfully!</h3>
             <p className="demo-modal__success-msg">
               Thank you for your interest in HRVICO.<br />
