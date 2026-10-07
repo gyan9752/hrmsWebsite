@@ -31,7 +31,7 @@ export const metadata = {
 export default function HomePage() {
   return (
     <>
-      {/* HERO SECTION */}
+      {/* UPGRADED HERO SECTION */}
       <section className="hero" id="hero">
         <div className="hero__bg">
           <div className="hero__bg-gradient"></div>
@@ -43,39 +43,188 @@ export default function HomePage() {
 
         <div className="container">
           <div className="hero__content">
+            {/* Pill Badge */}
             <div className="hero__eyebrow" data-animate="fade-up">
-              <span className="hero__eyebrow-icon">✨</span>
-              Transform Your HR Operations
+              <span className="hero__eyebrow-pulse" aria-hidden="true"></span>
+              <span>Intelligent All-in-One HRMS Platform</span>
             </div>
 
+            {/* Upgraded Headline */}
             <h1 className="hero__title" data-animate="fade-up">
-              Empower Your Workforce with<br />
-              <span className="gradient-text">Intelligent</span> HR Management
+              Run payroll. Track attendance.<br />
+              Manage your entire team.
+              <span className="hero__title-sub">
+                Without spreadsheets and HR chaos.
+              </span>
             </h1>
 
+            {/* Supporting Copy */}
             <p className="hero__subtitle" data-animate="fade-up">
-              The all-in-one professional HRMS platform designed to streamline
-              payroll, automate attendance, and elevate employee experiences.
+              HRVICO combines employee management, attendance, leave, payroll, documents, and performance into one intuitive platform—giving modern businesses complete clarity and control.
             </p>
 
-            <div className="hero__ctas" data-animate="fade-up" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
-              <HomeBookDemoBtn />
-              <Link
-                href="/features"
-                className="btn btn--secondary btn--large"
-                style={{ minWidth: '200px', justifyContent: 'center', textAlign: 'center' }}
-              >
-                Explore Platform
-              </Link>
+            {/* Core Capability Chips */}
+            <div className="hero__modules" data-animate="fade-up" aria-label="Core HRVICO Modules">
+              <span className="hero__module-tag">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                Employee Management
+              </span>
+              <span className="hero__module-tag">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                Attendance
+              </span>
+              <span className="hero__module-tag">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                Leave
+              </span>
+              <span className="hero__module-tag">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                  <line x1="2" y1="10" x2="22" y2="10"></line>
+                </svg>
+                Payroll
+              </span>
+              <span className="hero__module-tag">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                Documents
+              </span>
+              <span className="hero__module-tag">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                  <polyline points="17 6 23 6 23 12"></polyline>
+                </svg>
+                Performance
+              </span>
             </div>
 
+            {/* CTAs and Friction Reducers */}
+            <div className="hero__actions-group" data-animate="fade-up">
+              <div className="hero__ctas">
+                {/* Primary CTA */}
+                <a
+                  href="https://app.hrvico.com/onboard-company"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn--primary btn--large hero__btn-primary"
+                >
+                  <span>Start Free</span>
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+                </a>
+
+                {/* Secondary CTA */}
+                <HomeBookDemoBtn className="hero__btn-secondary" />
+
+                {/* Tertiary Link */}
+                <Link
+                  href="/features"
+                  className="hero__link-tertiary"
+                >
+                  <span>Explore Product</span>
+                  <span className="hero__link-arrow" aria-hidden="true">→</span>
+                </Link>
+              </div>
+
+              {/* Factual Friction Reducers */}
+              <div className="hero__trust-strip">
+                <div className="hero__trust-item">
+                  <svg className="hero__trust-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <span>₹0 for up to 5 employees</span>
+                </div>
+                <div className="hero__trust-dot" aria-hidden="true">•</div>
+                <div className="hero__trust-item">
+                  <svg className="hero__trust-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <span>Free setup</span>
+                </div>
+                <div className="hero__trust-dot" aria-hidden="true">•</div>
+                <div className="hero__trust-item">
+                  <svg className="hero__trust-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <span>No hidden charges</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Dashboard Showcase with Browser Chrome & Floating Micro-Stats */}
             <div className="hero__dashboard" data-animate="scale-in">
-              <img
-                className="my-image-set"
-                src="/assets/images/Group 237586 1.webp"
-                alt="HRVICO Dashboard Overview"
-                loading="eager"
-              />
+              <div className="hero__mockup-window">
+                <div className="hero__mockup-header">
+                  <div className="hero__mockup-dots" aria-hidden="true">
+                    <span className="hero__mockup-dot hero__mockup-dot--red"></span>
+                    <span className="hero__mockup-dot hero__mockup-dot--yellow"></span>
+                    <span className="hero__mockup-dot hero__mockup-dot--green"></span>
+                  </div>
+                  <div className="hero__mockup-url">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    </svg>
+                    <span>app.hrvico.com/dashboard</span>
+                  </div>
+                  <div className="hero__mockup-status">
+                    <span className="hero__eyebrow-pulse" style={{ width: '6px', height: '6px' }} aria-hidden="true"></span>
+                    <span>Live</span>
+                  </div>
+                </div>
+                <div className="hero__mockup-body">
+                  <img
+                    className="hero__mockup-img"
+                    src="/assets/images/Group 237586 1.webp"
+                    alt="HRVICO Unified HRMS Dashboard"
+                    loading="eager"
+                    fetchPriority="high"
+                    width={1300}
+                    height={720}
+                  />
+                </div>
+              </div>
+
+              {/* Floating micro-stat card 1: Payroll */}
+              <div className="hero__floating-badge hero__floating-badge--left" aria-hidden="true">
+                <div className="hero__floating-badge-icon hero__floating-badge-icon--purple">
+                  ⚡
+                </div>
+                <div>
+                  <div className="hero__floating-badge-title">1-Click Payroll Automation</div>
+                  <div className="hero__floating-badge-subtitle">Auto-calculated salary, tax &amp; payslips</div>
+                </div>
+              </div>
+
+              {/* Floating micro-stat card 2: Attendance */}
+              <div className="hero__floating-badge hero__floating-badge--right" aria-hidden="true">
+                <div className="hero__floating-badge-icon hero__floating-badge-icon--green">
+                  ✓
+                </div>
+                <div>
+                  <div className="hero__floating-badge-title">Real-Time Attendance Sync</div>
+                  <div className="hero__floating-badge-subtitle">Geofenced check-in &amp; leave tracking</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

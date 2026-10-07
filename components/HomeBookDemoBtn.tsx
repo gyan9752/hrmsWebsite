@@ -2,25 +2,44 @@
 
 import React from 'react';
 
-export default function HomeBookDemoBtn() {
+interface HomeBookDemoBtnProps {
+  className?: string;
+  style?: React.CSSProperties;
+  children?: React.ReactNode;
+}
+
+export default function HomeBookDemoBtn({ className, style, children }: HomeBookDemoBtnProps) {
   return (
     <button
+      type="button"
       onClick={() => {
         window.dispatchEvent(new CustomEvent('open-demo-modal'));
       }}
-      className="btn btn--primary btn--large"
-      style={{ minWidth: '200px', justifyContent: 'center', textAlign: 'center' }}
+      className={className || "btn btn--secondary btn--large"}
+      style={style}
     >
-      Book a Demo
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ marginLeft: '8px' }}>
-        <path
-          d="M3 8h10m0 0L9 4m4 4L9 12"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+      {children || (
+        <>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ marginRight: '8px', verticalAlign: 'middle' }}
+            aria-hidden="true"
+          >
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+          </svg>
+          Book a Demo
+        </>
+      )}
     </button>
   );
 }
