@@ -21,8 +21,20 @@ deploy:
   script:
     - |
       ssh $SSH_USER@$SERVER_IP "
-        rm -rf $APP_DIR &&
-        git clone https://${GITLAB_USERNAME}:${GITLAB_TOKEN}@gitlab.com/hrms-frontend2/hrms_website.git $APP_DIR
+        echo '=== WHOAMI / PWD ==='
+        whoami; pwd
+        echo '=== NODE / NPM / PM2 ==='
+        export PATH=\$PATH:/usr/local/bin:/usr/bin:~/.nvm/versions/node/\$(ls ~/.nvm/versions/node 2>/dev/null | tail -n 1)/bin
+        which node || true
+        node -v || true
+        which npm || true
+        npm -v || true
+        which pm2 || true
+        pm2 list || true
+        echo '=== NGINX CONFIGS ==='
+        cat /etc/nginx/sites-enabled/* 2>/dev/null || cat /etc/nginx/conf.d/* 2>/dev/null || true
+        echo '=== APP DIR LISTING ==='
+        ls -la $APP_DIR || true
       "
 
   rules:
