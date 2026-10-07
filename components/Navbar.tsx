@@ -138,7 +138,6 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
               <div className={`mega-menu mega-menu--features mega-menu--2col ${activeDropdown === 'features' ? 'open' : ''}`}>
                 <div className="mega-menu__body">
                   <div>
-                    <div className="mega-menu__col-title">HR Management</div>
                     <ul className="mega-menu__list">
                       <li>
                         <Link href="/features#employee-management" className="mega-menu__item" onClick={() => setActiveDropdown(null)}>
@@ -168,7 +167,6 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
                   </div>
 
                   <div>
-                    <div className="mega-menu__col-title">Employee Operations</div>
                     <ul className="mega-menu__list">
                       <li>
                         <Link href="/features#documents" className="mega-menu__item" onClick={() => setActiveDropdown(null)}>
@@ -234,7 +232,6 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
               <div className={`mega-menu mega-menu--solutions mega-menu--2col ${activeDropdown === 'solutions' ? 'open' : ''}`}>
                 <div className="mega-menu__body">
                   <div>
-                    <div className="mega-menu__col-title">By Business Size</div>
                     <ul className="mega-menu__list">
                       <li>
                         <Link href="/roles#small-business" className="mega-menu__item" onClick={() => setActiveDropdown(null)}>
@@ -296,7 +293,7 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
 
                 <div className="mega-menu__footer">
                   <Link href="/features" className="mega-menu__footer-link" onClick={() => setActiveDropdown(null)}>
-                    <span>Find the Right HRMS Solution</span>
+                    <span>Find the Right Solution</span>
                     <span aria-hidden="true">→</span>
                   </Link>
                 </div>
@@ -327,59 +324,22 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
                 </svg>
               </button>
 
-              <div className={`mega-menu mega-menu--industries mega-menu--3col ${activeDropdown === 'industries' ? 'open' : ''}`}>
+              <div className={`mega-menu mega-menu--industries mega-menu--2col ${activeDropdown === 'industries' ? 'open' : ''}`}>
                 <div className="mega-menu__body">
                   <div>
-                    <div className="mega-menu__col-title">Technology &amp; Services</div>
                     <ul className="mega-menu__list">
                       <li>
                         <Link href="/features#tech" className="mega-menu__item" onClick={() => setActiveDropdown(null)}>
                           <span className="mega-menu__item-title">IT &amp; Software</span>
-                          <span className="mega-menu__item-desc">Hybrid teams, shift rotations &amp; remote clock-ins</span>
+                          <span className="mega-menu__item-desc">Hybrid teams, sprint shifts &amp; remote check-ins</span>
                         </Link>
                       </li>
-                      <li>
-                        <Link href="/features#services" className="mega-menu__item" onClick={() => setActiveDropdown(null)}>
-                          <span className="mega-menu__item-title">Agencies &amp; Professional Services</span>
-                          <span className="mega-menu__item-desc">Client billing timesheets &amp; contractor management</span>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="/features#real-estate" className="mega-menu__item" onClick={() => setActiveDropdown(null)}>
-                          <span className="mega-menu__item-title">Real Estate</span>
-                          <span className="mega-menu__item-desc">Field agent tracking &amp; site-level geofencing</span>
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <div className="mega-menu__col-title">Operations &amp; Workforce</div>
-                    <ul className="mega-menu__list">
                       <li>
                         <Link href="/features#manufacturing" className="mega-menu__item" onClick={() => setActiveDropdown(null)}>
                           <span className="mega-menu__item-title">Manufacturing</span>
                           <span className="mega-menu__item-desc">Multi-shift rosters, overtime &amp; factory labor laws</span>
                         </Link>
                       </li>
-                      <li>
-                        <Link href="/features#retail" className="mega-menu__item" onClick={() => setActiveDropdown(null)}>
-                          <span className="mega-menu__item-title">Retail</span>
-                          <span className="mega-menu__item-desc">Store staff scheduling &amp; store-level reports</span>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href="/features#hospitality" className="mega-menu__item" onClick={() => setActiveDropdown(null)}>
-                          <span className="mega-menu__item-title">Hospitality</span>
-                          <span className="mega-menu__item-desc">Dynamic rotas &amp; flexible casual worker tracking</span>
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <div className="mega-menu__col-title">People-Focused</div>
-                    <ul className="mega-menu__list">
                       <li>
                         <Link href="/features#education" className="mega-menu__item" onClick={() => setActiveDropdown(null)}>
                           <span className="mega-menu__item-title">Education</span>
@@ -394,10 +354,39 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
                       </li>
                     </ul>
                   </div>
+
+                  <div>
+                    <ul className="mega-menu__list">
+                      <li>
+                        <Link href="/features#retail" className="mega-menu__item" onClick={() => setActiveDropdown(null)}>
+                          <span className="mega-menu__item-title">Retail</span>
+                          <span className="mega-menu__item-desc">Store staff scheduling &amp; store-level reports</span>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/features#hospitality" className="mega-menu__item" onClick={() => setActiveDropdown(null)}>
+                          <span className="mega-menu__item-title">Hospitality</span>
+                          <span className="mega-menu__item-desc">Dynamic rotas &amp; flexible casual worker tracking</span>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/features#real-estate" className="mega-menu__item" onClick={() => setActiveDropdown(null)}>
+                          <span className="mega-menu__item-title">Real Estate</span>
+                          <span className="mega-menu__item-desc">Field agent tracking &amp; site-level geofencing</span>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link href="/features#services" className="mega-menu__item" onClick={() => setActiveDropdown(null)}>
+                          <span className="mega-menu__item-title">Agencies &amp; Professional Services</span>
+                          <span className="mega-menu__item-desc">Client billing timesheets &amp; contractor management</span>
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
 
                 <div className="mega-menu__footer">
-                  <Link href="/features" className="mega-menu__footer-link" onClick={() => setActiveDropdown(null)}>
+                  <Link href="/features#industries" className="mega-menu__footer-link" onClick={() => setActiveDropdown(null)}>
                     <span>Explore All Industries</span>
                     <span aria-hidden="true">→</span>
                   </Link>
@@ -441,7 +430,6 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
               <div className={`mega-menu mega-menu--resources mega-menu--2col ${activeDropdown === 'resources' ? 'open' : ''}`}>
                 <div className="mega-menu__body">
                   <div>
-                    <div className="mega-menu__col-title">Learn</div>
                     <ul className="mega-menu__list">
                       <li>
                         <Link href="/hrms-software-2026" className="mega-menu__item" onClick={() => setActiveDropdown(null)}>
@@ -471,7 +459,6 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
                   </div>
 
                   <div>
-                    <div className="mega-menu__col-title">Compare &amp; Decide</div>
                     <ul className="mega-menu__list">
                       <li>
                         <Link href="/features#hrms-vs-excel" className="mega-menu__item" onClick={() => setActiveDropdown(null)}>
@@ -560,7 +547,7 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
       {/* Mobile Drawer Menu */}
       <div className={`navbar__mobile-menu ${mobileOpen ? 'open' : ''}`}>
         <Link href="/" className={`navbar__mobile-link ${isActive('/') ? 'active' : ''}`} onClick={() => setMobileOpen(false)}>
-          Home
+          HOME
         </Link>
 
         {/* Mobile Features Accordion */}
@@ -569,20 +556,20 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
             className="navbar__mobile-accordion-header"
             onClick={() => toggleMobileAccordion('features')}
           >
-            <span>Features</span>
+            <span>FEATURES</span>
             <svg
-              width="12"
-              height="7"
-              viewBox="0 0 10 6"
+              width="8"
+              height="12"
+              viewBox="0 0 8 12"
               fill="none"
               style={{
                 transition: 'transform 0.2s ease',
-                transform: mobileExpanded === 'features' ? 'rotate(180deg)' : 'rotate(0deg)',
+                transform: mobileExpanded === 'features' ? 'rotate(90deg)' : 'rotate(0deg)',
                 color: '#6C3FC5',
               }}
               aria-hidden="true"
             >
-              <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M1.5 1.5L6 6L1.5 10.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
           {mobileExpanded === 'features' && (
@@ -606,20 +593,20 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
             className="navbar__mobile-accordion-header"
             onClick={() => toggleMobileAccordion('solutions')}
           >
-            <span>Solutions</span>
+            <span>SOLUTIONS</span>
             <svg
-              width="12"
-              height="7"
-              viewBox="0 0 10 6"
+              width="8"
+              height="12"
+              viewBox="0 0 8 12"
               fill="none"
               style={{
                 transition: 'transform 0.2s ease',
-                transform: mobileExpanded === 'solutions' ? 'rotate(180deg)' : 'rotate(0deg)',
+                transform: mobileExpanded === 'solutions' ? 'rotate(90deg)' : 'rotate(0deg)',
                 color: '#6C3FC5',
               }}
               aria-hidden="true"
             >
-              <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M1.5 1.5L6 6L1.5 10.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
           {mobileExpanded === 'solutions' && (
@@ -628,7 +615,13 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
               <Link href="/roles#startups" className="navbar__mobile-sublink" onClick={() => setMobileOpen(false)}>HRMS for Startups</Link>
               <Link href="/roles#sme" className="navbar__mobile-sublink" onClick={() => setMobileOpen(false)}>HRMS for SMEs</Link>
               <Link href="/roles#growing-business" className="navbar__mobile-sublink" onClick={() => setMobileOpen(false)}>HRMS for Growing Businesses</Link>
-              <Link href="/features" className="navbar__mobile-sublink" style={{ fontWeight: 700, color: '#6C3FC5' }} onClick={() => setMobileOpen(false)}>Find the Right HRMS Solution →</Link>
+              <div className="navbar__mobile-divider" />
+              <div className="navbar__mobile-subhead">By Need</div>
+              <Link href="/features#employee-management" className="navbar__mobile-sublink" onClick={() => setMobileOpen(false)}>Employee Management</Link>
+              <Link href="/features#attendance-tracking" className="navbar__mobile-sublink" onClick={() => setMobileOpen(false)}>Attendance Management</Link>
+              <Link href="/features#leave-management" className="navbar__mobile-sublink" onClick={() => setMobileOpen(false)}>Leave Management</Link>
+              <Link href="/features#payroll-processing" className="navbar__mobile-sublink" onClick={() => setMobileOpen(false)}>Payroll Management</Link>
+              <Link href="/features" className="navbar__mobile-sublink" style={{ fontWeight: 700, color: '#6C3FC5' }} onClick={() => setMobileOpen(false)}>Find the Right Solution →</Link>
             </div>
           )}
         </div>
@@ -639,39 +632,39 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
             className="navbar__mobile-accordion-header"
             onClick={() => toggleMobileAccordion('industries')}
           >
-            <span>Industries</span>
+            <span>INDUSTRIES</span>
             <svg
-              width="12"
-              height="7"
-              viewBox="0 0 10 6"
+              width="8"
+              height="12"
+              viewBox="0 0 8 12"
               fill="none"
               style={{
                 transition: 'transform 0.2s ease',
-                transform: mobileExpanded === 'industries' ? 'rotate(180deg)' : 'rotate(0deg)',
+                transform: mobileExpanded === 'industries' ? 'rotate(90deg)' : 'rotate(0deg)',
                 color: '#6C3FC5',
               }}
               aria-hidden="true"
             >
-              <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M1.5 1.5L6 6L1.5 10.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
           {mobileExpanded === 'industries' && (
             <div className="navbar__mobile-accordion-body">
               <Link href="/features#tech" className="navbar__mobile-sublink" onClick={() => setMobileOpen(false)}>IT &amp; Software</Link>
-              <Link href="/features#services" className="navbar__mobile-sublink" onClick={() => setMobileOpen(false)}>Agencies &amp; Professional Services</Link>
-              <Link href="/features#real-estate" className="navbar__mobile-sublink" onClick={() => setMobileOpen(false)}>Real Estate</Link>
               <Link href="/features#manufacturing" className="navbar__mobile-sublink" onClick={() => setMobileOpen(false)}>Manufacturing</Link>
-              <Link href="/features#retail" className="navbar__mobile-sublink" onClick={() => setMobileOpen(false)}>Retail</Link>
-              <Link href="/features#hospitality" className="navbar__mobile-sublink" onClick={() => setMobileOpen(false)}>Hospitality</Link>
               <Link href="/features#education" className="navbar__mobile-sublink" onClick={() => setMobileOpen(false)}>Education</Link>
               <Link href="/features#healthcare" className="navbar__mobile-sublink" onClick={() => setMobileOpen(false)}>Healthcare</Link>
-              <Link href="/features" className="navbar__mobile-sublink" style={{ fontWeight: 700, color: '#6C3FC5' }} onClick={() => setMobileOpen(false)}>Explore All Industries →</Link>
+              <Link href="/features#retail" className="navbar__mobile-sublink" onClick={() => setMobileOpen(false)}>Retail</Link>
+              <Link href="/features#hospitality" className="navbar__mobile-sublink" onClick={() => setMobileOpen(false)}>Hospitality</Link>
+              <Link href="/features#real-estate" className="navbar__mobile-sublink" onClick={() => setMobileOpen(false)}>Real Estate</Link>
+              <Link href="/features#services" className="navbar__mobile-sublink" onClick={() => setMobileOpen(false)}>Agencies &amp; Professional Services</Link>
+              <Link href="/features#industries" className="navbar__mobile-sublink" style={{ fontWeight: 700, color: '#6C3FC5' }} onClick={() => setMobileOpen(false)}>Explore All Industries →</Link>
             </div>
           )}
         </div>
 
         <Link href="/pricing" className={`navbar__mobile-link ${isActive('/pricing') ? 'active' : ''}`} onClick={() => setMobileOpen(false)}>
-          Pricing
+          PRICING
         </Link>
 
         {/* Mobile Resources Accordion */}
@@ -680,20 +673,20 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
             className="navbar__mobile-accordion-header"
             onClick={() => toggleMobileAccordion('resources')}
           >
-            <span>Resources</span>
+            <span>RESOURCES</span>
             <svg
-              width="12"
-              height="7"
-              viewBox="0 0 10 6"
+              width="8"
+              height="12"
+              viewBox="0 0 8 12"
               fill="none"
               style={{
                 transition: 'transform 0.2s ease',
-                transform: mobileExpanded === 'resources' ? 'rotate(180deg)' : 'rotate(0deg)',
+                transform: mobileExpanded === 'resources' ? 'rotate(90deg)' : 'rotate(0deg)',
                 color: '#6C3FC5',
               }}
               aria-hidden="true"
             >
-              <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M1.5 1.5L6 6L1.5 10.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
           {mobileExpanded === 'resources' && (
@@ -711,14 +704,24 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
         </div>
 
         <Link href="/about" className={`navbar__mobile-link ${isActive('/about') ? 'active' : ''}`} onClick={() => setMobileOpen(false)}>
-          About
+          ABOUT
         </Link>
 
         <Link href="/contact" className={`navbar__mobile-link ${isActive('/contact') ? 'active' : ''}`} onClick={() => setMobileOpen(false)}>
-          Contact
+          CONTACT
         </Link>
 
         <div className="navbar__mobile-actions">
+          <a
+            href="https://app.hrvico.com/onboard-company"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="navbar__btn-start"
+            style={{ width: '100%', height: '46px', fontSize: '15px' }}
+          >
+            Start Free
+          </a>
+
           <button
             onClick={() => {
               setMobileOpen(false);
@@ -729,16 +732,6 @@ export default function Navbar({ onOpenDemo }: NavbarProps) {
           >
             Book a Demo
           </button>
-
-          <a
-            href="https://app.hrvico.com/onboard-company"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="navbar__btn-start"
-            style={{ width: '100%', height: '46px', fontSize: '15px' }}
-          >
-            Start Free
-          </a>
         </div>
       </div>
     </nav>
