@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import HomeBookDemoBtn from '@/components/HomeBookDemoBtn';
+import FAQAccordion from '@/components/interactive/FAQAccordion';
 
 export const metadata = {
   title: 'HRVICO — Intelligent HRMS Software Platform 2026',
@@ -441,6 +442,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* FREQUENTLY ASKED QUESTIONS */}
+      <FAQAccordion />
     </>
   );
 }

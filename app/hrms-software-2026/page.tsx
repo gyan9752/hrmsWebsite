@@ -241,10 +241,83 @@ export default function HRMSSoftware2026Page() {
                 </div>
               </section>
 
+              {/* STATUTORY COMPLIANCE IN INDIA SECTION */}
+              <section id="compliance" style={{ marginTop: '20px' }}>
+                <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#0f172a', marginBottom: '12px', lineHeight: 1.3 }}>
+                  4. HRMS Software in India: Statutory Compliance &amp; Labor Laws
+                </h2>
+                <p>
+                  Operating a business in India requires strict adherence to central and state labor regulations. Non-compliance results in heavy monetary penalties, interest, and reputational damage. HRVICO automates 100% of statutory payroll calculations:
+                </p>
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '16px', margin: '20px 0' }}>
+                  <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '18px' }}>
+                    <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#6C3FC5', marginBottom: '6px' }}>
+                      Employees&apos; Provident Fund (EPF)
+                    </h3>
+                    <p style={{ fontSize: '13px', color: '#64748b', margin: 0, lineHeight: 1.6 }}>
+                      Automatic 12% calculation of basic pay for employee and employer contributions, ECR file generation, and UAN mapping.
+                    </p>
+                  </div>
+
+                  <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '18px' }}>
+                    <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#6C3FC5', marginBottom: '6px' }}>
+                      Employee State Insurance (ESIC)
+                    </h3>
+                    <p style={{ fontSize: '13px', color: '#64748b', margin: 0, lineHeight: 1.6 }}>
+                      Accurate wage capping rules, 0.75% employee contribution, and 3.25% employer contribution with monthly return summaries.
+                    </p>
+                  </div>
+
+                  <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '18px' }}>
+                    <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#6C3FC5', marginBottom: '6px' }}>
+                      Professional Tax (PT)
+                    </h3>
+                    <p style={{ fontSize: '13px', color: '#64748b', margin: 0, lineHeight: 1.6 }}>
+                      Dynamic multi-state slab logic tailored for Maharashtra, Karnataka, Tamil Nadu, Telangana, West Bengal, and other Indian states.
+                    </p>
+                  </div>
+
+                  <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '18px' }}>
+                    <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#6C3FC5', marginBottom: '6px' }}>
+                      Tax Deducted at Source (TDS &amp; Form 16)
+                    </h3>
+                    <p style={{ fontSize: '13px', color: '#64748b', margin: 0, lineHeight: 1.6 }}>
+                      Income tax computation under both Old and New Tax Regimes, investment proof verification, and Form 16 generation.
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              {/* HOW TO CHOOSE HRMS CHECKLIST */}
+              <section id="evaluation" style={{ marginTop: '20px' }}>
+                <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#0f172a', marginBottom: '12px', lineHeight: 1.3 }}>
+                  5. How to Choose HRMS Software: 10-Point Checklist
+                </h2>
+                <p>
+                  Selecting the right HRMS for your organization requires evaluating usability, data security, and long-term scaling capability. Use this 10-point checklist before making a decision:
+                </p>
+
+                <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px', padding: '24px', margin: '16px 0' }}>
+                  <ol style={{ paddingLeft: '20px', margin: 0, display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '14px', color: '#334155' }}>
+                    <li><strong>Unified All-in-One Architecture:</strong> Ensure attendance, leave, payroll, and employee documents share one synchronized database without disconnected silos.</li>
+                    <li><strong>Biometric &amp; Mobile Geofencing:</strong> Verify physical biometric integration for office staff and GPS geofencing for hybrid/field employees.</li>
+                    <li><strong>Indian Statutory Compliance Engine:</strong> Automated EPF, ESIC, PT, and TDS calculations without error-prone manual spreadsheets.</li>
+                    <li><strong>Employee Self-Service (ESS):</strong> Mobile and desktop portal for staff to view salary slips, apply for leaves, and submit reimbursements.</li>
+                    <li><strong>Transparent Per-Employee Pricing:</strong> Zero hidden setup charges, free tiers for micro-teams, and predictable monthly or annual costs.</li>
+                    <li><strong>Multi-Level Approval Workflows:</strong> Flexible hierarchy rules so managers, department heads, and HR admins can review requests seamlessly.</li>
+                    <li><strong>Data Security &amp; Role-Based Permissions (RBAC):</strong> Enterprise 256-bit SSL encryption, automated backups, and strict role permissions between Super Admins and staff.</li>
+                    <li><strong>Rapid Implementation (Under 48 Hours):</strong> Easy bulk CSV/Excel import for instant staff directory migration.</li>
+                    <li><strong>Dedicated Local Support:</strong> Reliable telephone, email, and live support during Indian business operating hours.</li>
+                    <li><strong>Free Trial or Interactive Demo:</strong> Hands-on test of the actual platform prior to financial commitment.</li>
+                  </ol>
+                </div>
+              </section>
+
               {/* FAQ SECTION */}
               <section id="faqs" style={{ marginTop: '20px' }}>
                 <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#0f172a', marginBottom: '16px', lineHeight: 1.3 }}>
-                  4. Frequently Asked Questions (FAQs)
+                  6. Frequently Asked Questions (FAQs)
                 </h2>
                 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
@@ -334,7 +407,13 @@ export default function HRMSSoftware2026Page() {
                   <a href="#key-features" style={{ color: '#6C3FC5', textDecoration: 'none' }}>→ 3. HRVICO Core Features</a>
                 </li>
                 <li>
-                  <a href="#faqs" style={{ color: '#6C3FC5', textDecoration: 'none' }}>→ 4. Frequently Asked Questions</a>
+                  <a href="#compliance" style={{ color: '#6C3FC5', textDecoration: 'none' }}>→ 4. Statutory Compliance in India</a>
+                </li>
+                <li>
+                  <a href="#evaluation" style={{ color: '#6C3FC5', textDecoration: 'none' }}>→ 5. Checklist: How to Choose HRMS</a>
+                </li>
+                <li>
+                  <a href="#faqs" style={{ color: '#6C3FC5', textDecoration: 'none' }}>→ 6. Frequently Asked Questions</a>
                 </li>
               </ul>
             </div>
