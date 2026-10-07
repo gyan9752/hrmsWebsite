@@ -21,8 +21,8 @@ deploy:
   script:
     - |
       ssh $SSH_USER@$SERVER_IP "
-        ls -la /home/girjeshwhats/scriza/hrms/
-        ls -la /home/girjeshwhats/scriza/hrms/website/
+        pm2 describe hrms-frontend 2>/dev/null || true
+        pm2 describe 62 2>/dev/null || true
       "
 
   rules:
