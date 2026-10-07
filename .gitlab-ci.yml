@@ -21,8 +21,8 @@ deploy:
   script:
     - |
       ssh $SSH_USER@$SERVER_IP "
-        pm2 describe hrms-frontend 2>/dev/null || true
-        pm2 describe 62 2>/dev/null || true
+        ls -la /home/girjeshwhats/
+        find /home/girjeshwhats/ -maxdepth 3 -name '*.sh' 2>/dev/null || true
       "
 
   rules:
