@@ -21,8 +21,7 @@ deploy:
   script:
     - |
       ssh $SSH_USER@$SERVER_IP "
-        ls -la /home/girjeshwhats/
-        find /home/girjeshwhats/ -maxdepth 3 -name '*.sh' 2>/dev/null || true
+        find /home/girjeshwhats/ -name '.gitlab-ci.yml' 2>/dev/null || true
       "
 
   rules:
