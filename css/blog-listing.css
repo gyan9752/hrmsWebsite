@@ -848,8 +848,49 @@
   border-color: var(--accent-purple);
 }
 
+/* Image-Only Hover Zoom Effect for News Cards */
+.blog-card-img-wrap {
+  position: relative;
+  height: 220px;
+  width: 100%;
+  overflow: hidden;
+  background-color: #f8fafc;
+  cursor: pointer;
+}
+
+.blog-card-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.blog-card-img-wrap:hover .blog-card-img {
+  transform: scale(1.1) !important;
+}
+
 .blog-pagination-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   pointer-events: none;
+}
+
+/* ─── Mobile Responsiveness Enhancements (without changing desktop layout) ─── */
+@media (max-width: 768px) {
+  .blog-listing__grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .blog-card-img-wrap {
+    height: 180px !important;
+  }
+  .blog-pagination {
+    gap: 6px !important;
+    flex-wrap: wrap !important;
+  }
+  .blog-pagination-btn {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 13px !important;
+  }
 }

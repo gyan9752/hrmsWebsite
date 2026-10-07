@@ -286,22 +286,22 @@ body.contact-page {
 }
 
 .contact-card__submit-btn {
-  background: #0A061C;
-  color: #fff;
+  background: linear-gradient(135deg, #6C3FC5, #8B5CF6);
+  color: #ffffff;
   border: none;
   padding: 14px 44px;
-  border-radius: var(--radius-md, 8px);
+  border-radius: 9999px;
   font-size: var(--fs-sm);
-  font-weight: var(--fw-semibold);
+  font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 10px 24px rgba(10, 6, 28, 0.15);
+  box-shadow: 0 6px 20px rgba(108, 63, 197, 0.3);
   transition: all var(--transition-base);
 }
 
 .contact-card__submit-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 15px 30px rgba(108, 63, 197, 0.25);
-  background: var(--accent-purple);
+  box-shadow: 0 10px 28px rgba(108, 63, 197, 0.45);
+  background: linear-gradient(135deg, #5B2FB4, #7C4DFF);
 }
 
 /* Paper Plane Illustration */
@@ -341,7 +341,7 @@ body.contact-page {
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
   .contact-card__form-grid {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
@@ -364,34 +364,4 @@ body.contact-page {
   .contact-card__actions {
     justify-content: center;
   }
-}
-
-.contact-card__input,
-.contact-card__textarea { min-height: 44px; color: #1e293b; }
-.contact-card__input::placeholder,
-.contact-card__textarea::placeholder { color: #64748b; }
-.contact-card__label { color: #334155; font-size: 0.875rem; }
-.contact-form-status:not([hidden]) {
-  margin: 0 0 16px;
-  padding: 12px 14px;
-  color: #7f1d1d;
-  background: #fef2f2;
-  border: 1px solid #fecaca;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-.contact-form-status[hidden] { display: none !important; }
-
-
-/* The contact panel provides direct phone, WhatsApp, and email links; keep the fixed bubbles clear of the form. */
-.contact-page .float-contact-icon { display: none; }
-.contact-page .mobile-contact-actions { display: none; }
-
-.contact-success-icon {
-  display: flex;
-  justify-content: center;
-  color: var(--accent-purple);
-  font-size: 3rem;
-  margin-bottom: var(--space-md);
 }

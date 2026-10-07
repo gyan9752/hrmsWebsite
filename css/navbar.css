@@ -207,17 +207,16 @@
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-  .navbar__links {
-    display: none;
-  }
-
-  .navbar__cta.desktop-only {
-    display: none;
+@media (max-width: 991px) {
+  .desktop-only,
+  .navbar__links,
+  .navbar__actions,
+  .navbar__cta {
+    display: none !important;
   }
 
   .navbar__hamburger {
-    display: flex;
+    display: flex !important;
   }
 
   .navbar__mobile-menu {

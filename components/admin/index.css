@@ -1,0 +1,401 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.error{
+color:red;
+}
+
+.circularProgress{
+  width: 100%;
+  display:flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+}
+.loader{
+  width: 100%;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================================
+   GLOBAL RESET & TYPOGRAPHY
+================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body, button, input, select, textarea, 
+.MuiTypography-root, .MuiTableCell-root, .MuiButton-root, .MuiInputBase-root, .MuiDialog-root {
+  font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
+/* Remove default focus outline everywhere */
+*:focus,
+*:focus-visible,
+*:focus-within {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* ========================================
+   EXACT REFERENCE DARK MODE THEME (.dark-cms-theme)
+======================================== */
+body.dark-cms-theme {
+  background-color: #0d0e12 !important;
+  color: #f0f0f4 !important;
+}
+
+/* Page containers & wrappers */
+body.dark-cms-theme,
+body.dark-cms-theme .cms-dashboard-container,
+body.dark-cms-theme .cms-content-wrapper,
+body.dark-cms-theme .cms-outlet-container,
+body.dark-cms-theme .cms-page-container {
+  background-color: #0d0e12 !important;
+}
+
+/* Header & Sidebar */
+body.dark-cms-theme .cms-header,
+body.dark-cms-theme div[class*="HeaderContainer"] {
+  background-color: #13141a !important;
+  border-bottom: 1px solid #2a2b36 !important;
+}
+
+body.dark-cms-theme .cms-header svg,
+body.dark-cms-theme div[class*="HeaderContainer"] svg {
+  color: #6b6e7e !important;
+}
+
+body.dark-cms-theme .MuiDrawer-paper {
+  background-color: #13141a !important;
+  border-right: 1px solid #2a2b36 !important;
+}
+
+body.dark-cms-theme div[class*="LogoHeader"] {
+  border-bottom: 1px solid #2a2b36 !important;
+}
+
+body.dark-cms-theme div[class*="LogoutContainer"] {
+  border-top: 1px solid #2a2b36 !important;
+}
+
+/* Sidebar nav links */
+body.dark-cms-theme a[class*="StyledNavLink"] {
+  color: #a0a3b1 !important;
+}
+
+body.dark-cms-theme a[class*="StyledNavLink"]:hover {
+  background-color: #1a1b22 !important;
+  color: #c4b5fd !important;
+}
+
+body.dark-cms-theme a[class*="StyledNavLink"].active {
+  background-color: #241446 !important;
+  color: #c4b5fd !important;
+}
+
+body.dark-cms-theme a[class*="StyledNavLink"] .nav-icon {
+  color: #6b6e7e !important;
+}
+
+body.dark-cms-theme a[class*="StyledNavLink"]:hover .nav-icon,
+body.dark-cms-theme a[class*="StyledNavLink"].active .nav-icon {
+  color: #c4b5fd !important;
+}
+
+/* Cards / Paper containers */
+body.dark-cms-theme .MuiPaper-root {
+  background-color: #1a1b22 !important;
+  color: #f0f0f4 !important;
+  border: 1px solid #2a2b36 !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.55) !important;
+}
+
+/* Dialog */
+body.dark-cms-theme .MuiDialog-paper {
+  background-color: #1a1b22 !important;
+  border: 1px solid #2a2b36 !important;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.65) !important;
+}
+
+body.dark-cms-theme .MuiDialogContent-root {
+  border-top: 1px solid #2a2b36 !important;
+  border-bottom: 1px solid #2a2b36 !important;
+}
+
+/* Dividers */
+body.dark-cms-theme .MuiDivider-root {
+  border-color: #2a2b36 !important;
+}
+
+/* Typography */
+body.dark-cms-theme h1,
+body.dark-cms-theme h2,
+body.dark-cms-theme h3,
+body.dark-cms-theme h4,
+body.dark-cms-theme h5,
+body.dark-cms-theme h6 {
+  color: #f0f0f4 !important;
+}
+
+body.dark-cms-theme p {
+  color: #a0a3b1 !important;
+}
+
+body.dark-cms-theme label {
+  color: #d8d9e0 !important;
+}
+
+body.dark-cms-theme span[class*="ShowingText"],
+body.dark-cms-theme div[class*="EmptySub"] {
+  color: #6b6e7e !important;
+}
+
+/* Table */
+body.dark-cms-theme .MuiTableCell-head {
+  background-color: #16171e !important;
+  color: #6b6e7e !important;
+  border-bottom: 1px solid #2a2b36 !important;
+  letter-spacing: 0.07em !important;
+}
+
+body.dark-cms-theme .MuiTableCell-root {
+  color: #c8c9d4 !important;
+  border-bottom: 1px solid #2a2b36 !important;
+}
+
+body.dark-cms-theme .MuiTableRow-root:hover {
+  background-color: #1f2028 !important;
+}
+
+/* Inputs, selects, textareas */
+body.dark-cms-theme input,
+body.dark-cms-theme select,
+body.dark-cms-theme textarea,
+body.dark-cms-theme .MuiSelect-select,
+body.dark-cms-theme .MuiInputBase-root {
+  background-color: #13141a !important;
+  color: #f0f0f4 !important;
+  border-color: #2a2b36 !important;
+}
+
+body.dark-cms-theme input::placeholder,
+body.dark-cms-theme textarea::placeholder {
+  color: #6b6e7e !important;
+  opacity: 1 !important;
+}
+
+body.dark-cms-theme .MuiOutlinedInput-notchedOutline {
+  border-color: #2a2b36 !important;
+}
+
+/* Rich Text Editor (Quill) */
+body.dark-cms-theme .ql-toolbar {
+  background-color: #16171e !important;
+  border-color: #2a2b36 !important;
+}
+
+body.dark-cms-theme .ql-container {
+  background-color: #13141a !important;
+  border-color: #2a2b36 !important;
+}
+
+body.dark-cms-theme .ql-editor {
+  color: #f0f0f4 !important;
+}
+
+body.dark-cms-theme .ql-editor.ql-blank::before {
+  color: #6b6e7e !important;
+}
+
+body.dark-cms-theme .ql-stroke {
+  stroke: #a0a3b1 !important;
+}
+
+body.dark-cms-theme .ql-fill {
+  fill: #a0a3b1 !important;
+}
+
+body.dark-cms-theme .ql-picker-label,
+body.dark-cms-theme .ql-picker-item {
+  color: #a0a3b1 !important;
+}
+
+body.dark-cms-theme .ql-picker-options {
+  background-color: #1a1b22 !important;
+  border: 1px solid #2a2b36 !important;
+}
+
+/* ================================
+   COMPACT TABLE DENSITY
+================================ */
+body.compact-table .MuiTableCell-root {
+  padding: 6px 12px !important;
+  font-size: 0.82rem !important;
+}
+
+/* ================================
+   TIPTAP EDITOR STYLES
+================================ */
+
+.ProseMirror {
+  min-height: 250px;
+  max-height: 250px;
+  overflow-y: auto;
+  padding: 12px;
+
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+
+  background-color: #ffffff;
+  color: #000;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* Remove focus ring completely */
+.ProseMirror:focus,
+.ProseMirror:focus-visible,
+.ProseMirror-focused {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove Chrome default focus ring for editable divs */
+[contenteditable="true"]:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* ================================
+   JODIT EDITOR STYLES
+================================ */
+
+.jodit-wysiwyg ul,
+.jodit-wysiwyg ol,
+.jodit-editor ul,
+.jodit-editor ol {
+  padding-left: 40px !important;
+  margin-left: 0 !important;
+}
+
+.jodit-wysiwyg ul,
+.jodit-editor ul {
+  list-style-type: disc;
+  list-style-position: outside !important;
+}
+
+.jodit-wysiwyg ol,
+.jodit-editor ol {
+  list-style-type: decimal;
+  list-style-position: outside !important;
+}
+
+.jodit-wysiwyg li,
+.jodit-editor li {
+  margin-bottom: 4px;
+  display: list-item !important;
+}
+
+/* ================================
+   TIPTAP CONTENT STYLES
+================================ */
+
+.ProseMirror p {
+  margin: 0 0 8px;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  padding-left: 20px;
+}
+
+.ProseMirror li {
+  margin-bottom: 4px;
+}
+
+/* Code blocks */
+.ProseMirror pre {
+  background: #1e1e1e;
+  color: #ffffff;
+  padding: 12px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+/* Inline code */
+.ProseMirror code {
+  background: #f2f2f2;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+/* ================================
+   SCROLLBAR STYLING
+================================ */
+
+.ProseMirror::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ProseMirror::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 10px;
+}
+
+.ProseMirror::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ================================
+   OPTIONAL: REMOVE BLUE OUTLINE ON CLICK
+================================ */
+*:focus-visible {
+  outline: none !important;
+}
+
+.editor-preview {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #111;
+  word-break: break-word;
+}
+
+/* Paragraph spacing */
+.editor-preview p {
+  margin: 0 0 12px 0;
+}
+
+/* Bullet & numbered lists */
+.editor-preview ul,
+.editor-preview ol {
+  padding-left: 24px;
+  margin: 12px 0;
+}
+
+.editor-preview li {
+  margin-bottom: 6px;
+  list-style-position: outside;
+}
+
+/* Headings (if used later) */
+.editor-preview h1,
+.editor-preview h2,
+.editor-preview h3 {
+  margin: 16px 0 8px;
+  font-weight: 600;
+}
+
+/* Prevent extra spacing */
+.editor-preview * {
+  box-sizing: border-box;
+}

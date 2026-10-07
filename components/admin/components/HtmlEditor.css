@@ -1,0 +1,60 @@
+loader{
+  width: 100%;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================================
+   GLOBAL RESET
+================================ */
+* {
+  box-sizing: border-box;
+}
+
+.editor-container {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+button {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  border: none;
+  background: #fff;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: 0.2s ease;
+}
+
+button:hover {
+  background: #e6ecff;
+}
+
+select,
+input[type="color"] {
+  padding: 6px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.editor-area {
+  min-height: 280px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  outline: none;
+  font-size: 16px;
+  border-radius: 6px;
+}

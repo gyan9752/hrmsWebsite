@@ -6,6 +6,8 @@ variables:
   SERVER_IP: "66.116.244.42"
   SSH_PORT: "22"
   APP_DIR: "/home/girjeshwhats/scriza/hrms/website/hrms_website"
+  PM2_APP_NAME: "hrvico-website"
+  PORT: "5184"
 
 deploy:
   stage: deploy
@@ -16,14 +18,62 @@ deploy:
     - mkdir -p ~/.ssh
     - echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
-    - ssh-keyscan -H $SERVER_IP >> ~/.ssh/known_hosts
+    - touch ~/.ssh/known_hosts
+    - ssh-keyscan -p "$SSH_PORT" -H "$SERVER_IP" >> ~/.ssh/known_hosts 2>/dev/null || true
 
   script:
     - |
-      ssh $SSH_USER@$SERVER_IP "
-        ls -la /etc/sudoers.d/ 2>/dev/null || true
-        cat /etc/sudoers.d/* 2>/dev/null || true
-      "
+      ssh -p "$SSH_PORT" -i ~/.ssh/id_rsa "$SSH_USER@$SERVER_IP" << 'EOF'
+        set -e
+        export PATH=$PATH:/usr/local/bin:/usr/bin:~/.nvm/versions/node/$(ls ~/.nvm/versions/node 2>/dev/null | tail -n 1)/bin
+        APP_DIR="/home/girjeshwhats/scriza/hrms/website/hrms_website"
+        PM2_APP_NAME="hrvico-website"
+        PORT="5184"
+
+        echo "======================================"
+        echo "Updating code in $APP_DIR..."
+        echo "======================================"
+        if [ -d "$APP_DIR/.git" ]; then
+          cd "$APP_DIR"
+          git fetch origin main
+          git reset --hard origin/main
+        else
+          rm -rf "$APP_DIR"
+          git clone https://${GITLAB_USERNAME}:${GITLAB_TOKEN}@gitlab.com/hrms-frontend2/hrms_website.git "$APP_DIR"
+          cd "$APP_DIR"
+        fi
+
+        echo "--------------------------------------"
+        echo "Node and NPM versions:"
+        node -v
+        npm -v
+        echo "--------------------------------------"
+
+        echo "Installing dependencies..."
+        npm install --legacy-peer-deps
+
+        echo "Building Next.js application..."
+        rm -rf .next
+        npm run build
+
+        echo "Starting / Reloading PM2 application..."
+        if pm2 describe "$PM2_APP_NAME" > /dev/null 2>&1; then
+          pm2 restart "$PM2_APP_NAME" --update-env
+        else
+          pm2 start npm --name "$PM2_APP_NAME" -- start -- -p "$PORT"
+        fi
+        pm2 save || true
+
+        echo "Checking PM2 process status..."
+        pm2 status
+
+        echo "Verifying local service on port $PORT..."
+        sleep 5
+        curl -f http://127.0.0.1:$PORT > /dev/null || exit 1
+        echo "======================================"
+        echo "Next.js application is healthy on port $PORT!"
+        echo "======================================"
+      EOF
 
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
