@@ -21,7 +21,10 @@ deploy:
   script:
     - |
       ssh $SSH_USER@$SERVER_IP "
-        find /home/girjeshwhats/ -name '.gitlab-ci.yml' 2>/dev/null || true
+        echo '=== SCRIZA WEBSITE CI ==='
+        cat /home/girjeshwhats/scriza/scrizawebsite/.gitlab-ci.yml 2>/dev/null || true
+        echo '=== ECOENSA WEBSITE CI ==='
+        cat /home/girjeshwhats/scriza/ecoensa/website/.gitlab-ci.yml 2>/dev/null || true
       "
 
   rules:
