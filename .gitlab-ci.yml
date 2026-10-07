@@ -21,9 +21,8 @@ deploy:
   script:
     - |
       ssh $SSH_USER@$SERVER_IP "
-        ls -la /etc/nginx/sites-enabled/hrvico.com
-        ls -ld /etc/nginx/sites-available /etc/nginx/sites-enabled /etc/nginx
-        test -w /etc/nginx/sites-enabled/hrvico.com && echo 'WRITABLE' || echo 'NOT WRITABLE'
+        ls -la /home/girjeshwhats/scriza/hrms/
+        ls -la /home/girjeshwhats/scriza/hrms/website/
       "
 
   rules:
