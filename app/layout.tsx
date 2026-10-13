@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Script from 'next/script';
+import { Inter, Outfit } from 'next/font/google';
 import Navbar from '@/components/Navbar';
 import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
@@ -8,6 +9,20 @@ import DemoModal from '@/components/DemoModal';
 import CookieBanner from '@/components/CookieBanner';
 import FloatingContactButtons from '@/components/FloatingContactButtons';
 import AnimationScript from '@/components/AnimationScript';
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+  weight: ['400', '500', '600', '700', '800'],
+});
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-outfit',
+  weight: ['400', '500', '600', '700', '800'],
+});
 
 // Import existing stylesheets directly
 import '@/css/variables.css';
@@ -59,15 +74,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
+      <head />
       <body>
         {/* Google Analytics (GA4) - lazyOnload to prevent main thread blocking on mobile */}
         <Script

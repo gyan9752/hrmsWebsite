@@ -32,8 +32,8 @@
   --text-accent: #6C3FC5;
 
   /* ─── Typography ─── */
-  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-display: 'Outfit', var(--font-primary);
+  --font-primary: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: var(--font-outfit), 'Outfit', var(--font-primary);
 
   --fs-xs: 0.75rem;
   --fs-sm: 0.875rem;
