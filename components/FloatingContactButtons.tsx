@@ -25,8 +25,15 @@ export default function FloatingContactButtons() {
           pointerEvents: 'none',
         }}
       >
-        {/* Left Side: Floating WhatsApp Support Widget OR Circular Button */}
-        <div style={{ pointerEvents: 'auto', position: 'relative' }}>
+        {/* Left Side: Floating WhatsApp Support Widget (Desktop Only) */}
+        <div className="floating-whatsapp-desktop-only" style={{ pointerEvents: 'auto', position: 'relative' }}>
+          <style dangerouslySetInnerHTML={{ __html: `
+            @media (max-width: 768px) {
+              .floating-whatsapp-desktop-only {
+                display: none !important;
+              }
+            }
+          `}} />
           {isOpen ? (
             <div
               style={{

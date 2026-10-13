@@ -180,6 +180,7 @@ export default function HomePage() {
                 priority
                 width={1200}
                 height={700}
+                sizes="(max-width: 768px) 100vw, 960px"
                 style={{
                   width: '100%',
                   height: 'auto',
@@ -352,6 +353,7 @@ export default function HomePage() {
               loading="lazy"
               width={1000}
               height={707}
+              sizes="(max-width: 768px) 100vw, 720px"
               className="pain-solution__img"
               style={{
                 maxWidth: '720px',
@@ -517,6 +519,7 @@ export default function HomePage() {
               loading="lazy"
               width={1000}
               height={598}
+              sizes="(max-width: 768px) 100vw, 720px"
               className="core-features__img"
               style={{
                 maxWidth: '720px',
@@ -634,6 +637,7 @@ export default function HomePage() {
               loading="lazy"
               width={1000}
               height={666}
+              sizes="(max-width: 768px) 100vw, 820px"
               style={{
                 maxWidth: '820px',
                 height: 'auto',

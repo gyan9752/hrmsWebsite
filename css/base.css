@@ -682,6 +682,9 @@ input, textarea, select {
 }
 
 @media (max-width: 768px) {
+  .floating-whatsapp-desktop-only {
+    display: none !important;
+  }
   .float-contact-icon {
     bottom: 16px;
     width: 44px;

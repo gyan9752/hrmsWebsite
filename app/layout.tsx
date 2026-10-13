@@ -69,12 +69,12 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {/* Google Analytics (GA4) */}
+        {/* Google Analytics (GA4) - lazyOnload to prevent main thread blocking on mobile */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-TVS20GZXDB"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
