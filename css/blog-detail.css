@@ -6,7 +6,7 @@
 .blog-detail__banner {
   position: relative;
   width: 100%;
-  padding-top: 120px;
+  padding-top: 100px;
   padding-bottom: 60px;
   background-color: #0b1a30;
   display: flex;
@@ -18,7 +18,7 @@
 }
 
 .blog-detail__banner-inner {
-  max-width: 1200px;
+  max-width: var(--container-max, 1300px);
   width: 100%;
   padding: 0 var(--space-lg);
   display: flex;

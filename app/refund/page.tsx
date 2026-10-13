@@ -1,5 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export const metadata: Metadata = {
   title: 'Refund & Cancellation Policy — HRVICO HRMS',
@@ -27,8 +28,9 @@ export const metadata: Metadata = {
 export default function RefundPage() {
   return (
     <>
-      <header className="subpage__header" style={{ paddingTop: '100px', paddingBottom: '30px' }}>
-        <div className="container" style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 16px' }}>
+      <header className="subpage__header" style={{ paddingTop: '86px', paddingBottom: '30px' }}>
+        <div className="container">
+          <Breadcrumb />
           <p className="subpage__eyebrow">LEGAL &amp; TRUST</p>
           <h1 className="subpage__title">Refund &amp; Cancellation Policy</h1>
           <p className="subpage__subtitle" style={{ maxWidth: '800px' }}>
@@ -37,7 +39,7 @@ export default function RefundPage() {
         </div>
       </header>
 
-      <main className="subpage__container" style={{ maxWidth: '1200px', margin: '0 auto 80px', padding: '0 16px', width: '100%' }}>
+      <main className="subpage__container" style={{ maxWidth: '1300px', margin: '0 auto 80px', padding: '0 16px', width: '100%' }}>
         <div className="subpage__card rich-text">
           <h2>Refund &amp; Cancellation Policy – HRVICO Software</h2>
           <p>

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export const metadata: Metadata = {
   title: 'HTML Sitemap & Navigation Index — HRVICO HRMS',
@@ -57,8 +58,9 @@ const sitemapCategories = [
 
 export default function SitemapPage() {
   return (
-    <main style={{ minHeight: '80vh', padding: '120px 24px 80px', backgroundColor: '#f8fafc' }}>
+    <main style={{ minHeight: '80vh', padding: '86px 24px 80px', backgroundColor: '#f8fafc' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+        <Breadcrumb />
         {/* Page Header */}
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
           <span

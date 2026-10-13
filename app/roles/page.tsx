@@ -2,6 +2,8 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import RoleSwitcher from '@/components/RoleSwitcher';
+import Breadcrumb from '@/components/Breadcrumb';
+import HomeBookDemoBtn from '@/components/HomeBookDemoBtn';
 
 export const metadata: Metadata = {
   title: 'HRMS Solutions by Business Size & Role — HRVICO',
@@ -87,21 +89,42 @@ const solutionsByStage = [
 
 export default function RolesPage() {
   return (
-    <main style={{ paddingTop: '75px' }}>
+    <main>
       {/* HERO SECTION */}
-      <section className="section section--alt" style={{ paddingTop: '50px', paddingBottom: '30px', background: 'linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)', borderBottom: '1px solid #f1f5f9' }}>
+      <section className="hero" id="hero">
+        <div className="hero__bg">
+          <div className="hero__bg-gradient"></div>
+          <div className="hero__bg-grid"></div>
+          <div className="hero__orb hero__orb--1"></div>
+          <div className="hero__orb hero__orb--2"></div>
+        </div>
+
         <div className="container">
-          <div className="section-header" style={{ textAlign: 'center', maxWidth: '850px', margin: '0 auto' }}>
-            <p className="section-eyebrow" style={{ textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, color: '#6C3FC5', marginBottom: '8px' }}>
-              Solutions by Business Stage
-            </p>
-            <h1 className="section-title" style={{ fontSize: '2.5rem', fontWeight: 800, color: '#0f172a', margin: '0 0 12px 0', lineHeight: 1.25 }}>
-              The Right HRMS for{' '}
-              <span className="gradient-text">Your Exact Stage</span>
+          <Breadcrumb />
+          <div className="hero__content">
+            <div className="hero__eyebrow" data-animate="fade-up">
+              <span className="hero__eyebrow-pulse" aria-hidden="true"></span>
+              <span>SOLUTIONS BY BUSINESS STAGE</span>
+            </div>
+
+            <h1 className="hero__title" data-animate="fade-up">
+              The Right HRMS for <span className="gradient-text">Your Exact Stage</span>
             </h1>
-            <p className="section-subtitle" style={{ fontSize: '1.1rem', color: '#64748b', margin: '0 auto', lineHeight: 1.6 }}>
-              Whether you are managing your very first 5 hires or orchestrating hundreds of employees across multiple locations, HRVICO scales effortlessly with your team.
+
+            <p className="hero__subtitle" data-animate="fade-up">
+              Whether you are managing your very first 5 hires or orchestrating hundreds of employees across multiple locations, HRVico scales effortlessly with your team.
             </p>
+
+            <div className="hero__actions-group" data-animate="fade-up">
+              <div className="hero__ctas" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
+                <a href="https://app.hrvico.com/onboard-company" target="_blank" rel="noopener noreferrer" className="btn btn--primary btn--large hero__btn-primary">
+                  <span>Start Free Trial →</span>
+                </a>
+                <HomeBookDemoBtn className="btn btn--secondary btn--large hero__btn-secondary">
+                  <span>Book a Demo</span>
+                </HomeBookDemoBtn>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -213,47 +236,29 @@ export default function RolesPage() {
       <RoleSwitcher style={{ paddingTop: '20px', paddingBottom: '60px' }} />
 
       {/* FINAL CALL TO ACTION */}
-      <section style={{ background: 'linear-gradient(135deg, #0A061C 0%, #1A0D3F 100%)', padding: '60px 16px', color: '#ffffff', textAlign: 'center' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <h2 style={{ fontSize: '2.2rem', fontWeight: 800, color: '#ffffff', marginBottom: '14px' }}>
-            Empower Every Role. Streamline Every Workflow.
-          </h2>
-          <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.8)', marginBottom: '28px', lineHeight: 1.6 }}>
-            Free setup for up to 5 employees. Zero hidden charges. Take control of your HR operations today.
-          </p>
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <a
-              href="https://app.hrvico.com/onboard-company"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                background: 'linear-gradient(135deg, #6C3FC5, #8B5CF6)',
-                color: '#ffffff',
-                fontWeight: 700,
-                padding: '14px 32px',
-                borderRadius: '9999px',
-                textDecoration: 'none',
-                fontSize: '15px',
-                boxShadow: '0 6px 20px rgba(108, 63, 197, 0.4)',
-              }}
-            >
-              Start Free (Up to 5 Staff)
-            </a>
-            <Link
-              href="/contact"
-              style={{
-                background: 'rgba(255,255,255,0.1)',
-                color: '#ffffff',
-                border: '1px solid rgba(255,255,255,0.25)',
-                fontWeight: 600,
-                padding: '14px 32px',
-                borderRadius: '9999px',
-                textDecoration: 'none',
-                fontSize: '15px',
-              }}
-            >
-              Book a Demo
-            </Link>
+      <section className="final-cta" id="cta">
+        <div className="final-cta__bg"></div>
+        <div className="container">
+          <div className="final-cta__content" data-animate="fade-up">
+            <h2 className="final-cta__title">
+              Empower Every Role. <span className="gradient-text">Streamline Every Workflow.</span>
+            </h2>
+            <p className="final-cta__subtitle">
+              Free setup for up to 5 employees. Zero hidden charges. Take control of your HR operations today.
+            </p>
+            <div className="final-cta__actions">
+              <a
+                href="https://app.hrvico.com/onboard-company"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn--primary btn--large"
+              >
+                <span>Start Free (Up to 5 Staff) →</span>
+              </a>
+              <Link href="/contact" className="btn btn--secondary btn--large">
+                <span>Book a Demo</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

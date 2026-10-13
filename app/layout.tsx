@@ -2,9 +2,11 @@ import React from 'react';
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import Navbar from '@/components/Navbar';
+import Breadcrumb from '@/components/Breadcrumb';
 import Footer from '@/components/Footer';
 import DemoModal from '@/components/DemoModal';
 import CookieBanner from '@/components/CookieBanner';
+import FloatingContactButtons from '@/components/FloatingContactButtons';
 import AnimationScript from '@/components/AnimationScript';
 
 // Import existing stylesheets directly
@@ -82,7 +84,7 @@ export default function RootLayout({
         </Script>
 
         {/* Microsoft Clarity */}
-        <Script id="microsoft-clarity" strategy="afterInteractive">
+        <Script id="microsoft-clarity" strategy="lazyOnload">
           {`
             (function(c,l,a,r,i,t,y){
               c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -94,10 +96,13 @@ export default function RootLayout({
 
         <AnimationScript />
         <Navbar />
-        {children}
+        <main id="main-content">
+          {children}
+        </main>
         <Footer />
         <DemoModal />
         <CookieBanner />
+        <FloatingContactButtons />
       </body>
     </html>
   );

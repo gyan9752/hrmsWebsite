@@ -3,14 +3,18 @@
    ============================================ */
 
 .hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
   position: relative;
   overflow: hidden;
-  padding-top: 120px;
+  padding-top: 86px;
   padding-bottom: var(--space-4xl);
-  background: linear-gradient(180deg, #F5F0FF 0%, #FFFFFF 65%);
+  background: linear-gradient(180deg, #F8F6FE 0%, #FFFFFF 65%);
+}
+
+.hero--home {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  align-items: center;
+  padding-top: 135px !important;
 }
 
 /* Background Effects */
@@ -351,9 +355,9 @@
 /* Dashboard Mockup Showcase */
 .hero__dashboard {
   position: relative;
-  max-width: 1200px;
+  max-width: 880px;
   width: 100%;
-  margin: 20px auto 0;
+  margin: 32px auto 48px;
   animation: dashFloat 6s ease-in-out infinite;
 }
 
@@ -425,11 +429,15 @@
   position: relative;
   background: #ffffff;
   overflow: hidden;
+  max-height: 480px;
 }
 
 .hero__mockup-img {
   width: 100%;
   height: auto;
+  max-height: 480px;
+  object-fit: cover;
+  object-position: top center;
   display: block;
   border: none !important;
   box-shadow: none !important;

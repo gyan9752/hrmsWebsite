@@ -65,7 +65,7 @@
 
 /* Content Container */
 .subpage__header {
-  padding-top: var(--space-6xl);
+  padding-top: 100px;
   padding-bottom: var(--space-2xl);
   text-align: center;
   position: relative;

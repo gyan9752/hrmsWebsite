@@ -29,7 +29,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1300px;
+  max-width: var(--container-max, 1300px);
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -115,7 +115,7 @@
 
 /* ─── Blog Grid Section ─── */
 .scriza-grid-section {
-  max-width: 1300px;
+  max-width: var(--container-max, 1300px);
   margin: 40px auto 60px;
   padding: 0 20px;
   position: relative;

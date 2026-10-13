@@ -2,6 +2,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Breadcrumb from '@/components/Breadcrumb';
 
 export const metadata: Metadata = {
   title: 'Complete Guide: Best HRMS Software for SMEs in 2026 — HRVICO',
@@ -36,26 +37,12 @@ export const metadata: Metadata = {
 
 export default function HRMSSoftware2026Page() {
   return (
-    <div className="bg-white min-h-screen flex flex-col" style={{ paddingTop: '75px' }}>
-      {/* BREADCRUMB STRIP */}
-      <div style={{ backgroundColor: '#f8fafc', borderBottom: '1px solid #e2e8f0', padding: '14px 0' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', width: '100%', padding: '0 16px' }}>
-          <nav aria-label="breadcrumb" style={{ fontSize: '13px', fontWeight: 500, color: '#64748b', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Link href="/" style={{ color: '#6C3FC5', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
-              <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-              </svg>
-              <span>Home</span>
-            </Link>
-            <span style={{ color: '#cbd5e1' }}>/</span>
-            <span style={{ color: '#0f172a', fontWeight: 700 }}>HRMS Software 2026 Guide</span>
-          </nav>
-        </div>
-      </div>
+    <div className="bg-white min-h-screen flex flex-col">
 
       {/* HERO BANNER SECTION (THEME MATCHED) */}
-      <section className="section section--alt" style={{ paddingTop: '50px', paddingBottom: '40px', background: 'linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)', borderBottom: '1px solid #f1f5f9' }}>
+      <section className="section section--alt" style={{ paddingTop: '86px', paddingBottom: '40px', background: 'linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)', borderBottom: '1px solid #f1f5f9' }}>
         <div className="container">
+          <Breadcrumb />
           <div className="section-header" style={{ textAlign: 'center', marginBottom: '16px', maxWidth: '850px', margin: '0 auto' }}>
             <p className="section-eyebrow" style={{ textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, color: '#6C3FC5', marginBottom: '8px' }}>
               Workforce Guide 2026
@@ -134,8 +121,8 @@ export default function HRMSSoftware2026Page() {
               
               <section id="what-is-hrms">
                 <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#0f172a', marginBottom: '12px', lineHeight: 1.3 }}>
-                  1. What is HRMS Software in 2026?
-                </h2>
+              1. What is HRMS <span className="gradient-text">Software in 2026?</span>
+            </h2>
                 <p>
                   A <strong>Human Resource Management System (HRMS)</strong> is an all-in-one digital platform designed to streamline, automate, and centralize every core HR operation within a business. In 2026, HRMS software goes beyond basic record-keeping—it integrates attendance tracking, payroll processing, leave management, employee self-service (ESS), performance reviews, and statutory compliance into a single secure cloud dashboard.
                 </p>
@@ -146,8 +133,8 @@ export default function HRMSSoftware2026Page() {
 
               <section id="why-automate">
                 <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#0f172a', marginBottom: '12px', lineHeight: 1.3 }}>
-                  2. Why Growing SMEs Need HR Automation in 2026
-                </h2>
+              2. Why Growing SMEs Need HR <span className="gradient-text">Automation in 2026</span>
+            </h2>
                 <p>
                   As organizations grow from 10 to 500+ employees, managing HR operations manually creates operational bottlenecks. Here is why switching to an automated HRMS is essential in 2026:
                 </p>
@@ -176,8 +163,8 @@ export default function HRMSSoftware2026Page() {
 
               <section id="key-features">
                 <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#0f172a', marginBottom: '12px', lineHeight: 1.3 }}>
-                  3. Key Features of HRVICO HRMS Software
-                </h2>
+              3. Key Features of <span className="gradient-text">HRVICO HRMS Software</span>
+            </h2>
                 <p>
                   HRVICO provides a modular, multi-tenant architecture designed for Super Admins, HR Managers, and Employees:
                 </p>
@@ -244,8 +231,8 @@ export default function HRMSSoftware2026Page() {
               {/* STATUTORY COMPLIANCE IN INDIA SECTION */}
               <section id="compliance" style={{ marginTop: '20px' }}>
                 <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#0f172a', marginBottom: '12px', lineHeight: 1.3 }}>
-                  4. HRMS Software in India: Statutory Compliance &amp; Labor Laws
-                </h2>
+              4. HRMS Software in India: Statutory Compliance <span className="gradient-text">&amp; Labor Laws</span>
+            </h2>
                 <p>
                   Operating a business in India requires strict adherence to central and state labor regulations. Non-compliance results in heavy monetary penalties, interest, and reputational damage. HRVICO automates 100% of statutory payroll calculations:
                 </p>
@@ -292,8 +279,8 @@ export default function HRMSSoftware2026Page() {
               {/* HOW TO CHOOSE HRMS CHECKLIST */}
               <section id="evaluation" style={{ marginTop: '20px' }}>
                 <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#0f172a', marginBottom: '12px', lineHeight: 1.3 }}>
-                  5. How to Choose HRMS Software: 10-Point Checklist
-                </h2>
+              5. How to Choose HRMS <span className="gradient-text">Software: 10-Point Checklist</span>
+            </h2>
                 <p>
                   Selecting the right HRMS for your organization requires evaluating usability, data security, and long-term scaling capability. Use this 10-point checklist before making a decision:
                 </p>
@@ -317,8 +304,8 @@ export default function HRMSSoftware2026Page() {
               {/* FAQ SECTION */}
               <section id="faqs" style={{ marginTop: '20px' }}>
                 <h2 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#0f172a', marginBottom: '16px', lineHeight: 1.3 }}>
-                  6. Frequently Asked Questions (FAQs)
-                </h2>
+              6. Frequently Asked <span className="gradient-text">Questions (FAQs)</span>
+            </h2>
                 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                   <details style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '16px 20px', cursor: 'pointer' }}>
@@ -451,45 +438,29 @@ export default function HRMSSoftware2026Page() {
       </div>
 
       {/* BOTTOM CALL TO ACTION BANNER */}
-      <section style={{ background: 'linear-gradient(135deg, #0A061C 0%, #1A0D3F 100%)', padding: '60px 16px', color: '#ffffff', textAlign: 'center' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <h2 style={{ fontSize: '2.2rem', fontWeight: 800, color: '#ffffff', marginBottom: '14px' }}>
-            Ready to Automate Your HR Operations in 2026?
-          </h2>
-          <p style={{ fontSize: '1.1rem', color: 'rgba(255,255,255,0.8)', marginBottom: '28px', lineHeight: 1.6 }}>
-            Join growing companies using HRVICO for attendance tracking, payroll calculation, leave management, and employee self-service.
-          </p>
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-            <Link
-              href="/contact"
-              style={{
-                background: 'linear-gradient(135deg, #6C3FC5, #8B5CF6)',
-                color: '#ffffff',
-                fontWeight: 700,
-                padding: '14px 32px',
-                borderRadius: '9999px',
-                textDecoration: 'none',
-                fontSize: '15px',
-                boxShadow: '0 6px 20px rgba(108, 63, 197, 0.4)',
-              }}
-            >
-              Get Started Free
-            </Link>
-            <Link
-              href="/features"
-              style={{
-                background: 'rgba(255,255,255,0.1)',
-                color: '#ffffff',
-                border: '1px solid rgba(255,255,255,0.25)',
-                fontWeight: 600,
-                padding: '14px 32px',
-                borderRadius: '9999px',
-                textDecoration: 'none',
-                fontSize: '15px',
-              }}
-            >
-              Explore Features
-            </Link>
+      <section className="final-cta" id="cta">
+        <div className="final-cta__bg"></div>
+        <div className="container">
+          <div className="final-cta__content" data-animate="fade-up">
+            <h2 className="final-cta__title">
+              Ready to Automate Your HR <span className="gradient-text">Operations in 2026?</span>
+            </h2>
+            <p className="final-cta__subtitle">
+              Join growing companies using HRVICO for attendance tracking, payroll calculation, leave management, and employee self-service.
+            </p>
+            <div className="final-cta__actions">
+              <a
+                href="https://app.hrvico.com/onboard-company"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn--primary btn--large"
+              >
+                <span>Get Started Free →</span>
+              </a>
+              <Link href="/features" className="btn btn--secondary btn--large">
+                <span>Explore Features</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

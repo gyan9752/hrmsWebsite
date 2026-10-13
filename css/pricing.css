@@ -59,7 +59,7 @@ body.pricing-page {
 /* Override narrow subpage container limit for pricing grid layout */
 .pricing-page__container {
   width: 100%;
-  max-width: 1400px;
+  max-width: var(--container-max, 1300px);
   margin: 0 auto var(--space-5xl);
   padding: 0 var(--space-xl);
   position: relative;
@@ -159,14 +159,14 @@ body.pricing-page {
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-xl);
-  max-width: 1400px;
+  max-width: var(--container-max, 1300px);
   margin-left: auto;
   margin-right: auto;
 }
 
 .pricing-page__grid .pricing-card {
-  flex: 1 1 250px;
-  max-width: 275px;
+  flex: 1 1 260px;
+  max-width: 300px;
   min-height: 550px;
 }
 
@@ -412,6 +412,7 @@ body.pricing-page {
 .pricing-card__cta {
   width: 100%;
   padding: 12px 24px;
+  margin-top: auto;
 }
 
 /* ─── Button Theme Modifiers (Matches Mockup) ─── */
@@ -556,7 +557,7 @@ body.pricing-page {
   display: grid;
   grid-template-columns: 260px 1fr 240px;
   width: 100%;
-  max-width: 1200px;
+  max-width: var(--container-max, 1300px);
   margin: 40px auto 0;
   overflow: hidden;
   align-items: center;

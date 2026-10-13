@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import Link from 'next/link';
+import Breadcrumb from '@/components/Breadcrumb';
 import { notFound } from 'next/navigation';
 import {
   fetchAllBlogs,
@@ -113,30 +114,12 @@ export default async function CategoryNewsPage({ params, searchParams }: PagePro
   const paginatedBlogs = filteredBlogs.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   return (
-    <div className="bg-white min-h-screen flex flex-col" style={{ paddingTop: '75px' }}>
-      {/* BREADCRUMB STRIP */}
-      <div style={{ backgroundColor: '#f8fafc', borderBottom: '1px solid #e2e8f0', padding: '14px 0' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', width: '100%', padding: '0 16px' }}>
-          <nav aria-label="breadcrumb" style={{ fontSize: '13px', fontWeight: 500, color: '#64748b', display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-            <Link href="/" style={{ color: '#6C3FC5', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px', fontWeight: 600 }}>
-              <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-              </svg>
-              <span>Home</span>
-            </Link>
-            <span style={{ color: '#cbd5e1' }}>/</span>
-            <Link href="/latest-news" style={{ color: '#64748b', textDecoration: 'none', fontWeight: 600 }}>
-              Latest News
-            </Link>
-            <span style={{ color: '#cbd5e1' }}>/</span>
-            <span style={{ color: '#0f172a', fontWeight: 700 }}>{categoryDisplayName}</span>
-          </nav>
-        </div>
-      </div>
+    <div className="bg-white min-h-screen flex flex-col">
 
       {/* HERO BANNER SECTION (THEME MATCHED) */}
-      <section className="section section--alt" style={{ paddingTop: '50px', paddingBottom: '40px', background: 'linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)', borderBottom: '1px solid #f1f5f9' }}>
+      <section className="section section--alt" style={{ paddingTop: '86px', paddingBottom: '40px', background: 'linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)', borderBottom: '1px solid #f1f5f9' }}>
         <div className="container">
+          <Breadcrumb />
           <div className="section-header" style={{ textAlign: 'center', marginBottom: '16px', maxWidth: '850px', margin: '0 auto' }}>
             <p className="section-eyebrow" style={{ textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 700, color: '#6C3FC5', marginBottom: '8px' }}>
               Category

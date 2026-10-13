@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Breadcrumb from '@/components/Breadcrumb';
 import { notFound } from 'next/navigation';
 import { fetchBlogBySlug, getBlogImg, cleanAuthorString, stripHtml } from '@/lib/api';
 
@@ -59,15 +60,9 @@ export default async function BlogDetailPage({ params }: PageProps) {
 
   return (
     <main className="subpage">
-      <header className="subpage__header" style={{ padding: '48px 0 32px', background: '#fafafa', borderBottom: '1px solid #f1f5f9' }}>
+      <header className="subpage__header" style={{ paddingTop: '86px', paddingBottom: '32px', background: '#fafafa', borderBottom: '1px solid #f1f5f9' }}>
         <div className="container" style={{ maxWidth: '1100px', textAlign: 'center' }}>
-          {/* Breadcrumb */}
-          <div style={{ fontSize: '0.85rem', color: '#64748b', marginBottom: '16px' }}>
-            <Link href="/" style={{ color: '#ff5a1f', textDecoration: 'none', fontWeight: 600 }}>Home</Link> /{' '}
-            <Link href="/blogs" style={{ color: '#ff5a1f', textDecoration: 'none', fontWeight: 600 }}>Blogs</Link> /{' '}
-            <span style={{ color: '#0f172a', fontWeight: 500 }}>{blog.title}</span>
-          </div>
-
+          <Breadcrumb />
           <span
             style={{
               display: 'inline-block',

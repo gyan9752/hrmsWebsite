@@ -3,25 +3,35 @@ import type { Metadata } from 'next';
 import PricingClient from './PricingClient';
 
 export const metadata: Metadata = {
-  title: 'Flexible HRMS Pricing Plans — HRVICO',
-  description: 'Simple, transparent HRMS pricing plans for growing teams, startups, and large enterprises. No hidden fees.',
-  keywords: ['HRMS pricing', 'HR software cost', 'payroll software pricing', 'HRVICO plans', 'affordable HRMS India'],
+  title: 'HRMS Software Pricing in India | HRVico',
+  description:
+    'Compare HRVico HRMS plans from ₹0/month. Manage employee records, attendance, leave and payroll with a plan that fits your team.',
+  keywords: [
+    'HRMS Software Pricing India',
+    'HRMS pricing plans',
+    'HRMS software price in India',
+    'affordable HRMS software',
+    'HR software pricing India',
+    'payroll software pricing India',
+  ],
   alternates: {
     canonical: 'https://hrvico.com/pricing',
   },
   openGraph: {
-    title: 'Flexible HRMS Pricing Plans — HRVICO',
-    description: 'Simple, transparent HRMS pricing plans for growing teams, startups, and large enterprises.',
+    title: 'HRVico Pricing Plans | Find the Right HRMS for Your Team',
+    description:
+      'Start free with up to 5 employees or explore affordable HRMS plans for growing teams. Compare features and choose your plan.',
     url: 'https://hrvico.com/pricing',
     siteName: 'HRVico',
     type: 'website',
-    images: ['https://hrvico.com/assets/images/hero-dashboard.webp'],
+    images: ['https://hrvico.com/assets/images/hrvico-pricing-plans-og-image.webp'],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Flexible HRMS Pricing Plans — HRVICO',
-    description: 'Simple, transparent HRMS pricing plans for growing teams, startups, and large enterprises.',
-    images: ['https://hrvico.com/assets/images/hero-dashboard.webp'],
+    title: 'HRVico Pricing Plans | Find the Right HRMS for Your Team',
+    description:
+      'Start free with up to 5 employees or explore affordable HRMS plans for growing teams. Compare features and choose your plan.',
+    images: ['https://hrvico.com/assets/images/hrvico-pricing-plans-og-image.webp'],
   },
 };
 

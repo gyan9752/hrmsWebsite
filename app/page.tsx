@@ -3,24 +3,25 @@ import Link from 'next/link';
 import Image from 'next/image';
 import HomeBookDemoBtn from '@/components/HomeBookDemoBtn';
 import FAQAccordion from '@/components/interactive/FAQAccordion';
+import RoleSwitcher from '@/components/RoleSwitcher';
 
 export const metadata = {
   title: 'HRMS Software in India | HRVico',
   description:
     'HRMS software in India for employee, attendance, leave and payroll management. Start free with HRVico.',
   alternates: {
-    canonical: 'https://www.hrvico.com/',
+    canonical: 'https://hrvico.com/',
   },
   openGraph: {
     title: 'HRMS Software in India | HRVico',
     description:
       'HRMS software in India for employee, attendance, leave and payroll management. Start free with HRVico.',
-    url: 'https://www.hrvico.com/',
+    url: 'https://hrvico.com/',
     siteName: 'HRVico',
     type: 'website',
     images: [
       {
-        url: 'https://www.hrvico.com/assets/images/hrvico-hrms-software-india-dashboard.webp',
+        url: 'https://hrvico.com/assets/images/hrvico-hrms-software-india-dashboard.webp',
         width: 1200,
         height: 630,
         alt: 'HRVico HRMS software dashboard for Indian businesses',
@@ -32,17 +33,59 @@ export const metadata = {
     title: 'HRMS Software in India | HRVico',
     description:
       'HRMS software in India for employee, attendance, leave and payroll management. Start free with HRVico.',
-    images: ['https://www.hrvico.com/assets/images/hrvico-hrms-software-india-dashboard.webp'],
+    images: ['https://hrvico.com/assets/images/hrvico-hrms-software-india-dashboard.webp'],
   },
 };
 
 export default function HomePage() {
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'HRVico',
+    url: 'https://hrvico.com',
+    logo: 'https://hrvico.com/assets/images/hrvico-favicon.svg',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+91-9116011899',
+      contactType: 'customer support',
+      areaServed: 'IN',
+      availableLanguage: ['English', 'Hindi'],
+    },
+    sameAs: [],
+  };
+
+  const softwareSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'HRVico HRMS',
+    operatingSystem: 'Web, Android, iOS',
+    applicationCategory: 'BusinessApplication',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'INR',
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      ratingCount: '520',
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
+      />
       {/* =========================================================================
           SECTION 1 — HERO SECTION
           ========================================================================= */}
-      <section className="hero" id="hero">
+      <section className="hero hero--home" id="hero">
         <div className="hero__bg">
           <div className="hero__bg-gradient"></div>
           <div className="hero__bg-grid"></div>
@@ -61,7 +104,7 @@ export default function HomePage() {
 
             {/* H1 Headline */}
             <h1 className="hero__title" data-animate="fade-up">
-              HRMS Software for Indian Businesses
+              HRMS Software for <span className="gradient-text">Indian Businesses</span>
             </h1>
 
             {/* Supporting Microcopy */}
@@ -129,39 +172,21 @@ export default function HomePage() {
             </div>
 
             {/* Dashboard Showcase */}
-            <div className="hero__dashboard" data-animate="scale-in" style={{ marginTop: '40px' }}>
-              <div className="hero__mockup-window">
-                <div className="hero__mockup-header">
-                  <div className="hero__mockup-dots" aria-hidden="true">
-                    <span className="hero__mockup-dot hero__mockup-dot--red"></span>
-                    <span className="hero__mockup-dot hero__mockup-dot--yellow"></span>
-                    <span className="hero__mockup-dot hero__mockup-dot--green"></span>
-                  </div>
-                  <div className="hero__mockup-url">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                      <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                    </svg>
-                    <span>app.hrvico.com/dashboard</span>
-                  </div>
-                  <div className="hero__mockup-status">
-                    <span className="hero__eyebrow-pulse" style={{ width: '6px', height: '6px' }} aria-hidden="true"></span>
-                    <span>Live</span>
-                  </div>
-                </div>
-                <div className="hero__mockup-body">
-                  <Image
-                    className="hero__mockup-img"
-                    src="/assets/images/hrvico-hrms-software-india-dashboard.webp"
-                    alt="HRVico HRMS software dashboard for Indian businesses"
-                    loading="eager"
-                    priority
-                    width={1300}
-                    height={720}
-                    style={{ width: '100%', height: 'auto', display: 'block' }}
-                  />
-                </div>
-              </div>
+            <div className="hero__dashboard" data-animate="scale-in" style={{ marginTop: '36px', maxWidth: '960px', margin: '36px auto 0' }}>
+              <Image
+                src="/assets/images/Powerful Analytics at Your Fingertips.webp"
+                alt="HRVico HRMS software multi-device analytics dashboard"
+                loading="eager"
+                priority
+                width={1200}
+                height={700}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  display: 'block',
+                  filter: 'drop-shadow(0 20px 45px rgba(108, 63, 197, 0.16))',
+                }}
+              />
             </div>
           </div>
         </div>
@@ -174,7 +199,7 @@ export default function HomePage() {
         <div className="container">
           <div className="value-strip__header">
             <h2 className="value-strip__heading">
-              Everything Your HR Team Needs for Everyday Workforce Management
+              Everything Your HR Team Needs for <span className="gradient-text">Everyday Workforce Management</span>
             </h2>
           </div>
           <div className="value-strip__grid">
@@ -249,7 +274,7 @@ export default function HomePage() {
         <div className="container">
           <div className="pain-solution__intro-box" data-animate="fade-up">
             <h2 className="pain-solution__title">
-              Still Managing HR Across Spreadsheets, Messages &amp; Multiple Tools?
+              Still Managing HR Across Spreadsheets, Messages <span className="gradient-text">&amp; Multiple Tools?</span>
             </h2>
             <p className="pain-solution__pain-p">
               Employee records in one place. Attendance somewhere else. Leave requests in messages. Payroll data in spreadsheets. As your team grows, small HR tasks can quickly become difficult to manage.
@@ -322,16 +347,30 @@ export default function HomePage() {
           {/* Pain / Solution Visual Showcase */}
           <div className="pain-solution__visual" data-animate="scale-in">
             <Image
-              src="/assets/images/hrvico-employee-management-software.webp"
-              alt="HRVico employee management software for businesses"
+              src="/assets/images/Admin 1.webp"
+              alt="HRVico Admin HRMS employee management dashboard"
               loading="lazy"
-              width={1100}
-              height={620}
+              width={1000}
+              height={707}
               className="pain-solution__img"
+              style={{
+                maxWidth: '720px',
+                margin: '0 auto',
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+                filter: 'drop-shadow(0 16px 36px rgba(108, 63, 197, 0.14))',
+              }}
             />
           </div>
 
-          <div className="pain-solution__action" data-animate="fade-up">
+          {/* <div className="pain-solution__action" data-animate="fade-up">
+            <Link href="/features" className="btn btn--secondary btn--large">
+              <span>See How HRVico Works</span>
+              <span style={{ marginLeft: '6px' }} aria-hidden="true">→</span>
+            </Link>
+          </div> */}
+                    <div className="pain-solution__action" style={{ marginTop: '40px' }} data-animate="fade-up">
             <Link href="/features" className="btn btn--secondary btn--large">
               <span>See How HRVico Works</span>
               <span style={{ marginLeft: '6px' }} aria-hidden="true">→</span>
@@ -347,7 +386,7 @@ export default function HomePage() {
         <div className="container">
           <div className="core-features__header" data-animate="fade-up">
             <h2 className="core-features__title">
-              One HRMS for Your Everyday HR Operations
+              One HRMS for Your <span className="gradient-text">Everyday HR Operations</span>
             </h2>
           </div>
 
@@ -473,91 +512,47 @@ export default function HomePage() {
           {/* Product HRMS Dashboard Visual Showcase */}
           <div className="core-features__visual" data-animate="scale-in">
             <Image
-              src="/assets/images/hrvico-employee-management-hrms-dashboard.webp"
-              alt="HRVico employee management and HRMS dashboard"
+              src="/assets/images/Super Admin 1.webp"
+              alt="HRVico Super Admin HRMS analytics dashboard software"
               loading="lazy"
-              width={1100}
-              height={620}
+              width={1000}
+              height={598}
               className="core-features__img"
+              style={{
+                maxWidth: '720px',
+                margin: '0 auto',
+                width: '100%',
+                height: 'auto',
+                display: 'block',
+                filter: 'drop-shadow(0 16px 36px rgba(108, 63, 197, 0.14))',
+              }}
             />
           </div>
 
-          <div style={{ textAlign: 'center' }} data-animate="fade-up">
+          {/* <div style={{ textAlign: 'center' }} data-animate="fade-up">
+            <Link href="/features" className="btn btn--secondary btn--large">
+              <span>Explore All Features</span>
+              <span style={{ marginLeft: '6px' }} aria-hidden="true">→</span>
+            </Link>
+          </div> */}
+
+                    <div style={{ textAlign: 'center', marginTop: '40px' }} data-animate="fade-up">
             <Link href="/features" className="btn btn--secondary btn--large">
               <span>Explore All Features</span>
               <span style={{ marginLeft: '6px' }} aria-hidden="true">→</span>
             </Link>
           </div>
+
         </div>
       </section>
 
       {/* =========================================================================
           SECTION 5 — ROLE + BUSINESS SIZE
           ========================================================================= */}
-      <section className="roles-business" id="roles">
+      <RoleSwitcher />
+
+      <section className="business-size-section" style={{ paddingBottom: '4rem' }}>
         <div className="container">
-          <div className="roles-business__header" data-animate="fade-up">
-            <h2 className="roles-business__title">
-              HRVico Works Around the Way Your Business Works
-            </h2>
-          </div>
-
-          {/* Three Role Tabs / Cards */}
-          <div className="roles-grid" data-stagger>
-            <div className="role-card-item">
-              <div className="role-card-item__icon" aria-hidden="true">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                  <line x1="8" y1="21" x2="16" y2="21"></line>
-                  <line x1="12" y1="17" x2="12" y2="21"></line>
-                </svg>
-              </div>
-              <h3 className="role-card-item__title">Super Admin</h3>
-              <p className="role-card-item__desc">
-                Manage organisation-level settings and HRMS administration.
-              </p>
-            </div>
-
-            <div className="role-card-item">
-              <div className="role-card-item__icon" aria-hidden="true">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="8.5" cy="7" r="4"></circle>
-                  <polyline points="17 11 19 13 23 9"></polyline>
-                </svg>
-              </div>
-              <h3 className="role-card-item__title">HR &amp; Admin</h3>
-              <p className="role-card-item__desc">
-                Manage employees, attendance, leave, payroll and everyday HR operations.
-              </p>
-            </div>
-
-            <div className="role-card-item">
-              <div className="role-card-item__icon" aria-hidden="true">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                  <circle cx="12" cy="7" r="4"></circle>
-                </svg>
-              </div>
-              <h3 className="role-card-item__title">Employees</h3>
-              <p className="role-card-item__desc">
-                Access relevant employee information and complete everyday HR activities.
-              </p>
-            </div>
-          </div>
-
-          {/* Roles Dashboard Showcase */}
-          <div className="roles-showcase__visual" data-animate="scale-in">
-            <Image
-              src="/assets/images/hrvico-role-based-hrms-super-admin-hr-employees.webp"
-              alt="HRVico role based HRMS for Super Admin HR and employees"
-              loading="lazy"
-              width={1100}
-              height={620}
-              className="roles-showcase__img"
-            />
-          </div>
-
           {/* Business Size Section */}
           <div className="business-size-strip" data-animate="fade-up">
             <h3 className="business-size-strip__title">
@@ -608,7 +603,7 @@ export default function HomePage() {
         <div className="container">
           <div className="india-industry__header" data-animate="fade-up">
             <h2 className="india-industry__title">
-              HRMS Software for Businesses Across India
+              HRMS Software for <span className="gradient-text">Businesses Across India</span>
             </h2>
             <p className="india-industry__p">
               From startups and small businesses to growing organisations, HRVico helps businesses across India manage essential employee and HR operations from one platform.
@@ -628,7 +623,26 @@ export default function HomePage() {
           </div>
 
           {/* SEO CTAs */}
-          <div className="india-industry__ctas" data-animate="fade-up">
+         
+
+          {/* Visual Showcase */}
+          <div className="india-industry__showcase" data-animate="scale-in">
+            <Image
+              src="/assets/images/User.webp"
+              alt="HRVico HRMS software multi-device platform for businesses across India"
+              className="india-industry__img"
+              loading="lazy"
+              width={1000}
+              height={666}
+              style={{
+                maxWidth: '820px',
+                height: 'auto',
+                margin: '0 auto',
+                display: 'block',
+              }}
+            />
+          </div>
+           {/* <div className="india-industry__ctas" data-animate="fade-up">
             <Link href="/features#industries" className="btn btn--secondary btn--large">
               <span>Explore HRMS Solutions by Industry</span>
               <span style={{ marginLeft: '6px' }} aria-hidden="true">→</span>
@@ -637,18 +651,16 @@ export default function HomePage() {
               <span>Explore HRMS Software by State</span>
               <span style={{ marginLeft: '6px' }} aria-hidden="true">→</span>
             </Link>
-          </div>
-
-          {/* Visual Showcase */}
-          <div className="india-industry__showcase" data-animate="scale-in">
-            <Image
-              src="/assets/images/hrvico-hrms-software-indian-businesses.webp"
-              alt="HRVico HRMS software for businesses across India"
-              className="india-industry__img"
-              loading="lazy"
-              width={1200}
-              height={675}
-            />
+          </div> */}
+                     <div className="india-industry__ctas" style={{ marginTop: '40px', marginBottom: 0 }} data-animate="fade-up">
+            <Link href="/features#industries" className="btn btn--secondary btn--large">
+              <span>Explore HRMS Solutions by Industry</span>
+              <span style={{ marginLeft: '6px' }} aria-hidden="true">→</span>
+            </Link>
+            <Link href="#india-states" className="btn btn--secondary btn--large">
+              <span>Explore HRMS Software by State</span>
+              <span style={{ marginLeft: '6px' }} aria-hidden="true">→</span>
+            </Link>
           </div>
         </div>
       </section>
@@ -660,15 +672,15 @@ export default function HomePage() {
         <div className="container">
           <div className="homepage-pricing__header" data-animate="fade-up">
             <h2 className="homepage-pricing__title">
-              Simple HRMS Pricing That Grows With Your Team
+              Simple HRMS Pricing That Grows <span className="gradient-text">With Your Team</span>
             </h2>
             <p className="homepage-pricing__microcopy">
               Choose a plan based on your team size and upgrade as your business grows.
             </p>
           </div>
 
-          <div className="homepage-pricing__grid" data-stagger>
-            {/* Free Plan */}
+                  <div className="homepage-pricing__grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }} data-stagger>
+            {/* 1. Free Plan */}
             <div className="home-price-card">
               <h3 className="home-price-card__name">Free</h3>
               <div className="home-price-card__price-row">
@@ -714,10 +726,9 @@ export default function HomePage() {
               </a>
             </div>
 
-            {/* Starter Plan */}
-            <div className="home-price-card home-price-card--featured">
-              <span className="home-price-card__badge">Most Popular</span>
-              <h3 className="home-price-card__name">Starter</h3>
+            {/* 2. Basic Plan */}
+            <div className="home-price-card">
+              <h3 className="home-price-card__name">Basic Plan</h3>
               <div className="home-price-card__price-row">
                 <span className="home-price-card__currency">₹</span>
                 <span className="home-price-card__num">999</span>
@@ -725,12 +736,6 @@ export default function HomePage() {
               </div>
               <div className="home-price-card__team-cap">For up to 25 employees</div>
               <ul className="home-price-card__features">
-                <li className="home-price-card__feature-item">
-                  <svg className="home-price-card__check" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  <span>Automated Payroll Management</span>
-                </li>
                 <li className="home-price-card__feature-item">
                   <svg className="home-price-card__check" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -747,6 +752,59 @@ export default function HomePage() {
                   <svg className="home-price-card__check" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
+                  <span>Texting Chat Box</span>
+                </li>
+                <li className="home-price-card__feature-item">
+                  <svg className="home-price-card__check" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <span>Reports &amp; Analytics</span>
+                </li>
+              </ul>
+              <a
+                href="https://app.hrvico.com/onboard-company"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn--secondary"
+                style={{ width: '100%', textAlign: 'center' }}
+              >
+                Get Started
+              </a>
+            </div>
+
+            {/* 3. Standard Plan */}
+            <div className="home-price-card home-price-card--featured">
+              <span className="home-price-card__badge">Most Popular</span>
+              <h3 className="home-price-card__name">Standard Plan</h3>
+              <div className="home-price-card__price-row">
+                <span className="home-price-card__currency">₹</span>
+                <span className="home-price-card__num">1,999</span>
+                <span className="home-price-card__period">/ month</span>
+              </div>
+              <div className="home-price-card__team-cap">For up to 50 employees</div>
+              <ul className="home-price-card__features">
+                <li className="home-price-card__feature-item">
+                  <svg className="home-price-card__check" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <span>Automated Payroll Management</span>
+                </li>
+                <li className="home-price-card__feature-item">
+                  <svg className="home-price-card__check" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <span>Mobile Dashboard App</span>
+                </li>
+                <li className="home-price-card__feature-item">
+                  <svg className="home-price-card__check" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                  <span>HR Automation &amp; Chat Box</span>
+                </li>
+                <li className="home-price-card__feature-item">
+                  <svg className="home-price-card__check" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
                   <span>Multi-Admin Role Hierarchy</span>
                 </li>
               </ul>
@@ -757,50 +815,54 @@ export default function HomePage() {
                 className="btn btn--primary"
                 style={{ width: '100%', textAlign: 'center' }}
               >
-                Start Free Trial
+                Get Started
               </a>
             </div>
 
-            {/* Standard & Premium */}
+            {/* 4. Premium Plan */}
             <div className="home-price-card">
-              <h3 className="home-price-card__name">Standard &amp; Premium</h3>
+              <h3 className="home-price-card__name">Premium Plan</h3>
               <div className="home-price-card__price-row">
-                <span className="home-price-card__currency">Custom</span>
+                <span className="home-price-card__currency">₹</span>
+                <span className="home-price-card__num">3,999</span>
+                <span className="home-price-card__period">/ month</span>
               </div>
-              <div className="home-price-card__team-cap">For expanding &amp; large teams</div>
+              <div className="home-price-card__team-cap">For up to 100 employees</div>
               <ul className="home-price-card__features">
                 <li className="home-price-card__feature-item">
                   <svg className="home-price-card__check" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span>Advanced Appraisal Workflows</span>
+                  <span>Multi-Branch Management</span>
                 </li>
                 <li className="home-price-card__feature-item">
                   <svg className="home-price-card__check" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span>Custom Reimbursement Policies</span>
+                  <span>Priority Onboarding &amp; Support</span>
                 </li>
                 <li className="home-price-card__feature-item">
                   <svg className="home-price-card__check" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span>Dedicated Account Manager &amp; SLA</span>
+                  <span>Advanced Job Management</span>
                 </li>
                 <li className="home-price-card__feature-item">
                   <svg className="home-price-card__check" width="16" height="16" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  <span>Priority Technical Support</span>
+                  <span>Everything in Standard Plan</span>
                 </li>
               </ul>
-              <Link
-                href="/pricing"
+              <a
+                href="https://app.hrvico.com/onboard-company"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn btn--secondary"
                 style={{ width: '100%', textAlign: 'center' }}
               >
-                View Plans
-              </Link>
+                Get Started
+              </a>
             </div>
           </div>
 
@@ -820,7 +882,7 @@ export default function HomePage() {
         <div className="container">
           <div className="homepage-steps__header" data-animate="fade-up">
             <h2 className="homepage-steps__title">
-              Start Using HRVico in Three Simple Steps
+              Start Using HRVico in <span className="gradient-text">Three Simple Steps</span>
             </h2>
           </div>
 
@@ -873,7 +935,7 @@ export default function HomePage() {
       {/* =========================================================================
           TRUST SECTION — FREQUENTLY ASKED QUESTIONS
           ========================================================================= */}
-      <FAQAccordion />
+      <FAQAccordion title="Frequently Asked Questions About HRMS Software" />
 
       {/* =========================================================================
           FINAL CTA SECTION
@@ -883,7 +945,7 @@ export default function HomePage() {
         <div className="container">
           <div className="final-cta__content" data-animate="fade-up">
             <h2 className="final-cta__title">
-              Ready to Simplify Your HR Operations?
+              Ready to Simplify <span className="gradient-text">Your HR Operations?</span>
             </h2>
             <p className="final-cta__subtitle">
               Bring your employees, attendance, leave and payroll management together with HRVico.

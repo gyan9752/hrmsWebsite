@@ -40,11 +40,13 @@ const defaultFaqs: FAQItem[] = [
 
 export default function FAQAccordion({
   faqs = defaultFaqs,
-  title = "Frequently Asked Questions About HRMS Software",
-  showCta = true,
+  title,
+  subtitle,
+  showCta = false,
 }: {
   faqs?: FAQItem[];
   title?: string;
+  subtitle?: string;
   showCta?: boolean;
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -67,6 +69,20 @@ export default function FAQAccordion({
     })),
   };
 
+  const renderTitle = (t: string) => {
+    if (t.includes('gradient-text')) return t;
+    const parts = t.trim().split(' ');
+    if (parts.length <= 2) return <span className="gradient-text">{t}</span>;
+    const mainPart = parts.slice(0, -2).join(' ');
+    const highlightPart = parts.slice(-2).join(' ');
+    return (
+      <>
+        {mainPart}{' '}
+        <span className="gradient-text">{highlightPart}</span>
+      </>
+    );
+  };
+
   return (
     <section className="section faq homepage-faq" id="faq" aria-label="Frequently Asked Questions">
       <script
@@ -74,11 +90,18 @@ export default function FAQAccordion({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <div className="container">
-        <div className="section-header" style={{ textAlign: 'center', marginBottom: '40px' }}>
-          <h2 className="homepage-faq__title">
-            {title}
-          </h2>
-        </div>
+        {title && (
+          <div className="section-header" style={{ textAlign: 'center', marginBottom: '40px' }}>
+            <h2 className="homepage-faq__title" style={{ fontSize: '2.25rem', fontWeight: 800, color: '#0F172A', letterSpacing: '-0.02em', marginBottom: subtitle ? '10px' : 0 }}>
+              {typeof title === 'string' ? renderTitle(title) : title}
+            </h2>
+            {subtitle && (
+              <p className="section-header__subtitle" style={{ fontSize: '1.05rem', color: '#64748B', margin: '0 auto', maxWidth: '780px' }}>
+                {subtitle}
+              </p>
+            )}
+          </div>
+        )}
 
         <div className="faq-list" style={{ maxWidth: '820px', margin: '0 auto' }}>
           {faqs.map((item, index) => {

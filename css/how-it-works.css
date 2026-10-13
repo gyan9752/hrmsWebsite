@@ -37,36 +37,25 @@
 }
 
 .step-card__number {
-  width: 72px;
-  height: 72px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  background: var(--glass-bg);
-  border: 2px solid rgba(108, 63, 197, 0.3);
+  background: linear-gradient(135deg, #6C3FC5 0%, #8B5CF6 100%) !important;
+  color: #ffffff !important;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto var(--space-xl);
   position: relative;
+  box-shadow: 0 4px 14px rgba(108, 63, 197, 0.35);
 }
 
 .step-card__number-inner {
   font-family: var(--font-display);
-  font-size: var(--fs-xl);
-  font-weight: var(--fw-bold);
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.step-card__number::after {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  background: var(--gradient-primary);
-  opacity: 0.1;
-  z-index: -1;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
 }
 
 .step-card__icon {
