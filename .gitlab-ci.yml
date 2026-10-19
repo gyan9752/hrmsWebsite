@@ -23,7 +23,13 @@ deploy:
 
   script:
     - |
-      ssh -p "$SSH_PORT" -i ~/.ssh/id_rsa "$SSH_USER@$SERVER_IP" << 'EOF'
+      REPO_AUTH_URL="https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/hrms-frontend2/hrms_website.git"
+      if [ -n "$GITLAB_TOKEN" ] && [ -n "$GITLAB_USERNAME" ]; then
+        REPO_AUTH_URL="https://${GITLAB_USERNAME}:${GITLAB_TOKEN}@gitlab.com/hrms-frontend2/hrms_website.git"
+      fi
+
+      ssh -p "$SSH_PORT" -i ~/.ssh/id_rsa "$SSH_USER@$SERVER_IP" \
+        "REPO_AUTH_URL='$REPO_AUTH_URL' bash -s" << 'EOF'
         set -e
         export PATH=$PATH:/usr/local/bin:/usr/bin:~/.nvm/versions/node/$(ls ~/.nvm/versions/node 2>/dev/null | tail -n 1)/bin
         APP_DIR="/home/girjeshwhats/scriza/hrms/website/hrms_website"
@@ -35,12 +41,15 @@ deploy:
         echo "======================================"
         if [ -d "$APP_DIR/.git" ]; then
           cd "$APP_DIR"
+          git remote set-url origin "$REPO_AUTH_URL"
           git fetch origin main
           git reset --hard origin/main
+          git remote set-url origin "https://gitlab.com/hrms-frontend2/hrms_website.git" || true
         else
           rm -rf "$APP_DIR"
-          git clone https://${GITLAB_USERNAME}:${GITLAB_TOKEN}@gitlab.com/hrms-frontend2/hrms_website.git "$APP_DIR"
+          git clone "$REPO_AUTH_URL" "$APP_DIR"
           cd "$APP_DIR"
+          git remote set-url origin "https://gitlab.com/hrms-frontend2/hrms_website.git" || true
         fi
 
         echo "--------------------------------------"
