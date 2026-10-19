@@ -681,20 +681,7 @@ input, textarea, select {
   background-color: #6127D4;
 }
 
-.mobile-only-whatsapp {
-  display: none !important;
-}
-.desktop-only-whatsapp {
-  display: block;
-}
-
 @media (max-width: 768px) {
-  .desktop-only-whatsapp {
-    display: none !important;
-  }
-  .mobile-only-whatsapp {
-    display: block !important;
-  }
   .float-contact-icon {
     bottom: 16px;
     width: 44px;

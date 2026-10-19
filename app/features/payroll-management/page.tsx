@@ -186,31 +186,30 @@ export default function PayrollManagementPage() {
               </p>
             </div>
 
-            <div className="hero__dashboard" data-animate="scale-in" style={{ marginTop: '40px' }}>
-              <div className="hero__mockup-window">
-                <div className="hero__mockup-header">
-                  <div className="hero__mockup-dots" aria-hidden="true">
-                    <span className="hero__mockup-dot hero__mockup-dot--red"></span>
-                    <span className="hero__mockup-dot hero__mockup-dot--yellow"></span>
-                    <span className="hero__mockup-dot hero__mockup-dot--green"></span>
-                  </div>
-                  <div className="hero__mockup-url">
-                    <span>app.hrvico.com/payroll</span>
-                  </div>
-                </div>
-                <div className="hero__mockup-body">
-                  <Image
-                    className="hero__mockup-img"
-                    src="/assets/images/Super Admin 1.webp"
-                    alt="HRVico payroll management software dashboard for salary processing and employee payroll records"
-                    loading="eager"
-                    priority
-                    width={1000}
-                    height={598}
-                    style={{ width: '100%', height: 'auto', display: 'block' }}
-                  />
-                </div>
-              </div>
+            <div
+              className="hero__dashboard"
+              data-animate="scale-in"
+              style={{
+                marginTop: '40px',
+                maxWidth: '840px',
+                margin: '40px auto 0',
+              }}
+            >
+              <Image
+                src="/assets/images/Super Admin 1.webp"
+                alt="HRVico payroll management software dashboard for salary processing and employee payroll records"
+                loading="eager"
+                priority
+                width={1000}
+                height={598}
+                sizes="(max-width: 768px) 100vw, 840px"
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  display: 'block',
+                  filter: 'drop-shadow(0 20px 40px rgba(108, 63, 197, 0.16))',
+                }}
+              />
             </div>
           </div>
         </div>
